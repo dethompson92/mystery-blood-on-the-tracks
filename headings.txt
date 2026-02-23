@@ -1,0 +1,231 @@
+﻿
+=== 00_MASTER_INDEX_AND_CATALOG ===
+  Has </table>: True
+  H2[0]: \ud83d\udcc1 SECTION 1: 1957 ORIGINAL INVESTIGATION (Documents 01-18)
+  H2[1]: \ud83d\udcc1 SECTION 2: 2024 COLD CASE REOPENING (Documents 19-22)
+  H2[2]: \ud83d\udcc1 SECTION 3: PLAYER MATERIALS (Document 23)
+  H2[3]: \ud83c\udfaf How to Use These Documents
+  H2[4]: \u2696\ufe0f Content & Sensitivity Notes
+
+=== 01_railroad_police_incident_report ===
+  Has </table>: True
+  H2[0]: I. Initial Report & Discovery
+  H2[1]: II. Scene Description & Initial Observations
+  H2[2]: III. Victim Examination - Preliminary Medical Assessment
+  H2[3]: IV. Evidence Collected
+  H2[4]: V. Witness Interviews - Initial Statements
+
+=== 02_crime_scene_investigation_report ===
+  Has </table>: True
+  H2[0]: I. Scene Overview & Initial Walk-Through
+  H2[1]: II. Compartment Physical Description & Measurements
+  H2[2]: III. Victim Position & Condition (In Situ Examination)
+  H2[3]: IV. Bedding & Sleeping Area Examination
+  H2[4]: V. Door & Lock Mechanism - Detailed Examination
+
+=== 03_medical_examiner_autopsy_report ===
+  Has </table>: True
+  H2[0]: CIRCUMSTANCES OF DEATH
+  H2[1]: EXTERNAL EXAMINATION
+  H2[2]: HEAD AND NECK FINDINGS
+  H2[3]: INTERNAL EXAMINATION
+  H2[4]: TOXICOLOGY
+
+=== 04_porter_witness_statement ===
+  Has </table>: True
+  H2[0]: PRELIMINARY STATEMENT
+  H2[1]: WITNESS STATEMENT (Question and Answer Format)
+  H2[2]: STATEMENT CONCLUSION
+
+=== 05_suspect_interview_deluca ===
+  Has </table>: True
+  H2[0]: INTERVIEW SUMMARY
+  H2[1]: INTERVIEW TRANSCRIPT
+  H2[2]: INTERVIEW CONCLUSION
+
+=== 06_photographer_witness_statement ===
+  Has </table>: True
+  H2[0]: PRELIMINARY STATEMENT
+  H2[1]: WITNESS STATEMENT (Question and Answer Format)
+  H2[2]: STATEMENT CONCLUSION
+
+=== 07_dna_analysis_2024_cold_case ===
+  Has </table>: True
+  H2[0]: CASE BACKGROUND
+  H2[1]: EVIDENCE DESCRIPTION
+  H2[2]: ANALYTICAL METHODS
+  H2[3]: RESULTS
+  H2[4]: INTERPRETATION
+
+=== 08_trunk_discovery_report_2024 ===
+  Has </table>: True
+  H2[0]: INCIDENT SUMMARY
+  H2[1]: BACKGROUND - ESTATE OF CHARLOTTE DEVEREAUX BEAUMONT
+  H2[2]: DISCOVERY CIRCUMSTANCES
+  H2[3]: PHYSICAL DESCRIPTION OF TRUNK
+  H2[4]: INVENTORY OF TRUNK CONTENTS
+
+=== 09_journal_entries_devereaux_1957 ===
+  Has </table>: True
+  H2[0]: WITNESS STATEMENT (Question and Answer Format)
+  H2[1]: STATEMENT CONCLUSION (1957)
+
+=== 10_suspect_statement_devereaux_1957 ===
+  Has </table>: True
+  H2[0]: WITNESS STATEMENT (Question and Answer Format)
+  H2[1]: STATEMENT CONCLUSION (1957)
+
+=== 11_love_letters_evidence ===
+  Has </table>: True
+  H2[0]: EARLY RELATIONSHIP (1954-1955)
+  H2[1]: RELATIONSHIP TENSIONS (1957)
+
+=== 12_bartender_witness_statement ===
+  Has </table>: True
+  H2[0]: Statement of Witness
+  H2[1]: Corroborating Information
+  H2[2]: Investigative Assessment
+
+=== 13_conductor_witness_statement ===
+  Has </table>: True
+  H2[0]: Statement of Witness
+  H2[1]: Conductor's Night Check Timeline
+  H2[2]: Investigative Assessment
+
+=== 14_dr_hayes_interview ===
+  Has </table>: True
+  H2[0]: Interview Transcript
+  H2[1]: Investigative Assessment
+
+=== 15_margaret_sinclair_detailed_statement ===
+  Has </table>: True
+  H2[0]: Detailed Statement - Part I: Background and Journey
+  H2[1]: Detailed Statement - Part II: Additional Observations
+  H2[2]: Investigative Action Items
+
+=== 16_evidence_photographs_documentation ===
+  Has </table>: True
+  H3[0]: \u26a0\ufe0f PHOTOGRAPHER'S NOTE
+  H3[1]: \ud83d\udd2c FORENSIC PHOTOGRAPHY SUMMARY
+
+=== 17_detective_notes_timeline ===
+  Has </table>: False
+  H2[0]: Case #57-1114-HOMI: Murder of Vivienne Marchand
+  H2[1]: COMPREHENSIVE TIMELINE - NIGHT OF NOVEMBER 13-14, 1957
+  H2[2]: PERSONS OF INTEREST / SUSPECTS
+  H2[3]: CRITICAL EVIDENCE & UNANSWERED QUESTIONS
+
+=== 18_case_closure_1958 ===
+  Has </table>: True
+  H2[0]: Executive Summary
+  H2[1]: Investigation Summary
+  H2[2]: Persons of Interest - Final Assessment
+  H2[3]: Case Theories - Unresolved
+  H2[4]: Reasons for Case Closure
+
+=== 19_cold_case_review_memo_2024 ===
+  Has </table>: False
+  H2[0]: TO: Captain Richard Broussard, Commander - Cold Case Unit
+  H2[1]: FROM: Det. Lt. Sarah Chen, Lead Investigator
+  H2[2]: RE: Reopening of 1957 Vivienne Marchand Homicide - Significant New Evidence
+  H2[3]: Executive Summary
+  H2[4]: Background - Original 1957 Investigation
+
+=== 20_charlotte_devereaux_confession_2024 ===
+  Has </table>: False
+  H3[0]: CASE STATUS: SOLVED
+
+=== 21_district_attorney_summary_2024 ===
+  Has </table>: False
+  H2[0]: Case Summary: NOPD-COLD-2024-0847
+
+=== 22_final_case_closure_2024 ===
+  Has </table>: False
+  H2[0]: Final Status: Case NOPD-COLD-2024-0847
+
+=== 23_player_investigation_guide ===
+  Has </table>: False
+  H2[0]: Investigation Guide for Players
+  H2[1]: \ud83d\udccb How to Play
+  H2[2]: \ud83c\udfaf Key Questions to Answer
+  H2[3]: \ud83d\udcc2 Essential Documents to Start With
+  H2[4]: \ud83d\udd75\ufe0f Persons of Interest
+
+=== 24_character_dossiers ===
+  Has </table>: False
+
+=== 25_timeline_reconstruction ===
+  Has </table>: True
+  H2[0]: SECTION I: PRE-MURDER EVENING (NOV 13)
+  H2[1]: SECTION II: CRITICAL MURDER WINDOW (NOV 14)
+  H2[2]: SECTION III: POST-MURDER / DISCOVERY (NOV 14)
+
+=== 26_evidence_board_visualization ===
+  Has </table>: False
+  H3[0]: MISSING SCARF (MURDER WEAPON)
+  H3[1]: VICTIM'S WATCH
+  H3[2]: COMPARTMENT 7 DOOR
+
+=== 27_complete_solution_document ===
+  Has </table>: True
+  H2[0]: I. THE SOLUTION SUMMARY
+  H2[1]: II. THE MURDER: COMPLETE RECONSTRUCTION
+  H2[2]: III. WHY THE CASE WENT COLD (1957)
+  H2[3]: IV. HOW THE 2024 BREAKTHROUGH OCCURRED
+  H2[4]: V. KEY CLUES FOR SOLVING THE MYSTERY
+
+=== 28_historical_context_document ===
+  Has </table>: True
+  H2[0]: I. INTRODUCTION: THE WORLD OF 1957
+  H2[1]: II. THE LAVENDER SCARE (1950-1957)
+  H2[2]: III. LGBTQ+ LIFE IN THE SHADOWS
+  H2[3]: IV. RAILROAD TRAVEL & SEGREGATION
+  H2[4]: V. FORENSIC SCIENCE: 1957 VS. TODAY
+
+=== 29_gameplay_facilitation_guide ===
+  Has </table>: True
+  H2[0]: I. OVERVIEW FOR FACILITATORS
+  H2[1]: II. CONTENT WARNINGS & PREPARATION
+  H2[2]: III. SETUP & MATERIALS DISTRIBUTION
+  H2[3]: IV. FACILITATION STRATEGIES
+  H2[4]: V. KEY TEACHING MOMENTS
+
+=== 30_press_release_collection_1957 ===
+  Has </table>: True
+  H2[0]: JAZZ SINGER FOUND DEAD ABOARD LUXURY TRAIN
+  H2[1]: POLICE BAFFLED IN TRAIN MURDER CASE
+  H2[2]: POLICE SEEK \"MYSTERY WOMAN\" IN TRAIN MURDER
+  H2[3]: TRAIN MURDER INVESTIGATION CONTINUES
+  H2[4]: MARCHAND CASE GROWS COLD
+
+=== 31_press_release_2024 ===
+  Has </table>: True
+  H2[0]: EVIDENCE ITEM #1: VICTIM'S BODY
+  H2[1]: EVIDENCE ITEM #2: COMPARTMENT CONTENTS
+  H2[2]: EVIDENCE ITEM #3: FINGERPRINT LIFTS
+  H2[3]: EVIDENCE ITEM #4: MISSING MURDER WEAPON (SILK SCARF)
+  H2[4]: EVIDENCE ITEM #5: STEAMER TRUNK CONTENTS
+
+=== 32_evidence_chain_of_custody ===
+  Has </table>: True
+  H2[0]: EVIDENCE ITEM #1: VICTIM'S BODY
+  H2[1]: EVIDENCE ITEM #2: COMPARTMENT CONTENTS
+  H2[2]: EVIDENCE ITEM #3: FINGERPRINT LIFTS
+  H2[3]: EVIDENCE ITEM #4: MISSING MURDER WEAPON (SILK SCARF)
+  H2[4]: EVIDENCE ITEM #5: STEAMER TRUNK CONTENTS
+
+=== 33_investigative_dead_ends ===
+  Has </table>: True
+  H2[0]: DEAD END #1: VINCENT DELUCA (Jealous Fianc\u00e9 Theory)
+  H2[1]: DEAD END #2: ROBBERY / RANDOM CRIME THEORY
+  H2[2]: DEAD END #3: DR. EVELYN HAYES (Medical Knowledge)
+  H2[3]: DEAD END #4: PORTER ERNEST WASHINGTON
+  H2[4]: DEAD END #5: \"MYSTERY WOMAN IN BURGUNDY\"
+
+=== 34_psychological_analysis ===
+  Has </table>: True
+  H2[0]: Personality Characteristics
+  H2[1]: Psychological Framework
+  H2[2]: Personality Characteristics
+  H2[3]: Mental State Leading to Homicide
+  H2[4]: The Fatal Mismatch
