@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Journal - Charlotte Devereaux (1957)</title>
+    <style>
+        body {
+            background-color: #f9f4e8;
+            color: #2b2b2b;
+            font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+            line-height: 1.8;
+            margin: 0;
+            padding: 20px;
+        }
+        .journal-container {
+            max-width: 750px;
+            margin: 0 auto;
+            background-color: #fffef7;
+            padding: 50px;
+            border: 1px solid #d4c5a9;
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+            background-image: repeating-linear-gradient(
+                transparent,
+                transparent 31px,
+                #e8dcc0 31px,
+                #e8dcc0 32px
+            );
+        }
+        .header-section {
+            text-align: center;
+            border-bottom: 2px solid #8b7355;
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            font-family: 'Georgia', serif;
+        }
+        .header-title {
+            font-size: 26px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            color: #5c4033;
+        }
+        .entry {
+            margin: 30px 0;
+            padding: 15px;
+            border-left: 3px solid #8b7355;
+        }
+        .entry-date {
+            font-family: 'Georgia', serif;
+            font-weight: bold;
+            font-size: 16px;
+            color: #5c4033;
+            margin-bottom: 10px;
+        }
+        .entry-text {
+            font-size: 15px;
+            line-height: 2;
+            color: #2b2b2b;
+        }
+        .critical-entry {
+            background-color: #fff3cd;
+            border: 3px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+        }
+        .archival-note {
+            font-family: 'Arial', sans-serif;
+            background-color: #e8f1f8;
+            border: 2px solid #2c5f8d;
+            padding: 15px;
+            margin: 30px 0;
+            font-style: normal;
+            font-size: 13px;
+        }
+    /* ========================================
+   PRINT-OPTIMIZED CSS
+   Saves ink, prevents cutoff, controls page breaks
+   ======================================== */
+@page {
+  margin: 0.5in !important;
+}
+@media print {
+  /* Reset to printer-friendly colors */
+  body {
+    background-color: white !important;
+    background: white !important;
+    color: black !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove all dark backgrounds and shadows */
+  .document-container,
+  .header-box,
+  table,
+  th,
+  td,
+  div,
+  section {
+    background-color: white !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-color: black !important;
+  }
+
+  /* Ensure text is always black */
+  h1, h2, h3, h4, h5, h6, p, li, td, th, span, div {
+    color: black !important;
+  }
+
+  /* Keep ONLY red stamps visible (but lighter) */
+  .stamp {
+    color: #c0392b !important;
+    border-color: #c0392b !important;
+    opacity: 0.6 !important;
+    background: transparent !important;
+  }
+
+  /* Remove colored highlight backgrounds - keep border only */
+  .evidence-highlight,
+  .sig-critical,
+  .sig-supporting,
+  .sig-context {
+    background-color: white !important;
+    background: white !important;
+    border-left-width: 3px !important;
+    border-left-color: black !important;
+  }
+
+  /* Simplify evidence tags for printing */
+  .evidence-tag {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+
+  /* Control page breaks - prevent awkward splits */
+  table {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group; /* Repeat header on each page */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Keep related content together */
+  .evidence-highlight,
+  .signature-block,
+  .header-meta {
+    page-break-inside: avoid;
+  }
+
+  /* Remove unnecessary spacing for print */
+  .document-container {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Ensure tables fit on page */
+  table {
+    width: 100% !important;
+    font-size: 11pt !important;
+  }
+
+  th, td {
+    padding: 6pt !important;
+  }
+
+  /* Adjust font sizes for readability */
+  body {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  h1 {
+    font-size: 18pt !important;
+  }
+
+  h2 {
+    font-size: 14pt !important;
+  }
+
+  /* Show URLs for links (optional - comment out if not wanted) */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  /* Hide elements that shouldn't print */
+  .no-print {
+    display: none !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="journal-container">
+    <div class="header-section">
+        <h1 class="header-title">Private Journal</h1>
+        <div style="font-size: 18px; font-style: italic;">Charlotte Marie Devereaux</div>
+        <div style="font-size: 14px; margin-top: 10px;">Hollywood, California & Travels</div>
+        <div style="font-size: 14px;">1954 - 1957</div>
+    </div>
+
+    <div class="archival-note">
+        <strong>ARCHIVAL NOTE - 2024</strong><br>
+        This journal was recovered from a locked steamer trunk at 3847 Prytania Street, New Orleans, Louisiana on November 3, 2024. The journal belonged to Charlotte "Lottie" Devereaux Beaumont (1928-2023) and contains entries spanning 1954-1957. The following are transcribed excerpts relevant to the 1957 murder investigation of Vivienne Marchand. Full journal archived as Evidence Item #2 in NOPD Case #NOPD-COLD-2024-0847.
+    </div>
+
+    <div class="entry">
+        <div class="entry-date">August 12, 1954</div>
+        <div class="entry-text">
+            I met someone tonight. Her name is Vivienne. She's French, a jazz singer with the most incredible voice I've ever heard. We met at the Blue Note after her set. She looked at me and smiled, and I swear my heart stopped. We talked for hours. She's so sophisticated, so worldly. I feel like a foolish girl around her, but she doesn't make me feel foolish. She makes me feel seen. We're meeting again tomorrow night. I can't stop thinking about her.
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="entry-date">September 3, 1954</div>
+        <div class="entry-text">
+            V and I spent the whole day together. We drove to the beach, walked along the shore, talked about everything and nothing. When she held my hand, I thought I might cry from happiness. I've never felt this way about anyone. I know what we're doing is dangerous. If anyone found out... but I don't care. For the first time in my life, I feel truly alive.
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="entry-date">December 25, 1955</div>
+        <div class="entry-text">
+            Christmas with Vivienne. We couldn't be together publicly, so we spent the day in her apartment. She gave me a silver locket with her photograph inside. I gave her a silk scarf—burgundy and gold, Hermès, cost me three weeks' salary, but the look on her face was worth it. She called it "our secret treasure." I will love her forever.
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="entry-date">July 18, 1957</div>
+        <div class="entry-text">
+            Something's changed. Vivienne has been distant lately. She says she's just busy with work, but I can feel her pulling away. She canceled our plans twice this week. When I asked her what was wrong, she said, "Nothing, Lottie. I just need some space." Space? What does that mean? I'm scared. I can't lose her.
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="entry-date">September 8, 1957</div>
+        <div class="entry-text">
+            She told me today. She's moving to New Orleans. Some jazz club owner named Vincent offered her a contract and... she's going to marry him. MARRY HIM. She said it's "the practical thing to do." Practical? What about us? What about the last three years? I begged her not to go. I told her I loved her. She said, "Lottie, we both knew this couldn't last forever. It was beautiful while it lasted, but it's time to move on." Move on? How can she say that? She's throwing away everything we had for money and respectability. I hate her. I love her. I don't know what to do.
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="entry-date">October 15, 1957</div>
+        <div class="entry-text">
+            I keep calling her. She won't answer. I went to her apartment yesterday. She told me through the door that I need to stop, that it's over, that I'm making this harder than it needs to be. Harder for who? For her? What about me? I gave her everything. I risked everything for her. And she's just walking away like I meant nothing.
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="entry-date">November 10, 1957</div>
+        <div class="entry-text">
+            I called Vivienne's mother in Chicago. She told me Vivienne is leaving for New Orleans on November 13th. The Silver Comet train. I bought a ticket. I know she'll be angry when she sees me, but I have to try one more time. I have to make her understand that we belong together. Maybe if I can just talk to her, away from Los Angeles, away from Vincent, she'll remember what we had. She'll come back to me. She has to.
+        </div>
+    </div>
+
+    <div class="critical-entry">
+        <div class="entry-date" style="color: #c62828; font-size: 18px;">November 13, 1957 - Evening</div>
+        <div class="entry-text">
+            She's here. On the train. I saw her boarding in Chicago. When she saw me, her face... she looked angry. Trapped. We're in the same car—she's in Compartment 7, I'm in Compartment 8. Right next door. It feels like fate. Or a nightmare. I saw her at dinner with that man, Vincent. He's possessive, controlling. She looked miserable. I want to talk to her alone. I will talk to her alone. Tonight. I'll wait until everyone is asleep and I'll knock on her door. She'll let me in. She has to.
+        </div>
+    </div>
+
+    <div class="critical-entry">
+        <div class="entry-date" style="color: #c62828; font-size: 18px;">November 14, 1957 - 4:00 AM</div>
+        <div class="entry-text">
+            I killed her. God forgive me, I killed Vivienne. My hands won't stop shaking. I can't breathe. I can't think straight. Let me write it down before I lose my mind completely.
+
+            I went to her compartment around two-thirty in the morning. I'd been drinking—bourbon from the lounge car. I knocked softly. She opened the door. She was annoyed, told me to go away. But I pushed inside. I needed to talk to her.
+
+            I told her I loved her. I begged her to leave Vincent, to come back to me. She laughed. She actually laughed and said I was being "pathetic" and "delusional." She said what we had was "just fun" and that I needed to "grow up and move on." 
+
+            I told her I would tell everyone about us. I would expose the affair. She got cold, vicious. She said no one would believe me, that she would deny everything, that she'd tell everyone I was a crazy, obsessed stalker. She called me a "washed-up actress" and said I was "nothing."
+
+            She turned her back on me. She reached for that scarf—the one I gave her for Christmas. She was going to put it away, like she was putting me away. Dismissing me. And something inside me just... broke.
+
+            I grabbed the scarf from her hands. I don't even remember deciding to do it. I just did it. I wrapped it around her neck from behind. She struggled. God, she struggled. But the compartment was so small, and I was so angry, and I just pulled tighter and tighter until she stopped moving.
+
+            It took maybe two or three minutes. It felt like forever. It felt like an instant. When I let go, she collapsed. I laid her on the bed, tried to make it look like she was sleeping. I don't know why. Maybe I thought if she looked peaceful, it wouldn't be real.
+
+            I took the scarf. I couldn't leave it there. My hands had touched it, my DNA, my fingerprints—I don't know what evidence they can find, but I couldn't risk it. I hid it in my suitcase.
+
+            I killed the only person I ever loved. What have I done? What have I done?
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="entry-date">November 15, 1957</div>
+        <div class="entry-text">
+            The police questioned me today. I told them I didn't know Vivienne well, just a casual acquaintance. I said I was asleep all night. They believed me. Or at least, they didn't arrest me. They're focused on Vincent. He argued with her the night before. They think he did it. Let them. I can't go to prison. I can't. I'll keep the scarf hidden. No one will ever know.
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="entry-date">November 28, 1957</div>
+        <div class="entry-text">
+            I'm leaving Hollywood. I can't stay here. Everything reminds me of her. I'm going back to Louisiana. I'll start over. I'll bury this secret and never speak of it again. The scarf is locked in my trunk. I can't destroy it—it's the last piece of her I have. Maybe I'm a monster. Maybe I deserve to suffer. But I won't let them take me away. I won't.
+        </div>
+    </div>
+
+    <div class="entry">
+        <div class="entry-date">January 3, 1958</div>
+        <div class="entry-text">
+            The case is closed. They never found the killer. I'm safe. I'll never be safe. Every night I see her face. I hear her voice. I feel her hands trying to pull the scarf away. I'm in hell. I deserve to be in hell. But I'm free. God help me, I'm free.
+        </div>
+    </div>
+
+    <div class="archival-note">
+        <strong>END OF EXCERPTS</strong><br>
+        Additional entries from 1958-1975 express ongoing guilt, nightmares, and fear of discovery. Charlotte Devereaux married Harold Beaumont in 1959 and never returned to acting. The journal was hidden in a locked trunk until its discovery in November 2024, 67 years after the murder. The entries constitute a written confession and were instrumental in solving the cold case.
+    </div>
+
+</div>
+
+</body>
+</html>
+

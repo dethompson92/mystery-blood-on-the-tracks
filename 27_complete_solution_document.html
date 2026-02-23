@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Solution Document - Mystery #2B</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <style>
+      body {
+        font-family: 'Times New Roman', Times, serif;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: #fcfcfc;
+        color: #000;
+        line-height: 1.6;
+      }
+
+      /* Header Styling */
+      .header-container {
+        border-bottom: 2px solid #000;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+        text-align: center;
+        position: relative;
+      }
+
+      .confidential-stamp {
+        border: 4px solid #c0392b;
+        color: #c0392b;
+        display: inline-block;
+        padding: 10px 20px;
+        font-weight: bold;
+        font-size: 24px;
+        text-transform: uppercase;
+        transform: rotate(-3deg);
+        margin-bottom: 20px;
+        font-family: Arial, sans-serif;
+        opacity: 0.9;
+      }
+
+      .gm-warning {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+        padding: 15px;
+        margin: 20px 0;
+        text-align: center;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-family: Arial, sans-serif;
+      }
+
+      h1 {
+        font-size: 28px;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+      }
+
+      h2 {
+        font-size: 20px;
+        border-bottom: 1px solid #666;
+        padding-bottom: 5px;
+        margin-top: 30px;
+        text-transform: uppercase;
+        color: #333;
+      }
+
+      h3 {
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 20px;
+        color: #444;
+      }
+
+      .meta-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 30px;
+      }
+
+      .meta-table td {
+        padding: 8px;
+        border: 1px solid #ccc;
+        vertical-align: top;
+      }
+
+      .meta-label {
+        background-color: #f0f0f0;
+        font-weight: bold;
+        width: 150px;
+      }
+
+      .highlight-box {
+        background-color: #fff3cd;
+        border: 1px solid #ffeeba;
+        padding: 15px;
+        margin: 15px 0;
+      }
+
+      .evidence-list {
+        list-style-type: none;
+        padding-left: 0;
+      }
+
+      .evidence-item {
+        margin-bottom: 10px;
+        padding-left: 20px;
+        position: relative;
+      }
+
+      .evidence-item::before {
+        content: '▪';
+        position: absolute;
+        left: 0;
+        color: #c0392b;
+      }
+
+      .critical-tag {
+        background-color: #c0392b;
+        color: white;
+        padding: 2px 6px;
+        font-size: 11px;
+        border-radius: 3px;
+        margin-right: 5px;
+        text-transform: uppercase;
+        font-family: Arial, sans-serif;
+      }
+
+      .doc-ref {
+        font-size: 12px;
+        color: #666;
+        font-style: italic;
+        margin-left: 5px;
+      }
+
+      .timeline-step {
+        margin-bottom: 15px;
+        padding-left: 15px;
+        border-left: 3px solid #ccc;
+      }
+
+      .time-marker {
+        font-weight: bold;
+        font-family: 'Courier New', monospace;
+      }
+
+      .footer {
+        margin-top: 50px;
+        border-top: 1px solid #ccc;
+        padding-top: 20px;
+        font-size: 12px;
+        text-align: center;
+        color: #666;
+      }
+    /* ========================================
+   PRINT-OPTIMIZED CSS
+   Saves ink, prevents cutoff, controls page breaks
+   ======================================== */
+@page {
+  margin: 0.5in !important;
+}
+@media print {
+  /* Reset to printer-friendly colors */
+  body {
+    background-color: white !important;
+    background: white !important;
+    color: black !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove all dark backgrounds and shadows */
+  .document-container,
+  .header-box,
+  table,
+  th,
+  td,
+  div,
+  section {
+    background-color: white !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-color: black !important;
+  }
+
+  /* Ensure text is always black */
+  h1, h2, h3, h4, h5, h6, p, li, td, th, span, div {
+    color: black !important;
+  }
+
+  /* Keep ONLY red stamps visible (but lighter) */
+  .stamp {
+    color: #c0392b !important;
+    border-color: #c0392b !important;
+    opacity: 0.6 !important;
+    background: transparent !important;
+  }
+
+  /* Remove colored highlight backgrounds - keep border only */
+  .evidence-highlight,
+  .sig-critical,
+  .sig-supporting,
+  .sig-context {
+    background-color: white !important;
+    background: white !important;
+    border-left-width: 3px !important;
+    border-left-color: black !important;
+  }
+
+  /* Simplify evidence tags for printing */
+  .evidence-tag {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+
+  /* Control page breaks - prevent awkward splits */
+  table {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group; /* Repeat header on each page */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Keep related content together */
+  .evidence-highlight,
+  .signature-block,
+  .header-meta {
+    page-break-inside: avoid;
+  }
+
+  /* Remove unnecessary spacing for print */
+  .document-container {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Ensure tables fit on page */
+  table {
+    width: 100% !important;
+    font-size: 11pt !important;
+  }
+
+  th, td {
+    padding: 6pt !important;
+  }
+
+  /* Adjust font sizes for readability */
+  body {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  h1 {
+    font-size: 18pt !important;
+  }
+
+  h2 {
+    font-size: 14pt !important;
+  }
+
+  /* Show URLs for links (optional - comment out if not wanted) */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  /* Hide elements that shouldn't print */
+  .no-print {
+    display: none !important;
+  }
+}
+</style>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <div class="header-container">
+      <div class="confidential-stamp">SOLUTION DOCUMENT - CONFIDENTIAL</div>
+      <h1>MYSTERY #2B: BLOOD ON THE TRACKS</h1>
+      <p>CASE RESOLUTION & GAME MASTER GUIDE</p>
+      <div style="font-family: 'Courier New', monospace">
+        CASE FILE: 57-1114-HOMI / NOPD-COLD-2024-0847<br />
+        VICTIM: VIVIENNE MARCHAND<br />
+        STATUS: SOLVED (DEC 1, 2024)
+      </div>
+    </div>
+
+    <div class="gm-warning">
+      ⚠️ SPOILER WARNING: FOR GAME MASTER / EDUCATOR USE ONLY ⚠️<br />
+      DO NOT DISTRIBUTE TO PLAYERS
+    </div>
+
+    <!-- Section I: Summary -->
+    <h2>I. THE SOLUTION SUMMARY</h2>
+    <table class="meta-table">
+      <tr>
+        <td class="meta-label">THE KILLER</td>
+        <td>
+          <strong>Charlotte "Lottie" Devereaux</strong><br />
+          Age 29 (in 1957) | Aspiring Actress | Compartment 8 (Next Door)
+        </td>
+      </tr>
+      <tr>
+        <td class="meta-label">THE METHOD</td>
+        <td>Ligature Strangulation using victim's own burgundy & gold silk scarf.</td>
+      </tr>
+      <tr>
+        <td class="meta-label">THE TIME</td>
+        <td>
+          November 14, 1957<br />
+          <strong>02:45 AM - 03:00 AM</strong> (Approximate)
+        </td>
+      </tr>
+      <tr>
+        <td class="meta-label">THE LOCATION</td>
+        <td>Silver Comet Train | Sleeper Car "Magnolia" | Compartment 7</td>
+      </tr>
+      <tr>
+        <td class="meta-label">THE MOTIVE</td>
+        <td>
+          <strong>Jealous Rage & Fear of Exposure</strong><br />
+          Charlotte and Vivienne were secret lovers (1954-1957). Vivienne ended the relationship to marry a man.
+          Charlotte killed her in a crime of passion when rejected, fearing her sexuality would be exposed in homophobic
+          1957 America.
+        </td>
+      </tr>
+    </table>
+
+    <!-- Section II: Reconstruction -->
+    <h2>II. THE MURDER: COMPLETE RECONSTRUCTION</h2>
+    <div class="highlight-box">
+      <p>
+        <strong>Context:</strong> The murder was <em>not</em> premeditated. It was a confrontation that spiraled out of
+        control. The killer had legitimate access to the room (invited in), which explains the lack of forced entry.
+      </p>
+    </div>
+
+    <div class="timeline-step">
+      <span class="time-marker">BACKGROUND (1954-1957)</span><br />
+      Charlotte and Vivienne maintain a deep, secret romantic relationship. In Sept 1957, Vivienne ends it to marry club
+      owner Vincent DeLuca for financial security. Charlotte is devastated.
+    </div>
+
+    <div class="timeline-step">
+      <span class="time-marker">NOV 13 - 10:45 PM</span><br />
+      Witness Margaret Sinclair sees a "mystery woman in a burgundy suit" talking intensely with Vivienne. <br />
+      <em><strong>Key Clue:</strong> This woman is Charlotte. She was never identified in 1957.</em>
+    </div>
+
+    <div class="timeline-step">
+      <span class="time-marker">NOV 14 - 02:30 AM</span><br />
+      Charlotte, intoxicated and desperate, knocks on Vivienne's compartment door (Comp 7). She is staying right next
+      door in Compartment 8.
+    </div>
+
+    <div class="timeline-step">
+      <span class="time-marker">02:35 AM</span><br />
+      Vivienne lets Charlotte in to avoid a scene in the corridor.
+    </div>
+
+    <div class="timeline-step">
+      <span class="time-marker">02:40 AM - 02:45 AM</span><br />
+      Argument ensues. Charlotte begs for reconciliation. Vivienne coldly rejects her, calling her "pathetic" and
+      threatening to expose her as "delusional" to mutual acquaintances—a dangerous threat in 1957.
+    </div>
+
+    <div class="timeline-step">
+      <span class="time-marker">02:45 AM - 03:00 AM (THE MURDER)</span><br />
+      In a moment of blind rage, Charlotte grabs Vivienne's silk scarf (draped on a chair) and strangles her from
+      behind. Vivienne struggles briefly but is overpowered.
+    </div>
+
+    <div class="timeline-step">
+      <span class="time-marker">03:00 AM - 03:05 AM</span><br />
+      Charlotte realizes Vivienne is dead. She stages the body to look peaceful. She takes the murder weapon (scarf) to
+      remove evidence. She slips out and returns to her own room (Comp 8).
+    </div>
+
+    <div class="timeline-step">
+      <span class="time-marker">03:10 AM</span><br />
+      Porter Ernest Washington notices light under Charlotte's door—she is awake, panicking, and hiding the scarf in her
+      luggage.
+    </div>
+
+    <div class="timeline-step">
+      <span class="time-marker">POST-MURDER</span><br />
+      Charlotte successfully plays the role of a shocked stranger. She gives a false statement to police. She keeps the
+      secret for 67 years until her death.
+    </div>
+
+    <!-- Section III: Cold Case Factors -->
+    <h2>III. WHY THE CASE WENT COLD (1957)</h2>
+    <p>
+      The 1957 investigation failed due to a combination of social prejudice, missing evidence, and effective deception:
+    </p>
+    <ol>
+      <li>
+        <strong>The Invisible Motive:</strong> In 1957, a lesbian relationship was socially invisible. Investigators did
+        not consider a "lover's quarrel" between two women. They looked for a male killer.
+      </li>
+      <li>
+        <strong>Missing Weapon:</strong> Charlotte took the scarf. Without the weapon, there was no physical link to the
+        killer.
+      </li>
+      <li>
+        <strong>Technological Limits:</strong> No DNA testing existed. Fingerprints on the door were inconclusive.
+      </li>
+      <li>
+        <strong>The Red Herring:</strong> Vincent DeLuca (jealous fiancé) fit the profile perfectly. His presence
+        distracted police, even though he had a solid alibi.
+      </li>
+      <li>
+        <strong>"The Mystery Woman":</strong> Witness Margaret Sinclair saw Charlotte but didn't know her name. Police
+        never connected the "woman in burgundy" to the passenger in Compartment 8.
+      </li>
+    </ol>
+
+    <!-- Section IV: The Breakthrough -->
+    <h2>IV. HOW THE 2024 BREAKTHROUGH OCCURRED</h2>
+    <div class="highlight-box">
+      <strong>The Turning Point:</strong> The discovery of Charlotte Devereaux's locked trunk in November 2024.
+    </div>
+    <ul>
+      <li><strong>Physical Evidence:</strong> The missing burgundy scarf was in the trunk.</li>
+      <li>
+        <strong>Forensic Link:</strong> Modern DNA analysis found Vivienne's skin cells embedded in the scarf fabric
+        (impossible to detect in 1957).
+      </li>
+      <li>
+        <strong>Documentary Proof:</strong> Charlotte's journal details the affair and her guilt. Love letters confirm
+        the relationship.
+      </li>
+      <li><strong>Confession:</strong> Charlotte left a written confession days before her death at age 95.</li>
+    </ul>
+
+    <!-- Section V: Key Clues -->
+    <h2>V. KEY CLUES FOR SOLVING THE MYSTERY</h2>
+
+    <h3>CRITICAL EVIDENCE (Must Find These):</h3>
+    <ul class="evidence-list">
+      <li class="evidence-item">
+        <span class="critical-tag">WITNESS</span>
+        <strong>Margaret Sinclair's Statement:</strong> Mentions seeing a "mystery woman" at 10:45 PM.
+        <span class="doc-ref">(See Doc #15)</span>
+      </li>
+      <li class="evidence-item">
+        <span class="critical-tag">WEAPON</span>
+        <strong>The Missing Scarf:</strong> Vincent mentions it was missing. Found in 2024 trunk.
+        <span class="doc-ref">(See Doc #05 & #08)</span>
+      </li>
+      <li class="evidence-item">
+        <span class="critical-tag">AUDIO</span>
+        <strong>Soft Voices:</strong> Eleanor Whitfield heard "women's voices" at 02:45 AM.
+        <span class="doc-ref">(See Doc #17)</span>
+      </li>
+      <li class="evidence-item">
+        <span class="critical-tag">PROXIMITY</span>
+        <strong>Light Under Door:</strong> Porter saw light in Comp 8 (Charlotte) right after murder time.
+        <span class="doc-ref">(See Doc #04)</span>
+      </li>
+      <li class="evidence-item">
+        <span class="critical-tag">MOTIVE</span>
+        <strong>Love Letters:</strong> 2024 discovery proves the secret relationship.
+        <span class="doc-ref">(See Doc #11)</span>
+      </li>
+      <li class="evidence-item">
+        <span class="critical-tag">DNA</span>
+        <strong>Forensic Match:</strong> 2024 lab report links scarf to victim.
+        <span class="doc-ref">(See Doc #07)</span>
+      </li>
+    </ul>
+
+    <h3>RED HERRINGS (To Eliminate):</h3>
+    <ul class="evidence-list">
+      <li class="evidence-item">
+        <strong>Vincent DeLuca:</strong> Had motive (jealousy) but has a confirmed alibi (was in lounge car).
+      </li>
+      <li class="evidence-item">
+        <strong>Dr. Evelyn Hayes:</strong> Was in corridor at 03:00 AM but has no connection to victim.
+      </li>
+      <li class="evidence-item">
+        <strong>Robbery Theory:</strong> Jewelry was left behind; only the scarf was taken (personal).
+      </li>
+    </ul>
+
+    <!-- Section VI: Guide for Players -->
+    <h2>VI. SOLVING GUIDE FOR PLAYERS</h2>
+    <p>
+      <strong>Step 1: Establish Timeline</strong><br />
+      Use the watch (stopped at 3:17) and witness accounts to narrow TOD to ~02:45-03:00 AM.
+    </p>
+
+    <p>
+      <strong>Step 2: Eliminate Suspects</strong><br />
+      Rule out Vincent (Lounge Car) and Staff (Working). Focus on adjacent passengers.
+    </p>
+
+    <p>
+      <strong>Step 3: Connect the "Mystery Woman"</strong><br />
+      Realize that the woman Margaret saw must be a passenger. Charlotte is the only female passenger who fits the
+      description and location.
+    </p>
+
+    <p>
+      <strong>Step 4: Find the Motive (The 2024 Twist)</strong><br />
+      Use the 2024 documents (Letters, Journal) to uncover the secret lesbian relationship. This provides the "Why" that
+      1957 police missed.
+    </p>
+
+    <!-- Section VII: Discussion Topics -->
+    <h2>VII. DISCUSSION QUESTIONS FOR EDUCATORS</h2>
+    <ul>
+      <li>
+        <strong>Historical Context:</strong> How did the "Lavender Scare" and 1950s homophobia contribute to this
+        tragedy? (Fear of exposure was a primary driver for the killer).
+      </li>
+      <li><strong>Forensics:</strong> Compare 1957 capabilities vs. 2024. How would this case be handled today?</li>
+      <li>
+        <strong>The "Locked Room":</strong> Discuss how the killer simply walked out and locked the door (using the
+        latch) or if the victim locked it herself before dying (unlikely).
+        <em>Solution: The latch was a slam-lock type common on 1950s trains.</em>
+      </li>
+      <li>
+        <strong>Ethics:</strong> Discuss the ethics of "outing" the deceased victim and killer to solve the crime.
+      </li>
+    </ul>
+
+    <!-- Section VIII: History -->
+    <h2>VIII. HISTORICAL CONTEXT</h2>
+    <p>
+      <strong>The Lavender Scare:</strong> In the 1950s, the US government actively persecuted LGBTQ+ people, firing
+      thousands from jobs. Homosexuality was illegal and classified as a mental illness. Exposure meant total ruin. This
+      context is essential to understanding why Charlotte was so terrified of Vivienne exposing her, and why
+      investigators never suspected a romantic link between two women.
+    </p>
+
+    <div class="footer">
+      CONFIDENTIAL GAME MATERIAL - DO NOT DISTRIBUTE<br />
+      Mystery #2B: Blood on the Tracks | © 2026 AI Mystery Gen
+    </div>
+  </body>
+</html>
+
+

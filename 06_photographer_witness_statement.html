@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Witness Statement: Margaret Sinclair</title>
+    <style>
+        body {
+            background-color: #f4f1ea;
+            color: #2b2b2b;
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .report-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background-color: #fcfbf9;
+            padding: 50px;
+            border: 1px solid #d3cabc;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .header-section {
+            text-align: center;
+            border-bottom: 3px double #2b2b2b;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        h2 {
+            font-size: 16px;
+            border-bottom: 1px dashed #2b2b2b;
+            padding-bottom: 5px;
+            margin-top: 25px;
+            text-transform: uppercase;
+            background-color: #e9e5d9;
+            display: inline-block;
+            padding: 5px 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #555;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #e4dfd0;
+            font-weight: bold;
+            width: 30%;
+        }
+        .q-and-a {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        .question {
+            font-weight: bold;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+        .answer {
+            margin-left: 20px;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+        .highlight-box {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .signature-block {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .signature-line {
+            width: 45%;
+            border-top: 1px solid #2b2b2b;
+            padding-top: 10px;
+        }
+    /* ========================================
+   PRINT-OPTIMIZED CSS
+   Saves ink, prevents cutoff, controls page breaks
+   ======================================== */
+@page {
+  margin: 0.5in !important;
+}
+@media print {
+  /* Reset to printer-friendly colors */
+  body {
+    background-color: white !important;
+    background: white !important;
+    color: black !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove all dark backgrounds and shadows */
+  .document-container,
+  .header-box,
+  table,
+  th,
+  td,
+  div,
+  section {
+    background-color: white !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-color: black !important;
+  }
+
+  /* Ensure text is always black */
+  h1, h2, h3, h4, h5, h6, p, li, td, th, span, div {
+    color: black !important;
+  }
+
+  /* Keep ONLY red stamps visible (but lighter) */
+  .stamp {
+    color: #c0392b !important;
+    border-color: #c0392b !important;
+    opacity: 0.6 !important;
+    background: transparent !important;
+  }
+
+  /* Remove colored highlight backgrounds - keep border only */
+  .evidence-highlight,
+  .sig-critical,
+  .sig-supporting,
+  .sig-context {
+    background-color: white !important;
+    background: white !important;
+    border-left-width: 3px !important;
+    border-left-color: black !important;
+  }
+
+  /* Simplify evidence tags for printing */
+  .evidence-tag {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+
+  /* Control page breaks - prevent awkward splits */
+  table {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group; /* Repeat header on each page */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Keep related content together */
+  .evidence-highlight,
+  .signature-block,
+  .header-meta {
+    page-break-inside: avoid;
+  }
+
+  /* Remove unnecessary spacing for print */
+  .document-container {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Ensure tables fit on page */
+  table {
+    width: 100% !important;
+    font-size: 11pt !important;
+  }
+
+  th, td {
+    padding: 6pt !important;
+  }
+
+  /* Adjust font sizes for readability */
+  body {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  h1 {
+    font-size: 18pt !important;
+  }
+
+  h2 {
+    font-size: 14pt !important;
+  }
+
+  /* Show URLs for links (optional - comment out if not wanted) */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  /* Hide elements that shouldn't print */
+  .no-print {
+    display: none !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="report-container">
+    <div class="header-section">
+        <h1 class="header-title">Jackson Police Department</h1>
+        <div style="font-size: 16px;">Witness Statement / Interview Transcript</div>
+        <div style="font-size: 14px; margin-top: 10px;">Criminal Investigation Division - Homicide Bureau</div>
+    </div>
+
+    <table>
+        <tr>
+            <th>CASE NUMBER:</th>
+            <td>57-1114-HOMI</td>
+        </tr>
+        <tr>
+            <th>STATEMENT NUMBER:</th>
+            <td>WS-003</td>
+        </tr>
+        <tr>
+            <th>DATE OF INTERVIEW:</th>
+            <td>November 14, 1957</td>
+        </tr>
+        <tr>
+            <th>TIME OF INTERVIEW:</th>
+            <td>1345 Hours - 1450 Hours</td>
+        </tr>
+        <tr>
+            <th>LOCATION:</th>
+            <td>Jackson Union Station - Railway Police Office</td>
+        </tr>
+        <tr>
+            <th>INTERVIEWING OFFICER:</th>
+            <td>Detective Charles Monroe (Badge #427)</td>
+        </tr>
+        <tr>
+            <th>WITNESS INFORMATION:</th>
+            <td>Sinclair, Margaret Ann "Maggie"<br>
+            Age: 35 years old<br>
+            Race: White<br>
+            Occupation: Freelance Photographer (Jazz & Music Documentation)<br>
+            Residence: 412 N. Dearborn Street, Chicago, Illinois<br>
+            Professional Affiliations: Life Magazine (contributor), Chicago Tribune (freelance)</td>
+        </tr>
+    </table>
+
+    <h2>PRELIMINARY STATEMENT</h2>
+    <p>Miss Margaret Sinclair voluntarily provided a statement regarding the death of Miss Vivienne Marchand. Miss Sinclair was a personal friend of the deceased and was traveling in the adjacent compartment (Compartment 4) during the journey. She was cooperative and forthcoming during the interview. The following transcript represents the substance of her statement.</p>
+
+    <h2>WITNESS STATEMENT (Question and Answer Format)</h2>
+
+    <div class="q-and-a">
+        <div class="question">DETECTIVE MONROE: Miss Sinclair, please state your full name and occupation for the record.</div>
+        <div class="answer">SINCLAIR: Margaret Ann Sinclair. Everyone calls me Maggie. I'm a freelance photographer. I specialize in documenting jazz musicians and club culture, primarily in Chicago and New Orleans.</div>
+
+        <div class="question">MONROE: How did you know Miss Vivienne Marchand?</div>
+        <div class="answer">SINCLAIR: Vivienne and I were close friends. We met in 1950 when I was assigned to photograph performers at a jazz club on Chicago's South Side. She was singing there. I photographed her that night, and we just clicked. We became friends immediately. Over the years, I photographed many of her performances. Some of my best work features Vivienne.</div>
+
+        <div class="question">MONROE: Were you traveling to New Orleans for professional or personal reasons?</div>
+        <div class="answer">SINCLAIR: Professional. I'm on assignment for Life Magazine—a photo essay on New Orleans jazz culture. French Quarter clubs, musicians, the whole scene. I didn't know Vivienne would be on the same train until I saw her boarding in Chicago. It was a pleasant surprise.</div>
+
+        <div class="question">MONROE: Did you spend time with Miss Marchand during the journey?</div>
+        <div class="answer">SINCLAIR: Yes. We had dinner together in the dining car the first evening—me, Vivienne, a Dr. Caldwell, and Mr. DeLuca, Vivienne's fiancé. We talked, caught up. It was nice. After dinner, we went to the lounge car for drinks. Vivienne and I talked about her upcoming move to New Orleans and her wedding plans.</div>
+
+        <div class="question">MONROE: How did Miss Marchand seem to you during these conversations? Was her behavior normal?</div>
+        <div class="answer">SINCLAIR: (pause) She seemed... conflicted, Detective. On the surface, she was her usual charming self. But I've known Vivienne for seven years. I could tell something was troubling her. She seemed distracted, like her mind was elsewhere.</div>
+
+        <div class="question">MONROE: Did she tell you what was troubling her?</div>
+        <div class="answer">SINCLAIR: Not directly. Vivienne was a private person, especially about personal matters. But when we were alone for a moment in the lounge, I asked her if she was happy about the wedding. She looked at me and said, "I'm doing what's practical, Maggie." Not "I'm happy" or "I'm in love." Just "practical." That stuck with me.</div>
+
+        <div class="question">MONROE: What did you take that to mean?</div>
+        <div class="answer">SINCLAIR: I think Vivienne was marrying Vincent for security—financial stability, career opportunity. He owns a successful club, he's well-connected. But I don't think she was in love with him. Not the way a bride should be.</div>
+
+        <div class="question">MONROE: Did you witness the argument between Miss Marchand and Mr. DeLuca in the lounge car around ten-thirty?</div>
+        <div class="answer">SINCLAIR: Yes. I was still in the lounge, sitting in the corner with my camera equipment. They didn't see me, but I heard them. Their voices were raised. Vincent was upset, demanding to know if she was going to "walk away." Vivienne was defensive, telling him she could do what she wanted. It was tense.</div>
+
+        <div class="question">MONROE: What happened after the argument?</div>
+        <div class="answer">SINCLAIR: Vivienne left the lounge. Vincent stayed and drank. I left shortly after and went back to my compartment—Compartment 4, right next to Vivienne's Compartment 7.</div>
+
+        <div class="question">MONROE: What time did you retire to your compartment?</div>
+        <div class="answer">SINCLAIR: Around eleven o'clock, maybe a few minutes after.</div>
+
+        <div class="question">MONROE: Miss Sinclair, this next question is very important. Did you see or hear anything unusual during the night? Anything at all?</div>
+        <div class="answer">SINCLAIR: (long pause) Yes. I heard something. I've been debating whether to mention it because I'm not certain it's relevant, but... yes, I heard something.</div>
+
+        <div class="question">MONROE: Please tell me exactly what you heard, and when.</div>
+        <div class="answer">SINCLAIR: I have insomnia, Detective. I don't sleep well on trains. I was awake, reading a book in my compartment. I checked my watch at one point—it was two-forty in the morning. A few minutes later, I heard voices. Women's voices. They were coming from the compartment next to mine—Vivienne's compartment, Compartment 7.</div>
+
+        <div class="highlight-box">
+            <strong>DETECTIVE'S NOTE:</strong> Witness reports hearing female voices from victim's compartment at approximately 2:40-2:50 AM. This timeframe aligns with medical examiner's estimated time of death. Critical testimony.
+        </div>
+
+        <div class="question">MONROE: Can you describe these voices? What were they saying?</div>
+        <div class="answer">SINCLAIR: I couldn't make out specific words. The walls are thin, but the train noise—the wheels, the engine—it muffles sound. What I heard was the tone. The voices were raised, urgent. One was Vivienne's—I'd recognize her voice anywhere. The other was also female, but I couldn't identify who it was. They were arguing, or at least having an intense conversation.</div>
+
+        <div class="question">MONROE: How long did this conversation last?</div>
+        <div class="answer">SINCLAIR: Maybe five minutes, perhaps a bit more. Then it went quiet. Not gradually—suddenly. Like someone cut off a radio. Just... silence.</div>
+
+        <div class="question">MONROE: What did you do when it went silent?</div>
+        <div class="answer">SINCLAIR: I listened for a moment, then went back to my reading. I assumed they'd resolved whatever they were discussing. I didn't think anything sinister had happened. (voice breaking) I should have checked on her. Maybe if I'd knocked on the door...</div>
+
+        <div class="question">MONROE: Miss Sinclair, you couldn't have known. Did you hear anything else? Any footsteps, any doors opening or closing?</div>
+        <div class="answer">SINCLAIR: (pause) Now that you mention it, yes. A few minutes after the voices stopped—maybe three or four minutes—I heard a compartment door close. It was a soft sound, like someone was trying to be quiet. Then I heard light footsteps in the corridor. They went away from my door, toward the front of the car, I think.</div>
+
+        <div class="question">MONROE: Did you look out into the corridor to see who it was?</div>
+        <div class="answer">SINCLAIR: No. My door was closed and locked. I didn't want to intrude on someone's privacy. I thought it was just a passenger going to the washroom.</div>
+
+        <div class="question">MONROE: You said the second voice—the other woman—was not Miss Marchand. Do you have any idea who it might have been?</div>
+        <div class="answer">SINCLAIR: (hesitates) I can't say for certain, but there was another woman traveling in our car—Compartment 8, the one on the other side of Vivienne's. Her name is Charlotte Devereaux, I believe. She's an actress or performer of some kind. I saw her earlier in the evening, and she seemed... troubled.</div>
+
+        <div class="question">MONROE: Troubled how?</div>
+        <div class="answer">SINCLAIR: She was sitting alone in the lounge car when I passed through around nine o'clock. She was drinking, staring out the window, looking very melancholy. I remember thinking she seemed sad or upset about something. But I didn't speak to her. I don't know her personally.</div>
+
+        <div class="question">MONROE: Did you observe any interaction between Miss Devereaux and Miss Marchand during the journey?</div>
+        <div class="answer">SINCLAIR: (pause) Not directly. But when we were boarding in Chicago, I saw Miss Devereaux on the platform. When Vivienne walked past her, Miss Devereaux's expression changed. She looked... I don't know how to describe it. Pained? Desperate? Like she'd seen a ghost. It was fleeting, but I noticed it.</div>
+
+        <div class="question">MONROE: Did Miss Marchand notice Miss Devereaux?</div>
+        <div class="answer">SINCLAIR: If she did, she didn't acknowledge her. Vivienne just kept walking.</div>
+
+        <div class="question">MONROE: Miss Sinclair, did Miss Marchand ever mention Charlotte Devereaux to you? Did they know each other?</div>
+        <div class="answer">SINCLAIR: (very long pause) Detective, I'm not comfortable speculating about Vivienne's personal life. She was my friend, and I want to respect her privacy, even now.</div>
+
+        <div class="question">MONROE: Miss Sinclair, I understand your loyalty to your friend, but this is a murder investigation. If you know something relevant, you must tell me.</div>
+        <div class="answer">SINCLAIR: (sighs) I saw Vivienne with Miss Devereaux once before, years ago, in Los Angeles. They were together at a jazz club. They seemed... close. Very close. I didn't ask Vivienne about it, and she didn't offer an explanation. That's all I can say.</div>
+
+        <div class="highlight-box">
+            <strong>DETECTIVE'S NOTE:</strong> Witness suggests possible prior relationship between victim and Charlotte Devereaux. Given social stigma of 1957, witness is reluctant to elaborate. Further investigation into Devereaux required.
+        </div>
+
+        <div class="question">MONROE: What time did you finally fall asleep last night?</div>
+        <div class="answer">SINCLAIR: I never really slept. I dozed off around five in the morning for maybe an hour. Then the porter was knocking on doors around seven. That's when I heard the commotion—people talking urgently, the porter running. I opened my door and saw him outside Vivienne's compartment, looking shaken. He told us she was... she was gone.</div>
+
+        <div class="question">MONROE: How did you react when you learned of Miss Marchand's death?</div>
+        <div class="answer">SINCLAIR: I was in shock, Detective. I couldn't believe it. I still can't. Vivienne was vibrant, alive. The idea that someone... that someone strangled her in the next room while I was just feet away... (crying) I'll never forgive myself for not checking on her.</div>
+
+        <div class="question">MONROE: Is there anything else you observed or remember that might be relevant to this investigation?</div>
+        <div class="answer">SINCLAIR: Only that at breakfast this morning—before we knew about Vivienne—I saw Miss Devereaux in the dining car. She looked pale, shaken, like she'd seen a ghost. Or committed a terrible act. Her hands were trembling. I remember thinking she looked ill.</div>
+
+        <div class="question">MONROE: Thank you, Miss Sinclair. Is there anything else you wish to add?</div>
+        <div class="answer">SINCLAIR: Just that Vivienne deserves justice, Detective. She was a good person, a talented artist. Whoever did this needs to be caught.</div>
+    </div>
+
+    <h2>STATEMENT CONCLUSION</h2>
+    <p>Interview concluded at 1450 hours. Miss Sinclair was cooperative and provided valuable information regarding the timeline of events and potential suspect observations. Her testimony about hearing two women's voices in the victim's compartment between 2:40-2:50 AM is critical to establishing time of death and identifying potential suspects. Follow-up interview with Charlotte Devereaux is priority.</p>
+
+    <div class="signature-block">
+        <div class="signature-line">
+            <p>____________________________________<br>
+            <strong>Witness Signature:</strong> Margaret Sinclair<br>
+            Date: November 14, 1957</p>
+        </div>
+        <div class="signature-line">
+            <p>____________________________________<br>
+            <strong>Interviewing Officer:</strong> Det. Charles Monroe<br>
+            Badge #427, JPD Homicide Division<br>
+            Date: November 14, 1957</p>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
+

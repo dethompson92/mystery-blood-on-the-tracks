@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timeline Reconstruction - Mystery #2B</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <style>
+      body {
+        font-family: 'Courier New', Courier, monospace;
+        background-color: #2c2c2c; /* Dark background as requested */
+        color: #dcdcdc; /* Light text for readability on dark bg */
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px;
+        line-height: 1.5;
+      }
+
+      /* Paper/Document Container Styling */
+      .document-container {
+        background-color: #1a1a1a;
+        border: 2px solid #555;
+        padding: 40px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        position: relative;
+      }
+
+      /* Header Styling */
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: 'Courier New', Courier, monospace;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: #dcdcdc;
+        border-bottom: 1px solid #555;
+        padding-bottom: 10px;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 28px;
+        margin-bottom: 10px;
+        border-bottom: 3px double #dcdcdc;
+      }
+
+      .header-meta {
+        text-align: center;
+        font-size: 14px;
+        margin-bottom: 40px;
+        color: #aaa;
+      }
+
+      .stamp {
+        border: 3px solid #c0392b;
+        color: #c0392b;
+        display: inline-block;
+        padding: 5px 15px;
+        font-weight: bold;
+        font-size: 18px;
+        transform: rotate(-5deg);
+        margin: 20px 0;
+        opacity: 0.8;
+      }
+
+      /* Timeline Table Styling */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 30px 0;
+        font-size: 14px;
+        background-color: #222;
+      }
+
+      th,
+      td {
+        border: 1px solid #444;
+        padding: 12px;
+        vertical-align: top;
+        color: #ddd;
+      }
+
+      th {
+        background-color: #333;
+        text-align: left;
+        font-weight: bold;
+        text-transform: uppercase;
+      }
+
+      /* Significance Coloring */
+      .sig-critical {
+        border-left: 5px solid #c0392b; /* Red */
+        background-color: rgba(192, 57, 43, 0.1);
+      }
+
+      .sig-supporting {
+        border-left: 5px solid #f39c12; /* Orange/Yellow */
+        background-color: rgba(243, 156, 18, 0.1);
+      }
+
+      .sig-context {
+        border-left: 5px solid #7f8c8d; /* Grey */
+        background-color: rgba(127, 140, 141, 0.1);
+      }
+
+      /* Tags and Labels */
+      .evidence-tag {
+        background-color: #dcdcdc;
+        color: #000;
+        padding: 2px 6px;
+        font-size: 11px;
+        font-weight: bold;
+        border-radius: 2px;
+        margin-right: 5px;
+        font-family: Arial, sans-serif;
+      }
+
+      .location-marker {
+        font-style: italic;
+        color: #aaa;
+        font-size: 12px;
+        display: block;
+        margin-top: 5px;
+      }
+
+      /* Analytical Notes Section */
+      .notes-section {
+        background-color: #333;
+        border: 1px dashed #777;
+        padding: 20px;
+        margin-top: 40px;
+        font-family: 'Special Elite', 'Courier New', monospace; /* Typewriter feel */
+      }
+
+      .notes-header {
+        font-weight: bold;
+        text-decoration: underline;
+        margin-bottom: 15px;
+        display: block;
+      }
+
+      ul {
+        list-style-type: square;
+        padding-left: 20px;
+      }
+
+      li {
+        margin-bottom: 8px;
+      }
+
+      /* Footer */
+      .footer {
+        margin-top: 50px;
+        text-align: center;
+        font-size: 12px;
+        color: #666;
+        border-top: 1px solid #444;
+        padding-top: 20px;
+      }
+    /* ========================================
+   PRINT-OPTIMIZED CSS
+   Saves ink, prevents cutoff, controls page breaks
+   ======================================== */
+@page {
+  margin: 0.5in !important;
+}
+@media print {
+  /* Reset to printer-friendly colors */
+  body {
+    background-color: white !important;
+    background: white !important;
+    color: black !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove all dark backgrounds and shadows */
+  .document-container,
+  .header-box,
+  table,
+  th,
+  td,
+  div,
+  section {
+    background-color: white !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-color: black !important;
+  }
+
+  /* Ensure text is always black */
+  h1, h2, h3, h4, h5, h6, p, li, td, th, span, div {
+    color: black !important;
+  }
+
+  /* Keep ONLY red stamps visible (but lighter) */
+  .stamp {
+    color: #c0392b !important;
+    border-color: #c0392b !important;
+    opacity: 0.6 !important;
+    background: transparent !important;
+  }
+
+  /* Remove colored highlight backgrounds - keep border only */
+  .evidence-highlight,
+  .sig-critical,
+  .sig-supporting,
+  .sig-context {
+    background-color: white !important;
+    background: white !important;
+    border-left-width: 3px !important;
+    border-left-color: black !important;
+  }
+
+  /* Simplify evidence tags for printing */
+  .evidence-tag {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+
+  /* Control page breaks - prevent awkward splits */
+  table {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group; /* Repeat header on each page */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Keep related content together */
+  .evidence-highlight,
+  .signature-block,
+  .header-meta {
+    page-break-inside: avoid;
+  }
+
+  /* Remove unnecessary spacing for print */
+  .document-container {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Ensure tables fit on page */
+  table {
+    width: 100% !important;
+    font-size: 11pt !important;
+  }
+
+  th, td {
+    padding: 6pt !important;
+  }
+
+  /* Adjust font sizes for readability */
+  body {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  h1 {
+    font-size: 18pt !important;
+  }
+
+  h2 {
+    font-size: 14pt !important;
+  }
+
+  /* Show URLs for links (optional - comment out if not wanted) */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  /* Hide elements that shouldn't print */
+  .no-print {
+    display: none !important;
+  }
+}
+</style>
+  </head>
+  <body>
+    <div class="document-container">
+      <div style="text-align: right; font-size: 12px; color: #888">DOC #25</div>
+
+      <h1>TIMELINE RECONSTRUCTION</h1>
+
+      <div class="header-meta">
+        CASE: 57-1114-HOMI | VICTIM: MARCHAND, VIVIENNE | DATE: NOV 13-14, 1957<br />
+        PREPARED BY: DET. JAMES HOLLOWAY, JACKSON PD<br />
+        <div class="stamp">CONFIDENTIAL POLICE FILE</div>
+      </div>
+
+      <div class="notes-section" style="margin-bottom: 30px; background-color: #2a2a2a">
+        <span class="notes-header">INVESTIGATOR'S PREFACE:</span>
+        <p>
+          This timeline reconstructs the events aboard the Silver Comet train (Seaboard Air Line Railroad) from the
+          evening of November 13th to the morning of November 14th, 1957. Data compiled from witness statements
+          (Washington, DeLuca, Sinclair, Whitfield, et al.), conductor logs, and forensic estimates.
+        </p>
+        <p>
+          <strong>CRITICAL NOTE:</strong> Time of death is estimated between 02:45 and 03:00 AM based on stopped watch
+          (03:17) and rigor mortis analysis. All passenger alibis must be verified against this specific window.
+        </p>
+      </div>
+
+      <h2>SECTION I: PRE-MURDER EVENING (NOV 13)</h2>
+      <p style="font-size: 13px; font-style: italic; margin-bottom: 15px">
+        Train Location: Departing Illinois, traversing Kentucky/Tennessee border.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 15%">Time</th>
+            <th style="width: 25%">Location / Subject</th>
+            <th style="width: 45%">Event Description</th>
+            <th style="width: 15%">Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="sig-context">
+            <td>22:00</td>
+            <td>Lounge Car (Car 6)<br /><span class="location-marker">General</span></td>
+            <td>
+              Social hour winding down. Approximately 15 passengers present, including Victim (Marchand), Suspect
+              DeLuca, Witness Sinclair, and Subject Devereaux.
+            </td>
+            <td>Bartender Log</td>
+          </tr>
+          <tr class="sig-supporting">
+            <td>22:30</td>
+            <td>Lounge Car (Car 6)<br /><span class="location-marker">DeLuca / Marchand</span></td>
+            <td>
+              <strong>ARGUMENT OBSERVED.</strong> Vincent DeLuca seen arguing with Vivienne Marchand. Witnesses report
+              raised voices regarding "secrets" and "cold feet." DeLuca appeared agitated; Marchand dismissive.
+            </td>
+            <td>Whitfield / Sinclair</td>
+          </tr>
+          <tr class="sig-critical">
+            <td>22:45</td>
+            <td>Lounge Car (Car 6)<br /><span class="location-marker">Devereaux / Marchand</span></td>
+            <td>
+              <strong>SUSPICIOUS INTERACTION.</strong> Margaret Sinclair observes "mystery woman in burgundy suit"
+              (later identified as Charlotte Devereaux) approaching Marchand. Intense, hushed conversation. Marchand
+              appears shaken.
+            </td>
+            <td>M. Sinclair (Doc #15)</td>
+          </tr>
+          <tr class="sig-context">
+            <td>23:00</td>
+            <td>Sleeper Car "Magnolia" (Car 7)<br /><span class="location-marker">Marchand</span></td>
+            <td>
+              Vivienne Marchand leaves Lounge Car and returns to her compartment (No. 7). This is the last time she is
+              seen alive by general public.
+            </td>
+            <td>Porter Washington</td>
+          </tr>
+          <tr class="sig-context">
+            <td>23:15</td>
+            <td>Sleeper Car "Magnolia" (Car 7)<br /><span class="location-marker">Devereaux</span></td>
+            <td>Charlotte Devereaux returns to Compartment 8 (directly adjacent to Victim).</td>
+            <td>Porter Washington</td>
+          </tr>
+          <tr class="sig-context">
+            <td>23:30</td>
+            <td>Sleeper Car "Magnolia" (Car 7)<br /><span class="location-marker">DeLuca</span></td>
+            <td>Vincent DeLuca returns to Compartment 10. Visibly intoxicated/angry.</td>
+            <td>Porter Washington</td>
+          </tr>
+          <tr class="sig-supporting">
+            <td>23:45</td>
+            <td>Sleeper Car "Magnolia" (Car 7)<br /><span class="location-marker">Porter Washington</span></td>
+            <td>
+              <strong>FINAL ROUNDS.</strong> Porter Ernest Washington conducts final evening check. Confirms lights out
+              in most compartments. Marchand's door closed. No sounds of distress.
+            </td>
+            <td>Washington Stmt (Doc #04)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>SECTION II: CRITICAL MURDER WINDOW (NOV 14)</h2>
+      <p style="font-size: 13px; font-style: italic; margin-bottom: 15px">
+        Train Location: Tennessee into Mississippi. Speed constant approx 60mph.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 15%">Time</th>
+            <th style="width: 25%">Location / Subject</th>
+            <th style="width: 45%">Event Description</th>
+            <th style="width: 15%">Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="sig-supporting">
+            <td>01:15</td>
+            <td>Corridor (Car 7)<br /><span class="location-marker">DeLuca</span></td>
+            <td>
+              Vincent DeLuca seen in corridor by Porter. Pace agitated, smoking cigarette. Wearing shirt sleeves, no
+              jacket.
+            </td>
+            <td>Washington Stmt</td>
+          </tr>
+          <tr class="sig-supporting">
+            <td>01:30</td>
+            <td>Corridor -> Lounge<br /><span class="location-marker">DeLuca</span></td>
+            <td>DeLuca leaves Sleeper Car 7, heads towards Lounge Car (Car 6).</td>
+            <td>Washington Stmt</td>
+          </tr>
+          <tr class="sig-supporting">
+            <td>01:45 - 04:00</td>
+            <td>Lounge Car (Car 6)<br /><span class="location-marker">DeLuca / Bartender</span></td>
+            <td>
+              <strong>ALIBI ESTABLISHED.</strong> DeLuca confirmed present in Lounge Car by Bartender Marcus Webb.
+              Consumed multiple bourbons alone. Did not leave until 04:00. <br /><em
+                >NOTE: This places prime suspect away from scene during TOD.</em
+              >
+            </td>
+            <td>Bartender Stmt (Doc #12)</td>
+          </tr>
+          <tr class="sig-context">
+            <td>02:30</td>
+            <td>Car 7 (Magnolia)<br /><span class="location-marker">Conductor Blackwood</span></td>
+            <td>Routine security check. Conductor passes through Car 7. Notes quiet. No passengers in corridor.</td>
+            <td>Conductor Log (Doc #13)</td>
+          </tr>
+          <tr class="sig-critical">
+            <td>02:40 - 02:50</td>
+            <td>Compartment 5/7 Area<br /><span class="location-marker">Witness Whitfield</span></td>
+            <td>
+              <strong>AUDITORY EVIDENCE.</strong> Eleanor Whitfield (Comp 5) wakes up. Reports hearing "soft women's
+              voices" arguing/pleading from nearby compartment (likely Comp 7 or 8). One voice identified as
+              "desperate."
+            </td>
+            <td>Whitfield Stmt</td>
+          </tr>
+          <tr class="sig-critical">
+            <td>02:45 - 03:00</td>
+            <td>Compartment 7<br /><span class="location-marker">VICTIM</span></td>
+            <td>
+              <strong>ESTIMATED TIME OF DEATH.</strong> Based on: <br />1. Watch stopped at 03:17 (likely broken during
+              struggle/staging)<br />2. Medical Examiner rigor estimates<br />3. Witness auditory timeline.
+            </td>
+            <td>ME Report (Doc #03)</td>
+          </tr>
+          <tr class="sig-critical">
+            <td>02:50</td>
+            <td>Corridor (Car 7)<br /><span class="location-marker">Porter Washington</span></td>
+            <td>
+              <strong>SUSPICIOUS MOVEMENT.</strong> Porter (in vestibule seat) hears soft footsteps in carpeted
+              corridor. Sound suggests someone moving from mid-car (Comp 7/8 area) towards end or restroom. Did not see
+              individual.
+            </td>
+            <td>Washington Stmt</td>
+          </tr>
+          <tr class="sig-critical">
+            <td>02:55</td>
+            <td>Compartment 7 Area<br /><span class="location-marker">Witness Sinclair</span></td>
+            <td>
+              Margaret Sinclair (Comp 4) hears a compartment door close softly nearby (Latch click). Not slammed.
+              Suggests careful exit.
+            </td>
+            <td>M. Sinclair (Doc #15)</td>
+          </tr>
+          <tr class="sig-supporting">
+            <td>03:00</td>
+            <td>Corridor (Car 7)<br /><span class="location-marker">Dr. Hayes</span></td>
+            <td>
+              Dr. Evelyn Hayes (Comp 3) exits to use corridor washroom. Sees corridor empty. Returns to compartment at
+              03:05.
+            </td>
+            <td>Hayes Interview (Doc #14)</td>
+          </tr>
+          <tr class="sig-critical">
+            <td>03:10</td>
+            <td>Compartment 8<br /><span class="location-marker">Devereaux</span></td>
+            <td>
+              Porter Washington notes light visible under door of Compartment 8 (Devereaux). Unusual for hour. Suggests
+              occupant awake.
+            </td>
+            <td>Washington Stmt</td>
+          </tr>
+          <tr class="sig-context">
+            <td>03:17</td>
+            <td>Compartment 7<br /><span class="location-marker">Evidence Item</span></td>
+            <td>
+              Gold wristwatch on victim found stopped at this time. Likely marks end of physical struggle or intentional
+              staging.
+            </td>
+            <td>Crime Scene Rpt (Doc #02)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h2>SECTION III: POST-MURDER / DISCOVERY (NOV 14)</h2>
+      <p style="font-size: 13px; font-style: italic; margin-bottom: 15px">
+        Train Location: Crossing into Mississippi. Approaching Jackson.
+      </p>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 15%">Time</th>
+            <th style="width: 25%">Location / Subject</th>
+            <th style="width: 45%">Event Description</th>
+            <th style="width: 15%">Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="sig-context">
+            <td>04:00</td>
+            <td>Lounge -> Car 7<br /><span class="location-marker">DeLuca</span></td>
+            <td>
+              Vincent DeLuca leaves Lounge Car, returns to Compartment 10. Stumbles/intoxicated. Assisted briefly by
+              Porter.
+            </td>
+            <td>Washington Stmt</td>
+          </tr>
+          <tr class="sig-context">
+            <td>04:00 - 06:00</td>
+            <td>Car 7 (Magnolia)<br /><span class="location-marker">All Passengers</span></td>
+            <td>
+              Quiet hours. Train stops briefly in Memphis (04:15) for mail/crew change. No passengers board/disembark
+              from Sleeper cars.
+            </td>
+            <td>Railroad Log</td>
+          </tr>
+          <tr class="sig-context">
+            <td>06:30</td>
+            <td>Car 7 (Magnolia)<br /><span class="location-marker">Porter Washington</span></td>
+            <td>Morning preparations begin. Coffee service preparation.</td>
+            <td>Washington Stmt</td>
+          </tr>
+          <tr class="sig-critical">
+            <td>06:45</td>
+            <td>Compartment 7<br /><span class="location-marker">Porter / Victim</span></td>
+            <td>
+              <strong>DISCOVERY OF BODY.</strong> Porter knocks for wake-up call. No answer. Door locked from inside.
+              Uses master key. Discovers Vivienne Marchand unresponsive on berth.
+            </td>
+            <td>Incident Rpt (Doc #01)</td>
+          </tr>
+          <tr class="sig-critical">
+            <td>06:48</td>
+            <td>Compartment 7<br /><span class="location-marker">Dr. Caldwell</span></td>
+            <td>
+              Porter summons Dr. Caldwell (Comp 3). Caldwell performs cursory exam. Confirms death. Notes strangulation
+              marks.
+            </td>
+            <td>Caldwell Stmt</td>
+          </tr>
+          <tr class="sig-context">
+            <td>07:00</td>
+            <td>Train Wide<br /><span class="location-marker">Conductor</span></td>
+            <td>
+              Emergency stop procedures initiated. Police notified via radio/telegraph ahead of Jackson, MS stop. Car 7
+              sealed.
+            </td>
+            <td>Railroad Log</td>
+          </tr>
+          <tr class="sig-context">
+            <td>07:30</td>
+            <td>Jackson Station<br /><span class="location-marker">Police</span></td>
+            <td>Train arrives Jackson, MS. Jackson PD boards. Investigation commences.</td>
+            <td>Incident Rpt</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="notes-section" style="background-color: #fcf3cf; color: #333; border: 1px solid #d4ac0d">
+        <span class="notes-header" style="color: #7d6608">DETECTIVE'S ANALYSIS & DISCREPANCIES:</span>
+        <ul>
+          <li>
+            <strong>LOCKED ROOM ISSUE:</strong> Door was locked from INSIDE. Killer must have had way to lock from
+            outside OR victim locked it after killer left (impossible given death) OR killer is someone victim let
+            in/out.
+          </li>
+          <li>
+            <strong>DELUCA ALIBI:</strong> Vincent DeLuca has solid alibi for 01:45-04:00. Unless bartender is lying,
+            DeLuca CANNOT be the killer, despite motive/argument.
+          </li>
+          <li>
+            <strong>MISSING TIME:</strong> 02:45-03:00 is the critical window. Who was awake?
+            <ul>
+              <li>Whitfield (heard voices)</li>
+              <li>Sinclair (heard door)</li>
+              <li>Devereaux (light under door at 03:10)</li>
+            </ul>
+          </li>
+          <li>
+            <strong>THE MYSTERY WOMAN:</strong> Sinclair's sighting of "woman in burgundy" at 22:45 is crucial. Matches
+            description of Devereaux, but Devereaux claims not to know Marchand. If they were talking at 22:45,
+            Devereaux is lying.
+          </li>
+          <li>
+            <strong>FOOTSTEPS:</strong> 02:50 AM footsteps + 02:55 AM door click + 03:10 AM light in Comp 8 suggests
+            killer exited Comp 7, walked short distance, entered Comp 8. Distance between Comp 7 and Comp 8 is approx 4
+            feet.
+          </li>
+        </ul>
+      </div>
+
+      <div class="footer">
+        PROPERTY OF JACKSON POLICE DEPARTMENT - HOMICIDE DIVISION<br />
+        DO NOT DUPLICATE OR REMOVE FROM FILE
+      </div>
+    </div>
+  </body>
+</html>
+
+

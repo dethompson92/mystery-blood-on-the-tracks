@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crime Scene Examination Report</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #f4f1e8;
+            color: #2c2c2c;
+            max-width: 950px;
+            margin: 40px auto;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            background-image: linear-gradient(0deg, transparent 24%, rgba(0,0,0,.03) 25%, rgba(0,0,0,.03) 26%, transparent 27%, transparent 74%, rgba(0,0,0,.03) 75%, rgba(0,0,0,.03) 76%, transparent 77%, transparent),
+                              linear-gradient(90deg, transparent 24%, rgba(0,0,0,.03) 25%, rgba(0,0,0,.03) 26%, transparent 27%, transparent 74%, rgba(0,0,0,.03) 75%, rgba(0,0,0,.03) 76%, transparent 77%, transparent);
+            background-size: 50px 50px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px double #2c2c2c;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 24px;
+            margin: 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .stamp {
+            display: inline-block;
+            border: 3px solid #8b0000;
+            color: #8b0000;
+            padding: 5px 15px;
+            margin: 10px 0;
+            transform: rotate(3deg);
+            font-weight: bold;
+        }
+        .report-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #8b0000;
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff;
+            border: 2px solid #8b0000;
+        }
+        .info-table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+        .info-table td {
+            padding: 10px;
+            border: 1px solid #666;
+        }
+        .info-table td:first-child {
+            font-weight: bold;
+            width: 250px;
+            background-color: #e8e5d8;
+        }
+        .section {
+            margin: 30px 0;
+        }
+        .section h2 {
+            font-size: 16px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #2c2c2c;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        .content {
+            line-height: 1.8;
+            text-align: justify;
+            font-size: 13px;
+            padding: 20px;
+            background-color: #fefefe;
+            border-left: 4px solid #8b0000;
+        }
+        .diagram-box {
+            background-color: #f0f0f0;
+            border: 2px solid #666;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        .evidence-detail {
+            background-color: #fffacd;
+            border: 2px dashed #8b8b00;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .critical-finding {
+            background-color: #f8d7da;
+            border: 3px solid #721c24;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        .measurement-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        .measurement-table th {
+            background-color: #2c2c2c;
+            color: white;
+            padding: 10px;
+            text-align: left;
+        }
+        .measurement-table td {
+            border: 1px solid #666;
+            padding: 8px;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+    /* ========================================
+   PRINT-OPTIMIZED CSS
+   Saves ink, prevents cutoff, controls page breaks
+   ======================================== */
+@page {
+  margin: 0.5in !important;
+}
+@media print {
+  /* Reset to printer-friendly colors */
+  body {
+    background-color: white !important;
+    background: white !important;
+    color: black !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove all dark backgrounds and shadows */
+  .document-container,
+  .header-box,
+  table,
+  th,
+  td,
+  div,
+  section {
+    background-color: white !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-color: black !important;
+  }
+
+  /* Ensure text is always black */
+  h1, h2, h3, h4, h5, h6, p, li, td, th, span, div {
+    color: black !important;
+  }
+
+  /* Keep ONLY red stamps visible (but lighter) */
+  .stamp {
+    color: #c0392b !important;
+    border-color: #c0392b !important;
+    opacity: 0.6 !important;
+    background: transparent !important;
+  }
+
+  /* Remove colored highlight backgrounds - keep border only */
+  .evidence-highlight,
+  .sig-critical,
+  .sig-supporting,
+  .sig-context {
+    background-color: white !important;
+    background: white !important;
+    border-left-width: 3px !important;
+    border-left-color: black !important;
+  }
+
+  /* Simplify evidence tags for printing */
+  .evidence-tag {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+
+  /* Control page breaks - prevent awkward splits */
+  table {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group; /* Repeat header on each page */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Keep related content together */
+  .evidence-highlight,
+  .signature-block,
+  .header-meta {
+    page-break-inside: avoid;
+  }
+
+  /* Remove unnecessary spacing for print */
+  .document-container {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Ensure tables fit on page */
+  table {
+    width: 100% !important;
+    font-size: 11pt !important;
+  }
+
+  th, td {
+    padding: 6pt !important;
+  }
+
+  /* Adjust font sizes for readability */
+  body {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  h1 {
+    font-size: 18pt !important;
+  }
+
+  h2 {
+    font-size: 14pt !important;
+  }
+
+  /* Show URLs for links (optional - comment out if not wanted) */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  /* Hide elements that shouldn't print */
+  .no-print {
+    display: none !important;
+  }
+}
+</style>
+</head>
+<body>
+    <div class="header">
+        <h1>Jackson Police Department</h1>
+        <p>Crime Scene Investigation Unit - Detailed Examination Report</p>
+        <p>142 East Capitol Street, Jackson, Mississippi</p>
+        <div class="stamp">CRIME SCENE - HOMICIDE</div>
+    </div>
+
+    <div class="report-title">
+        CRIME SCENE EXAMINATION REPORT<br>
+        CASE NO. 57-1114-HOMI
+    </div>
+
+    <table class="info-table">
+        <tr>
+            <td>Crime Scene Location:</td>
+            <td><strong>Illinois Central Railroad - Silver Comet Train 47</strong><br>
+                Magnolia Sleeper Car, First-Class Compartment No. 7<br>
+                Train positioned on siding, Mile Marker 287, north of Jackson, MS</td>
+        </tr>
+        <tr>
+            <td>Examination Date & Time:</td>
+            <td>November 14, 1957 - 07:45 hours to 12:30 hours (4 hours 45 minutes)</td>
+        </tr>
+        <tr>
+            <td>Scene Classification:</td>
+            <td><strong>PRIMARY CRIME SCENE - HOMICIDE</strong></td>
+        </tr>
+        <tr>
+            <td>Victim:</td>
+            <td>Vivienne Marie Marchand (DOB: 8/12/1925, Age 32, Female, White)</td>
+        </tr>
+        <tr>
+            <td>Lead Crime Scene Investigator:</td>
+            <td>Evidence Technician Raymond T. Burke (Badge #44)</td>
+        </tr>
+        <tr>
+            <td>Assisting Personnel:</td>
+            <td>Detective James Holloway (Homicide Division)<br>
+                Detective Marion Ross (Homicide Division)<br>
+                Dr. Richard L. Caldwell, M.D. (Medical Examiner)<br>
+                Officer Thomas Burke (Evidence Collection)<br>
+                Officer Patricia Knowles (Documentation/Stenographer)</td>
+        </tr>
+        <tr>
+            <td>Weather Conditions:</td>
+            <td>Clear, temperature 52°F, no precipitation (exterior); interior train climate controlled</td>
+        </tr>
+        <tr>
+            <td>Scene Security:</td>
+            <td>Compartment sealed at 06:50 hours by conductor. Officer patrol established at 07:45 hours. No unauthorized access after discovery.</td>
+        </tr>
+    </table>
+
+    <div class="section">
+        <h2>I. Scene Overview & Initial Walk-Through</h2>
+        <div class="content">
+            <p><strong>Scene Type:</strong> This is a confined, enclosed primary crime scene within a moving vehicle (train compartment). The scene represents an unusual investigative environment due to: (1) limited space (approximately 48 square feet), (2) mobile nature of crime scene prior to train halt, (3) locked-room configuration, and (4) multiple potential suspects in close proximity.</p>
+
+            <p><strong>Scene Condition Upon Arrival:</strong> When investigation team arrived at 07:45 hours, the compartment had been sealed by conductor Theodore Blackwood at 06:50 hours (approximately 5 minutes after porter's discovery of body). Only three persons had entered compartment prior to our arrival: (1) Porter Ernest Washington (discovered victim at 06:45 hrs), (2) Conductor Blackwood (verified death and secured scene), and (3) Dr. Richard Caldwell (preliminary medical assessment at 08:20 hrs).</p>
+
+            <p><strong>Contamination Assessment:</strong> Scene contamination is minimal. Porter Washington entered only far enough to verify victim's condition (approximately 3 feet into compartment, did not touch body). Conductor Blackwood entered to verify situation and check for signs of life (checked victim's wrist for pulse, examined face for breathing). Dr. Caldwell conducted preliminary medical examination with proper evidence preservation protocols. No other persons entered scene prior to full forensic examination.</p>
+
+            <p><strong>Scene Preservation Protocol:</strong> Upon our arrival, we established the following protocols: (1) Single entry/exit point logged and controlled, (2) Photographic documentation completed before any evidence moved or altered, (3) Systematic grid search pattern established, (4) All collected evidence tagged, photographed, and logged with chain-of-custody documentation, (5) Scene maintained in secured state throughout 4-hour 45-minute examination period.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>II. Compartment Physical Description & Measurements</h2>
+        <div class="diagram-box">
+            <h3>COMPARTMENT 7 - FLOOR PLAN DIAGRAM</h3>
+            <pre style="font-family: 'Courier New', monospace; font-size: 11px; line-height: 1.3; text-align: left;">
+    ┌─────────────────────────────────────────────────────────┐
+    │  WINDOW (24" × 36") - CURTAINS CLOSED - LOCKED         │  ← NORTH (Train Direction)
+    ├─────────────────────────────────────────────────────────┤
+    │                                                         │
+    │  [SLEEPING BERTH - LOWERED POSITION]                   │
+    │   ═══════════════════════════════════════              │
+    │   ║ (VICTIM'S BODY POSITIONED HERE)    ║              │
+    │   ║ HEAD ↑ NORTH      FEET ↓ SOUTH     ║              │
+    │   ═══════════════════════════════════════              │
+    │                                                         │
+    │  [TABLE]  [WASHROOM]                                   │
+    │  (Fold-  (Private)                                     │
+    │   down)   3'×3'                                        │
+    │                                                         │
+    │  [LUGGAGE RACK - OVERHEAD]                             │
+    │   • 2 Leather Suitcases                                │
+    │   • 1 Hatbox                                            │
+    │                                                         │
+    │  [HANGING AREA]                                         │
+    │   • Evening Gown (Green)                                │
+    │   • Traveling Coat (Gray)                               │
+    │   • Day Dress (Burgundy)                                │
+    │                                                         │
+    └─────────────────────────────────────────────────────────┘
+              [DOOR - CORRIDOR ACCESS]                          ← SOUTH
+         (FOUND LOCKED FROM INTERIOR)
+            </pre>
+        </div>
+
+        <table class="measurement-table">
+            <tr>
+                <th>Feature</th>
+                <th>Measurement</th>
+                <th>Condition</th>
+            </tr>
+            <tr>
+                <td>Compartment Interior Dimensions</td>
+                <td>6 ft (width) × 8 ft (length) = 48 sq ft</td>
+                <td>Standard first-class sleeper configuration</td>
+            </tr>
+            <tr>
+                <td>Ceiling Height</td>
+                <td>7 ft 2 inches</td>
+                <td>Standard</td>
+            </tr>
+            <tr>
+                <td>Sleeping Berth</td>
+                <td>30 inches (width) × 72 inches (length)</td>
+                <td>Lowered position, folding mechanism secure</td>
+            </tr>
+            <tr>
+                <td>Window</td>
+                <td>24 inches (height) × 36 inches (width)</td>
+                <td>Closed, locked from interior, curtains drawn</td>
+            </tr>
+            <tr>
+                <td>Entry Door</td>
+                <td>30 inches (width) × 78 inches (height)</td>
+                <td>Standard solid wood construction, brass hardware</td>
+            </tr>
+            <tr>
+                <td>Door Lock Mechanism</td>
+                <td>Deadbolt (brass) + Privacy Latch (steel)</td>
+                <td><strong>BOTH ENGAGED FROM INTERIOR WHEN DISCOVERED</strong></td>
+            </tr>
+            <tr>
+                <td>Private Washroom</td>
+                <td>3 ft × 3 ft = 9 sq ft</td>
+                <td>Sink, toilet, mirror, towel rack - all undisturbed</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>III. Victim Position & Condition (In Situ Examination)</h2>
+        <div class="content">
+            <p><strong>Body Position:</strong> Victim Vivienne Marchand was found lying supine (face-up) on the sleeping berth in a relaxed, natural sleeping position. Detailed positioning as follows:</p>
+
+            <ul style="line-height: 1.8;">
+                <li><strong>Head Orientation:</strong> North end of berth, toward window. Head resting on pillow in centered position, face directed upward toward ceiling</li>
+                <li><strong>Upper Body:</strong> Shoulders level, arms positioned at sides in relaxed manner (right arm alongside body, left arm across lower abdomen). No defensive positioning of arms</li>
+                <li><strong>Lower Body:</strong> Legs extended naturally, slight bend at knees, feet pointing upward. Legs positioned close together, not splayed</li>
+                <li><strong>Overall Impression:</strong> Body position suggests victim was lying in normal sleeping position when death occurred. NO evidence of struggle, violent movement, or defensive posturing</li>
+            </ul>
+
+            <p><strong>Victim's Attire:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>Silk nightgown (ivory/cream colored with lace trim at neckline and hem)</li>
+                <li>No undergarments visible</li>
+                <li>No jewelry on body (removed for sleep and placed on bedside table - watch, earrings, necklace observed on table)</li>
+                <li>Hair arranged naturally on pillow, bobby pins visible (victim had styled hair before sleeping)</li>
+                <li>Nightgown shows NO tears, pulls, or signs of violent displacement</li>
+            </ul>
+
+            <p><strong>Visible Trauma (Preliminary Observation):</strong></p>
+            <ul style="line-height: 1.8;">
+                <li><strong>Neck Region:</strong> Distinct horizontal ligature mark visible around entire circumference of neck, approximately 1.5 inches in width</li>
+                <li><strong>Facial Discoloration:</strong> Cyanosis (bluish discoloration) around lips, mouth, and lower face consistent with oxygen deprivation</li>
+                <li><strong>Petechial Hemorrhaging:</strong> Visible small red/purple spots (petechiae) in conjunctiva of eyes and on facial skin</li>
+                <li><strong>No Other Trauma:</strong> NO visible injuries to head, face (apart from asphyxiation indicators), torso, arms, legs, or hands. No defensive wounds. No signs of blunt force trauma or other assault</li>
+            </ul>
+        </div>
+
+        <div class="critical-finding">
+            <h3 style="margin-top: 0; color: #721c24;">🔬 CRITICAL FORENSIC FINDING - LIGATURE MARK ANALYSIS</h3>
+            
+            <p><strong>Detailed Ligature Mark Characteristics:</strong></p>
+            
+            <table class="measurement-table" style="margin-top: 15px;">
+                <tr>
+                    <th>Feature</th>
+                    <th>Measurement/Observation</th>
+                </tr>
+                <tr>
+                    <td>Location</td>
+                    <td>Horizontal band around neck, positioned approximately at level of larynx and upper trachea</td>
+                </tr>
+                <tr>
+                    <td>Width</td>
+                    <td>Approximately 1.5 inches (3.8 cm) throughout circumference</td>
+                </tr>
+                <tr>
+                    <td>Depth/Pressure Impression</td>
+                    <td>Moderate depth, uniform around neck - suggests sustained, even pressure rather than violent jerking</td>
+                </tr>
+                <tr>
+                    <td>Pattern Detail</td>
+                    <td><strong>FABRIC WEAVE PATTERN VISIBLE</strong> - Fine woven textile impression showing diagonal thread pattern consistent with silk or high-quality fabric</td>
+                </tr>
+                <tr>
+                    <td>Color/Bruising</td>
+                    <td>Dark purple-brown discoloration in pattern band; surrounding tissue shows petechial hemorrhaging</td>
+                </tr>
+                <tr>
+                    <td>Orientation</td>
+                    <td>Perfectly horizontal around neck (0° deviation) - suggests ligature applied while victim in supine/lying position</td>
+                </tr>
+                <tr>
+                    <td>Knot Evidence</td>
+                    <td>NO evidence of knot impression or localized deep pressure point - suggests ligature was CROSSED and PULLED from behind victim's head, not tied with knot</td>
+                </tr>
+            </table>
+
+            <p><strong>Forensic Interpretation (Evidence Tech. Burke):</strong></p>
+            <p>"The ligature mark characteristics are consistent with strangulation by soft fabric material, specifically silk or similar fine woven textile, approximately 1.5 to 2 inches in width when used. The fabric weave pattern impression indicates high-quality material. The even depth and horizontal orientation suggest victim was likely in supine (lying) position during attack, and perpetrator applied sustained pressure from above or behind victim's head. The absence of a knot impression suggests perpetrator manually held ligature taut (crossing ends and pulling) rather than tying a knot. This indicates perpetrator maintained direct control throughout strangulation, which typically requires 2-4 minutes of sustained pressure to cause death."</p>
+
+            <p><strong>⚠ CRITICAL EVIDENCE:</strong> This ligature mark pattern is <strong>CONSISTENT WITH THE MISSING BURGUNDY-GOLD SILK SCARF</strong> described by victim's fiancé. Width, fabric texture, and quality match description of missing item. <strong>RECOVERY OF THIS SCARF IS PARAMOUNT TO INVESTIGATION.</strong></p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>IV. Bedding & Sleeping Area Examination</h2>
+        <div class="content">
+            <p><strong>Sleeping Berth Configuration:</strong> The sleeping berth is a fold-down design standard to first-class railroad sleeper compartments. Berth was in lowered (sleeping) position, secured with safety latch. Mattress is standard railroad issue, approximately 4 inches thick, covered with white cotton sheets and wool blanket provided by railroad.</p>
+
+            <p><strong>Bedding Condition & Analysis:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li><strong>Bottom Sheet:</strong> White cotton, railroad-issue, fitted to mattress. Sheet shows normal displacement consistent with person sleeping - wrinkles and creases in central area where body weight concentrated. NO tears, excessive wrinkling, or signs of violent movement</li>
+                
+                <li><strong>Top Sheet:</strong> White cotton, railroad-issue, found partially covering victim (pulled down to waist level). Sheet displacement is MINIMAL and consistent with person preparing for sleep, NOT consistent with violent struggle</li>
+                
+                <li><strong>Blanket:</strong> Gray wool, railroad-issue, found folded at foot of berth (victim apparently not using blanket for warmth). Blanket shows NO signs of disturbance</li>
+                
+                <li><strong>Pillow:</strong> Standard down-filled pillow with white cotton pillowcase. Victim's head resting on pillow in natural position. Pillowcase shows indentation from victim's head but NO signs of violence or struggle</li>
+                
+                <li><strong>Key Observation:</strong> The minimal disturbance to bedding is HIGHLY SIGNIFICANT. If victim had struggled violently against attacker, bedding would show extensive displacement, twisting, pulling, or bunching. The orderly condition of bedding suggests: (1) Victim was deeply asleep or sedated when attacked, OR (2) Attack occurred so suddenly that victim was rendered unconscious before defensive struggle could occur, OR (3) Victim did not perceive threat from attacker (knew and trusted perpetrator)</li>
+            </ul>
+
+            <p><strong>Biological Evidence Collection from Bedding:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>Complete bedding set (sheets, pillowcase, blanket) collected for laboratory analysis</li>
+                <li>Items will be examined for: foreign hairs, textile fibers, bodily fluids, cosmetic traces, soil/debris, and any transfer evidence from perpetrator</li>
+                <li>Samples submitted to Mississippi State Crime Laboratory for processing (Evidence Items #002, #002A, #002B, #002C)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>V. Door & Lock Mechanism - Detailed Examination</h2>
+        <div class="critical-finding">
+            <h3 style="margin-top: 0; color: #721c24;">🔐 THE LOCKED-ROOM PARADOX - CRITICAL EVIDENCE</h3>
+            
+            <p><strong>Door Condition When Discovered:</strong> This is the CENTRAL MYSTERY of this investigation. According to porter Ernest Washington's sworn statement, when he attempted to deliver the 06:30 wake-up call at 06:45 hours (after victim did not respond to knocking), he found the door LOCKED FROM THE INTERIOR.</p>
+
+            <p><strong>Lock Mechanism Configuration:</strong> Railroad first-class compartment doors are equipped with two separate locking devices:</p>
+            
+            <ol style="line-height: 1.8;">
+                <li><strong>DEADBOLT LOCK (Primary Security):</strong> Brass deadbolt mechanism, operated by key from exterior OR manual thumb-turn from interior. When engaged, deadbolt extends 1 inch into door frame, preventing door from opening.</li>
+                
+                <li><strong>PRIVACY LATCH (Secondary Security):</strong> Steel sliding latch located 6 inches below deadbolt. Can ONLY be engaged from interior of compartment by sliding latch horizontally into bracket mounted on door frame. No exterior mechanism to engage privacy latch.</li>
+            </ol>
+
+            <p><strong>Porter's Account of Lock Status:</strong> Porter Washington states that when he attempted to use his master key at 06:45 hours:</p>
+            <ul style="line-height: 1.8;">
+                <li>He inserted master key into exterior keyhole</li>
+                <li>Master key successfully unlocked the deadbolt mechanism</li>
+                <li>However, door would not open - it was blocked by something additional</li>
+                <li>He pushed firmly and felt resistance from the PRIVACY LATCH (which was still engaged)</li>
+                <li>Privacy latch can ONLY be engaged from the INTERIOR of the compartment</li>
+                <li>Porter states he had to use "significant force" with master key and push firmly on door to disengage privacy latch (this is NOT normal - privacy latch should not be defeatable by master key alone, but porter's force combined with age/wear of mechanism apparently allowed it to give way)</li>
+            </ul>
+
+            <p><strong>Our Detailed Lock Examination:</strong> We conducted extensive examination of both lock mechanisms:</p>
+
+            <table class="measurement-table" style="margin-top: 15px;">
+                <tr>
+                    <th>Component</th>
+                    <th>Findings</th>
+                </tr>
+                <tr>
+                    <td>Deadbolt Mechanism</td>
+                    <td>Standard brass deadbolt in good working condition. Shows normal wear consistent with age (approximately 8 years in service). NO signs of tampering, forced entry, or manipulation. Lock cylinder functions properly. Bolt extends and retracts smoothly.</td>
+                </tr>
+                <tr>
+                    <td>Privacy Latch</td>
+                    <td>Steel sliding latch with minor rust on bracket (normal for age and humidity in train environment). Latch slides horizontally into receiving bracket on door frame. <strong>CRITICAL: Privacy latch can ONLY be engaged from interior - there is NO exterior mechanism.</strong> Latch shows wear but NO evidence of forced manipulation or tampering.</td>
+                </tr>
+                <tr>
+                    <td>Door Frame</td>
+                    <td>Solid wood frame in good condition. NO splintering, cracking, or damage around lock strike plates. NO evidence of forced entry using pry bar, crowbar, or other implement.</td>
+                </tr>
+                <tr>
+                    <td>Door Hinges</td>
+                    <td>Three brass hinges on interior side of door. Hinges in good condition, securely mounted. NO signs of removal or tampering with hinge pins.</td>
+                </tr>
+                <tr>
+                    <td>Door Handle (Interior)</td>
+                    <td>Brass lever handle. Multiple fingerprints present (victim's prints identified, porter's prints identified from his entry). Handle operates smoothly.</td>
+                </tr>
+                <tr>
+                    <td>Door Handle (Exterior)</td>
+                    <td>Brass lever handle. Fingerprints present from multiple sources (porter, conductor, officers). Handle operates normally.</td>
+                </tr>
+            </table>
+
+            <p><strong>⚠ INVESTIGATIVE IMPLICATIONS:</strong></p>
+            <p>The locked-door condition presents a SIGNIFICANT LOGICAL PROBLEM for this investigation. If the privacy latch was engaged from the INTERIOR when the body was discovered, this suggests one of the following scenarios:</p>
+
+            <ol style="line-height: 1.8;">
+                <li><strong>THEORY A:</strong> Victim locked both locks herself before going to sleep, and perpetrator had master key access to enter compartment (only crew members have master keys). After committing murder, perpetrator exited and door automatically re-locked with deadbolt.</li>
+                
+                <li><strong>THEORY B:</strong> Perpetrator was in compartment with victim (invited or with permission). After committing murder, perpetrator engaged BOTH locks from interior, then found alternate exit method (window? - but window is locked and too small for adult to pass through).</li>
+                
+                <li><strong>THEORY C:</strong> Perpetrator committed murder, then engaged privacy latch from interior before exiting, and used some unknown technique to manipulate latch from exterior after closing door. (We have tested this extensively and found NO method to engage privacy latch from exterior.)</li>
+                
+                <li><strong>THEORY D:</strong> Victim locked door herself AFTER perpetrator departed (this would require victim to still be alive and mobile after attack, which contradicts all medical evidence).</li>
+            </ol>
+
+            <p><strong>Evidence Technician Burke's Assessment:</strong> "In my 12 years as a forensic investigator, I have never encountered a more perplexing locked-room scenario. The physical evidence definitively shows both locks were engaged from the interior. Yet I can find NO physical evidence of how a perpetrator could have exited and left both locks engaged. The lock mechanisms show no tampering. The door frame shows no forced entry. There is no alternate exit. This case defies logical explanation based purely on physical evidence. The answer must lie in the human testimony and timeline reconstruction."</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>VI. Window Examination</h2>
+        <div class="content">
+            <p><strong>Window Configuration:</strong> Standard railroad safety glass window, dimensions 24 inches (height) × 36 inches (width). Window is positioned on north wall of compartment (exterior wall of train), approximately 48 inches above floor level.</p>
+
+            <p><strong>Window Condition:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>Window was found CLOSED and LOCKED from interior at time of discovery</li>
+                <li>Lock mechanism (brass rotating latch) was in ENGAGED position - window cannot be opened from exterior when lock engaged</li>
+                <li>Heavy curtains (dark blue fabric, railroad-issue) were DRAWN CLOSED across entire window</li>
+                <li>Glass shows NO cracks, chips, or damage</li>
+                <li>Window frame is secure with NO signs of tampering or forced entry</li>
+                <li>NO scratches or marks on window sill or frame consistent with entry/exit attempts</li>
+            </ul>
+
+            <p><strong>Window as Potential Entry/Exit Point - Analysis:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li><strong>Physical Dimensions:</strong> Even if window were open, the 24" × 36" opening is EXTREMELY SMALL for adult human to pass through, particularly while train in motion</li>
+                <li><strong>Height from Ground:</strong> When train is stationary, window is approximately 7 feet above ground level. When train was in motion (estimated time of murder), window height above ground/tracks would make entry/exit essentially impossible</li>
+                <li><strong>Window Lock Status:</strong> Window was LOCKED from interior when discovered, ruling out exterior entry</li>
+                <li><strong>Fingerprint Analysis:</strong> Window latch shows only ONE set of fingerprints, identified as victim's (consistent with victim closing and locking window herself)</li>
+                <li><strong>Conclusion:</strong> Window is NOT viable entry or exit point for perpetrator</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>VII. Personal Effects & Compartment Contents</h2>
+        <div class="content">
+            <p><strong>Bedside Table Items (All Collected as Evidence):</strong></p>
+            <ul style="line-height: 1.8;">
+                <li><strong>Wristwatch (Ladies'):</strong> Gold-tone wristwatch with leather band, <strong>STOPPED AT 3:17 AM</strong> - This may indicate exact time of death or time watch was removed/displaced during struggle (Evidence Item #005)</li>
+                
+                <li><strong>Water Glass:</strong> Heavy glass tumbler, half-filled with water. NO lipstick marks on rim (victim had removed makeup before sleeping). Water shows NO visible residue or foreign substances. Glass submitted for laboratory analysis (Evidence Item #006)</li>
+                
+                <li><strong>Prescription Medication:</strong> Sleeping pills in amber glass bottle. Label: "Dr. Morrison, New Orleans - Seconal (secobarbital) - Take 1 at bedtime as needed for sleep." Bottle approximately 2/3 full, suggesting victim had access to sedatives. Medication and remaining pills collected for analysis (Evidence Item #007)</li>
+                
+                <li><strong>Personal Journal:</strong> Leather-bound diary with brass clasp lock (unlocked). Journal contains handwritten entries dated throughout 1957. Collected for detailed examination - may contain information about victim's relationships, activities, or threats (Evidence Item #008)</li>
+                
+                <li><strong>Reading Glasses:</strong> Folded reading glasses in fabric case. NO damage (Evidence Item #009)</li>
+                
+                <li><strong>Jewelry Items:</strong> Wristwatch (noted above), pearl earrings (pair), gold necklace with pendant. All items present and undamaged - rules out robbery motive (Evidence Items #010A, #010B, #010C)</li>
+            </ul>
+
+            <p><strong>Hanging Wardrobe Items:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>Emerald green silk evening gown with beaded detailing (expensive, designer garment)</li>
+                <li>Charcoal gray wool traveling coat (excellent condition)</li>
+                <li>Burgundy day dress with black trim (good quality)</li>
+                <li>All garments appear undisturbed and properly hung</li>
+                <li><strong>CRITICAL ABSENCE:</strong> NO burgundy-gold silk scarf visible among hanging items or elsewhere in compartment. Victim's fiancé confirms victim owned such a scarf and wore it frequently. THIS SCARF IS BELIEVED TO BE THE MURDER WEAPON.</li>
+            </ul>
+
+            <p><strong>Luggage Contents (2 Suitcases + Hatbox):</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>Suitcase #1: Clothing items (undergarments, stockings, additional dresses, blouses) - neatly packed</li>
+                <li>Suitcase #2: Shoes (3 pairs), cosmetics case, hairbrush set, perfume bottles, personal hygiene items - organized</li>
+                <li>Hatbox: Two ladies' hats (one felt, one straw with ribbon) - good condition</li>
+                <li>All luggage shows normal packing for multi-day journey. NO signs of hasty packing or disturbance</li>
+                <li>Complete inventory of luggage contents documented and cross-referenced with fiancé's knowledge of victim's belongings</li>
+            </ul>
+
+            <p><strong>Handbag (Found on fold-down table):</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>Black leather handbag (good quality, designer brand)</li>
+                <li>Contents: Wallet with $127 in cash, driver's license, train ticket stub (New Orleans to Chicago), lipstick, compact mirror, handkerchief, small notebook, fountain pen, keys (apartment keys), business cards</li>
+                <li><strong>Significant Finding:</strong> Cash and valuables UNTOUCHED - definitively rules out robbery as motive</li>
+                <li>Entire handbag and contents collected as evidence (Evidence Item #009)</li>
+            </ul>
+
+            <p><strong>Washroom Contents:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>Sink area: Face cream, tooth powder, toothbrush, hairbrush, cosmetics case</li>
+                <li>Towel rack: Two towels (one hand towel, one larger towel) - folded, minimal signs of recent use</li>
+                <li>Toilet area: Clean, no signs of disturbance</li>
+                <li>Mirror: Clean, no messages or marks</li>
+                <li>Washroom shows victim used facilities earlier in evening (likely before retiring) but NO evidence of activity during night</li>
+            </ul>
+        </div>
+
+        <div class="evidence-detail">
+            <h3 style="margin-top: 0;">💰 ROBBERY MOTIVE - DEFINITIVELY RULED OUT</h3>
+            <p><strong>Evidence Against Robbery Motive:</strong></p>
+            <ul>
+                <li>$127 in cash found untouched in victim's handbag</li>
+                <li>Gold jewelry (watch, necklace, earrings) left in plain sight on bedside table - total estimated value $200-300</li>
+                <li>Expensive designer evening gown and coat left undisturbed</li>
+                <li>NO signs of ransacking, drawer searching, or luggage disturbance</li>
+            </ul>
+            <p><strong>Conclusion:</strong> This was NOT a robbery. Perpetrator's motive was personal, not financial.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>VIII. Fingerprint Evidence</h2>
+        <div class="content">
+            <p><strong>Fingerprint Collection Summary:</strong> A total of 23 latent fingerprints were successfully lifted from various surfaces within Compartment 7. Prints were collected from:</p>
+
+            <ul style="line-height: 1.8;">
+                <li>Door handles (interior and exterior)</li>
+                <li>Door frame area</li>
+                <li>Fold-down table surface</li>
+                <li>Window latch</li>
+                <li>Bedside table</li>
+                <li>Water glass</li>
+                <li>Personal items (jewelry, handbag, journal)</li>
+            </ul>
+
+            <p><strong>Preliminary Fingerprint Analysis:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li><strong>Victim's Prints:</strong> Identified on multiple surfaces (as expected) - door handle (interior), table, water glass, window latch, personal items. Confirms victim's normal habitation of space.</li>
+                
+                <li><strong>Porter Ernest Washington's Prints:</strong> Identified on exterior door handle and door frame (consistent with his entry at 06:45 hours to discover body and check for vital signs).</li>
+                
+                <li><strong>Conductor Theodore Blackwood's Prints:</strong> Identified on exterior door handle (consistent with his entry to verify situation after porter's discovery).</li>
+                
+                <li><strong>Unidentified Prints:</strong> Several partial prints that do not match victim, porter, or conductor. These prints are of POOR QUALITY (smudged, incomplete) and may belong to: (1) Railroad cleaning staff who serviced compartment before victim boarded, (2) Previous passengers who occupied compartment on earlier journeys, or (3) Perpetrator (if perpetrator touched surfaces while in compartment).</li>
+            </ul>
+
+            <p><strong>Fingerprint Evidence Limitations:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>Unidentified partial prints are insufficient quality for positive identification via fingerprint database comparison</li>
+                <li>Railroad compartments are cleaned between journeys, but not sterilized - older prints from previous occupants may persist on some surfaces</li>
+                <li>If perpetrator wore gloves OR was careful not to touch surfaces, NO usable fingerprints would be left</li>
+                <li>We will attempt to match unidentified prints against all passengers and crew members for elimination purposes</li>
+            </ul>
+
+            <p><strong>Conclusion:</strong> Fingerprint evidence is LIMITED in investigative value for this case. We have NO clear fingerprint evidence directly linking any suspect to the crime.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>IX. Trace Evidence & Fiber Analysis</h2>
+        <div class="content">
+            <p><strong>Fiber & Hair Evidence:</strong> Crime scene technicians conducted meticulous examination of all surfaces for trace evidence, with particular focus on:</p>
+
+            <ul style="line-height: 1.8;">
+                <li><strong>Bedding Materials:</strong> Examined for foreign hairs, textile fibers from perpetrator's clothing, and transfer evidence</li>
+                <li><strong>Victim's Nightgown:</strong> Examined for fibers that might have transferred from perpetrator during attack</li>
+                <li><strong>Floor Surfaces:</strong> Vacuumed and debris collected for laboratory analysis</li>
+                <li><strong>Door Handle Areas:</strong> Examined for textile fibers that might have transferred from perpetrator's clothing</li>
+            </ul>
+
+            <p><strong>Preliminary Findings:</strong></p>
+            <ul style="line-height: 1.8;">
+                <li>Multiple textile fibers collected from bedding and victim's nightgown</li>
+                <li>Fibers include: cotton (consistent with bedding materials), silk (consistent with victim's nightgown and potentially murder weapon), wool (consistent with victim's traveling coat), and various synthetic fibers</li>
+                <li>Several dark-colored textile fibers found on pillow area - MAY be significant if they transferred from perpetrator's clothing during attack</li>
+                <li>Hair samples collected from pillow and bedding: most match victim's hair color/texture; several hairs of different color/texture found - these will be examined microscopically and compared against suspect samples</li>
+            </ul>
+
+            <p><strong>Limitations of 1957 Fiber Analysis:</strong> Current forensic fiber analysis technology is LIMITED compared to what may be available in future decades. We can conduct microscopic examination, compare fiber types, and make general determinations, but we CANNOT definitively match a fiber to a specific garment with absolute certainty. All fiber evidence will be preserved for potential future re-examination if forensic science advances.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>X. Scene Reconstruction & Conclusions</h2>
+        <div class="critical-finding">
+            <h3 style="margin-top: 0; color: #721c24;">🎯 CRIME SCENE INVESTIGATOR'S CONCLUSIONS</h3>
+            
+            <p><strong>Based on the complete crime scene examination, I conclude the following:</strong></p>
+
+            <ol style="line-height: 2.0;">
+                <li><strong>CAUSE OF DEATH:</strong> Ligature strangulation using soft fabric implement (believed to be missing burgundy-gold silk scarf owned by victim)</li>
+                
+                <li><strong>MANNER OF DEATH:</strong> HOMICIDE - No evidence supports accidental death or suicide</li>
+                
+                <li><strong>TIME OF DEATH:</strong> Approximately 3:17 AM (November 14, 1957) based on victim's stopped watch and medical examiner's assessment</li>
+                
+                <li><strong>VICTIM'S STATE AT TIME OF ATTACK:</strong> Victim was likely ASLEEP or in relaxed/drowsy state (possibly sedated by sleeping medication). Evidence: (a) No defensive wounds, (b) Minimal disturbance to bedding, (c) Body position suggests natural sleeping posture, (d) No signs of struggle</li>
+                
+                <li><strong>ATTACK METHOD:</strong> Perpetrator approached victim while she was sleeping, applied ligature (silk scarf) around neck from above or behind victim's head, and maintained sustained pressure for 2-4 minutes until death occurred. Victim likely lost consciousness within 10-20 seconds, explaining lack of struggle</li>
+                
+                <li><strong>PERPETRATOR ACCESS:</strong> This is the CENTRAL MYSTERY. Perpetrator either: (a) Had master key access to enter compartment, (b) Was invited/admitted by victim before attack, or (c) Used unknown method to manipulate locks. The locked-door condition when body was discovered CANNOT be easily explained by physical evidence alone</li>
+                
+                <li><strong>MOTIVE:</strong> NOT robbery (cash and valuables untouched). Likely PERSONAL motive - relationship conflict, jealousy, revenge, or threat elimination. The premeditated nature (use of victim's own scarf, attack during sleep) suggests planning and intent</li>
+                
+                <li><strong>SUSPECT PROFILE:</strong> Based on physical evidence and scene characteristics: (a) Someone with ACCESS to victim (either through master key OR victim's trust/permission), (b) Someone with knowledge of victim's sleep schedule/habits, (c) Someone physically capable of manual strangulation (requires 2-4 minutes of sustained hand/arm strength), (d) Someone who could move through train corridors without attracting attention during night hours (2:00-4:00 AM)</li>
+                
+                <li><strong>MISSING EVIDENCE:</strong> Recovery of murder weapon (burgundy-gold silk scarf) is CRITICAL. Scarf will contain biological evidence (victim's skin cells, possibly perpetrator's DNA), fingerprints (if perpetrator handled scarf without gloves), and can be definitively matched to ligature marks on victim's neck</li>
+                
+                <li><strong>PHYSICAL EVIDENCE LIMITATIONS:</strong> This crime scene has yielded MINIMAL direct physical evidence linking a specific perpetrator to the crime. We have: (a) NO clear fingerprints from perpetrator, (b) LIMITED fiber evidence of uncertain value, (c) NO murder weapon, (d) NO eyewitnesses to attack itself. <strong>This case will be solved through: (1) Witness testimony and timeline reconstruction, (2) Identification of person with motive and opportunity, (3) Recovery of murder weapon, and/or (4) Confession.</strong></li>
+            </ol>
+
+            <p><strong>Signed:</strong></p>
+            <p style="font-family: 'Brush Script MT', cursive; font-size: 20px; margin: 15px 0;">Raymond T. Burke</p>
+            <p>Evidence Technician #44 - Crime Scene Investigation Unit</p>
+            <p>Jackson Police Department</p>
+            <p>Date: November 14, 1957 - 14:00 hours</p>
+        </div>
+    </div>
+
+    <div style="background-color: #2c2c2c; color: white; padding: 25px; margin-top: 40px;">
+        <h3 style="margin-top: 0; text-align: center;">CASE STATUS</h3>
+        <p style="text-align: center; margin: 10px 0;"><strong>ACTIVE HOMICIDE INVESTIGATION</strong></p>
+        <p style="text-align: center; margin: 10px 0;">All evidence secured in JPD Evidence Room #3</p>
+        <p style="text-align: center; margin: 10px 0;">Evidence items submitted to Mississippi State Crime Laboratory for analysis</p>
+        <p style="text-align: center; margin: 10px 0;">Scene photographs (72 exposures) developed and catalogued</p>
+        <p style="text-align: center; margin: 10px 0; font-size: 14px;"><strong>Priority: FIND THE MISSING SILK SCARF (Murder Weapon)</strong></p>
+    </div>
+
+    <div class="footer">
+        <p>JACKSON POLICE DEPARTMENT - CRIME SCENE INVESTIGATION UNIT</p>
+        <p>This is an official forensic document - Unauthorized disclosure prohibited</p>
+        <p>Case File: 57-1114-HOMI | Document #02 - Crime Scene Examination Report | Page 1 of 1</p>
+        <p>Cross-References: Initial Incident Report (Doc #1), Autopsy Report (Doc #3), Evidence Photographs (Doc #16)</p>
+    </div>
+</body>
+</html>
+
+

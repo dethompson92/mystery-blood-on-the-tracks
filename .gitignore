@@ -1,0 +1,6 @@
+desktop.ini
+Thumbs.db
+*.pdf
+# Optional: exclude the Genspark context files if you don't want them public
+# Genspark chats context.md
+# Genspark chats context.pdf

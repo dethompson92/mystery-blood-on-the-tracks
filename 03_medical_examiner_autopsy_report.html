@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autopsy Report: Case #57-1114-HOMI</title>
+    <style>
+        body {
+            background-color: #f4f1ea;
+            color: #2b2b2b;
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .report-container {
+            max-width: 850px;
+            margin: 0 auto;
+            background-color: #fcfbf9;
+            padding: 50px;
+            border: 1px solid #d3cabc;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+        .header-section {
+            text-align: center;
+            border-bottom: 3px double #2b2b2b;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .header-subtitle {
+            font-size: 16px;
+            margin: 5px 0;
+        }
+        h2 {
+            font-size: 18px;
+            border-bottom: 1px dashed #2b2b2b;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #555;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #e4dfd0;
+            font-weight: bold;
+            width: 35%;
+        }
+        p {
+            text-align: justify;
+            margin-bottom: 15px;
+            text-indent: 40px;
+        }
+        .finding-box {
+            background-color: #fffacd;
+            border: 2px solid #d4af37;
+            padding: 15px;
+            margin: 20px 0;
+            font-weight: bold;
+        }
+        .signature-block {
+            margin-top: 60px;
+            border-top: 1px solid #2b2b2b;
+            padding-top: 20px;
+        }
+        .signature {
+            font-family: 'Brush Script MT', cursive;
+            font-size: 2em;
+            color: #1a365d;
+            margin: 10px 0;
+        }
+        ul {
+            margin: 10px 0 15px 0;
+            padding-left: 40px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+    /* ========================================
+   PRINT-OPTIMIZED CSS
+   Saves ink, prevents cutoff, controls page breaks
+   ======================================== */
+@page {
+  margin: 0.5in !important;
+}
+@media print {
+  /* Reset to printer-friendly colors */
+  body {
+    background-color: white !important;
+    background: white !important;
+    color: black !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove all dark backgrounds and shadows */
+  .document-container,
+  .header-box,
+  table,
+  th,
+  td,
+  div,
+  section {
+    background-color: white !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-color: black !important;
+  }
+
+  /* Ensure text is always black */
+  h1, h2, h3, h4, h5, h6, p, li, td, th, span, div {
+    color: black !important;
+  }
+
+  /* Keep ONLY red stamps visible (but lighter) */
+  .stamp {
+    color: #c0392b !important;
+    border-color: #c0392b !important;
+    opacity: 0.6 !important;
+    background: transparent !important;
+  }
+
+  /* Remove colored highlight backgrounds - keep border only */
+  .evidence-highlight,
+  .sig-critical,
+  .sig-supporting,
+  .sig-context {
+    background-color: white !important;
+    background: white !important;
+    border-left-width: 3px !important;
+    border-left-color: black !important;
+  }
+
+  /* Simplify evidence tags for printing */
+  .evidence-tag {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+
+  /* Control page breaks - prevent awkward splits */
+  table {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group; /* Repeat header on each page */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Keep related content together */
+  .evidence-highlight,
+  .signature-block,
+  .header-meta {
+    page-break-inside: avoid;
+  }
+
+  /* Remove unnecessary spacing for print */
+  .document-container {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Ensure tables fit on page */
+  table {
+    width: 100% !important;
+    font-size: 11pt !important;
+  }
+
+  th, td {
+    padding: 6pt !important;
+  }
+
+  /* Adjust font sizes for readability */
+  body {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  h1 {
+    font-size: 18pt !important;
+  }
+
+  h2 {
+    font-size: 14pt !important;
+  }
+
+  /* Show URLs for links (optional - comment out if not wanted) */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  /* Hide elements that shouldn't print */
+  .no-print {
+    display: none !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="report-container">
+    <div class="header-section">
+        <h1 class="header-title">State of Mississippi</h1>
+        <div class="header-subtitle">Hinds County Medical Examiner's Office</div>
+        <div class="header-subtitle">Jackson City Hospital - Forensic Pathology Division</div>
+        <div class="header-subtitle" style="margin-top: 15px; font-weight: bold;">AUTOPSY EXAMINATION REPORT</div>
+    </div>
+
+    <table>
+        <tr>
+            <th>CASE NUMBER:</th>
+            <td>57-1114-HOMI</td>
+        </tr>
+        <tr>
+            <th>AUTOPSY NUMBER:</th>
+            <td>ME-1957-11-347</td>
+        </tr>
+        <tr>
+            <th>DECEDENT:</th>
+            <td>MARCHAND, Vivienne (Female, White, Age 32)</td>
+        </tr>
+        <tr>
+            <th>DATE OF DEATH:</th>
+            <td>November 14, 1957 (estimated between 0230 and 0330 hours)</td>
+        </tr>
+        <tr>
+            <th>DATE OF AUTOPSY:</th>
+            <td>November 15, 1957</td>
+        </tr>
+        <tr>
+            <th>TIME OF AUTOPSY:</th>
+            <td>0900 Hours</td>
+        </tr>
+        <tr>
+            <th>PLACE OF AUTOPSY:</th>
+            <td>Jackson City Hospital Morgue, Jackson, Mississippi</td>
+        </tr>
+        <tr>
+            <th>PATHOLOGIST:</th>
+            <td>Dr. William H. Thornton, MD (Chief Medical Examiner, Hinds County)</td>
+        </tr>
+        <tr>
+            <th>ASSISTANT:</th>
+            <td>Dr. Margaret Holloway, MD (Deputy Medical Examiner)</td>
+        </tr>
+        <tr>
+            <th>WITNESSES:</th>
+            <td>Detective James Holloway (JPD Badge #402), Detective Charles Monroe (JPD Badge #427)</td>
+        </tr>
+    </table>
+
+    <h2>CIRCUMSTANCES OF DEATH</h2>
+    <p>The decedent, Miss Vivienne Marchand, a thirty-two-year-old professional jazz vocalist residing in Chicago, Illinois, was discovered deceased in her private sleeper compartment (Car 7, Compartment 7) aboard the Silver Comet passenger train on the morning of November 14, 1957, at approximately 0645 hours. The train was en route from Chicago to New Orleans when the body was discovered by the Pullman porter during routine morning rounds. The train made an emergency stop at Jackson Union Station, Mississippi, where local authorities were summoned. Preliminary scene investigation by Jackson Police Department detectives indicated no signs of forced entry, no visible blood, and no obvious signs of a violent struggle within the compartment. The body was transported to this facility for complete medicolegal autopsy examination.</p>
+
+    <h2>EXTERNAL EXAMINATION</h2>
+    <p>The body is that of a well-developed, well-nourished white female appearing consistent with the stated age of thirty-two years. The body measures sixty-six inches in length and weighs one hundred eighteen pounds. Rigor mortis is present in all major muscle groups and is moderately advanced. Livor mortis is present posteriorly and is fixed, consistent with the supine position in which the body was discovered. The estimated post-mortem interval, based on rigor mortis development, liver temperature (taken at scene at 0715 hours, recorded as 88.3 degrees Fahrenheit), and ambient environmental conditions aboard the train, places time of death between 0230 and 0330 hours on November 14, 1957.</p>
+
+    <p>The decedent is clothed in a cream-colored silk nightgown and a burgundy dressing robe. Both garments are intact and show no tears, rips, or signs of forcible removal. The decedent is barefoot. Pearl stud earrings are present in both earlobes. Hair is dark brown, wavy, and shoulder-length, styled in a manner consistent with current fashion. Fingernails are manicured and painted with red lacquer; no damage or defensive splitting is observed beneath the nails.</p>
+
+    <div class="finding-box">
+        CRITICAL FINDING: Examination of the anterior neck reveals a prominent horizontal furrow encircling the entire circumference of the neck. The furrow measures approximately one and one-half inches in width and is located at the level of the thyroid cartilage. The furrow exhibits deep tissue compression, with areas of subcutaneous hemorrhaging and ecchymosis (bruising) visible upon palpation. The pattern is consistent with ligature strangulation using a broad, soft fabric ligature, applied with considerable force.
+    </div>
+
+    <h2>HEAD AND NECK FINDINGS</h2>
+    <p>The scalp shows no contusions, lacerations, or hematomas. The skull is intact with no fractures or depressions detected upon palpation or subsequent internal examination. The face exhibits pronounced bilateral conjunctival petechiae—pinpoint hemorrhages in the white portions of both eyes. Additional petechial hemorrhaging is observed on the eyelids and across the facial skin, particularly concentrated around the orbital regions. These findings are pathognomonic (distinctly characteristic) of asphyxial death due to neck compression.</p>
+
+    <p>Dissection of the neck structures reveals extensive deep soft tissue hemorrhaging within the strap muscles of the neck (sternocleidomastoid, sternohyoid, and omohyoid muscles bilaterally). Hemorrhage extends into the deeper cervical fascia. Upon careful removal and examination of the laryngeal skeleton, a fracture of the superior horn of the thyroid cartilage on the right side is identified. Additionally, the hyoid bone exhibits a unilateral fracture of the left greater horn. These fractures are indicative of substantial compressive force applied to the anterior neck consistent with manual or ligature strangulation.</p>
+
+    <h2>INTERNAL EXAMINATION</h2>
+
+    <h3>Respiratory System:</h3>
+    <p>The larynx and trachea contain no foreign material or aspirated contents. The mucosal surfaces of the upper airway show petechial hemorrhaging. Both lungs are moderately congested and edematous (fluid-filled), weighing 420 grams (right) and 380 grams (left), which is within expected range but shows mild pulmonary edema consistent with asphyxia. No gross pathology, masses, or infarctions are identified in the lung parenchyma.</p>
+
+    <h3>Cardiovascular System:</h3>
+    <p>The heart weighs 280 grams and is of normal size and configuration for an adult female of this age and body habitus. The coronary arteries are patent and free of atherosclerotic disease. The myocardium is firm and red-brown, with no areas of infarction or fibrosis. All four cardiac chambers and valves are grossly unremarkable. Approximately 150 milliliters of serous fluid is present in the pericardial sac, a mild increase suggestive of terminal cardiovascular stress.</p>
+
+    <h3>Gastrointestinal System:</h3>
+    <p>The esophagus, stomach, small intestine, and colon are unremarkable. The stomach contains approximately 200 milliliters of partially digested food material, appearing consistent with a meal consumed approximately four to six hours prior to death (likely dinner service aboard the train). No evidence of toxins, foreign substances, or pathological lesions is observed in the gastrointestinal tract.</p>
+
+    <h3>Hepatobiliary and Genitourinary Systems:</h3>
+    <p>The liver, gallbladder, pancreas, spleen, kidneys, and urinary bladder are all grossly and microscopically normal. No evidence of disease, injury, or congenital abnormality is identified.</p>
+
+    <h3>Central Nervous System:</h3>
+    <p>The brain weighs 1320 grams and shows no external or internal hemorrhage, contusions, lacerations, or masses. The cerebral vessels are patent and unremarkable. No skull fractures or intracranial pathology is identified.</p>
+
+    <h2>TOXICOLOGY</h2>
+    <p>Blood, urine, and vitreous humor samples were submitted to the Mississippi State Crime Laboratory for comprehensive toxicological analysis. Preliminary qualitative screening for common poisons, narcotics, barbiturates, and alcohol was negative. Full quantitative results are pending and will be appended to this report upon receipt (estimated completion: November 22, 1957).</p>
+
+    <h2>MICROSCOPIC EXAMINATION</h2>
+    <p>Tissue sections from the heart, lungs, liver, kidneys, and neck musculature were prepared and examined histologically. Microscopic examination confirms the presence of acute hemorrhage in the cervical soft tissues. Pulmonary tissue shows intra-alveolar edema and congestion consistent with asphyxial death. No evidence of pre-existing natural disease is identified microscopically in any organ system examined.</p>
+
+    <h2>OPINION AND CONCLUSIONS</h2>
+
+    <div class="finding-box">
+        <strong>CAUSE OF DEATH:</strong> Asphyxia due to ligature strangulation.
+    </div>
+
+    <div class="finding-box">
+        <strong>MANNER OF DEATH:</strong> HOMICIDE.
+    </div>
+
+    <p>The constellation of autopsy findings in this case unequivocally establishes that Miss Vivienne Marchand died as a result of asphyxia caused by external compression of the neck structures via ligature strangulation. The specific findings supporting this conclusion include:</p>
+
+    <ul>
+        <li>Prominent horizontal ligature furrow encircling the neck with associated subcutaneous hemorrhaging</li>
+        <li>Bilateral conjunctival and facial petechial hemorrhaging (classic marker of asphyxia)</li>
+        <li>Fractures of the hyoid bone and thyroid cartilage (indicative of significant compressive force)</li>
+        <li>Deep cervical soft tissue hemorrhaging in neck musculature</li>
+        <li>Pulmonary edema and congestion consistent with asphyxial death</li>
+        <li>Absence of any natural disease process sufficient to cause death</li>
+    </ul>
+
+    <p>The characteristics of the ligature furrow—broad width, horizontal orientation, and even depth—are consistent with strangulation using a soft, wide fabric ligature such as a scarf, stocking, or similar textile material. The furrow does not exhibit the characteristic inverted-V pattern typically seen in suicidal hangings, thereby excluding suspension as a mechanism. Furthermore, the degree of force required to fracture both the hyoid bone and thyroid cartilage strongly suggests an assaultive homicidal act rather than accidental or self-inflicted injury.</p>
+
+    <p>The absence of defensive injuries (no fingernail damage, no bruising or abrasions on the hands, forearms, or upper extremities) suggests that the victim was likely taken by surprise, possibly approached from behind, or was incapacitated rapidly before she could mount an effective physical resistance. The confined space of the train compartment (approximately six by eight feet) would have severely limited her ability to escape or defend herself once the attack commenced.</p>
+
+    <p>The post-mortem interval estimate of four to six hours prior to discovery (body found at 0645 hours, estimated death between 0230-0330 hours) is consistent with witness statements and known movements of passengers aboard the train during the overnight journey.</p>
+
+    <p>In summary, this death is clearly the result of homicidal violence. The mechanism of death—ligature strangulation—required the application of sustained, deliberate force over a period of two to three minutes. This was not an accident, and the manner of death is certified as HOMICIDE.</p>
+
+    <div class="signature-block">
+        <p><strong>Respectfully submitted,</strong></p>
+        <div class="signature">Dr. William H. Thornton</div>
+        <p>William H. Thornton, M.D.<br>
+        Chief Medical Examiner, Hinds County, Mississippi<br>
+        Mississippi Medical License #4721<br>
+        Board Certified, American Board of Pathology</p>
+        <p style="margin-top: 20px;"><strong>Date:</strong> November 15, 1957</p>
+    </div>
+
+</div>
+
+</body>
+</html>
+

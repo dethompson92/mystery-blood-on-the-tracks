@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence Discovery Report - Steamer Trunk</title>
+    <style>
+        body {
+            background-color: #f9f9f9;
+            color: #1a1a1a;
+            font-family: 'Arial', 'Helvetica', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .report-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 50px;
+            border: 2px solid #2c5f8d;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        .header-section {
+            text-align: center;
+            border-bottom: 4px double #2c5f8d;
+            padding-bottom: 25px;
+            margin-bottom: 30px;
+            background-color: #e8f1f8;
+            padding: 25px;
+            margin: -50px -50px 30px -50px;
+        }
+        .header-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #2c5f8d;
+        }
+        h2 {
+            font-size: 18px;
+            border-bottom: 2px solid #2c5f8d;
+            padding-bottom: 8px;
+            margin-top: 30px;
+            text-transform: uppercase;
+            color: #2c5f8d;
+            font-weight: bold;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #2c5f8d;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #2c5f8d;
+            color: white;
+            font-weight: bold;
+            width: 30%;
+        }
+        .evidence-box {
+            background-color: #fff3cd;
+            border: 3px solid #ffc107;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        .inventory-item {
+            background-color: #f0f0f0;
+            border-left: 4px solid #2c5f8d;
+            padding: 12px;
+            margin: 10px 0;
+        }
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+        ul {
+            margin: 10px 0;
+            padding-left: 40px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+    /* ========================================
+   PRINT-OPTIMIZED CSS
+   Saves ink, prevents cutoff, controls page breaks
+   ======================================== */
+@page {
+  margin: 0.5in !important;
+}
+@media print {
+  /* Reset to printer-friendly colors */
+  body {
+    background-color: white !important;
+    background: white !important;
+    color: black !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove all dark backgrounds and shadows */
+  .document-container,
+  .header-box,
+  table,
+  th,
+  td,
+  div,
+  section {
+    background-color: white !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-color: black !important;
+  }
+
+  /* Ensure text is always black */
+  h1, h2, h3, h4, h5, h6, p, li, td, th, span, div {
+    color: black !important;
+  }
+
+  /* Keep ONLY red stamps visible (but lighter) */
+  .stamp {
+    color: #c0392b !important;
+    border-color: #c0392b !important;
+    opacity: 0.6 !important;
+    background: transparent !important;
+  }
+
+  /* Remove colored highlight backgrounds - keep border only */
+  .evidence-highlight,
+  .sig-critical,
+  .sig-supporting,
+  .sig-context {
+    background-color: white !important;
+    background: white !important;
+    border-left-width: 3px !important;
+    border-left-color: black !important;
+  }
+
+  /* Simplify evidence tags for printing */
+  .evidence-tag {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+
+  /* Control page breaks - prevent awkward splits */
+  table {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group; /* Repeat header on each page */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Keep related content together */
+  .evidence-highlight,
+  .signature-block,
+  .header-meta {
+    page-break-inside: avoid;
+  }
+
+  /* Remove unnecessary spacing for print */
+  .document-container {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Ensure tables fit on page */
+  table {
+    width: 100% !important;
+    font-size: 11pt !important;
+  }
+
+  th, td {
+    padding: 6pt !important;
+  }
+
+  /* Adjust font sizes for readability */
+  body {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  h1 {
+    font-size: 18pt !important;
+  }
+
+  h2 {
+    font-size: 14pt !important;
+  }
+
+  /* Show URLs for links (optional - comment out if not wanted) */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  /* Hide elements that shouldn't print */
+  .no-print {
+    display: none !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="report-container">
+    <div class="header-section">
+        <h1 class="header-title">New Orleans Police Department</h1>
+        <div style="font-size: 18px; font-weight: bold;">Cold Case Unit - Evidence Discovery Report</div>
+        <div style="font-size: 14px; margin-top: 10px;">8th District - Investigative Services Bureau</div>
+    </div>
+
+    <table>
+        <tr>
+            <th>REPORT NUMBER:</th>
+            <td>NOPD-COLD-2024-0847-DISC</td>
+        </tr>
+        <tr>
+            <th>ORIGINAL CASE:</th>
+            <td>JPD 57-1114-HOMI (Jackson PD, Mississippi, 1957)</td>
+        </tr>
+        <tr>
+            <th>DISCOVERY DATE:</th>
+            <td>November 3, 2024</td>
+        </tr>
+        <tr>
+            <th>DISCOVERY LOCATION:</th>
+            <td>3847 Prytania Street, New Orleans, Louisiana 70115<br>
+            (Former residence of Charlotte Devereaux Beaumont, deceased)</td>
+        </tr>
+        <tr>
+            <th>REPORTING OFFICER:</th>
+            <td>Detective Sarah Chen, Badge #8472<br>
+            New Orleans Police Department - Cold Case Unit</td>
+        </tr>
+        <tr>
+            <th>ASSISTING OFFICERS:</th>
+            <td>Officer Marcus Webb, Badge #5521<br>
+            Officer Jennifer Rousseau, Badge #6104</td>
+        </tr>
+    </table>
+
+    <h2>INCIDENT SUMMARY</h2>
+    <p>On November 3, 2024, at approximately 1445 hours, the New Orleans Police Department Cold Case Unit was contacted by Mr. Thomas Beaumont III (age 62), acting as executor of the estate of his mother, Charlotte Devereaux Beaumont (deceased October 14, 2023, age 95). Mr. Beaumont reported the discovery of a locked steamer trunk in the attic of his late mother's residence during estate clearing operations. The trunk, when opened with bolt cutters by estate workers, was found to contain items potentially related to a historical unsolved murder case from 1957.</p>
+
+    <p>Detective Sarah Chen responded to the scene at 1520 hours and determined that the contents of the trunk warranted immediate preservation and forensic examination. The trunk and its contents were secured as potential evidence and transported to NOPD Cold Case Unit headquarters for documentation and analysis.</p>
+
+    <h2>BACKGROUND - ESTATE OF CHARLOTTE DEVEREAUX BEAUMONT</h2>
+    <p><strong>Deceased:</strong> Charlotte Devereaux Beaumont (née Charlotte Marie Devereaux)<br>
+    <strong>Date of Birth:</strong> June 12, 1928 (Baton Rouge, Louisiana)<br>
+    <strong>Date of Death:</strong> October 14, 2023 (New Orleans, Louisiana)<br>
+    <strong>Age at Death:</strong> 95 years<br>
+    <strong>Residence:</strong> 3847 Prytania Street, New Orleans (owned since 1959)<br>
+    <strong>Marital Status:</strong> Widow (husband Harold Beaumont, deceased 2011)</p>
+
+    <p><strong>Professional History:</strong> Charlotte Devereaux worked briefly as an actress in Hollywood (1946-1956) under the stage name "Lottie Devereaux." She appeared in minor roles in B-movies and television programs but never achieved significant fame. She left the entertainment industry in 1957 and returned to Louisiana, where she married Harold Beaumont (a local businessman) in 1959. She lived a quiet, private life in New Orleans for over six decades until her death in 2023.</p>
+
+    <h2>DISCOVERY CIRCUMSTANCES</h2>
+    <p>According to Mr. Thomas Beaumont III, his mother rarely spoke about her early life in Hollywood and never discussed the period surrounding 1957. The family home at 3847 Prytania Street has a finished attic that served as storage for the family. After his mother's death in October 2023, Mr. Beaumont began the process of clearing the estate in preparation for sale.</p>
+
+    <p>On November 2, 2024, estate workers hired to assist with clearing the attic discovered a large steamer trunk tucked behind boxes of Christmas decorations and old furniture. The trunk was locked with both a keyed lock and an external padlock. No keys could be located among Mrs. Beaumont's personal effects. On November 3, 2024, with Mr. Beaumont's authorization, estate workers used bolt cutters to remove the padlock and pried open the main lock.</p>
+
+    <p>Upon opening the trunk, workers discovered personal items that appeared to date from the 1950s, including journals, photographs, correspondence, and a silk scarf. One of the workers, familiar with true crime stories, noticed handwritten journal entries referencing a "murder" and "Vivienne" and immediately advised Mr. Beaumont to contact authorities. Mr. Beaumont contacted NOPD at 1445 hours.</p>
+
+    <h2>PHYSICAL DESCRIPTION OF TRUNK</h2>
+    <div class="inventory-item">
+        <strong>Item Description:</strong> Antique steamer trunk, circa 1940s-1950s<br>
+        <strong>Manufacturer:</strong> Louis Vuitton (label inside lid)<br>
+        <strong>Dimensions:</strong> 32 inches (L) × 18 inches (W) × 14 inches (H)<br>
+        <strong>Material:</strong> Canvas-covered wood frame with leather trim and brass hardware<br>
+        <strong>Condition:</strong> Good condition considering age. Minor water staining on exterior. Interior lined with aged fabric (floral pattern). No signs of mold or severe deterioration.<br>
+        <strong>Lock Mechanism:</strong> Combination lock (original, intact but non-functional). Brass padlock (secondary security, removed by bolt cutters).<br>
+        <strong>Storage Location:</strong> Attic of 3847 Prytania Street, in northwest corner, behind furniture. Appears undisturbed for decades based on dust accumulation.
+    </div>
+
+    <h2>INVENTORY OF TRUNK CONTENTS</h2>
+
+    <div class="evidence-box">
+        <strong>⚠️ CRITICAL EVIDENCE ITEMS - 67-YEAR-OLD COLD CASE</strong><br>
+        All items listed below were photographed in situ before removal. Chain of custody initiated November 3, 2024.
+    </div>
+
+    <div class="inventory-item">
+        <strong>ITEM #1: SILK SCARF (PRIMARY EVIDENCE - MURDER WEAPON)</strong><br>
+        Description: One (1) burgundy and gold silk scarf, approximately 36" × 36"<br>
+        Designer Label: "Hermès Paris" (visible on corner)<br>
+        Condition: Aged but intact. Multiple areas of brownish discoloration consistent with aged biological staining (possible blood/bodily fluids)<br>
+        Packaging: Wrapped carefully in acid-free tissue paper, placed in small cloth bag<br>
+        Significance: Matches description of missing scarf worn by victim Vivienne Marchand on November 13, 1957, last seen before her murder. Believed to be the murder weapon used for ligature strangulation. Submitted for DNA analysis November 18, 2024 (see LSP-DNA-2024-11-1847).
+    </div>
+
+    <div class="inventory-item">
+        <strong>ITEM #2: PERSONAL JOURNAL (1954-1957)</strong><br>
+        Description: Leather-bound journal, approximately 200 pages, handwritten entries in blue ink<br>
+        Date Range: Entries dated from January 1954 through November 1957<br>
+        Author: Charlotte "Lottie" Devereaux (confirmed via handwriting analysis)<br>
+        Content Summary: Personal diary detailing romantic relationship with Vivienne Marchand (victim), emotional distress over breakup, entries from night of murder describing confrontation and subsequent killing. Multiple entries express guilt, fear of discovery, and intent to hide evidence.<br>
+        Key Entry: November 14, 1957 - "I killed her. God forgive me, I killed Vivienne. I didn't mean to. I just wanted her to love me again. Now she's gone and I have her blood on my hands. I took the scarf. I can never let anyone find it."<br>
+        Evidential Value: CONFESSION. Journal constitutes written admission of guilt.
+    </div>
+
+    <div class="inventory-item">
+        <strong>ITEM #3: LOVE LETTERS (1954-1957)</strong><br>
+        Description: Bundle of 47 handwritten letters tied with ribbon<br>
+        Authors: Letters between Charlotte Devereaux and Vivienne Marchand<br>
+        Date Range: August 1954 - September 1957<br>
+        Content Summary: Romantic correspondence between the two women documenting their secret three-year relationship. Letters discuss meetings in private apartments, fears of social exposure, expressions of love and devotion. Later letters (August-September 1957) show increasing tension, with Vivienne distancing herself and Charlotte expressing desperation.<br>
+        Evidential Value: Establishes romantic relationship (hidden motive), documents escalating conflict prior to murder.
+    </div>
+
+    <div class="inventory-item">
+        <strong>ITEM #4: PHOTOGRAPHS (1954-1957)</strong><br>
+        Description: Twenty-three (23) black and white photographs, various sizes<br>
+        Subjects: Charlotte Devereaux and Vivienne Marchand together in various locations (Los Angeles jazz clubs, private residences, beach scenes)<br>
+        Significance: Photographic evidence of close personal relationship between suspect and victim. Several photos show physical affection (embracing, holding hands) inconsistent with "casual acquaintances" claim made in 1957 police statement.<br>
+        Notable Image: Photograph dated "August 1957" (handwritten on reverse) shows both women at a Los Angeles apartment. Vivienne is wearing the burgundy and gold Hermès scarf—the same scarf later used as murder weapon.
+    </div>
+
+    <div class="inventory-item">
+        <strong>ITEM #5: TRAIN TICKET STUB</strong><br>
+        Description: Seaboard Air Line Railroad ticket stub<br>
+        Route: Chicago (Union Station) to New Orleans (Union Passenger Terminal)<br>
+        Train: Silver Comet<br>
+        Date: November 13, 1957<br>
+        Passenger Name: C. Devereaux<br>
+        Car Assignment: Car 7 "Magnolia" - Compartment 8<br>
+        Significance: Confirms Charlotte Devereaux was passenger in compartment directly adjacent to victim's compartment (Compartment 7).
+    </div>
+
+    <div class="inventory-item">
+        <strong>ITEM #6: NEWSPAPER CLIPPINGS (1957-1958)</strong><br>
+        Description: Seven (7) newspaper articles regarding the murder investigation<br>
+        Sources: Chicago Tribune, New Orleans Times-Picayune, Jackson Daily News<br>
+        Date Range: November 1957 - March 1958<br>
+        Content: Articles documenting the murder, investigation, and eventual closure of case as "unsolved."<br>
+        Annotations: Several articles have handwritten margin notes in Charlotte Devereaux's handwriting, including "They'll never know," "Vincent suspected - good," and "Safe."
+    </div>
+
+    <div class="inventory-item">
+        <strong>ITEM #7: MISCELLANEOUS PERSONAL ITEMS</strong><br>
+        - One (1) silver locket containing photo of Vivienne Marchand<br>
+        - One (1) matchbook from "Blue Note Jazz Club" (Los Angeles, 1954)<br>
+        - One (1) dried red rose (pressed and preserved)<br>
+        - One (1) small perfume bottle (empty, label: "Chanel No. 5")<br>
+        Significance: Personal mementos of relationship with victim. Suggest suspect kept "trophies" of victim and relationship.
+    </div>
+
+    <h2>INITIAL ANALYSIS AND INVESTIGATIVE ACTIONS</h2>
+
+    <p><strong>November 3, 2024:</strong> Trunk and contents secured as evidence. Scene photographed and documented. Estate temporarily placed on hold pending investigation.</p>
+
+    <p><strong>November 5, 2024:</strong> Contacted Jackson Police Department (Mississippi) and requested all available case files from JPD 57-1114-HOMI. Files received November 8, 2024 (digitized scans of original 1957 reports).</p>
+
+    <p><strong>November 10, 2024:</strong> Handwriting analysis confirmed journal and letters authored by Charlotte Devereaux.</p>
+
+    <p><strong>November 18, 2024:</strong> Silk scarf submitted to Louisiana State Police Crime Laboratory for DNA analysis.</p>
+
+    <p><strong>November 25, 2024:</strong> DNA results received. Scarf contains DNA of both victim (Vivienne Marchand) and suspect (Charlotte Devereaux). DNA match probability: 99.9999979% (1 in 476 trillion).</p>
+
+    <p><strong>November 27, 2024:</strong> Case classified as SOLVED based on DNA evidence, written confession (journal), and corroborating evidence (letters, photographs, motive).</p>
+
+    <h2>CONCLUSIONS</h2>
+
+    <p>The discovery of the locked steamer trunk at the residence of Charlotte Devereaux Beaumont has resulted in the successful resolution of a 67-year-old cold case. The evidence contained within the trunk provides conclusive proof that Charlotte Devereaux murdered Vivienne Marchand on November 14, 1957, aboard the Silver Comet passenger train.</p>
+
+    <div class="evidence-box">
+        <strong>CASE STATUS: SOLVED</strong><br>
+        <strong>PERPETRATOR:</strong> Charlotte "Lottie" Devereaux Beaumont (deceased October 2023)<br>
+        <strong>EVIDENCE:</strong> DNA analysis, written confession, photographic evidence, witness corroboration<br>
+        <strong>MOTIVE:</strong> Jealous rage following termination of secret romantic relationship<br>
+        <strong>PROSECUTION:</strong> Not possible (perpetrator deceased)
+    </div>
+
+    <p>While Charlotte Devereaux cannot be prosecuted due to her death in 2023, the resolution of this case provides closure for historical records and honors the memory of the victim, Vivienne Marchand. A public announcement regarding the case resolution is scheduled for December 15, 2024.</p>
+
+    <p style="margin-top: 40px;"><strong>Respectfully submitted,</strong></p>
+    <p>____________________________________<br>
+    <strong>Detective Sarah Chen, Badge #8472</strong><br>
+    New Orleans Police Department - Cold Case Unit<br>
+    Date: November 28, 2024</p>
+
+</div>
+
+</body>
+</html>
+

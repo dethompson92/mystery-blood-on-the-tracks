@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Psychological Analysis Report - Mystery #2B</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <style>
+      body {
+        max-width: 880px;
+        margin: 0 auto;
+        padding: 40px 60px;
+        font-family: 'Times New Roman', Times, serif;
+        line-height: 1.6;
+        color: #000;
+        background-color: #fff;
+      }
+
+      /* Report Header Styling */
+      .report-header {
+        border-bottom: 2px solid #000;
+        padding-bottom: 20px;
+        margin-bottom: 40px;
+      }
+
+      .confidential-stamp {
+        border: 2px solid #d32f2f;
+        color: #d32f2f;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 5px 10px;
+        display: inline-block;
+        margin-bottom: 15px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+      }
+
+      .agency-title {
+        font-family: Arial, sans-serif;
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 5px;
+      }
+
+      .doc-title {
+        font-size: 24px;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: 20px 0 10px 0;
+        text-align: center;
+      }
+
+      .meta-data {
+        font-family: Arial, sans-serif;
+        font-size: 12px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        border-top: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        padding: 10px 0;
+        margin-top: 20px;
+      }
+
+      /* Content Styling */
+      h1 {
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+        border-bottom: 1px solid #000;
+        padding-bottom: 5px;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      h2 {
+        font-size: 16px;
+        font-weight: bold;
+        margin-top: 25px;
+        margin-bottom: 10px;
+        color: #444;
+      }
+
+      h3 {
+        font-size: 14px;
+        font-weight: bold;
+        font-style: italic;
+        margin-top: 15px;
+      }
+
+      p {
+        margin-bottom: 15px;
+        text-align: justify;
+        font-size: 14px;
+      }
+
+      ul {
+        margin-bottom: 15px;
+        padding-left: 20px;
+        font-size: 14px;
+      }
+
+      li {
+        margin-bottom: 5px;
+      }
+
+      /* Clinical Box Styling */
+      .clinical-box {
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin: 20px 0;
+      }
+
+      .diagnosis-label {
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 12px;
+        color: #555;
+        margin-bottom: 5px;
+        display: block;
+      }
+
+      .diagnosis-text {
+        font-weight: bold;
+        color: #000;
+      }
+
+      /* Comparison Table */
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        font-size: 13px;
+      }
+
+      .comparison-table th,
+      .comparison-table td {
+        border: 1px solid #999;
+        padding: 10px;
+        vertical-align: top;
+      }
+
+      .comparison-table th {
+        background-color: #e0e0e0;
+        font-weight: bold;
+        text-align: left;
+      }
+
+      /* Footer */
+      .footer {
+        margin-top: 60px;
+        border-top: 1px solid #000;
+        padding-top: 10px;
+        font-size: 10px;
+        text-align: center;
+        color: #666;
+        font-family: Arial, sans-serif;
+      }
+    /* ========================================
+   PRINT-OPTIMIZED CSS
+   Saves ink, prevents cutoff, controls page breaks
+   ======================================== */
+@page {
+  margin: 0.5in !important;
+}
+@media print {
+  /* Reset to printer-friendly colors */
+  body {
+    background-color: white !important;
+    background: white !important;
+    color: black !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove all dark backgrounds and shadows */
+  .document-container,
+  .header-box,
+  table,
+  th,
+  td,
+  div,
+  section {
+    background-color: white !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-color: black !important;
+  }
+
+  /* Ensure text is always black */
+  h1, h2, h3, h4, h5, h6, p, li, td, th, span, div {
+    color: black !important;
+  }
+
+  /* Keep ONLY red stamps visible (but lighter) */
+  .stamp {
+    color: #c0392b !important;
+    border-color: #c0392b !important;
+    opacity: 0.6 !important;
+    background: transparent !important;
+  }
+
+  /* Remove colored highlight backgrounds - keep border only */
+  .evidence-highlight,
+  .sig-critical,
+  .sig-supporting,
+  .sig-context {
+    background-color: white !important;
+    background: white !important;
+    border-left-width: 3px !important;
+    border-left-color: black !important;
+  }
+
+  /* Simplify evidence tags for printing */
+  .evidence-tag {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+
+  /* Control page breaks - prevent awkward splits */
+  table {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group; /* Repeat header on each page */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Keep related content together */
+  .evidence-highlight,
+  .signature-block,
+  .header-meta {
+    page-break-inside: avoid;
+  }
+
+  /* Remove unnecessary spacing for print */
+  .document-container {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Ensure tables fit on page */
+  table {
+    width: 100% !important;
+    font-size: 11pt !important;
+  }
+
+  th, td {
+    padding: 6pt !important;
+  }
+
+  /* Adjust font sizes for readability */
+  body {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  h1 {
+    font-size: 18pt !important;
+  }
+
+  h2 {
+    font-size: 14pt !important;
+  }
+
+  /* Show URLs for links (optional - comment out if not wanted) */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  /* Hide elements that shouldn't print */
+  .no-print {
+    display: none !important;
+  }
+}
+</style>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="report-header">
+      <div class="confidential-stamp">CONFIDENTIAL - CLINICAL FORENSIC ANALYSIS</div>
+      <div class="agency-title">Forensic Psychological Services Division</div>
+      <div class="doc-title">RETROSPECTIVE PSYCHOLOGICAL PROFILE & HOMICIDE ANALYSIS</div>
+
+      <div class="meta-data">
+        <div><strong>CASE REFERENCE:</strong> NOPD-COLD-2024-0847</div>
+        <div><strong>DATE OF REPORT:</strong> November 28, 2024</div>
+        <div><strong>SUBJECT (DECEASED):</strong> Charlotte Devereaux</div>
+        <div><strong>VICTIM (DECEASED):</strong> Vivienne Marchand</div>
+        <div><strong>CRIME DATE:</strong> November 14, 1957</div>
+        <div><strong>ANALYSIS TYPE:</strong> Post-Mortem Psychological Autopsy</div>
+      </div>
+    </div>
+
+    <!-- Section I -->
+    <h1>I. INTRODUCTION TO PSYCHOLOGICAL ANALYSIS</h1>
+    <p>
+      <strong>Purpose:</strong> This report provides a retrospective psychological analysis of the homicide of Vivienne
+      Marchand to understand the behavioral, emotional, and systemic factors that precipitated the crime. By
+      reconstructing the psychological state of both the victim and the perpetrator, we aim to explain the motive and
+      dynamics of this historical cold case.
+    </p>
+    <p>
+      <strong>Methodology:</strong> Analysis is based on archival evidence including personal journals (1957),
+      correspondence (1954-1957), witness statements from the original investigation, and the perpetrator's deathbed
+      confession (2024).
+    </p>
+    <p>
+      <strong>Limitations:</strong> This analysis is conducted 67 years post-incident. Both subjects are deceased,
+      preventing direct clinical interview. Determinations are based on documented behavior and written records.
+    </p>
+
+    <!-- Section II -->
+    <h1>II. VICTIM PROFILE: VIVIENNE MARCHAND</h1>
+
+    <div class="clinical-box">
+      <span class="diagnosis-label">PERSONALITY ASSESSMENT</span>
+      <span class="diagnosis-text">High-Functioning, Pragmatic, Compartmentalized</span>
+    </div>
+
+    <h2>Personality Characteristics</h2>
+    <ul>
+      <li>
+        <strong>Ambitious & Career-Focused:</strong> Prioritized professional success and stability above emotional
+        needs.
+      </li>
+      <li>
+        <strong>Emotionally Guarded:</strong> Demonstrated difficulty with vulnerability; maintained rigid boundaries
+        between her public persona and private life.
+      </li>
+      <li>
+        <strong>Pragmatic Survivalist:</strong> Made life decisions based on security rather than authenticity (e.g.,
+        engagement to Vincent DeLuca).
+      </li>
+    </ul>
+
+    <h2>Psychological Framework</h2>
+    <p>
+      Vivienne displayed an adaptive response to the persecution of the 1950s. Her bisexuality was managed through
+      extreme secrecy and compartmentalization. Her decision to end her relationship with Charlotte Devereaux was driven
+      by "cold pragmatism"—a survival strategy to secure her future through a socially acceptable marriage. She
+      underestimated Charlotte's emotional volatility because she viewed relationships through a rational, transactional
+      lens.
+    </p>
+    <p>
+      <strong>Impact of Historical Trauma:</strong> Living in the closet created emotional distance. Fear of exposure
+      shaped all her decisions, leading her to sacrifice authenticity for safety—a common psychological defense
+      mechanism in oppressed groups during this era.
+    </p>
+
+    <!-- Section III -->
+    <h1>III. KILLER PROFILE: CHARLOTTE "LOTTIE" DEVEREAUX</h1>
+
+    <div class="clinical-box">
+      <span class="diagnosis-label">CLINICAL IMPRESSION</span>
+      <span class="diagnosis-text">Borderline Personality Traits with Anxious-Preoccupied Attachment</span>
+    </div>
+
+    <h2>Personality Characteristics</h2>
+    <ul>
+      <li>
+        <strong>Emotionally Dependent:</strong> Exhibited an insecure attachment style, relying heavily on others for
+        self-worth.
+      </li>
+      <li>
+        <strong>Obsessive Fixation:</strong> Prone to "limerence" or obsessive love patterns, viewing Vivienne not just
+        as a partner but as a lifeline.
+      </li>
+      <li>
+        <strong>Internalized Homophobia:</strong> Deep shame regarding her sexuality, manifesting as self-hatred and
+        anxiety.
+      </li>
+      <li><strong>Maladaptive Coping:</strong> Documented heavy alcohol use to manage emotional dysregulation.</li>
+    </ul>
+
+    <h2>Mental State Leading to Homicide</h2>
+    <p>
+      Charlotte was in a state of acute emotional crisis. Facing the loss of her primary attachment figure (Vivienne),
+      combined with career failure in Hollywood and financial desperation, she experienced a collapse of her identity.
+      Her journal entries indicate suicidal ideation prior to the murder, suggesting she felt she had "nothing left to
+      lose" except her reputation.
+    </p>
+
+    <!-- Section IV -->
+    <h1>IV. PREMEDITATION VS. CRIME OF PASSION ANALYSIS</h1>
+
+    <table class="comparison-table">
+      <tr>
+        <th width="50%">Evidence of Premeditation</th>
+        <th width="50%">Evidence of Crime of Passion</th>
+      </tr>
+      <tr>
+        <td>
+          <ul>
+            <li>Purchased train ticket after learning of victim's travel.</li>
+            <li>Journal entries show obsessive rumination.</li>
+            <li>Followed victim onto train (stalking behavior).</li>
+          </ul>
+        </td>
+        <td>
+          <ul>
+            <li>No murder weapon brought to scene (used victim's own scarf).</li>
+            <li>Impulsive decision during heated argument.</li>
+            <li>Immediate shock and remorse (inconsistent with calculated killing).</li>
+            <li>Lack of escape plan (returned to adjacent room).</li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+
+    <div class="clinical-box">
+      <span class="diagnosis-label">CLINICAL DETERMINATION</span>
+      <span class="diagnosis-text"
+        >CRIME OF PASSION (Voluntary Manslaughter equivalent) with elements of Obsessive Fixation.</span
+      >
+    </div>
+
+    <p>
+      The homicide occurred during an acute emotional breakdown triggered by Vivienne's rejection and specific threat to
+      expose Charlotte as "obsessed." This threat represented an existential danger in 1957. The killing was an
+      explosive reaction to betrayal and fear, rather than a cold-blooded execution. Charlotte's 67 years of
+      debilitating guilt are consistent with an unplanned act of violence.
+    </p>
+
+    <!-- Section V -->
+    <h1>V. TRAUMA AND INTERNALIZED HOMOPHOBIA</h1>
+    <p>
+      <strong>Psychological Burden:</strong> Charlotte's secret identity created a baseline of constant high anxiety. In
+      1957, exposure meant social death, imprisonment, and institutionalization. This "existential threat" heightened
+      her fight-or-flight response.
+    </p>
+    <p>
+      <strong>Impact of Persecution:</strong> The criminalization of homosexuality meant Charlotte had no legal recourse
+      for a broken heart. She could not seek support, therapy, or validation. When Vivienne threatened exposure, it
+      triggered a survival instinct that overrode inhibition. The murder was, in a twisted psychological sense, an act
+      to "prevent exposure" and survive.
+    </p>
+
+    <!-- Section VI -->
+    <h1>VI. POST-CRIME PSYCHOLOGICAL IMPACT (1957-2024)</h1>
+    <p>
+      Charlotte lived for 67 years with the burden of her crime. Her subsequent life choices reflect a pattern of
+      self-punishment and hiding:
+    </p>
+    <ul>
+      <li><strong>Abandonment of Ambition:</strong> She never acted again, punishing herself by denying her dream.</li>
+      <li>
+        <strong>Performative Normativity:</strong> She married a man to construct a "perfect" heteronormative cover,
+        living a lie to prove her innocence.
+      </li>
+      <li>
+        <strong>Retention of Evidence:</strong> Keeping the scarf and journal suggests an inability to psychologically
+        let go—the items served as a "memorial" to the relationship and a badge of her guilt.
+      </li>
+      <li>
+        <strong>Deathbed Confession:</strong> The need to confess before death indicates that the guilt remained
+        unresolved and distinct from her self-preservation instinct.
+      </li>
+    </ul>
+
+    <!-- Section VII -->
+    <h1>VII. RELATIONSHIP DYNAMICS ANALYSIS</h1>
+
+    <h2>The Fatal Mismatch</h2>
+    <p>The tragedy stemmed from a fundamental incompatibility in attachment needs and power dynamics:</p>
+    <ul>
+      <li>
+        <strong>Power Imbalance:</strong> Vivienne held all the power (success, money, emotional independence), while
+        Charlotte was destitute and dependent.
+      </li>
+      <li>
+        <strong>Attachment Clash:</strong> Vivienne's <em>Avoidant Attachment</em> (distancing) triggered Charlotte's
+        <em>Anxious Attachment</em> (clinging), creating a cycle of pursuit and withdrawal that escalated to violence.
+      </li>
+      <li>
+        <strong>Divergent Realities:</strong> Vivienne viewed the affair as a "temporary adventure"; Charlotte viewed it
+        as a "marriage."
+      </li>
+    </ul>
+
+    <!-- Section VIII -->
+    <h1>VIII. SYSTEMIC FACTORS (Society as Contributing Cause)</h1>
+    <p>
+      It is the clinical opinion of this review that the sociopolitical context of 1957 was a significant contributing
+      factor to this homicide.
+    </p>
+    <p>
+      <strong>If this occurred in 2024:</strong> Charlotte would have had access to legal marriage, divorce, therapy,
+      and social support. The breakup would have been painful but likely not fatal.
+    </p>
+    <p>
+      <strong>In 1957 Context:</strong> The closet created a high-stakes pressure cooker. The inability to live
+      authentically meant the relationship existed in a vacuum of desperation. The threat of "outing" was weaponized,
+      turning a romantic dispute into a survival scenario.
+    </p>
+
+    <!-- Section IX -->
+    <h1>IX. CLINICAL CONCLUSIONS</h1>
+
+    <div class="clinical-box">
+      <span class="diagnosis-label">RETROSPECTIVE DIAGNOSIS (CHARLOTTE DEVEREAUX)</span>
+      <span class="diagnosis-text">
+        1. Adjustment Disorder with Disturbance of Conduct (Acute)<br />
+        2. Borderline Personality Features (Fear of Abandonment)<br />
+        3. Alcohol Use Disorder (Severe)<br />
+        4. Unresolved Trauma secondary to Systemic Persecution
+      </span>
+    </div>
+
+    <p>
+      <strong>Mitigating Factors:</strong> Acute emotional distress, intoxication, historical fear of persecution, and
+      provocation (threat of exposure).
+    </p>
+    <p>
+      <strong>Aggravating Factors:</strong> Stalking behavior (following victim), concealment of evidence (taking the
+      scarf), and decades of deception.
+    </p>
+
+    <!-- Section X -->
+    <h1>X. ETHICAL AND THERAPEUTIC REFLECTIONS</h1>
+    <p>
+      <strong>Modern Intervention:</strong> Had Charlotte received modern mental health intervention, this crime likely
+      would have been prevented. Her warning signs (obsession, depression) were clear but ignored due to the need for
+      secrecy.
+    </p>
+    <p>
+      <strong>Lesson for Practice:</strong> This case illustrates how systemic oppression exacerbates individual
+      pathology. When love is criminalized, relationships become dangerous. The "Lavender Scare" did not just destroy
+      careers; in this case, it created the psychological conditions for murder.
+    </p>
+
+    <div class="footer">
+      CONFIDENTIAL PSYCHOLOGICAL REPORT • NOPD COLD CASE UNIT • DO NOT DISTRIBUTE<br />
+      Author: Dr. Elena Rostova, Forensic Psychologist | License #PSY-29482
+    </div>
+  </body>
+</html>
+
+
