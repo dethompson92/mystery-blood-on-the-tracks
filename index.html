@@ -579,17 +579,7 @@
             <div style="font-size: 0.7rem; opacity: 0.7; letter-spacing: 1px;">CASE NO. 1957-BCBN</div>
         </div>
 
-        <div id="hints-container" style="padding: 10px 20px; border-bottom: 1px solid #34495e;">
-            <div
-                style="font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent-color); margin-bottom: 5px;">
-                HINTS</div>
-            <button class="action-btn" id="btn-hint-1" onclick="promptHint(1)"
-                style="width: 100%; margin-bottom: 5px;">HINT 1</button>
-            <button class="action-btn" id="btn-hint-2" onclick="promptHint(2)"
-                style="width: 100%; margin-bottom: 5px; display: none;">HINT 2</button>
-            <button class="action-btn" id="btn-hint-3" onclick="promptHint(3)" style="width: 100%; display: none;">HINT
-                3</button>
-        </div>
+
 
         <div id="nav-list">
             <!-- Navigation items will be injected here -->
@@ -613,6 +603,7 @@
             <span id="breadcrumb">CASE_FILES / ...</span>
             <input type="text" id="search-box" placeholder="Search case files...">
             <div style="display: flex; gap: 10px;">
+                <button class="action-btn" onclick="showSolveCasePage()" style="background-color: var(--accent-color); color: white; border: none; font-weight: bold;">SOLVE CASE</button>
                 <button class="action-btn" onclick="toggleNotes()">DEDUCTION LOG</button>
                 <button class="action-btn" onclick="window.print()">PRINT FILE</button>
             </div>
@@ -626,6 +617,20 @@
                 <p style="font-size: 1.5rem; max-width: 600px;">A locked-room mystery unfolding on the Silver Comet
                     express. Solve the 1957 murder through 2024 cold case evidence.</p>
                 <button class="start-btn" onclick="startInvestigation()">START INVESTIGATION</button>
+            </div>
+
+            
+            <div id="solve-case-page" style="display: none; height: 100%; overflow-y: auto;">
+                <div class="document-body">
+                    <h1 style="font-family: 'Special Elite', cursive; color: var(--accent-color); text-align: center; font-size: 2.5rem; margin-top: 0;">SOLVE THE MYSTERY</h1>
+                    <p style="text-align: center; font-size: 1.2rem; margin-bottom: 40px;">Select the most conclusive piece of evidence for each question to prove your deductions and officially close the case.</p>
+                    
+                    <div id="questions-container" style="max-width: 600px; margin: 0 auto;"></div>
+                    
+                    <div style="text-align: center; margin-top: 40px;">
+                        <button onclick="submitSolution()" style="padding: 15px 40px; background-color: var(--accent-color); color: white; border: none; font-family: 'Special Elite', cursive; font-size: 1.3rem; cursor: pointer; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">SUBMIT FINDINGS</button>
+                    </div>
+                </div>
             </div>
 
             <div id="doc-active-content" style="display: none;">
@@ -695,7 +700,7 @@
         let readFiles = JSON.parse(localStorage.getItem('readFiles') || '[]');
         let deductionNotes = JSON.parse(localStorage.getItem('deductionNotes') || '[]');
         let unlockedDocs = JSON.parse(localStorage.getItem('unlockedDocs') || '[]');
-        let unlockedPhases = JSON.parse(localStorage.getItem('unlockedPhases') || '[1]');
+
 
         const spoilerDocs = [
             "00_MASTER_INDEX_AND_CATALOG",
@@ -712,6 +717,112 @@
             "32_evidence_chain_of_custody",
             "33_investigative_dead_ends"
         ];
+
+        
+        const solveQuestions = [
+            { id: 'q1', text: '1. WHO is the killer?', allowedAnswers: ['20_charlotte_devereaux_confession_2024', '19_cold_case_review_memo_2024'] },
+            { id: 'q2', text: '2. HOW did they escape the locked room?', allowedAnswers: ['20_charlotte_devereaux_confession_2024', '02_crime_scene_investigation_report'] },
+            { id: 'q3', text: '3. WHY was Vivienne murdered? (Motive)', allowedAnswers: ['11_love_letters_evidence', '09_journal_entries_devereaux_1957', '20_charlotte_devereaux_confession_2024'] },
+            { id: 'q4', text: '4. WHAT happened to the murder weapon?', allowedAnswers: ['08_trunk_discovery_report_2024', '07_dna_analysis_2024_cold_case'] },
+            { id: 'q5', text: '5. WHO is the "mystery woman in burgundy"?', allowedAnswers: ['15_margaret_sinclair_detailed_statement', '20_charlotte_devereaux_confession_2024'] }
+        ];
+
+        function showSolveCasePage() {
+            document.getElementById('landing-page').style.display = 'none';
+            document.getElementById('doc-active-content').style.display = 'none';
+            document.getElementById('solve-case-page').style.display = 'block';
+            document.getElementById('breadcrumb').innerText = `CASE_FILES / SOLVE CASE`;
+            currentDoc = null;
+            
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.remove('sidebar-open');
+            }
+            
+            renderSolveDropdowns();
+        }
+
+        function renderSolveDropdowns() {
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+            
+            // Generate list of all available documents for the dropdowns
+            let optionsHtml = '<option value="">-- Select Evidence --</option>';
+            Object.keys(caseData.documents).forEach(id => {
+                if(spoilerDocs.includes(id) && id !== '20_charlotte_devereaux_confession_2024' && id !== '19_cold_case_review_memo_2024' && id !== '07_dna_analysis_2024_cold_case' && id !== '08_trunk_discovery_report_2024') {
+                    // Hide some endgame docs from selection except the crucial recent ones players might find or know about 
+                    // Actually, let's include all non-solution spoiler docs
+                    if(id === '27_complete_solution_document') return;
+                }
+                const doc = caseData.documents[id];
+                optionsHtml += `<option value="${id}">${doc.shortTitle || doc.title}</option>`;
+            });
+
+            solveQuestions.forEach(q => {
+                const qDiv = document.createElement('div');
+                qDiv.style.marginBottom = '25px';
+                qDiv.style.padding = '15px';
+                qDiv.style.backgroundColor = document.body.classList.contains('dark-mode') ? '#333' : '#f5f5f5';
+                qDiv.style.borderLeft = '4px solid var(--text-color)';
+                qDiv.style.borderRadius = '0 4px 4px 0';
+                
+                const label = document.createElement('label');
+                label.style.display = 'block';
+                label.style.fontWeight = 'bold';
+                label.style.marginBottom = '10px';
+                label.style.fontFamily = "'Cutive Mono', monospace";
+                label.innerText = q.text;
+                
+                const select = document.createElement('select');
+                select.id = `select-${q.id}`;
+                select.style.width = '100%';
+                select.style.padding = '10px';
+                select.style.fontFamily = 'inherit';
+                select.style.fontSize = '1rem';
+                select.style.borderRadius = '4px';
+                select.style.border = '1px solid #ccc';
+                select.innerHTML = optionsHtml;
+                
+                qDiv.appendChild(label);
+                qDiv.appendChild(select);
+                container.appendChild(qDiv);
+            });
+        }
+
+        function submitSolution() {
+            let allCorrect = true;
+            solveQuestions.forEach(q => {
+                const select = document.getElementById(`select-${q.id}`);
+                const val = select.value;
+                if (!val || !q.allowedAnswers.includes(val)) {
+                    allCorrect = false;
+                    select.style.borderColor = '#e74c3c';
+                    select.style.backgroundColor = 'rgba(231, 76, 60, 0.1)';
+                } else {
+                    select.style.borderColor = '#2ecc71';
+                    select.style.backgroundColor = 'rgba(46, 204, 113, 0.1)';
+                }
+            });
+            
+            if (allCorrect) {
+                alert("CONGRATULATIONS DETECTIVE!\n\nYou have correctly assembled the evidence to solve the mystery. The Official Case Resolution document has been unlocked.");
+                if (!unlockedDocs.includes('27_complete_solution_document')) {
+                    unlockedDocs.push('27_complete_solution_document');
+                    localStorage.setItem('unlockedDocs', JSON.stringify(unlockedDocs));
+                }
+                document.getElementById('solve-case-page').style.display = 'none';
+                document.getElementById('doc-active-content').style.display = 'block';
+                loadDocument('27_complete_solution_document');
+            } else {
+                alert("INCORRECT EVIDENCE.\n\nSome of your conclusions are entirely wrong or lack the most definitive evidence. Review the highlighted fields and reconsider your deductions.");
+            }
+        }
+        
+        // Override loadDocument slightly to hide solve page
+        const origLoadDocument = loadDocument;
+        loadDocument = function(id) {
+            document.getElementById('solve-case-page').style.display = 'none';
+            origLoadDocument(id);
+        };
 
         function startInvestigation() {
             document.getElementById('landing-page').style.display = 'none';
@@ -836,51 +947,7 @@
             };
         }
 
-        function promptUnlockPhase(phaseNum) {
-            const modal = document.getElementById('reveal-modal');
-            const confirmBtn = document.getElementById('confirm-reveal-btn');
 
-            modal.querySelector('h2').innerText = `PROCEED TO PHASE ${phaseNum}`;
-            modal.querySelector('p').innerText = "Are you sure? New evidence will be unlocked.";
-            confirmBtn.innerText = "YES, PROCEED";
-
-            modal.style.display = 'flex';
-
-            confirmBtn.onclick = function () {
-                modal.style.display = 'none';
-                if (!unlockedPhases.includes(phaseNum)) {
-                    unlockedPhases.push(phaseNum);
-                    localStorage.setItem('unlockedPhases', JSON.stringify(unlockedPhases));
-                }
-                renderNav();
-            };
-        }
-
-        const hints = {
-            1: "Focus on what is MISSING from the compartment, not what is there.",
-            2: "The 'mystery woman in burgundy' is already on the passenger manifest. Compare Compartment 2.",
-            3: "The killer kept the murder weapon for 67 years. Why?"
-        };
-
-        function promptHint(hintNum) {
-            const modal = document.getElementById('reveal-modal');
-            const confirmBtn = document.getElementById('confirm-reveal-btn');
-
-            modal.querySelector('h2').innerText = `REVEAL HINT ${hintNum}`;
-            modal.querySelector('p').innerText = "Are you sure you want to reveal this hint?";
-            confirmBtn.innerText = "YES, SHOW HINT";
-
-            modal.style.display = 'flex';
-
-            confirmBtn.onclick = function () {
-                modal.querySelector('h2').innerText = `HINT ${hintNum}`;
-                modal.querySelector('p').innerText = hints[hintNum];
-                confirmBtn.innerText = "CLOSE";
-                confirmBtn.onclick = function () {
-                    modal.style.display = 'none';
-                };
-            };
-        }
 
         function toggleNotes() {
             const panel = document.getElementById('notes-panel');
@@ -1070,17 +1137,7 @@
 
             const lowerFilter = filter.toLowerCase();
 
-            if (unlockedPhases.includes(1)) document.getElementById('btn-hint-1').style.display = 'block';
-            if (unlockedPhases.includes(2)) document.getElementById('btn-hint-2').style.display = 'block';
-            if (unlockedPhases.includes(3)) document.getElementById('btn-hint-3').style.display = 'block';
-
             caseData.structure.forEach(section => {
-                const isPhase2 = section.title.includes('PHASE 2');
-                const isPhase3 = section.title.includes('PHASE 3');
-                const phaseNum = isPhase3 ? 3 : (isPhase2 ? 2 : 1);
-
-                const isLocked = !unlockedPhases.includes(phaseNum);
-
                 const sectionItems = section.items.filter(itemId => {
                     const doc = caseData.documents[itemId];
                     return !filter || (doc && (doc.title.toLowerCase().includes(lowerFilter) || doc.body.toLowerCase().includes(lowerFilter)));
@@ -1089,47 +1146,19 @@
                 if (sectionItems.length > 0) {
                     const sectionHeader = document.createElement('div');
                     sectionHeader.className = 'nav-section-title';
+                    sectionHeader.innerText = section.title;
+                    nav.appendChild(sectionHeader);
 
-                    if (isLocked) {
-                        sectionHeader.innerHTML = `🔒 ` + section.title;
-                        sectionHeader.style.opacity = '0.6';
-                        nav.appendChild(sectionHeader);
+                    sectionItems.forEach(itemId => {
+                        const itemData = caseData.documents[itemId];
+                        if (!itemData) return;
 
-                        // Add a button to unlock
-                        const unlockBtnContainer = document.createElement('div');
-                        unlockBtnContainer.style.padding = '10px 20px';
-
-                        const unlockBtn = document.createElement('button');
-                        unlockBtn.innerText = `PROCEED TO PHASE ${phaseNum}`;
-                        unlockBtn.className = 'action-btn';
-                        unlockBtn.style.width = '100%';
-                        unlockBtn.style.backgroundColor = 'var(--accent-color)';
-                        unlockBtn.style.color = 'white';
-                        unlockBtn.style.border = 'none';
-                        unlockBtn.style.padding = '10px';
-                        unlockBtn.style.cursor = 'pointer';
-                        unlockBtn.style.fontFamily = "'Special Elite', cursive";
-
-                        if (phaseNum === Math.max(...unlockedPhases) + 1 && !filter) {
-                            unlockBtn.onclick = () => promptUnlockPhase(phaseNum);
-                            unlockBtnContainer.appendChild(unlockBtn);
-                            nav.appendChild(unlockBtnContainer);
-                        }
-                    } else {
-                        sectionHeader.innerText = section.title;
-                        nav.appendChild(sectionHeader);
-
-                        sectionItems.forEach(itemId => {
-                            const itemData = caseData.documents[itemId];
-                            if (!itemData) return;
-
-                            const item = document.createElement('div');
-                            item.className = `nav-item ${readFiles.includes(itemId) ? 'read' : ''} ${currentDoc === itemId ? 'active' : ''}`;
-                            item.innerHTML = `<span>${itemData.icon || '📄'}</span> ${itemData.shortTitle || itemData.title}`;
-                            item.onclick = () => loadDocument(itemId);
-                            nav.appendChild(item);
-                        });
-                    }
+                        const item = document.createElement('div');
+                        item.className = `nav-item ${readFiles.includes(itemId) ? 'read' : ''} ${currentDoc === itemId ? 'active' : ''}`;
+                        item.innerHTML = `<span>${itemData.icon || '📄'}</span> ${itemData.shortTitle || itemData.title}`;
+                        item.onclick = () => loadDocument(itemId);
+                        nav.appendChild(item);
+                    });
                 }
             });
         }
