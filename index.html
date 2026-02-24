@@ -603,7 +603,9 @@
             <span id="breadcrumb">CASE_FILES / ...</span>
             <input type="text" id="search-box" placeholder="Search case files...">
             <div style="display: flex; gap: 10px;">
-                <button class="action-btn" onclick="showSolveCasePage()" style="background-color: var(--accent-color); color: white; border: none; font-weight: bold;">SOLVE CASE</button>
+                <button class="action-btn" onclick="showSolveCasePage()"
+                    style="background-color: var(--accent-color); color: white; border: none; font-weight: bold;">SOLVE
+                    CASE</button>
                 <button class="action-btn" onclick="toggleNotes()">DEDUCTION LOG</button>
                 <button class="action-btn" onclick="window.print()">PRINT FILE</button>
             </div>
@@ -619,36 +621,52 @@
                 <button class="start-btn" onclick="startInvestigation()">START INVESTIGATION</button>
             </div>
 
-            
-            
+
+
             <div id="solve-case-page" style="display: none; height: 100%; overflow-y: auto;">
                 <div class="document-body">
-                    <h1 style="font-family: 'Special Elite', cursive; color: var(--accent-color); text-align: center; font-size: 2.5rem; margin-top: 0;">SOLVE THE MYSTERY</h1>
-                    <p style="text-align: center; font-size: 1.2rem; margin-bottom: 40px;">Select all corresponding pieces of evidence for each question and explain your deductions.</p>
-                    
+                    <h1
+                        style="font-family: 'Special Elite', cursive; color: var(--accent-color); text-align: center; font-size: 2.5rem; margin-top: 0;">
+                        SOLVE THE MYSTERY</h1>
+                    <p style="text-align: center; font-size: 1.2rem; margin-bottom: 40px;">Select all corresponding
+                        pieces of evidence for each question and explain your deductions.</p>
+
                     <div id="questions-container" style="max-width: 600px; margin: 0 auto;"></div>
-                    
+
                     <div style="text-align: center; margin-top: 40px;">
-                        <button onclick="submitSolution()" style="padding: 15px 40px; background-color: var(--accent-color); color: white; border: none; font-family: 'Special Elite', cursive; font-size: 1.3rem; cursor: pointer; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">SUBMIT FINDINGS</button>
+                        <button onclick="submitSolution()"
+                            style="padding: 15px 40px; background-color: var(--accent-color); color: white; border: none; font-family: 'Special Elite', cursive; font-size: 1.3rem; cursor: pointer; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">SUBMIT
+                            FINDINGS</button>
                     </div>
                 </div>
             </div>
 
             <div id="solve-results-page" style="display: none; height: 100%; overflow-y: auto;">
                 <div class="document-body">
-                    <h1 style="font-family: 'Special Elite', cursive; color: #2ecc71; text-align: center; font-size: 2.5rem; margin-top: 0;">EVIDENCE VERIFIED</h1>
-                    <p style="text-align: center; font-size: 1.2rem; margin-bottom: 30px;">Your evidence supports the correct conclusions. Now, present your deductions for final grading.</p>
-                    
-                    <div id="results-container" style="max-width: 700px; margin: 0 auto; background: var(--bg-color); padding: 20px; border-radius: 8px; border: 1px dashed #ccc;"></div>
-                    
+                    <h1
+                        style="font-family: 'Special Elite', cursive; color: #2ecc71; text-align: center; font-size: 2.5rem; margin-top: 0;">
+                        EVIDENCE VERIFIED</h1>
+                    <p style="text-align: center; font-size: 1.2rem; margin-bottom: 30px;">Your evidence supports the
+                        correct conclusions. Now, present your deductions for final grading.</p>
+
+                    <div id="results-container"
+                        style="max-width: 700px; margin: 0 auto; background: var(--bg-color); padding: 20px; border-radius: 8px; border: 1px dashed #ccc;">
+                    </div>
+
                     <div style="text-align: center; margin-top: 30px;">
-                        <button onclick="copyForAIGrading()" style="padding: 12px 30px; background-color: #3498db; color: white; border: none; font-family: 'Special Elite', cursive; font-size: 1.1rem; cursor: pointer; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-bottom: 20px;">📋 COPY FOR AI GRADING</button>
-                        
+                        <button onclick="copyForAIGrading()"
+                            style="padding: 12px 30px; background-color: #3498db; color: white; border: none; font-family: 'Special Elite', cursive; font-size: 1.1rem; cursor: pointer; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); margin-bottom: 20px;">📋
+                            COPY FOR AI GRADING</button>
+
                         <div style="margin-top: 30px; padding: 20px; border-top: 2px dashed #ccc;">
                             <h3 style="font-family: 'Special Elite', cursive;">Final Assessment</h3>
-                            <p>Once graded by your AI partner, enter your final score (0-100) below to close the case.</p>
-                            <input type="number" id="final-ai-score" min="0" max="100" placeholder="Score %" style="padding: 10px; font-size: 1.2rem; width: 120px; text-align: center; margin-right: 15px; border-radius: 4px; border: 1px solid #ccc;">
-                            <button onclick="finalizeMystery()" style="padding: 12px 30px; background-color: var(--accent-color); color: white; border: none; font-family: 'Special Elite', cursive; font-size: 1.1rem; cursor: pointer; border-radius: 4px;">FINALIZE CASE</button>
+                            <p>Once graded by your AI partner, enter your final score (0-100) below to close the case.
+                            </p>
+                            <input type="number" id="final-ai-score" min="0" max="100" placeholder="Score %"
+                                style="padding: 10px; font-size: 1.2rem; width: 120px; text-align: center; margin-right: 15px; border-radius: 4px; border: 1px solid #ccc;">
+                            <button onclick="finalizeMystery()"
+                                style="padding: 12px 30px; background-color: var(--accent-color); color: white; border: none; font-family: 'Special Elite', cursive; font-size: 1.1rem; cursor: pointer; border-radius: 4px;">FINALIZE
+                                CASE</button>
                         </div>
                     </div>
                 </div>
@@ -739,8 +757,8 @@
             "33_investigative_dead_ends"
         ];
 
-        
-        
+
+
         const solveQuestions = [
             { id: 'q1', text: '1. WHO is the killer? (Select Required Evidence & Explain)', requiredEvidence: ['20_charlotte_devereaux_confession_2024', '19_cold_case_review_memo_2024'], actualAnswer: 'Charlotte Devereaux, performing a "mercy killing" to save Vivienne from exposure and prison.' },
             { id: 'q2', text: '2. HOW did they escape the locked room?', requiredEvidence: ['20_charlotte_devereaux_confession_2024', '02_crime_scene_investigation_report'], actualAnswer: 'She never left. She remained hidden in Compartment 2 while the porter opened the adjoining door, slipping out during the chaos.' },
@@ -756,25 +774,25 @@
             document.getElementById('solve-case-page').style.display = 'block';
             document.getElementById('breadcrumb').innerText = `CASE_FILES / SOLVE CASE`;
             currentDoc = null;
-            
+
             if (window.innerWidth <= 768) {
                 document.getElementById('sidebar').classList.remove('sidebar-open');
             }
-            
+
             renderSolveCheckboxes();
         }
 
         function renderSolveCheckboxes() {
             const container = document.getElementById('questions-container');
             container.innerHTML = '';
-            
+
             let evidenceOptions = [];
             Object.keys(caseData.documents).forEach(id => {
-                if(spoilerDocs.includes(id) && id !== '20_charlotte_devereaux_confession_2024' && id !== '19_cold_case_review_memo_2024' && id !== '07_dna_analysis_2024_cold_case' && id !== '08_trunk_discovery_report_2024') {
-                    if(id === '27_complete_solution_document') return;
+                if (spoilerDocs.includes(id) && id !== '20_charlotte_devereaux_confession_2024' && id !== '19_cold_case_review_memo_2024' && id !== '07_dna_analysis_2024_cold_case' && id !== '08_trunk_discovery_report_2024') {
+                    if (id === '27_complete_solution_document') return;
                 }
                 const doc = caseData.documents[id];
-                evidenceOptions.push({id: id, title: doc.shortTitle || doc.title});
+                evidenceOptions.push({ id: id, title: doc.shortTitle || doc.title });
             });
 
             solveQuestions.forEach(q => {
@@ -784,14 +802,14 @@
                 qDiv.style.backgroundColor = document.body.classList.contains('dark-mode') ? '#333' : '#f5f5f5';
                 qDiv.style.borderLeft = '4px solid var(--text-color)';
                 qDiv.style.borderRadius = '0 4px 4px 0';
-                
+
                 const label = document.createElement('label');
                 label.style.display = 'block';
                 label.style.fontWeight = 'bold';
                 label.style.marginBottom = '10px';
                 label.style.fontFamily = "'Cutive Mono', monospace";
                 label.innerText = q.text;
-                
+
                 const checkboxContainer = document.createElement('div');
                 checkboxContainer.style.background = '#fff';
                 checkboxContainer.style.border = '1px solid #ccc';
@@ -799,7 +817,7 @@
                 checkboxContainer.style.overflowY = 'auto';
                 checkboxContainer.style.padding = '10px';
                 checkboxContainer.style.marginBottom = '15px';
-                if(document.body.classList.contains('dark-mode')) {
+                if (document.body.classList.contains('dark-mode')) {
                     checkboxContainer.style.background = '#222';
                     checkboxContainer.style.borderColor = '#444';
                 }
@@ -812,12 +830,12 @@
                     cb.value = opt.id;
                     cb.id = `cb-${q.id}-${opt.id}`;
                     cb.className = `evidence-cb-${q.id}`;
-                    
+
                     const cblabel = document.createElement('label');
                     cblabel.htmlFor = cb.id;
                     cblabel.innerText = ` ${opt.title}`;
                     cblabel.style.fontSize = '0.9rem';
-                    
+
                     row.appendChild(cb);
                     row.appendChild(cblabel);
                     checkboxContainer.appendChild(row);
@@ -838,7 +856,7 @@
                 textArea.style.fontSize = '1em';
                 textArea.rows = 4;
                 textArea.placeholder = "Explain how the evidence leads to your conclusion...";
-                
+
                 qDiv.appendChild(label);
                 qDiv.appendChild(checkboxContainer);
                 qDiv.appendChild(textLabel);
@@ -853,10 +871,10 @@
                 const checkboxes = document.querySelectorAll(`.evidence-cb-${q.id}`);
                 const selected = Array.from(checkboxes).filter(cb => cb.checked).map(cb => cb.value);
                 const qDiv = document.querySelector(`.evidence-cb-${q.id}`).parentElement.parentElement;
-                
-                const exactMatch = selected.length === q.requiredEvidence.length && 
-                                   selected.every(v => q.requiredEvidence.includes(v));
-                
+
+                const exactMatch = selected.length === q.requiredEvidence.length &&
+                    selected.every(v => q.requiredEvidence.includes(v));
+
                 if (!exactMatch) {
                     allCorrect = false;
                     qDiv.style.borderColor = '#e74c3c';
@@ -866,10 +884,10 @@
                     qDiv.style.backgroundColor = 'rgba(46, 204, 113, 0.1)';
                 }
             });
-            
+
             if (allCorrect) {
                 document.getElementById('solve-case-page').style.display = 'none';
-            if(document.getElementById('solve-results-page')) document.getElementById('solve-results-page').style.display = 'none';
+                if (document.getElementById('solve-results-page')) document.getElementById('solve-results-page').style.display = 'none';
                 document.getElementById('solve-results-page').style.display = 'block';
                 renderResults();
             } else {
@@ -882,12 +900,12 @@
             container.innerHTML = '';
             solveQuestions.forEach(q => {
                 const userText = document.getElementById(`text-${q.id}`).value.trim();
-                
+
                 const row = document.createElement('div');
                 row.style.marginBottom = '25px';
                 row.style.paddingBottom = '15px';
                 row.style.borderBottom = '1px solid #ccc';
-                
+
                 row.innerHTML = `
                     <div style="font-weight: bold; font-size: 1.1rem; margin-bottom: 10px; color: var(--accent-color);">${q.text}</div>
                     <div style="background: rgba(0,0,0,0.05); padding: 10px; border-left: 3px solid #ccc; margin-bottom: 15px;">
@@ -904,13 +922,25 @@
         }
 
         function copyForAIGrading() {
-            let text = "Please act as a detective evaluator and grade my deductions out of 100 based on the actual answers provided below.\n\n";
+            let text = `You are a strict but fair lead detective grading a junior detective's final report on a 1957 cold case murder (The "Silver Comet" locked-room mystery). 
+
+I am going to provide you with 5 questions, my deductive rationale for each, and the actual factual answer based on the evidence.
+
+YOUR TASK:
+1. Compare my "User Rationale" against the "Actual Answer" for each question.
+2. Grade how well my rationale grasps the core facts of the actual answer. (Be forgiving of minor details, but strict on the WHO, HOW, and WHY).
+3. Provide a brief, in-character critique of my detective work (2-3 sentences max per question).
+4. Give me a FINAL PERCENTAGE SCORE out of 100% at the very end of your response.
+
+Here is my report:
+
+`;
             solveQuestions.forEach((q, i) => {
                 const userText = document.getElementById(`text-${q.id}`).value.trim() || 'No answer provided.';
-                text += `Question ${i+1}: ${q.text}\nUser Rationale: ${userText}\nActual Answer: ${q.actualAnswer}\n\n`;
+                text += `--- QUESTION ${i + 1}: ${q.text} ---\nMY RATIONALE: ${userText}\nACTUAL FACTUAL ANSWER: ${q.actualAnswer}\n\n`;
             });
-            text += "Please provide brief feedback and a final percentage score out of 100.";
-            
+            text += "Please provide your evaluation and my final score out of 100% now.";
+
             navigator.clipboard.writeText(text).then(() => {
                 alert("Copied! Paste this prompt into any AI chatbot (like ChatGPT, Claude, Gemini) to receive your grade.");
             }).catch(err => {
@@ -920,13 +950,13 @@
 
         function finalizeMystery() {
             const score = document.getElementById('final-ai-score').value;
-            if(!score || score < 0 || score > 100) {
+            if (!score || score < 0 || score > 100) {
                 alert("Please enter a valid final score between 0 and 100.");
                 return;
             }
-            
+
             alert(`CASE CLOSED!\n\nFinal Score: ${score}%\n\nThe Official Case Resolution document is now unlocked.`);
-            
+
             if (!unlockedDocs.includes('27_complete_solution_document')) {
                 unlockedDocs.push('27_complete_solution_document');
                 localStorage.setItem('unlockedDocs', JSON.stringify(unlockedDocs));
@@ -936,12 +966,12 @@
             loadDocument('27_complete_solution_document');
         }
 
-        
+
         // Override loadDocument slightly to hide solve page
         const origLoadDocument = loadDocument;
-        loadDocument = function(id) {
+        loadDocument = function (id) {
             document.getElementById('solve-case-page').style.display = 'none';
-            if(document.getElementById('solve-results-page')) document.getElementById('solve-results-page').style.display = 'none';
+            if (document.getElementById('solve-results-page')) document.getElementById('solve-results-page').style.display = 'none';
             origLoadDocument(id);
         };
 
