@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mystery 2B - Evidence Board Visualization</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&family=Special+Elite&family=Permanent+Marker&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: 'Courier Prime', 'Courier New', monospace;
+        background-color: #2c241b; /* Dark cork/wood background */
+        background-image: url('https://www.transparenttextures.com/patterns/cork-board.png'); /* Simple texture pattern if available, or just fallback color */
+        color: #1a1a1a;
+        max-width: 1200px; /* Wider for board layout */
+        margin: 0 auto;
+        padding: 40px;
+        position: relative;
+      }
+
+      /* The Board Container */
+      .evidence-board {
+        background-color: #8d6e63; /* Cork color */
+        border: 15px solid #3e2723; /* Wood frame */
+        padding: 30px;
+        box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.5);
+        position: relative;
+        min-height: 1400px;
+        overflow: hidden; /* Contains the "string" lines */
+      }
+
+      /* Title Card */
+      .case-title-card {
+        background-color: #f5f5f5;
+        border: 1px solid #999;
+        padding: 15px 30px;
+        text-align: center;
+        width: 50%;
+        margin: 0 auto 40px auto;
+        transform: rotate(-1deg);
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+        position: relative;
+        z-index: 10;
+      }
+
+      .case-title-card h1 {
+        font-family: 'Special Elite', cursive;
+        font-size: 28px;
+        margin: 0;
+        color: #b71c1c;
+        text-decoration: underline;
+      }
+
+      .case-title-card p {
+        font-size: 14px;
+        margin: 5px 0 0 0;
+        color: #444;
+      }
+
+      /* Section Headers (Tape Labels) */
+      .section-label {
+        background-color: #263238;
+        color: #eceff1;
+        padding: 5px 15px;
+        font-family: 'Permanent Marker', cursive;
+        font-size: 18px;
+        transform: rotate(-2deg);
+        display: inline-block;
+        margin-bottom: 20px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        border: 1px solid #cfd8dc;
+      }
+
+      /* Evidence Cards */
+      .evidence-card {
+        background-color: #f0e6d2; /* Manila folder color */
+        border: 1px solid #d7ccc8;
+        padding: 15px;
+        margin-bottom: 20px;
+        box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+        position: relative;
+        font-size: 13px;
+        width: 100%;
+        transition: transform 0.2s;
+      }
+
+      /* Pin effect */
+      .evidence-card::before {
+        content: '';
+        width: 12px;
+        height: 12px;
+        background-color: #d32f2f; /* Red pin head */
+        border-radius: 50%;
+        position: absolute;
+        top: -6px;
+        left: 50%;
+        transform: translateX(-50%);
+        box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        z-index: 5;
+      }
+
+      .evidence-card h3 {
+        font-size: 16px;
+        margin-bottom: 8px;
+        border-bottom: 1px dashed #8d6e63;
+        padding-bottom: 4px;
+        font-weight: bold;
+        color: #3e2723;
+      }
+
+      /* Card Types */
+      .card-photo {
+        background-color: #fff;
+        padding: 10px 10px 30px 10px; /* Polaroid style */
+        text-align: center;
+      }
+
+      .card-photo img {
+        width: 100%;
+        filter: grayscale(100%) sepia(20%);
+        border: 1px solid #ddd;
+      }
+
+      .card-doc {
+        background-color: #fff9c4; /* Sticky note yellow */
+        transform: rotate(1deg);
+      }
+
+      .card-critical {
+        border: 3px solid #b71c1c; /* Red border for critical evidence */
+        background-color: #ffebee;
+      }
+
+      /* Grid Layout */
+      .board-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+      }
+
+      .column {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      /* Tags */
+      .tag {
+        display: inline-block;
+        padding: 2px 6px;
+        font-size: 10px;
+        font-weight: bold;
+        border: 1px solid #333;
+        margin-top: 5px;
+        background: #fff;
+      }
+
+      .tag-missing {
+        background: #ffcdd2;
+        color: #b71c1c;
+      }
+      .tag-recovered {
+        background: #c8e6c9;
+        color: #1b5e20;
+      }
+      .tag-verified {
+        background: #e0f7fa;
+        color: #006064;
+      }
+      .tag-suspect {
+        background: #ffe0b2;
+        color: #e65100;
+      }
+
+      /* Handwritten Notes */
+      .handwritten-note {
+        font-family: 'Permanent Marker', cursive;
+        color: #1a237e; /* Blue ink */
+        font-size: 14px;
+        position: absolute;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 5px;
+        transform: rotate(-5deg);
+        z-index: 10;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .note-red {
+        color: #b71c1c;
+        transform: rotate(3deg);
+      }
+
+      /* String Connections (Simulated with borders/lines) */
+      .connection-line {
+        position: absolute;
+        background-color: #b71c1c; /* Red string */
+        height: 2px;
+        z-index: 1;
+        opacity: 0.6;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Specific Connections */
+      .conn-1 {
+        top: 350px;
+        left: 25%;
+        width: 50%;
+        transform: rotate(15deg);
+      }
+      .conn-2 {
+        top: 600px;
+        left: 10%;
+        width: 30%;
+        transform: rotate(-10deg);
+      }
+      .conn-3 {
+        top: 900px;
+        left: 40%;
+        width: 40%;
+        transform: rotate(5deg);
+      }
+
+      /* Footer Stamp */
+      .status-stamp {
+        position: absolute;
+        bottom: 50px;
+        right: 50px;
+        border: 5px solid #1b5e20;
+        color: #1b5e20;
+        padding: 10px 20px;
+        font-size: 36px;
+        font-weight: bold;
+        text-transform: uppercase;
+        transform: rotate(-15deg);
+        opacity: 0.8;
+        font-family: 'Special Elite', cursive;
+        background: rgba(255, 255, 255, 0.4);
+      }
+
+      .cross-ref {
+        font-size: 10px;
+        color: #555;
+        margin-top: 8px;
+        border-top: 1px dotted #999;
+        padding-top: 4px;
+        display: block;
+      }
+    /* ========================================
+   PRINT-OPTIMIZED CSS
+   Saves ink, prevents cutoff, controls page breaks
+   ======================================== */
+@page {
+  margin: 0.5in !important;
+}
+@media print {
+  /* Reset to printer-friendly colors */
+  body {
+    background-color: white !important;
+    background: white !important;
+    color: black !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove all dark backgrounds and shadows */
+  .document-container,
+  .header-box,
+  table,
+  th,
+  td,
+  div,
+  section {
+    background-color: white !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-color: black !important;
+  }
+
+  /* Ensure text is always black */
+  h1, h2, h3, h4, h5, h6, p, li, td, th, span, div {
+    color: black !important;
+  }
+
+  /* Keep ONLY red stamps visible (but lighter) */
+  .stamp {
+    color: #c0392b !important;
+    border-color: #c0392b !important;
+    opacity: 0.6 !important;
+    background: transparent !important;
+  }
+
+  /* Remove colored highlight backgrounds - keep border only */
+  .evidence-highlight,
+  .sig-critical,
+  .sig-supporting,
+  .sig-context {
+    background-color: white !important;
+    background: white !important;
+    border-left-width: 3px !important;
+    border-left-color: black !important;
+  }
+
+  /* Simplify evidence tags for printing */
+  .evidence-tag {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+
+  /* Control page breaks - prevent awkward splits */
+  table {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group; /* Repeat header on each page */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Keep related content together */
+  .evidence-highlight,
+  .signature-block,
+  .header-meta {
+    page-break-inside: avoid;
+  }
+
+  /* Remove unnecessary spacing for print */
+  .document-container {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Ensure tables fit on page */
+  table {
+    width: 100% !important;
+    font-size: 11pt !important;
+  }
+
+  th, td {
+    padding: 6pt !important;
+  }
+
+  /* Adjust font sizes for readability */
+  body {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  h1 {
+    font-size: 18pt !important;
+  }
+
+  h2 {
+    font-size: 14pt !important;
+  }
+
+  /* Show URLs for links (optional - comment out if not wanted) */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  /* Hide elements that shouldn't print */
+  .no-print {
+    display: none !important;
+  }
+}
+</style>
+  </head>
+  <body>
+    <div class="evidence-board">
+      <!-- Title -->
+      <div class="case-title-card">
+        <h1>CASE INVESTIGATION BOARD</h1>
+        <p>VICTIM: VIVIENNE MARCHAND | CASE #57-1114-HOMI -> REOPENED 2024</p>
+        <p style="font-size: 12px; color: #b71c1c"><strong>STATUS: SOLVED (DEC 2024)</strong></p>
+      </div>
+
+      <!-- Simulated Red String Connections -->
+      <div class="connection-line conn-1"></div>
+      <div class="connection-line conn-2"></div>
+      <div class="connection-line conn-3"></div>
+
+      <!-- Handwritten Notes on Board -->
+      <div class="handwritten-note" style="top: 150px; left: 50px">Where is the scarf?</div>
+      <div class="handwritten-note note-red" style="top: 180px; right: 80px">67 YEARS OF LIES!</div>
+      <div class="handwritten-note" style="top: 800px; left: 40%">Two women heard...</div>
+
+      <div class="board-grid">
+        <!-- COLUMN 1: PHYSICAL EVIDENCE & FORENSICS -->
+        <div class="column">
+          <div class="section-label">PHYSICAL EVIDENCE</div>
+
+          <!-- Weapon -->
+          <div class="evidence-card card-critical">
+            <h3>MISSING SCARF (MURDER WEAPON)</h3>
+            <p><strong>Desc:</strong> Burgundy & gold silk scarf, French designer label.</p>
+            <p><strong>1957 Status:</strong> MISSING from scene.</p>
+            <p><strong>2024 Status:</strong> FOUND in C. Devereaux's trunk.</p>
+            <div class="tag tag-recovered">DNA MATCH CONFIRMED</div>
+            <span class="cross-ref">See Docs: #01, #02, #07, #08</span>
+          </div>
+
+          <!-- Watch -->
+          <div class="evidence-card">
+            <h3>VICTIM'S WATCH</h3>
+            <p><strong>Status:</strong> Broken/Stopped</p>
+            <p><strong>Time:</strong> 03:17 AM</p>
+            <p><strong>Significance:</strong> Establishes end of struggle/staging timeline.</p>
+            <div class="tag tag-verified">TIME MARKER</div>
+            <span class="cross-ref">See Doc: #02</span>
+          </div>
+
+          <!-- Door Lock -->
+          <div class="evidence-card">
+            <h3>COMPARTMENT 7 DOOR</h3>
+            <p><strong>Condition:</strong> LOCKED from INSIDE.</p>
+            <p>
+              <strong>Implication:</strong> Killer locked door upon exit? (Impossible with bolt) OR Victim locked it?
+              (Dead).
+            </p>
+            <p style="color: #b71c1c; font-style: italic">How did she escape?</p>
+            <div class="tag tag-verified">LOCKED ROOM</div>
+            <span class="cross-ref">See Doc: #02, #04</span>
+          </div>
+
+          <div class="section-label" style="margin-top: 30px">FORENSIC FINDINGS</div>
+
+          <!-- Autopsy -->
+          <div class="evidence-card card-doc">
+            <h3>AUTOPSY REPORT (1957)</h3>
+            <p><strong>Cause:</strong> Ligature Strangulation</p>
+            <p><strong>TOD:</strong> 02:45 - 03:00 AM</p>
+            <p><strong>Notes:</strong> No defense wounds. Victim likely asleep or caught off guard.</p>
+            <span class="cross-ref">See Doc: #03</span>
+          </div>
+
+          <!-- DNA -->
+          <div class="evidence-card card-critical">
+            <h3>DNA ANALYSIS (2024)</h3>
+            <p><strong>Source:</strong> Scarf recovered from trunk.</p>
+            <p>
+              <strong>Result:</strong> Contains skin cells/sweat from Vivienne Marchand (Victim) + Charlotte Devereaux
+              (Suspect).
+            </p>
+            <p><strong>Conclusion:</strong> DEFINITIVE LINK.</p>
+            <div class="tag tag-verified">SOLVED</div>
+            <span class="cross-ref">See Doc: #07</span>
+          </div>
+        </div>
+
+        <!-- COLUMN 2: SUSPECTS & WITNESSES -->
+        <div class="column">
+          <div class="section-label">PERSONS OF INTEREST</div>
+
+          <!-- Charlotte Devereaux -->
+          <div class="evidence-card card-critical" style="border-width: 4px">
+            <h3>CHARLOTTE DEVEREAUX</h3>
+            <p><strong>Role:</strong> Passenger, Compartment 8 (Next Door)</p>
+            <p><strong>1957 Stmt:</strong> "I didn't know her." (LIE)</p>
+            <p><strong>Motive:</strong> Secret Lover / Jealousy / Fear of Exposure.</p>
+            <p><strong>Status:</strong> CONFESSED (2024)</p>
+            <div class="tag tag-suspect">THE KILLER</div>
+            <span class="cross-ref">See Docs: #10, #20, #24</span>
+          </div>
+
+          <!-- Mystery Woman -->
+          <div class="evidence-card card-photo">
+            <h3>"THE MYSTERY WOMAN"</h3>
+            <p><strong>Sighting:</strong> 22:45 PM, Nov 13</p>
+            <p><strong>Witness:</strong> M. Sinclair</p>
+            <p><strong>Desc:</strong> Woman in burgundy suit talking to victim.</p>
+            <p style="color: #b71c1c"><strong>ID:</strong> IT WAS CHARLOTTE!</p>
+            <div class="tag tag-verified">CRITICAL LEAD</div>
+            <span class="cross-ref">See Doc: #15</span>
+          </div>
+
+          <!-- Vincent DeLuca -->
+          <div class="evidence-card">
+            <h3>VINCENT DELUCA</h3>
+            <p><strong>Role:</strong> Fiancé</p>
+            <p><strong>Theory:</strong> Jealous Rage?</p>
+            <p><strong>Alibi:</strong> 01:45-04:00 AM in Lounge Car.</p>
+            <p><strong>Witness:</strong> Bartender confirms.</p>
+            <div class="tag tag-verified">CLEARED</div>
+            <span class="cross-ref">See Docs: #05, #12</span>
+          </div>
+
+          <!-- Porter -->
+          <div class="evidence-card">
+            <h3>ERNEST WASHINGTON (PORTER)</h3>
+            <p><strong>Role:</strong> Witness / Discovery</p>
+            <p><strong>Key Info:</strong> Heard footsteps 02:50 AM. Saw light under Charlotte's door 03:10 AM.</p>
+            <p><strong>Credibility:</strong> High.</p>
+            <span class="cross-ref">See Doc: #04</span>
+          </div>
+
+          <!-- Witnesses -->
+          <div class="evidence-card card-doc">
+            <h3>WITNESS SUMMARY</h3>
+            <ul style="padding-left: 15px; margin: 0">
+              <li><strong>E. Whitfield:</strong> Heard "soft women's voices" ~02:45.</li>
+              <li><strong>M. Sinclair:</strong> Heard door click ~02:55.</li>
+              <li><strong>Dr. Hayes:</strong> In corridor 03:00 (saw nothing).</li>
+            </ul>
+            <span class="cross-ref">See Docs: #14, #15</span>
+          </div>
+        </div>
+
+        <!-- COLUMN 3: INVESTIGATIVE TIMELINE & LEAD TRACKING -->
+        <div class="column">
+          <div class="section-label">TIMELINE & LEADS</div>
+
+          <!-- Timeline 1957 -->
+          <div class="evidence-card">
+            <h3>1957 INVESTIGATION</h3>
+            <p><strong>Nov 14:</strong> Murder discovered.</p>
+            <p><strong>Leads Chased:</strong> Robbery (Failed), Fiancé (Cleared), Random Drifter (No evidence).</p>
+            <p><strong>Result:</strong> COLD CASE. Closed Feb 1958.</p>
+            <div class="tag tag-missing">UNSOLVED</div>
+            <span class="cross-ref">See Doc: #18</span>
+          </div>
+
+          <!-- Timeline 2024 -->
+          <div class="evidence-card card-critical">
+            <h3>2024 BREAKTHROUGH</h3>
+            <p><strong>Nov 3:</strong> Trunk discovered.</p>
+            <p><strong>Contents:</strong> Scarf, Journal, Letters.</p>
+            <p><strong>Nov 10:</strong> DNA Match.</p>
+            <p><strong>Nov 18:</strong> Charlotte Confesses.</p>
+            <div class="tag tag-recovered">SOLVED</div>
+            <span class="cross-ref">See Docs: #19, #20</span>
+          </div>
+
+          <!-- The Letters -->
+          <div class="evidence-card">
+            <h3>EVIDENCE: LOVE LETTERS</h3>
+            <p><strong>Dates:</strong> 1954-1957</p>
+            <p><strong>Content:</strong> Secret relationship between Charlotte & Vivienne.</p>
+            <p><strong>Significance:</strong> Establishes MOTIVE missing in 1957.</p>
+            <span class="cross-ref">See Doc: #11</span>
+          </div>
+
+          <!-- Dead Ends -->
+          <div class="evidence-card card-doc">
+            <h3>DISCARDED THEORIES (RED HERRINGS)</h3>
+            <p><strong>1. Robbery:</strong> Jewelry left behind. Only scarf taken.</p>
+            <p><strong>2. Dr. Hayes:</strong> Proximity only. No motive.</p>
+            <p><strong>3. Random Attack:</strong> Door locked inside. No forced entry. Victim knew killer.</p>
+            <span class="cross-ref">See Doc: #33</span>
+          </div>
+
+          <!-- Final Note -->
+          <div class="evidence-card" style="background-color: #e8f5e9; border: 2px solid #2e7d32">
+            <h3>CASE RESOLUTION</h3>
+            <p><strong>Killer:</strong> Charlotte Devereaux</p>
+            <p><strong>Motive:</strong> Crime of Passion / Fear of Exposure.</p>
+            <p><strong>Method:</strong> Strangulation (Scarf).</p>
+            <p><strong>Status:</strong> CLOSED.</p>
+            <span class="cross-ref">See Doc: #22</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- The Big Stamp -->
+      <div class="status-stamp">CASE CLOSED</div>
+    </div>
+  </body>
+</html>
+
+

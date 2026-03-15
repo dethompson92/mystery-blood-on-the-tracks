@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEMEFO Forensic Preliminary Report | Mystery 3A</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#FF4D6D;--cyan:#00D4FF;--gold:#FFD700;--dark:#0A0A0F;--card:#12121A;--border:#1E1E2E;--text:#E8E8F0;--muted:#888899;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--dark);color:var(--text);font-family:'IBM Plex Mono',monospace;min-height:100vh;}
+  .doc-header{background:linear-gradient(135deg,#050A05 0%,#0A0A0F 100%);border-bottom:2px solid var(--cyan);padding:2rem;text-align:center;}
+  .show-logo{font-family:'Playfair Display',serif;font-size:1rem;color:var(--cyan);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:0.5rem;}
+  .doc-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:#fff;margin-bottom:0.3rem;}
+  .doc-sub{font-size:0.78rem;color:var(--muted);}
+  .tier-badge{display:inline-block;background:var(--cyan);color:#000;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;padding:0.3rem 0.9rem;border-radius:2px;margin-bottom:1rem;}
+  .container{max-width:960px;margin:0 auto;padding:2rem 1.5rem;}
+  .tier2-banner{background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.25);border-radius:4px;padding:0.8rem 1.2rem;font-size:0.75rem;color:var(--cyan);margin-bottom:1.5rem;text-align:center;}
+  .form-block{background:var(--card);border:1px solid var(--border);border-radius:4px;padding:1.5rem;margin-bottom:1.5rem;}
+  .form-title{font-size:0.7rem;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;border-bottom:1px solid var(--border);padding-bottom:0.5rem;margin-bottom:1rem;font-family:'IBM Plex Mono',monospace;}
+  .field-row{display:grid;grid-template-columns:200px 1fr;gap:1rem;padding:0.4rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.8rem;}
+  .field-row:last-child{border-bottom:none;}
+  .f-label{color:var(--muted);font-size:0.72rem;}
+  .f-val{color:var(--text);}
+  p{color:var(--muted);font-size:0.85rem;line-height:1.75;margin-bottom:0.8rem;font-family:'Inter',sans-serif;}
+  .finding-section{margin-bottom:1.5rem;}
+  .finding-title{font-size:0.7rem;color:var(--cyan);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.8rem;}
+  .finding-item{display:flex;gap:0.8rem;padding:0.6rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.8rem;}
+  .finding-item:last-child{border-bottom:none;}
+  .fi-num{color:var(--gold);min-width:24px;}
+  .fi-text{color:var(--muted);line-height:1.6;font-family:'Inter',sans-serif;}
+  .conclusion-box{background:rgba(255,77,109,0.07);border:1px solid rgba(255,77,109,0.25);border-radius:4px;padding:1.2rem;margin:1.5rem 0;}
+  .con-title{font-size:0.7rem;color:var(--red);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.8rem;}
+  .con-text{font-size:0.88rem;color:var(--text);line-height:1.75;font-family:'Inter',sans-serif;}
+  .evidence-table{width:100%;border-collapse:collapse;margin-top:1rem;}
+  .evidence-table thead th{background:rgba(0,212,255,0.08);color:var(--cyan);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.6rem 0.8rem;text-align:left;border-bottom:1px solid rgba(0,212,255,0.2);}
+  .evidence-table tbody td{padding:0.6rem 0.8rem;font-size:0.78rem;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);font-family:'Inter',sans-serif;}
+  .evidence-table tbody tr:hover{background:rgba(255,255,255,0.02);}
+  .case-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:0.7rem;color:var(--muted);}
+  .case-meta span{color:var(--text);}
+</style>
+</head>
+<body>
+<div class="doc-header">
+  <div class="show-logo">SEMEFO — Servicio Médico Forense · Quintana Roo</div>
+  <div class="tier-badge">TIER 2 — INVESTIGATOR DOCUMENT · T2-03</div>
+  <div class="doc-title">DICTAMEN PERICIAL PRELIMINAR / PRELIMINARY FORENSIC REPORT</div>
+  <div class="doc-sub">FGE-QR-2025-07-0847 · Victim: Solomon Vance · Date of Examination: July 19, 2025</div>
+</div>
+<div class="container">
+  <div class="tier2-banner">🔵 TIER 2 DOCUMENT — SEMEFO Preliminary Forensic Examination Report. Full autopsy report pending. This document covers external examination, preliminary cause of death determination, and initial evidence findings.</div>
+
+  <div class="form-block">
+    <div class="form-title">Case Identification / Identificación del Caso</div>
+    <div class="field-row"><span class="f-label">Caso / Case No.</span><span class="f-val">FGE-QR-2025-07-0847</span></div>
+    <div class="field-row"><span class="f-label">Nombre / Decedent</span><span class="f-val">VANCE, Solomon Dieudonne</span></div>
+    <div class="field-row"><span class="f-label">Edad / Age</span><span class="f-val">33 años / years</span></div>
+    <div class="field-row"><span class="f-label">Fecha de muerte estimada</span><span class="f-val">July 19, 2025 · 00:05 – 00:15 hrs (CST)</span></div>
+    <div class="field-row"><span class="f-label">Lugar de hallazgo</span><span class="f-val">Gran Horizonte Resort & Spa, Cancún, Q. Roo — Infinity Pool, Floor 15 North Tower</span></div>
+    <div class="field-row"><span class="f-label">Médico Forense</span><span class="f-val">Dr. Arturo Villanueva-Restrepo, M.D., SEMEFO Quintana Roo</span></div>
+    <div class="field-row"><span class="f-label">Hora de llegada al sitio</span><span class="f-val">02:10 hrs July 19, 2025</span></div>
+    <div class="field-row"><span class="f-label">Estado del documento</span><span class="f-val">PRELIMINAR — Full autopsy report pending 72 hours</span></div>
+  </div>
+
+  <div class="form-block">
+    <div class="form-title">I. Scene Conditions at Time of Examination</div>
+    <p>The decedent was discovered in the north quadrant of the rooftop infinity pool (Floor 15, North Tower), submerged to approximately waist depth in a face-up supine position. Water temperature was 29°C (84°F). Pool lights were active at time of discovery. An electrical appliance (subsequently identified as a Conair 1875W hair dryer, Model CDSH1875, serial SN-4472-B) was found at the pool floor adjacent to the decedent's right leg. A 25-foot extension cord was found coiled near the pool access gate, partially wet.</p>
+    <p>The main circuit breaker for the pool area electrical outlets was confirmed in the ON position by resort engineering staff. The pool area exterior outlet (mounted on the northeast equipment panel, 3m from the pool edge) showed burn marks consistent with high-amperage discharge.</p>
+  </div>
+
+  <div class="form-block">
+    <div class="form-title">II. External Examination Findings</div>
+    <div class="finding-section">
+      <div class="finding-title">Primary Findings — Electrical Injury Consistent</div>
+      <div class="finding-item"><span class="fi-num">1.</span><span class="fi-text"><strong style="color:var(--text);">Entry burn marks:</strong> Two distinct low-voltage entry wound sites identified on the right foot (plantar surface, arch) and left hand (palmar surface, ring and little finger). Sites are characterized by dry, leathery, gray-brown tissue with central charring. Approximate diameter: 1.5cm and 1.8cm respectively. Pattern consistent with electrical current entry through submerged extremities.</span></div>
+      <div class="finding-item"><span class="fi-num">2.</span><span class="fi-text"><strong style="color:var(--text);">Arborescent markings:</strong> Feathering or Lichtenberg figures visible on right forearm and lower right leg — branching skin markings consistent with electrical injury in living tissue, indicating the victim was alive at time of current passage.</span></div>
+      <div class="finding-item"><span class="fi-num">3.</span><span class="fi-text"><strong style="color:var(--text);">Cyanosis:</strong> Perioral cyanosis (bluish discoloration around lips and oral mucosa) and peripheral cyanosis at fingertips, consistent with cardiopulmonary arrest.</span></div>
+      <div class="finding-item"><span class="fi-num">4.</span><span class="fi-text"><strong style="color:var(--text);">No drowning indicators (preliminary):</strong> Absence of froth at mouth and nasal passages. No foam cone at nostrils. Pulmonary status to be confirmed at full autopsy, but external presentation does not suggest primary drowning as cause of death.</span></div>
+      <div class="finding-item"><span class="fi-num">5.</span><span class="fi-text"><strong style="color:var(--text);">No traumatic injury:</strong> No blunt force trauma, incised wounds, gunshot wounds, or strangulation marks identified on external examination. Neck: no petechiae consistent with asphyxia. No defensive wounds on hands.</span></div>
+      <div class="finding-item"><span class="fi-num">6.</span><span class="fi-text"><strong style="color:var(--text);">Lividity (livor mortis):</strong> Fixed dorsal lividity consistent with supine position — indicates decedent did not move significantly after death. Position at discovery likely reflects position of death.</span></div>
+    </div>
+  </div>
+
+  <div class="form-block">
+    <div class="form-title">III. Preliminary Cause & Manner of Death</div>
+    <div class="conclusion-box">
+      <div class="con-title">Preliminary Opinion — Dr. Arturo Villanueva-Restrepo, SEMEFO Q. Roo</div>
+      <div class="con-text">
+        <p>Based on external examination findings, scene conditions, and the presence of an active electrical appliance in the pool water, the preliminary cause of death is: <strong>Ventricular fibrillation secondary to low-voltage electrocution (accidental-appearing).</strong></p>
+        <p>Manner of death: The physical evidence is <strong>inconsistent with accidental death</strong>. A powered hair dryer does not fall into a rooftop pool from 3 meters distant without assistance. The placement of the dryer, the presence of the extension cord coiled near the gate, and the absence of any legitimate reason for the appliance to be in the pool area are collectively consistent with intentional introduction of the device into the water while the victim was present. <strong>Preliminary manner of death: HOMICIDE.</strong></p>
+        <p>Full determination pending complete autopsy, toxicology screening (72 hours), and analysis of electrical appliance.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-block">
+    <div class="form-title">IV. Physical Evidence Collected at Scene</div>
+    <table class="evidence-table">
+      <thead><tr><th>Evidence #</th><th>Item</th><th>Location</th><th>Condition</th><th>Chain of Custody</th></tr></thead>
+      <tbody>
+        <tr><td>E-001</td><td>Conair 1875W Hair Dryer, Model CDSH1875, S/N SN-4472-B</td><td>Pool floor, adj. right leg of decedent</td><td>Waterlogged; power cord intact; plug separated from extension cord</td><td>SEMEFO forensic lab — fingerprint analysis pending</td></tr>
+        <tr><td>E-002</td><td>25-foot extension cord (orange, 16-gauge, 3-prong)</td><td>Coiled near pool access gate, northeast corner</td><td>Partially wet; plug end shows minor burn char at prong base</td><td>SEMEFO — fingerprint & trace analysis</td></tr>
+        <tr><td>E-003</td><td>Apple Watch Series 8 (screen cracked)</td><td>On decedent's left wrist</td><td>Water damage; non-functional; sent to FGE-QR digital forensics</td><td>FGE-QR digital evidence</td></tr>
+        <tr><td>E-004</td><td>Room keycard CON-1201</td><td>Decedent's swimwear pocket</td><td>Intact; read successfully (Room 1201, Solomon Vance)</td><td>FGE-QR</td></tr>
+        <tr><td>E-005</td><td>Pool water sample (4L)</td><td>Northeast pool section, 30cm depth</td><td>Sealed; sent to SEMEFO lab for chemical/toxin screening</td><td>SEMEFO</td></tr>
+        <tr><td>E-006</td><td>White resort towel (blood-free)</td><td>Pool deck lounge chair, northeast</td><td>Slightly damp; no biological material detected on surface</td><td>FGE-QR</td></tr>
+        <tr><td>E-007</td><td>Mobile phone — Samsung Galaxy S24 Ultra</td><td>Decedent's room (located 07:45 AM, Room 1201)</td><td>Unlocked (biometric scan waived); sent to FGE-QR digital forensics</td><td>FGE-QR digital evidence — forensic extraction in progress</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="form-block">
+    <div class="form-title">V. Investigative Notes from Forensic Examiner</div>
+    <p>The pattern of injury in this case — ventricular fibrillation from aquatic electrocution, no trauma, calm posture at time of death — is consistent with a victim who was unaware of the lethal mechanism until it was activated. The absence of defensive wounds and the calm posture support the hypothesis that the victim was relaxed, seated, with lower extremities in the water at the time the current was introduced.</p>
+    <p>Hair dryers of this wattage (1875W) generate sufficient current density at pool resistance levels to induce cardiac arrest within 15–60 seconds. Death would have been rapid. The victim likely experienced initial muscle tetany (involuntary contraction) before loss of consciousness and cardiac arrest. He would not have been able to call for help or exit the pool once the current was established.</p>
+    <p><strong style="color:var(--text);">NOTE FOR INVESTIGATORS:</strong> Evidence item E-001 (hair dryer cord) has been prioritized for fingerprint analysis. Preliminary visual inspection in the field identified what may be a partial fingerprint on the rubber-grip section of the cord, approximately 15cm from the plug end. This has been preserved and sent for latent print analysis. Results expected within 24–48 hours.</p>
+  </div>
+
+  <div class="case-meta">
+    <div>Case: <span>FGE-QR-2025-07-0847</span></div>
+    <div>Document: <span>T2-03 · SEMEFO Preliminary Forensic Report</span></div>
+    <div>Examiner: <span>Dr. Arturo Villanueva-Restrepo, SEMEFO Q. Roo</span></div>
+    <div>Date: <span>July 19, 2025 · 04:40 hrs</span></div>
+  </div>
+</div>
+</body>
+</html>

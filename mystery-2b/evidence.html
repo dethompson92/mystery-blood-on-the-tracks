@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence Board | Blood on the Tracks | MMC</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/mystery-2b.css">
+    <style>
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: var(--spacing-sm);
+        }
+
+        /* Style evidence cards as old vintage paper */
+        .mystery-2b .evidence-card {
+            background: linear-gradient(135deg, var(--color-tertiary) 0%, #E6C280 100%);
+            border: 1px solid #C4A470;
+            color: #332211;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+            transition: all 0.2s;
+        }
+
+        .mystery-2b .evidence-card:hover {
+            transform: scale(1.02) rotate(1deg);
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.6);
+            background: linear-gradient(135deg, white 0%, var(--color-tertiary) 100%);
+        }
+
+        .mystery-2b .evidence-card h4 {
+            color: #332211;
+        }
+    </style>
+</head>
+
+<body class="mystery-2b">
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-container">
+            <a href="../index.html" class="nav-logo">MMC.</a>
+            <div class="nav-links">
+                <a href="investigation.html" class="nav-link">&larr; Hub</a>
+                <a href="suspects.html" class="nav-link">Suspects</a>
+                <a href="evidence.html" class="nav-link active">Evidence Board</a>
+            </div>
+            <button class="hamburger">☰</button>
+        </div>
+    </nav>
+
+    <header class="page-header"
+        style="padding: var(--spacing-lg) 0; text-align: center; border-bottom: 2px double var(--color-primary); margin-bottom: var(--spacing-sm);">
+        <div class="container">
+            <h1 style="color: var(--color-tertiary);">Evidence Board</h1>
+            <p class="mono" style="color: var(--color-gray);">Case NOPD-57-1144 | 1957 vs 2024 Archives</p>
+        </div>
+    </header>
+
+    <main class="section pt-0">
+        <div class="container">
+
+            <div class="era-tabs">
+                <button class="era-tab-btn active" data-target="tab-1957">1957 ARCHIVE</button>
+                <button class="era-tab-btn" data-target="tab-2024">2024 FORENSICS</button>
+            </div>
+
+            <!-- 1957 Archive -->
+            <div id="tab-1957" class="tab-content active" style="display: block;">
+                <p class="mb-4" style="color: var(--color-gray);">Original typed police reports, witness statements, and
+                    train manifests.</p>
+                <div class="evidence-grid" id="evidence-1957">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+            <!-- 2024 Forensics -->
+            <div id="tab-2024" class="tab-content" style="display: none;">
+                <p class="mb-4" style="color: var(--color-gray);">Modern blood spatter analysis, DNA reports, and
+                    declassified FBI files.</p>
+                <div class="evidence-grid" id="evidence-2024">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Modal for Evidence Documents -->
+    <div id="evidence-modal" class="modal">
+        <div class="modal-header">
+            <button class="modal-close">&times;</button>
+        </div>
+        <iframe src="about:blank" title="Evidence Document"></iframe>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Tab Switching Logic
+            const tabs = document.querySelectorAll('.era-tab-btn');
+            const contents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    contents.forEach(c => c.style.display = 'none');
+
+                    tab.classList.add('active');
+                    document.getElementById(tab.dataset.target).style.display = 'block';
+                });
+            });
+
+            // Populate Evidence (35 Files total: split between eras for flavor)
+            const c1957 = document.getElementById('evidence-1957');
+            const c2024 = document.getElementById('evidence-2024');
+
+            for (let i = 1; i <= 35; i++) {
+                const docNum = i.toString().padStart(2, '0');
+                const card = document.createElement('a');
+                card.href = `documents/NOPD-${docNum}.html`;
+                card.className = 'evidence-card';
+                card.innerHTML = `
+                    <span class="doc-id" style="color: var(--color-secondary); font-weight: bold;">NOPD-${docNum}</span>
+                    <h4>${i <= 20 ? '1957 Case File' : '2024 Lab Report'}</h4>
+                `;
+
+                if (i <= 20) {
+                    c1957.appendChild(card);
+                } else {
+                    card.style.background = 'rgba(255,255,255,0.9)'; // give 2024 files a modern look
+                    card.style.border = '1px solid #ccc';
+                    c2024.appendChild(card);
+                }
+            }
+
+            // Modal Logic
+            const modal = document.getElementById('evidence-modal');
+            const modalIframe = modal.querySelector('iframe');
+
+            document.querySelectorAll('.evidence-card').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    modalIframe.src = link.getAttribute('href');
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+
+            document.querySelector('.modal-close').addEventListener('click', () => {
+                modal.classList.remove('active');
+                modalIframe.src = 'about:blank';
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+</body>
+
+</html>

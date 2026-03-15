@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detailed Witness Statement - Margaret "Maggie" Sinclair</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #f4f1e8;
+            color: #2c2c2c;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            background-image: linear-gradient(0deg, transparent 24%, rgba(0,0,0,.03) 25%, rgba(0,0,0,.03) 26%, transparent 27%, transparent 74%, rgba(0,0,0,.03) 75%, rgba(0,0,0,.03) 76%, transparent 77%, transparent),
+                              linear-gradient(90deg, transparent 24%, rgba(0,0,0,.03) 25%, rgba(0,0,0,.03) 26%, transparent 27%, transparent 74%, rgba(0,0,0,.03) 75%, rgba(0,0,0,.03) 76%, transparent 77%, transparent);
+            background-size: 50px 50px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px double #2c2c2c;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 24px;
+            margin: 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .header p {
+            margin: 5px 0;
+            font-size: 12px;
+        }
+        .stamp {
+            display: inline-block;
+            border: 2px solid #004d7f;
+            color: #004d7f;
+            padding: 5px 15px;
+            margin: 10px 0;
+            transform: rotate(-4deg);
+            font-weight: bold;
+        }
+        .info-table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+        .info-table td {
+            padding: 8px;
+            border: 1px solid #666;
+        }
+        .info-table td:first-child {
+            font-weight: bold;
+            width: 200px;
+            background-color: #e8e5d8;
+        }
+        .section {
+            margin: 30px 0;
+        }
+        .section h2 {
+            font-size: 16px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #2c2c2c;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        .statement-text {
+            line-height: 1.8;
+            text-align: justify;
+            font-size: 13px;
+            padding: 20px;
+            background-color: #fefefe;
+            border-left: 4px solid #004d7f;
+        }
+        .interviewer-note {
+            font-style: italic;
+            color: #555;
+            background-color: #f9f7f0;
+            padding: 10px;
+            margin: 15px 0;
+            border-left: 3px solid #888;
+        }
+        .highlighted {
+            background-color: #ffecb3;
+            padding: 2px 5px;
+            font-weight: bold;
+        }
+        .observation-box {
+            background-color: #e8f4f8;
+            border: 2px solid #004d7f;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .signature-section {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .signature-box {
+            width: 45%;
+            border-top: 2px solid #2c2c2c;
+            padding-top: 10px;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+    /* ========================================
+   PRINT-OPTIMIZED CSS
+   Saves ink, prevents cutoff, controls page breaks
+   ======================================== */
+@page {
+  margin: 0.5in !important;
+}
+@media print {
+  /* Reset to printer-friendly colors */
+  body {
+    background-color: white !important;
+    background: white !important;
+    color: black !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove all dark backgrounds and shadows */
+  .document-container,
+  .header-box,
+  table,
+  th,
+  td,
+  div,
+  section {
+    background-color: white !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-color: black !important;
+  }
+
+  /* Ensure text is always black */
+  h1, h2, h3, h4, h5, h6, p, li, td, th, span, div {
+    color: black !important;
+  }
+
+  /* Keep ONLY red stamps visible (but lighter) */
+  .stamp {
+    color: #c0392b !important;
+    border-color: #c0392b !important;
+    opacity: 0.6 !important;
+    background: transparent !important;
+  }
+
+  /* Remove colored highlight backgrounds - keep border only */
+  .evidence-highlight,
+  .sig-critical,
+  .sig-supporting,
+  .sig-context {
+    background-color: white !important;
+    background: white !important;
+    border-left-width: 3px !important;
+    border-left-color: black !important;
+  }
+
+  /* Simplify evidence tags for printing */
+  .evidence-tag {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+
+  /* Control page breaks - prevent awkward splits */
+  table {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group; /* Repeat header on each page */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Keep related content together */
+  .evidence-highlight,
+  .signature-block,
+  .header-meta {
+    page-break-inside: avoid;
+  }
+
+  /* Remove unnecessary spacing for print */
+  .document-container {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Ensure tables fit on page */
+  table {
+    width: 100% !important;
+    font-size: 11pt !important;
+  }
+
+  th, td {
+    padding: 6pt !important;
+  }
+
+  /* Adjust font sizes for readability */
+  body {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  h1 {
+    font-size: 18pt !important;
+  }
+
+  h2 {
+    font-size: 14pt !important;
+  }
+
+  /* Show URLs for links (optional - comment out if not wanted) */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  /* Hide elements that shouldn't print */
+  .no-print {
+    display: none !important;
+  }
+}
+</style>
+</head>
+<body>
+    <div class="header">
+        <h1>Jackson Police Department</h1>
+        <h1>Homicide Division - Detailed Witness Statement</p>
+        <p>142 East Capitol Street, Jackson, Mississippi</p>
+        <div class="stamp">KEY WITNESS - DETAILED ACCOUNT</div>
+    </div>
+
+    <table class="info-table">
+        <tr>
+            <td>Case Number:</td>
+            <td><strong>57-1114-HOMI</strong></td>
+        </tr>
+        <tr>
+            <td>Statement Date & Time:</td>
+            <td>November 14, 1957 - 16:45 hours</td>
+        </tr>
+        <tr>
+            <td>Witness Name:</td>
+            <td>Margaret Anne Sinclair ("Maggie")</td>
+        </tr>
+        <tr>
+            <td>Date of Birth:</td>
+            <td>May 18, 1937 (Age 20)</td>
+        </tr>
+        <tr>
+            <td>Race / Sex:</td>
+            <td>White / Female</td>
+        </tr>
+        <tr>
+            <td>Occupation:</td>
+            <td>Photography Assistant / Student</td>
+        </tr>
+        <tr>
+            <td>Residential Address:</td>
+            <td>622 Bourbon Street, Apt. 3B, New Orleans, Louisiana</td>
+        </tr>
+        <tr>
+            <td>Travel Destination:</td>
+            <td>Atlanta, Georgia (magazine assignment with photographer)</td>
+        </tr>
+        <tr>
+            <td>Compartment Assignment:</td>
+            <td>Magnolia Car - Compartment 9</td>
+        </tr>
+        <tr>
+            <td>Interviewing Officer:</td>
+            <td>Detective Marion Ross (Badge #318)</td>
+        </tr>
+        <tr>
+            <td>Location of Interview:</td>
+            <td>Jackson PD Headquarters, Interview Room 4</td>
+        </tr>
+    </table>
+
+    <div class="section">
+        <h2>Detailed Statement - Part I: Background and Journey</h2>
+        <div class="statement-text">
+            <p><strong>Detective Ross:</strong> Miss Sinclair, thank you for coming in for this more detailed interview. I understand you already gave an initial statement this morning. We'd like to go into greater depth about what you observed.</p>
+
+            <p><strong>Sinclair:</strong> Of course. I want to help. I still can't believe this happened. I keep thinking... maybe if I'd noticed something, if I'd been more alert...</p>
+
+            <p><strong>Detective Ross:</strong> Let's start from the beginning. Tell me about your work and why you were on this train.</p>
+
+            <p><strong>Sinclair:</strong> I'm a photography assistant and I study part-time at Tulane. I work for Arthur Whitmore—he's a magazine photographer, does fashion and lifestyle work for various publications. We were heading to Atlanta for a shoot with a clothing manufacturer. Arthur's in Compartment 6, right next to me.</p>
+
+            <p><strong>Detective Ross:</strong> How long have you worked for Mr. Whitmore?</p>
+
+            <p><strong>Sinclair:</strong> About eight months. I started as his darkroom assistant last spring, and now I travel with him on assignments. I manage equipment, help with lighting, keep track of shot lists—that sort of thing.</p>
+
+            <p><strong>Detective Ross:</strong> Walk me through your evening. What time did you board?</p>
+
+            <p><strong>Sinclair:</strong> Arthur and I boarded around 7:15 PM. We got our equipment loaded—several cases of camera gear and lighting—and then we each went to our compartments to settle in. We met in the dining car at 9:00 for dinner. We went over the shoot details for Atlanta—what we needed to accomplish, the schedule, the client's specifications.</p>
+
+            <p><strong>Detective Ross:</strong> How long were you in the dining car?</p>
+
+            <p><strong>Sinclair:</strong> Until about 10:30, I think. Maybe a little later. Arthur ordered coffee and we just talked through the plans. Then we both headed back to the sleeper car.</p>
+
+            <p><strong>Detective Ross:</strong> Did you notice the other passengers when you returned to your car?</p>
+
+            <p><strong>Sinclair:</strong> <span class="highlighted">Yes, actually. That's when I first noticed Miss Marchand—the victim. She was in the corridor outside her compartment, Compartment 7. She was talking with another woman. They seemed... friendly. Like they knew each other.</span></p>
+
+            <p><strong>Detective Ross:</strong> This is very important, Miss Sinclair. Can you describe this other woman?</p>
+
+            <p><strong>Sinclair:</strong> <span class="highlighted">She was probably in her mid-thirties, dark hair styled in a neat roll, wearing a burgundy traveling suit—very elegant, expensive-looking. She had a calm, composed way about her. I remember thinking she looked sophisticated, like she came from money or high society.</span></p>
+
+            <p><strong>Detective Ross:</strong> Did you hear what they were discussing?</p>
+
+            <p><strong>Sinclair:</strong> <span class="highlighted">Just bits and pieces as I passed by. The woman in burgundy said something like, "It's been such a long time," and Miss Marchand responded with something about "catching up on old times." They seemed happy to see each other—like old friends reuniting. It didn't seem tense or argumentative at all.</span></p>
+
+            <p><strong>Detective Ross:</strong> What time was this conversation taking place?</p>
+
+            <p><strong>Sinclair:</strong> I'd say around 10:45 PM. Arthur and I got back to the sleeper car, and I passed them in the corridor on my way to my compartment.</p>
+
+            <p><strong>Detective Ross:</strong> Did you see where this other woman went after the conversation?</p>
+
+            <p><strong>Sinclair:</strong> <span class="highlighted">I didn't watch—that would have been rude, you know? But I think her compartment was further down the corridor from mine. I was in Compartment 9, near the end of the car. I believe I saw her heading toward the lower-numbered compartments. Maybe Compartment 1 or 2? I'm not certain.</span></p>
+
+            <p><strong>Detective Ross:</strong> This is excellent information, Miss Sinclair. No one else has mentioned seeing anyone with Miss Marchand. Did you see this woman at any other time during the night?</p>
+
+            <p><strong>Sinclair:</strong> No, that was the only time I saw her. After I went into my compartment, I didn't come out again until morning.</p>
+
+            <p><strong>Detective Ross:</strong> Tell me about the rest of your night.</p>
+
+            <p><strong>Sinclair:</strong> I changed into my nightclothes, washed up, and got into bed. I read for a little while—a novel I'd brought along. I turned off my light around midnight. The train movement usually rocks me right to sleep.</p>
+
+            <p><strong>Detective Ross:</strong> Did you hear anything unusual during the night? Voices, movement in the corridor, any sounds that stood out?</p>
+
+            <p><strong>Sinclair:</strong> <span class="highlighted">Actually, yes. I woke up once—I'm not exactly sure what time, maybe around 2:00 or 3:00 in the morning. I heard what sounded like a door closing. Not a slam, just... a gentle click. Like someone trying to be quiet. At the time, I just thought it was another passenger using the washroom or something. I didn't think anything of it and went back to sleep.</span></p>
+
+            <p><strong>Detective Ross:</strong> Could you tell where the sound came from?</p>
+
+            <p><strong>Sinclair:</strong> Not really. It wasn't my door—I know that much. But the sound could have come from anywhere in the car. You know how sounds travel on a train—everything echoes a bit.</p>
+
+            <p><strong>Detective Ross:</strong> Did you hear any voices or sounds of struggle?</p>
+
+            <p><strong>Sinclair:</strong> No, nothing like that. Just that one door sound, and then silence again. Just the train.</p>
+
+            <p><strong>Detective Ross:</strong> When did you next wake up?</p>
+
+            <p><strong>Sinclair:</strong> When I heard the commotion this morning—must have been around 6:45 or 7:00. I heard urgent voices, footsteps in the corridor, the train's emergency whistle. I got dressed quickly and opened my door to see what was happening. That's when the porter told us someone had... died. He asked everyone to stay in their compartments.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Detailed Statement - Part II: Additional Observations</h2>
+        <div class="observation-box">
+            <h3>Critical Witness Observations:</h3>
+            <p><strong>1. Woman in Burgundy Suit:</strong> Seen conversing with victim around 10:45 PM in friendly manner. Described as mid-30s, dark hair, expensive burgundy traveling suit, sophisticated demeanor. Believed to occupy compartment in lower-numbered section (1-3).</p>
+            
+            <p><strong>2. Late-Night Door Sound:</strong> Witness heard door closing quietly at approximately 2:00-3:00 AM. Could not determine exact location within car.</p>
+            
+            <p><strong>3. Victim's Demeanor:</strong> Appeared happy, relaxed, and friendly when observed at 10:45 PM. No signs of distress or concern.</p>
+        </div>
+
+        <div class="statement-text">
+            <p><strong>Detective Ross:</strong> Miss Sinclair, thinking back to when you saw Miss Marchand with this other woman—did either of them have anything in their hands? Drinks, bags, any objects?</p>
+
+            <p><strong>Sinclair:</strong> <span class="highlighted">Now that you mention it, I think the woman in burgundy might have been holding something—maybe a small handbag or clutch? I'm not entirely sure. Miss Marchand wasn't holding anything that I could see. She was wearing a beautiful dressing gown—silk, I think, with a floral pattern.</span></p>
+
+            <p><strong>Detective Ross:</strong> Did you notice any scarves? Either woman wearing or carrying a scarf?</p>
+
+            <p><strong>Sinclair:</strong> I... I don't recall specifically. It was just a brief moment as I passed by. I wasn't really studying them, you know? I was tired and thinking about the next day's shoot.</p>
+
+            <p><strong>Detective Ross:</strong> That's perfectly understandable. How about other passengers? Did you notice anyone else moving around the car that night?</p>
+
+            <p><strong>Sinclair:</strong> Just Arthur—Mr. Whitmore. I saw him go into his compartment right after we got back from dinner. His compartment is Number 6, right between Miss Marchand's Compartment 7 and my Compartment 9. We said goodnight in the corridor.</p>
+
+            <p><strong>Detective Ross:</strong> Did Mr. Whitmore seem to know Miss Marchand?</p>
+
+            <p><strong>Sinclair:</strong> I don't think so. He didn't mention her. Though... wait, he did say something at dinner about photographing jazz performers in New Orleans recently. He might have mentioned photographing someone at a club, but I don't remember if he said it was Miss Marchand specifically.</p>
+
+            <p><strong>Detective Ross:</strong> We'll follow up with Mr. Whitmore about that. One more question, Miss Sinclair. The woman you saw with Miss Marchand—would you recognize her if you saw her again?</p>
+
+            <p><strong>Sinclair:</strong> I think so, yes. I got a pretty good look at her face. She had distinctive features—strong cheekbones, composed expression. I'd remember her.</p>
+
+            <p><strong>Detective Ross:</strong> Excellent. We may ask you to look at some photographs or speak with our sketch artist. Would you be willing to help us create a composite drawing?</p>
+
+            <p><strong>Sinclair:</strong> Absolutely. Anything I can do to help. Detective, do you think this woman in burgundy is... do you think she's involved?</p>
+
+            <p><strong>Detective Ross:</strong> We're following all leads, Miss Sinclair. Your information is very helpful. Is there anything else you can think of—any detail, no matter how small—that might be relevant?</p>
+
+            <p><strong>Sinclair:</strong> Just... I keep thinking about how happy they looked. Miss Marchand and that woman. They seemed genuinely pleased to see each other. It's hard to imagine that just a few hours later, one of them would be... I'm sorry, this is all very upsetting.</p>
+
+            <p><strong>Detective Ross:</strong> Take your time, Miss Sinclair. You're doing very well. This information is invaluable to our investigation.</p>
+        </div>
+
+        <div class="interviewer-note">
+            <strong>Interviewing Officer's Notes (Det. Ross):</strong> Witness is credible, observant, and cooperative. Her account provides CRITICAL new information: an unidentified woman in burgundy was seen with the victim approximately 2 hours before estimated time of death, engaged in friendly conversation. This woman has not been identified in any other witness statements. Physical description and behavioral details suggest person of interest. Witness also reports hearing door closing during critical time window (2:00-3:00 AM). Recommend immediate follow-up: (1) Identify all female passengers in Compartments 1-3, (2) Locate burgundy traveling suit among passenger belongings, (3) Work with sketch artist to create composite drawing, (4) Re-interview all passengers regarding knowledge of this woman. This is our first significant lead.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Investigative Action Items</h2>
+        <div class="statement-text">
+            <p><strong>PRIORITY 1:</strong> Identify woman in burgundy suit - likely occupant of Compartments 1, 2, or 3</p>
+
+            <p><strong>PRIORITY 2:</strong> Schedule witness with police sketch artist to create composite drawing</p>
+
+            <p><strong>PRIORITY 3:</strong> Search all female passengers' luggage for burgundy traveling suit</p>
+
+            <p><strong>PRIORITY 4:</strong> Re-interview passengers in Compartments 1-3 regarding their whereabouts at 10:45 PM</p>
+
+            <p><strong>PRIORITY 5:</strong> Interview Arthur Whitmore regarding his knowledge of victim and his observations</p>
+
+            <p><strong>PRIORITY 6:</strong> Determine exact timeline of door-closing sound heard by witness</p>
+
+            <p><strong>STATUS:</strong> This witness account represents the first direct observation of victim with another passenger. High investigative value.</p>
+        </div>
+    </div>
+
+    <div class="signature-section">
+        <div class="signature-box">
+            <p><strong>Witness Signature:</strong></p>
+            <p style="font-family: 'Brush Script MT', cursive; font-size: 20px; margin: 10px 0;">Margaret A. Sinclair</p>
+            <p>Date: November 14, 1957</p>
+        </div>
+        <div class="signature-box">
+            <p><strong>Interviewing Officer:</strong></p>
+            <p style="font-family: 'Brush Script MT', cursive; font-size: 20px; margin: 10px 0;">Det. Marion Ross</p>
+            <p>Badge #318 | Date: November 14, 1957</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>JACKSON POLICE DEPARTMENT - HOMICIDE DIVISION</p>
+        <p>This detailed statement represents expanded witness account following initial morning statement.</p>
+        <p>Case File: 57-1114-HOMI | Document #15 | Page 1 of 1</p>
+    </div>
+</body>
+</html>
+
+

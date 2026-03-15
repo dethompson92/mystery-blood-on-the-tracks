@@ -1,1 +1,0 @@
-'r car from the rear of the train.</p>\\n            <div class=\\"evidence-image-container\\">\\n                <img src=\\"Images/30_silver_comet_full_train_layout.png\\" class=\\"evidence-image\\" alt=\\"Train Layout\\">\\n                <div class=\\"image-caption\\">Fig 1.1: Silver Comet Full Train Configuration & Car Designa'

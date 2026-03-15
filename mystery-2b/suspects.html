@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suspect Dossiers | Blood on the Tracks | MMC</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/mystery-2b.css">
+    <style>
+        .suspect-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-sm);
+        }
+
+        @media (min-width: 768px) {
+            .suspect-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body class="mystery-2b">
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-container">
+            <a href="../index.html" class="nav-logo">MMC.</a>
+            <div class="nav-links">
+                <a href="investigation.html" class="nav-link">&larr; Hub</a>
+                <a href="suspects.html" class="nav-link active">Persons of Interest</a>
+                <a href="evidence.html" class="nav-link">Evidence Files</a>
+            </div>
+            <button class="hamburger">☰</button>
+        </div>
+    </nav>
+
+    <header class="page-header"
+        style="padding: var(--spacing-lg) 0; text-align: center; border-bottom: 2px double var(--color-primary); margin-bottom: var(--spacing-md);">
+        <div class="container">
+            <h1 style="color: var(--color-tertiary);">Persons of Interest</h1>
+            <p class="mono" style="color: var(--color-gray);">Original 1957 Passenger Manifest & Crew</p>
+        </div>
+    </header>
+
+    <main class="section pt-0">
+        <div class="container">
+
+            <div class="suspect-grid">
+
+                <!-- Suspect 1 -->
+                <div class="dossier-card">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <img src="https://placehold.co/150x150/100805/8B4513?text=E.+Montgomery"
+                            alt="Eleanor Montgomery" class="dossier-image">
+                        <div style="flex: 1; min-width: 200px;">
+                            <h3 style="margin-bottom: 0; color: var(--color-tertiary);">Eleanor Montgomery</h3>
+                            <p class="mono" style="font-size: 0.85rem; color: var(--color-gray);">Age 34 | Socialite
+                                (Passenger, Car 4)</p>
+
+                            <hr style="border: none; border-top: 1px dashed var(--color-primary); margin: 0.5rem 0;">
+
+                            <p style="font-size: 0.9rem;"><strong>Notes (1957):</strong> Seen arguing intensely with
+                                Marchand in the dining car. Refused to state the nature of their relationship. Hired
+                                expensive lawyers immediately.</p>
+
+                            <div class="mt-2">
+                                <span class="suspicion-tag">PUBLIC ALTERCATION</span>
+                                <span class="suspicion-tag">EVASIVE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suspect 2 -->
+                <div class="dossier-card">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <img src="https://placehold.co/150x150/100805/8B4513?text=P.+Kovalenko" alt="Pyotr Kovalenko"
+                            class="dossier-image">
+                        <div style="flex: 1; min-width: 200px;">
+                            <h3 style="margin-bottom: 0; color: var(--color-tertiary);">Pyotr Kovalenko</h3>
+                            <p class="mono" style="font-size: 0.85rem; color: var(--color-gray);">Age 42 | Diplomatic
+                                Attaché</p>
+
+                            <hr style="border: none; border-top: 1px dashed var(--color-primary); margin: 0.5rem 0;">
+
+                            <p style="font-size: 0.9rem;"><strong>Notes (1957):</strong> Soviet national traveling under
+                                diplomatic cover. Marchand was known to deal in recovered European artworks. Suspected
+                                espionage ties.</p>
+
+                            <div class="mt-2">
+                                <span class="suspicion-tag">COLD WAR TIES</span>
+                                <span class="suspicion-tag"
+                                    style="color: var(--color-secondary); border-color: var(--color-secondary);">FLIGHT
+                                    RISK (1957)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suspect 3 -->
+                <div class="dossier-card">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <img src="https://placehold.co/150x150/100805/8B4513?text=T.+Harrison" alt="Thomas Harrison"
+                            class="dossier-image">
+                        <div style="flex: 1; min-width: 200px;">
+                            <h3 style="margin-bottom: 0; color: var(--color-tertiary);">Thomas Harrison</h3>
+                            <p class="mono" style="font-size: 0.85rem; color: var(--color-gray);">Age 29 | Pullman
+                                Porter</p>
+
+                            <hr style="border: none; border-top: 1px dashed var(--color-primary); margin: 0.5rem 0;">
+
+                            <p style="font-size: 0.9rem;"><strong>Notes (1957):</strong> Had master keys to all sleeper
+                                cabins. Found the body. Police report noted blood spray on his uniform cuffs, which he
+                                claimed was from checking for a pulse.</p>
+
+                            <div class="mt-2">
+                                <span class="suspicion-tag">MEANS & OPPORTUNITY</span>
+                                <span class="suspicion-tag">PHYSICAL EVIDENCE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suspect 4 -->
+                <div class="dossier-card">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <img src="https://placehold.co/150x150/100805/8B4513?text=A.+Vance" alt="Arthur Vance"
+                            class="dossier-image">
+                        <div style="flex: 1; min-width: 200px;">
+                            <h3 style="margin-bottom: 0; color: var(--color-tertiary);">Arthur Vance</h3>
+                            <p class="mono" style="font-size: 0.85rem; color: var(--color-gray);">Age 58 | Rival
+                                Appraiser</p>
+
+                            <hr style="border: none; border-top: 1px dashed var(--color-primary); margin: 0.5rem 0;">
+
+                            <p style="font-size: 0.9rem;"><strong>Notes (1957):</strong> Booked the cabin directly
+                                adjacent to Marchand. Long history of professional rivalry. Was carrying a heavily
+                                insured, undisclosed artifact.</p>
+
+                            <div class="mt-2">
+                                <span class="suspicion-tag">PROXIMITY</span>
+                                <span class="suspicion-tag">PROFESSIONAL MOTIVE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../assets/js/nav.js"></script>
+</body>
+
+</html>

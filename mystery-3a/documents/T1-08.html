@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suspect Profile — Dominic Wallace | Mystery 3A</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#FF4D6D;--cyan:#00D4FF;--gold:#FFD700;--dark:#0A0A0F;--card:#12121A;--border:#1E1E2E;--text:#E8E8F0;--muted:#888899;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;}
+  .doc-header{background:linear-gradient(135deg,#1A0A0A 0%,#0A0A0F 100%);border-bottom:3px solid var(--red);padding:2rem;text-align:center;}
+  .show-logo{font-family:'Playfair Display',serif;font-size:1rem;color:var(--cyan);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:0.5rem;}
+  .doc-title{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:#fff;margin-bottom:0.3rem;}
+  .doc-sub{font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--muted);letter-spacing:0.1em;}
+  .tier-badge{display:inline-block;background:var(--red);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;padding:0.3rem 0.9rem;border-radius:2px;margin-bottom:1rem;}
+  .container{max-width:900px;margin:0 auto;padding:2.5rem 2rem;}
+  .suspect-hero{background:linear-gradient(135deg,#1F0505 0%,#0D0D1F 100%);border:2px solid var(--red);border-radius:6px;padding:2rem;margin-bottom:2rem;display:grid;grid-template-columns:220px 1fr;gap:2rem;align-items:start;}
+  .suspect-card{background:rgba(255,77,109,0.07);border:1px solid rgba(255,77,109,0.25);border-radius:6px;padding:1.5rem;text-align:center;}
+  .suspect-label{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--red);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.5rem;}
+  .suspect-name{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:#fff;margin-bottom:0.3rem;}
+  .suspect-role{font-size:0.8rem;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-bottom:1rem;}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;margin-top:1rem;}
+  .stat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:3px;padding:0.4rem;text-align:center;}
+  .slabel{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;display:block;}
+  .sval{font-size:0.82rem;color:var(--text);display:block;margin-top:0.1rem;}
+  .suspect-intro h2{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);margin-bottom:0.8rem;}
+  p{color:var(--muted);font-size:0.9rem;line-height:1.75;margin-bottom:0.8rem;}
+  .section{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.8rem;margin-bottom:1.5rem;}
+  .section-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--cyan);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.8rem;}
+  .info-item{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:4px;padding:0.8rem;}
+  .info-label{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;display:block;margin-bottom:0.2rem;}
+  .info-val{font-size:0.88rem;color:var(--text);}
+  .quote-block{background:rgba(255,77,109,0.06);border-left:3px solid var(--red);padding:1rem 1.2rem;border-radius:0 4px 4px 0;margin:1rem 0;font-style:italic;color:var(--text);font-size:0.9rem;line-height:1.7;}
+  .red-herring-banner{background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.3);border-radius:4px;padding:1rem 1.2rem;font-family:'IBM Plex Mono',monospace;font-size:0.75rem;color:var(--gold);line-height:1.6;margin-bottom:1.5rem;}
+  .timeline-entry{display:flex;gap:1rem;padding:0.8rem 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+  .timeline-entry:last-child{border-bottom:none;}
+  .t-time{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--cyan);white-space:nowrap;min-width:80px;}
+  .t-text{font-size:0.85rem;color:var(--muted);line-height:1.6;}
+  .motive-box{background:rgba(255,77,109,0.07);border:1px solid rgba(255,77,109,0.2);border-radius:6px;padding:1.2rem;margin-top:1rem;}
+  .motive-label{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--red);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:0.6rem;display:block;}
+  .motive-text{font-size:0.88rem;color:var(--text);line-height:1.7;}
+  .case-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+  .meta-item{font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:var(--muted);}
+  .meta-item span{color:var(--text);}
+  @media(max-width:600px){.suspect-hero{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="doc-header">
+  <div class="show-logo">Forever Match · Mystery 3A — The Algorithm Knows</div>
+  <div class="tier-badge">TIER 1 — SUSPECT PROFILE · T1-08</div>
+  <div class="doc-title">Dominic Wallace</div>
+  <div class="doc-sub">FGE-QR-2025-07-0847 · Person of Interest #2 · Contestant · ON-CAMERA THREAT DOCUMENTED</div>
+</div>
+<div class="container">
+  <div class="red-herring-banner">⚠ NOTE TO INVESTIGATORS: Dominic Wallace made an on-camera verbal threat against Solomon Vance less than 3 hours before the estimated time of death. This threat is documented on two production cameras. Cross-reference all evidence carefully before reaching conclusions.</div>
+
+  <div class="suspect-hero">
+    <div class="suspect-card">
+      <div class="suspect-label">Suspect #2 — HIGH PRIORITY</div>
+      <div class="suspect-name">Dominic Wallace</div>
+      <div class="suspect-role">Physical Trainer · Contestant</div>
+      <div class="stat-grid">
+        <div class="stat"><span class="slabel">Age</span><span class="sval">31</span></div>
+        <div class="stat"><span class="slabel">Origin</span><span class="sval">Atlanta, GA</span></div>
+        <div class="stat"><span class="slabel">Ethnicity</span><span class="sval">Black American</span></div>
+        <div class="stat"><span class="slabel">EROS Match</span><span class="sval">Zara Mirza</span></div>
+      </div>
+    </div>
+    <div class="suspect-intro">
+      <h2>Overview</h2>
+      <p>Dominic Wallace, 31, is a personal trainer and former Division II collegiate football player from Atlanta, Georgia. He operates his own personal training business in Charlotte, NC. He is the algorithmic match of contestant Zara Mirza. By all accounts, Dominic applied to <em>Forever Match</em> sincerely — looking for a genuine relationship, not fame or exposure.</p>
+      <p>On camera at 9:47 PM on July 18, 2025 — less than three hours before Solomon Vance's estimated time of death — Dominic confronted Solomon in the pool bar area and made the following documented statement. This is the most explicit verbal threat in the case record.</p>
+    </div>
+  </div>
+
+  <div class="quote-block" style="font-size:1.05rem;border-left-color:var(--red);margin-bottom:1.5rem;">
+    "You're a snake. You play games with real people's feelings. You're dead to me, you know that? <strong>Dead to me.</strong>" <br><span style="font-size:0.75rem;color:var(--muted);font-style:normal;margin-top:0.5rem;display:block;">— Dominic Wallace, directed at Solomon Vance · 9:47 PM · July 18, 2025 · Captured on Production Cameras P-04 and P-07</span>
+  </div>
+
+  <div class="section">
+    <div class="section-title">👤 Background & Personal Profile</div>
+    <div class="info-grid">
+      <div class="info-item"><span class="info-label">Full Name</span><span class="info-val">Dominic James Wallace</span></div>
+      <div class="info-item"><span class="info-label">Hometown</span><span class="info-val">Atlanta, GA</span></div>
+      <div class="info-item"><span class="info-label">Education</span><span class="info-val">Div. II football scholarship (Bethune-Cookman Univ.)</span></div>
+      <div class="info-item"><span class="info-label">Occupation</span><span class="info-val">Personal Trainer / Fitness Business Owner</span></div>
+      <div class="info-item"><span class="info-label">Location</span><span class="info-val">Charlotte, NC</span></div>
+      <div class="info-item"><span class="info-label">Physical</span><span class="info-val">6'2", muscular, close-fade cut, full beard</span></div>
+    </div>
+    <p style="margin-top:1rem;">Dominic's background is athletic and professionally focused. Former collegiate football at the Division II level, now running a successful fitness business. Multiple show staff described him as "the most genuine person on the cast" — someone who treated the show's premise seriously and was visibly invested in building an authentic relationship with his algorithmically matched partner, Zara Mirza.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">⚡ Relationship to Victim & Documented Conflict</div>
+    <p>Dominic's conflict with Solomon Vance stems directly from Solomon's secret interactions with Zara Mirza — Dominic's assigned algorithm match. Dominic discovered that Solomon had been privately meeting with Zara outside of official filming schedules, in apparent violation of the show's contestant interaction protocols.</p>
+    <p>After learning of this, Dominic confronted Solomon on the evening of July 18 in front of witnesses and active production cameras. The confrontation was emotionally charged but not physically violent. Investigators note that Dominic made no physical contact with Solomon during the confrontation and left the area after approximately 90 seconds.</p>
+    <div class="motive-box">
+      <span class="motive-label">🔍 Documented Motive (as known to investigators)</span>
+      <span class="motive-text">Romantic betrayal. Dominic believed Solomon was deliberately undermining his genuine connection with Zara Mirza for personal entertainment or leverage. His verbal threat, while recorded, must be weighed against his physical and emotional profile, his alibi claims, and the broader evidence pattern.</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🕐 Last Known Movements — July 18, 2025</div>
+    <div class="timeline-entry"><span class="t-time">6:00 PM</span><span class="t-text">Day 19 pool event, Roof 15. All contestants present. Observed in multiple camera angles with Zara Mirza.</span></div>
+    <div class="timeline-entry"><span class="t-time">9:47 PM</span><span class="t-text">ON CAMERA: Verbal confrontation with Solomon in the pool bar area. Two cameras document the exchange. Duration: ~90 seconds. Dominic walks away. Victor Delgado is present.</span></div>
+    <div class="timeline-entry"><span class="t-time">10:15 PM</span><span class="t-text">Observed entering Las Brisas Restaurant with other contestants ahead of the scheduled cast dinner.</span></div>
+    <div class="timeline-entry"><span class="t-time">10:35 PM–12:40 AM</span><span class="t-text">At Las Brisas cast dinner. Confirmed by multiple contestant witnesses, two serving staff, one bartender, and the restaurant's internal security camera at 11:52 PM.</span></div>
+    <div class="timeline-entry"><span class="t-time">12:40 AM</span><span class="t-text">Left Las Brisas. Returned to contestant suite, Room 1106. Keycard log confirms entry at 12:44 AM.</span></div>
+    <div class="timeline-entry"><span class="t-time">1:30 AM</span><span class="t-text">In Room 1106 when FGE-QR investigators sent floor-wide notification. Responded immediately.</span></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🗣 Statement to Investigators (Initial)</div>
+    <div class="quote-block">"Yeah, I confronted him. What he was doing wasn't right. But I didn't touch him. I said what I had to say and walked away. I spent the rest of the night at dinner — ask anybody who was there. I had nothing to do with what happened. I'm not that person."</div>
+    <p>Dominic's statement is notable for its directness. He did not deny the confrontation or minimize its intensity. He was forthcoming about the reason — Solomon's behavior with Zara — and volunteered multiple names as alibi witnesses without prompting. He expressed what investigators characterized as "genuine shock and grief" upon learning of Solomon's death.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🔎 Investigator's Notes — Points to Examine</div>
+    <p>· Dominic's verbal threat is the most explicit in the case record — but does it align with behavioral and alibi evidence?</p>
+    <p>· Cross-reference the Las Brisas security camera timestamp at 11:52 PM against the estimated window of Solomon's death (12:05–12:15 AM).</p>
+    <p>· Multiple independent witnesses place Dominic at dinner throughout the blackout window. Do their accounts fully account for the time?</p>
+    <p>· Dominic admits knowing about Solomon's behavior with Zara — who told him, and when? Does the source of his information matter?</p>
+    <p>· Investigators noted Dominic's phone contained personal recordings. He was not asked to surrender the device voluntarily at the initial interview stage.</p>
+  </div>
+
+  <div class="case-meta">
+    <div class="meta-item">Case: <span>FGE-QR-2025-07-0847</span></div>
+    <div class="meta-item">Document: <span>T1-08 · Suspect Profile — Dominic Wallace</span></div>
+    <div class="meta-item">Prepared by: <span>Inv. Dra. Sofía Montoya-Reyes, FGE-QR</span></div>
+    <div class="meta-item">Date: <span>July 19, 2025</span></div>
+  </div>
+</div>
+</body>
+</html>

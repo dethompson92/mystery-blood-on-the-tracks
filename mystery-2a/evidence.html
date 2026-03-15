@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence Files | The Final Prescription | MMC</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/mystery-2a.css">
+    <style>
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--spacing-sm);
+        }
+    </style>
+</head>
+
+<body class="mystery-2a">
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-container">
+            <a href="../index.html" class="nav-logo">MMC.</a>
+            <div class="nav-links">
+                <a href="investigation.html" class="nav-link">&larr; Hub</a>
+                <a href="suspects.html" class="nav-link">Suspects</a>
+                <a href="evidence.html" class="nav-link active">Evidence Files</a>
+            </div>
+            <button class="hamburger">☰</button>
+        </div>
+    </nav>
+
+    <header class="page-header"
+        style="padding: var(--spacing-lg) 0; text-align: center; border-bottom: 1px solid var(--color-slate); margin-bottom: var(--spacing-sm);">
+        <div class="container">
+            <h1>Evidence Archive</h1>
+            <p class="mono" style="color: var(--color-gray);">Case PORTLAND-PD-24-12-092 Materials</p>
+        </div>
+    </header>
+
+    <main class="section pt-0">
+        <div class="container">
+
+            <p class="mb-4" style="color: var(--color-gray);">All 43 recovered documents are available for review. There
+                are no tiered locks on this case; the sheer volume of data is the challenge.</p>
+
+            <div class="evidence-grid" id="evidence-container">
+                <!-- Javascript will populate the 43 files -->
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Modal for Evidence Documents -->
+    <div id="evidence-modal" class="modal">
+        <div class="modal-header">
+            <button class="modal-close" style="color: var(--color-secondary);">&times;</button>
+        </div>
+        <iframe src="about:blank" title="Evidence Document"></iframe>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/nav.js"></script>
+    <script src="../assets/js/evidence-board.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('evidence-container');
+
+            // Programmatically generate the 43 evidence cards to save HTML payload size
+            for (let i = 1; i <= 43; i++) {
+                const docNum = i.toString().padStart(2, '0');
+
+                let title = "Document";
+                if (i <= 5) title = "Police Report";
+                else if (i <= 15) title = "Lab Result";
+                else if (i <= 25) title = "Internal Email";
+                else if (i <= 35) title = "Financial Record";
+                else title = "Witness Transcript";
+
+                const card = document.createElement('a');
+                card.href = `documents/DOC-${docNum}.html`;
+                card.className = 'evidence-card';
+                card.innerHTML = `
+                    <span class="doc-id" style="color: var(--color-secondary);">DOC-${docNum}</span>
+                    <h4>${title} ${docNum}</h4>
+                `;
+                container.appendChild(card);
+            }
+
+            // Manually re-trigger the evidence-board.js logic just for these newly created nodes if needed.
+            // But since evidence-board binds on DOMContentLoaded, and this script runs after DOMContentLoaded,
+            // we will bind the click listener manually for these dynamically created ones.
+            const modal = document.getElementById('evidence-modal');
+            const modalIframe = modal.querySelector('iframe');
+
+            container.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    modalIframe.src = link.getAttribute('href');
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suspect Profile — Rafael Rios | Mystery 3A</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#FF4D6D;--cyan:#00D4FF;--gold:#FFD700;--dark:#0A0A0F;--card:#12121A;--border:#1E1E2E;--text:#E8E8F0;--muted:#888899;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;}
+  .doc-header{background:linear-gradient(135deg,#0A100A 0%,#0A0A1A 100%);border-bottom:2px solid var(--cyan);padding:2rem;text-align:center;}
+  .show-logo{font-family:'Playfair Display',serif;font-size:1rem;color:var(--cyan);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:0.5rem;}
+  .doc-title{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:#fff;margin-bottom:0.3rem;}
+  .doc-sub{font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--muted);}
+  .tier-badge{display:inline-block;background:var(--cyan);color:#000;font-family:'IBM Plex Mono',monospace;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;padding:0.3rem 0.9rem;border-radius:2px;margin-bottom:1rem;}
+  .container{max-width:900px;margin:0 auto;padding:2.5rem 2rem;}
+  .suspect-hero{background:linear-gradient(135deg,#050F10 0%,#0D0D1F 100%);border:2px solid var(--cyan);border-radius:6px;padding:2rem;margin-bottom:2rem;display:grid;grid-template-columns:220px 1fr;gap:2rem;align-items:start;}
+  .suspect-card{background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.2);border-radius:6px;padding:1.5rem;text-align:center;}
+  .suspect-label{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--cyan);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.5rem;}
+  .suspect-name{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:#fff;margin-bottom:0.3rem;}
+  .suspect-role{font-size:0.8rem;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-bottom:1rem;}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;margin-top:1rem;}
+  .stat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:3px;padding:0.4rem;text-align:center;}
+  .slabel{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;display:block;}
+  .sval{font-size:0.82rem;color:var(--text);display:block;margin-top:0.1rem;}
+  .suspect-intro h2{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);margin-bottom:0.8rem;}
+  p{color:var(--muted);font-size:0.9rem;line-height:1.75;margin-bottom:0.8rem;}
+  .section{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.8rem;margin-bottom:1.5rem;}
+  .section-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--cyan);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.8rem;}
+  .info-item{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:4px;padding:0.8rem;}
+  .info-label{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;display:block;margin-bottom:0.2rem;}
+  .info-val{font-size:0.88rem;color:var(--text);}
+  .quote-block{background:rgba(0,212,255,0.05);border-left:3px solid var(--cyan);padding:1rem 1.2rem;border-radius:0 4px 4px 0;margin:1rem 0;font-style:italic;color:var(--text);font-size:0.88rem;line-height:1.7;}
+  .timeline-entry{display:flex;gap:1rem;padding:0.8rem 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+  .timeline-entry:last-child{border-bottom:none;}
+  .t-time{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--cyan);white-space:nowrap;min-width:80px;}
+  .t-text{font-size:0.85rem;color:var(--muted);line-height:1.6;}
+  .motive-box{background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.2);border-radius:6px;padding:1.2rem;margin-top:1rem;}
+  .motive-label{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--cyan);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:0.6rem;display:block;}
+  .motive-text{font-size:0.88rem;color:var(--text);line-height:1.7;}
+  .case-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+  .meta-item{font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:var(--muted);}
+  .meta-item span{color:var(--text);}
+  @media(max-width:600px){.suspect-hero{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="doc-header">
+  <div class="show-logo">Forever Match · Mystery 3A — The Algorithm Knows</div>
+  <div class="tier-badge">TIER 1 — SUSPECT PROFILE · T1-10</div>
+  <div class="doc-title">Rafael Rios</div>
+  <div class="doc-sub">FGE-QR-2025-07-0847 · Person of Interest #4 · Contestant</div>
+</div>
+<div class="container">
+  <div class="suspect-hero">
+    <div class="suspect-card">
+      <div class="suspect-label">Suspect #4</div>
+      <div class="suspect-name">Rafael Rios</div>
+      <div class="suspect-role">Architect · Contestant</div>
+      <div class="stat-grid">
+        <div class="stat"><span class="slabel">Age</span><span class="sval">35</span></div>
+        <div class="stat"><span class="slabel">Origin</span><span class="sval">Guadalajara, Mexico</span></div>
+        <div class="stat"><span class="slabel">Nationality</span><span class="sval">Mexican</span></div>
+        <div class="stat"><span class="slabel">EROS Match</span><span class="sval">Not disclosed</span></div>
+      </div>
+    </div>
+    <div class="suspect-intro">
+      <h2>Overview</h2>
+      <p>Rafael Rios, 35, is an architect from Mexico City who runs a sustainable architecture practice with a focus on eco-conscious residential and commercial design. A UNAM (Universidad Nacional Autónoma de México) Architecture School graduate, he is widely regarded as a rising voice in Latin American sustainable design. He joined <em>Forever Match</em> at the suggestion of his publicist to gain exposure in the US market.</p>
+      <p>Of the six persons of interest, Rafael is the most guarded with investigators. He is measured, polite, and notably careful in his choice of words. His relationship with Solomon Vance is characterized by investigators as "unusual in nature" — the specific details of which Rafael has declined to fully elaborate on.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">👤 Background & Professional Profile</div>
+    <div class="info-grid">
+      <div class="info-item"><span class="info-label">Full Name</span><span class="info-val">Rafael Alejandro Rios Castillo</span></div>
+      <div class="info-item"><span class="info-label">Born</span><span class="info-val">Guadalajara, Jalisco, Mexico</span></div>
+      <div class="info-item"><span class="info-label">Education</span><span class="info-val">UNAM School of Architecture, Mexico City</span></div>
+      <div class="info-item"><span class="info-label">Firm</span><span class="info-val">Rios & Asociados, Mexico City</span></div>
+      <div class="info-item"><span class="info-label">Family</span><span class="info-val">Father prominent Guadalajara businessman; traditional Catholic upbringing</span></div>
+      <div class="info-item"><span class="info-label">Physical</span><span class="info-val">5'11", tan complexion, well-groomed stubble, stylish dresser</span></div>
+    </div>
+    <p style="margin-top:1rem;">Rafael's father is a prominent figure in Guadalajara's business community, and his family background is described as conservative. Multiple people on the show described Rafael as "reserved but charming" and noted that he kept to himself more than most contestants. His stated reason for joining the show — US market exposure for his architecture practice — was consistent across multiple conversations.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">⚡ Relationship to Victim & Documented Conflict</div>
+    <p>Rafael acknowledges knowing Solomon Vance through normal show interactions. He states their relationship was "cordial and unremarkable." However, two crew members independently report observing a private conversation between Solomon and Rafael in the resort corridor on Day 16 that appeared "tense" and left Rafael visibly unsettled.</p>
+    <p>Rafael has not disclosed the subject of this conversation to investigators. When asked directly, he stated: "Solomon talked to a lot of people about a lot of things. I don't think our conversation is relevant to your investigation."</p>
+    <div class="motive-box">
+      <span class="motive-label">🔍 Documented Motive (as known to investigators)</span>
+      <span class="motive-text">Unclear. Rafael's reluctance to describe his private conversation with Solomon and his broadly evasive posture suggest the topic of that conversation was sensitive. Investigators have not yet established the nature of any threat or leverage Solomon may have held over Rafael. This remains an active inquiry.</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🕐 Last Known Movements — July 18, 2025</div>
+    <div class="timeline-entry"><span class="t-time">6:00 PM</span><span class="t-text">Day 19 pool event, Roof 15. Present for approximately 90 minutes before returning to his suite briefly.</span></div>
+    <div class="timeline-entry"><span class="t-time">9:00 PM</span><span class="t-text">Observed at poolside informal gathering. Did not participate in or observe the 9:47 PM confrontation between Dominic and Solomon (confirmed by crew).</span></div>
+    <div class="timeline-entry"><span class="t-time">10:35 PM</span><span class="t-text">Attending cast dinner, Las Brisas Restaurant. Arrived at dinner table. Multiple witnesses confirm presence.</span></div>
+    <div class="timeline-entry"><span class="t-time">12:10 AM</span><span class="t-text">Left dinner early. Stated he had an early video call with a client in Mexico City at 7:00 AM.</span></div>
+    <div class="timeline-entry"><span class="t-time">12:14 AM</span><span class="t-text">Room 1104 keycard log confirms entry at 12:14 AM.</span></div>
+    <div class="timeline-entry"><span class="t-time">7:30 AM</span><span class="t-text">Next keycard activity: exit from Room 1104 at 7:30 AM. (Investigation already underway.)</span></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🗣 Statement to Investigators (Initial)</div>
+    <div class="quote-block">"I was at dinner until around midnight, then I went to my room. I have a client call at seven in the morning. I went to sleep. I heard nothing unusual. I don't know anything about what happened to Solomon. We were not close."</div>
+    <p>Rafael's statement is brief and offers minimal detail beyond his claimed whereabouts. He answered all questions with minimal elaboration and voluntarily provided his room keycard for log verification. Investigators noted his demeanor was "controlled" and "notably unemotional" given the circumstances.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🔎 Investigator's Notes — Points to Examine</div>
+    <p>· What was the subject of the private Day 16 conversation between Rafael and Solomon witnessed by two crew members?</p>
+    <p>· Rafael's keycard log supports his claim to have been in his room from 12:14 AM. But the estimated murder window is 12:05–12:15 AM — very close to his hotel room entry. Does the timing fully exclude him?</p>
+    <p>· Why did Rafael leave dinner ~30 minutes before Kavya (12:10 vs 12:20) and before the dinner was over?</p>
+    <p>· Rafael's claim of a "7 AM client call" is verifiable through his phone or meeting records.</p>
+    <p>· Did Solomon have information about Rafael that would motivate Rafael's compliance — even without explicit payment demands?</p>
+  </div>
+
+  <div class="case-meta">
+    <div class="meta-item">Case: <span>FGE-QR-2025-07-0847</span></div>
+    <div class="meta-item">Document: <span>T1-10 · Suspect Profile — Rafael Rios</span></div>
+    <div class="meta-item">Prepared by: <span>Inv. Dra. Sofía Montoya-Reyes, FGE-QR</span></div>
+    <div class="meta-item">Date: <span>July 19, 2025</span></div>
+  </div>
+</div>
+</body>
+</html>

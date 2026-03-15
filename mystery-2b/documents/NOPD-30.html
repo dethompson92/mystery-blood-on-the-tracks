@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <title>1957 Newspaper Coverage - Mystery #2B</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Old+Standard+TT:wght@400;700&family=UnifrakturMaguntia&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        max-width: 900px; /* Slightly wider for newspaper columns */
+        margin: 0 auto;
+        padding: 40px;
+        background-color: #f5f5dc; /* Sepia / aged newsprint */
+        color: #1a1a1a;
+        font-family: 'Old Standard TT', serif;
+        line-height: 1.4;
+      }
+
+      /* Masthead Styling */
+      .masthead {
+        text-align: center;
+        border-bottom: 4px double #000;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+      }
+
+      .newspaper-name {
+        font-family: 'UnifrakturMaguntia', cursive;
+        font-size: 56px;
+        margin: 0;
+        line-height: 1;
+      }
+
+      .meta-bar {
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+        padding: 4px 0;
+        margin-top: 10px;
+        display: flex;
+        justify-content: space-between;
+        font-family: 'Playfair Display', serif;
+        font-weight: bold;
+        font-size: 14px;
+        text-transform: uppercase;
+      }
+
+      /* Article Styling */
+      .article-container {
+        margin-bottom: 50px;
+        border-bottom: 2px solid #555;
+        padding-bottom: 30px;
+      }
+
+      .headline-lg {
+        font-family: 'Playfair Display', serif;
+        font-weight: 900;
+        font-size: 38px;
+        line-height: 1.1;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      .headline-md {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 1.2;
+        margin-bottom: 8px;
+        text-transform: uppercase;
+      }
+
+      .subhead {
+        font-family: 'Old Standard TT', serif;
+        font-style: italic;
+        font-size: 18px;
+        text-align: center;
+        margin-bottom: 15px;
+      }
+
+      .byline {
+        font-weight: bold;
+        font-size: 12px;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        text-align: center;
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+        padding: 3px 0;
+        display: inline-block;
+      }
+
+      /* Column Layouts */
+      .cols-3 {
+        column-count: 3;
+        column-gap: 20px;
+        column-rule: 1px solid #ccc;
+        text-align: justify;
+      }
+
+      .cols-2 {
+        column-count: 2;
+        column-gap: 30px;
+        column-rule: 1px solid #ccc;
+        text-align: justify;
+      }
+
+      .drop-cap {
+        float: left;
+        font-family: 'Playfair Display', serif;
+        font-size: 48px;
+        line-height: 0.8;
+        padding-right: 5px;
+        font-weight: bold;
+      }
+
+      /* Special Elements */
+      .pull-quote {
+        border-top: 2px solid #000;
+        border-bottom: 2px solid #000;
+        font-family: 'Playfair Display', serif;
+        font-size: 18px;
+        font-style: italic;
+        text-align: center;
+        padding: 10px;
+        margin: 15px 0;
+        background-color: #eee8aa; /* Slight yellow tint */
+        break-inside: avoid;
+      }
+
+      .photo-box {
+        background-color: #ddd;
+        border: 1px solid #000;
+        padding: 40px;
+        text-align: center;
+        margin: 10px 0 10px 10px;
+        float: right;
+        width: 180px;
+        font-size: 11px;
+        font-style: italic;
+      }
+
+      .ad-box {
+        border: 2px solid #000;
+        padding: 10px;
+        margin: 20px 0;
+        text-align: center;
+        font-family: sans-serif;
+        background: #fff;
+        break-inside: avoid;
+      }
+
+      .ad-title {
+        font-weight: 900;
+        text-transform: uppercase;
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+
+      .news-brief {
+        background-color: #e0e0e0;
+        padding: 10px;
+        border: 1px solid #999;
+        margin-top: 20px;
+        font-size: 12px;
+        break-inside: avoid;
+      }
+
+      /* Obituary Styling */
+      .obit-box {
+        border: 4px double #000;
+        padding: 20px;
+        background-color: #fff;
+      }
+    /* ========================================
+   PRINT-OPTIMIZED CSS
+   Saves ink, prevents cutoff, controls page breaks
+   ======================================== */
+@page {
+  margin: 0.5in !important;
+}
+@media print {
+  /* Reset to printer-friendly colors */
+  body {
+    background-color: white !important;
+    background: white !important;
+    color: black !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove all dark backgrounds and shadows */
+  .document-container,
+  .header-box,
+  table,
+  th,
+  td,
+  div,
+  section {
+    background-color: white !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-color: black !important;
+  }
+
+  /* Ensure text is always black */
+  h1, h2, h3, h4, h5, h6, p, li, td, th, span, div {
+    color: black !important;
+  }
+
+  /* Keep ONLY red stamps visible (but lighter) */
+  .stamp {
+    color: #c0392b !important;
+    border-color: #c0392b !important;
+    opacity: 0.6 !important;
+    background: transparent !important;
+  }
+
+  /* Remove colored highlight backgrounds - keep border only */
+  .evidence-highlight,
+  .sig-critical,
+  .sig-supporting,
+  .sig-context {
+    background-color: white !important;
+    background: white !important;
+    border-left-width: 3px !important;
+    border-left-color: black !important;
+  }
+
+  /* Simplify evidence tags for printing */
+  .evidence-tag {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+
+  /* Control page breaks - prevent awkward splits */
+  table {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group; /* Repeat header on each page */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Keep related content together */
+  .evidence-highlight,
+  .signature-block,
+  .header-meta {
+    page-break-inside: avoid;
+  }
+
+  /* Remove unnecessary spacing for print */
+  .document-container {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Ensure tables fit on page */
+  table {
+    width: 100% !important;
+    font-size: 11pt !important;
+  }
+
+  th, td {
+    padding: 6pt !important;
+  }
+
+  /* Adjust font sizes for readability */
+  body {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  h1 {
+    font-size: 18pt !important;
+  }
+
+  h2 {
+    font-size: 14pt !important;
+  }
+
+  /* Show URLs for links (optional - comment out if not wanted) */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  /* Hide elements that shouldn't print */
+  .no-print {
+    display: none !important;
+  }
+}
+</style>
+  </head>
+  <body>
+    <!-- ISSUE 1: INITIAL DISCOVERY -->
+    <div class="masthead">
+      <h1 class="newspaper-name">Jackson Daily News</h1>
+      <div class="meta-bar">
+        <span>Vol. 65, No. 312</span>
+        <span>Friday, November 15, 1957</span>
+        <span>Price: 5 Cents</span>
+      </div>
+    </div>
+
+    <div class="article-container">
+      <h2 class="headline-lg">JAZZ SINGER FOUND DEAD ABOARD LUXURY TRAIN</h2>
+      <div class="subhead">Police Suspect Foul Play in Death of Vocalist Vivienne Marchand</div>
+
+      <div style="text-align: center">
+        <div class="byline">By CLARENCE MITCHELL, Staff Writer</div>
+      </div>
+
+      <div class="cols-3">
+        <span class="drop-cap">J</span>ACKSON, Miss. — Tragedy struck the rails of the Seaboard Air Line Railroad early
+        yesterday morning when the body of acclaimed jazz vocalist Vivienne Marchand, 32, was discovered in her private
+        compartment aboard the Silver Comet passenger train. <br /><br />
+        Authorities in Jackson have detained the train and its passengers while an investigation is underway. Police
+        Chief Roy Thornton confirmed that the death is being treated as a "probable homicide," though he declined to
+        elaborate on the cause of death pending a coroner’s report.
+        <br /><br />
+        Miss Marchand, a French-born chanteuse known for her sultry voice and glamorous stage presence, was traveling
+        from Chicago to New Orleans for a highly anticipated engagement at The Blue Moon club in the French Quarter. She
+        was discovered at approximately 6:45 a.m. by a Pullman porter attempting to deliver a wake-up call.
+
+        <div class="pull-quote">"We are shocked and devastated by this tragedy on our line."</div>
+
+        <p>
+          "The door was locked from the inside," stated a railroad official who wished to remain anonymous. "The porter
+          had to use his master key. It was a terrible shock."
+        </p>
+
+        <p>
+          Passengers in the sleeper car "Magnolia" reported hearing nothing unusual during the night as the train
+          traversed Tennessee and Mississippi. Among those detained for questioning is Mr. Vincent DeLuca, 47, a New
+          Orleans nightclub owner and Miss Marchand’s fiancé.
+        </p>
+
+        <p>
+          Miss Marchand fled war-torn Paris in 1943 and built a successful career in the jazz clubs of Chicago and New
+          York. Her sudden death has sent shockwaves through the music community.
+        </p>
+
+        <div class="news-brief">
+          <strong>LITTLE ROCK UPDATE:</strong>
+          Federal troops remain at Central High School as integration efforts continue under President Eisenhower's
+          order. Tensions reported calm but high.
+        </div>
+      </div>
+    </div>
+
+    <!-- ISSUE 2: INVESTIGATION UPDATE -->
+    <div class="meta-bar" style="margin-bottom: 20px">
+      <span>Monday, November 18, 1957</span>
+      <span>Jackson Daily News</span>
+      <span>Page 3</span>
+    </div>
+
+    <div class="article-container">
+      <h2 class="headline-md">POLICE BAFFLED IN TRAIN MURDER CASE</h2>
+      <div class="subhead">"Locked Room Mystery" Stumps Investigators; Weapon Missing</div>
+
+      <div class="cols-2">
+        <div class="photo-box">
+          [PHOTO OF TRAIN]<br />
+          The Silver Comet sitting at the station where the investigation continues.
+        </div>
+        <span class="drop-cap">I</span>NVESTIGATORS admitted yesterday that they face a baffling puzzle in the death of
+        Vivienne Marchand. Coroner Dr. A.J. Taggart confirmed that the singer died of strangulation, likely between 2:00
+        a.m. and 4:00 a.m. Thursday. <br /><br />
+        "The peculiar aspect," stated Detective James Holloway of the Jackson Police Department, "is that the
+        compartment door was bolted from the inside. There is no other point of entry."
+        <br /><br />
+        Police have interviewed over 30 passengers and crew members. A thorough search of the train failed to produce
+        the murder weapon, believed to be a burgundy and gold silk scarf belonging to the victim.
+        <br /><br />
+        "We are pursuing several leads," Holloway insisted, brushing aside rumors that the case had hit a dead end. Mr.
+        Vincent DeLuca, the victim's fiancé, was questioned extensively and released late Saturday. He maintains he was
+        in the lounge car during the critical hours.
+        <br /><br />
+        Miss Marchand’s luggage showed no signs of robbery. Her jewelry and cash were untouched, leading police to rule
+        out theft as a motive. This leaves a chilling question: Who wanted the glamorous songstress dead?
+      </div>
+    </div>
+
+    <!-- ISSUE 3: WITNESS APPEAL -->
+    <div class="masthead" style="border-top: 4px double #000; margin-top: 40px">
+      <h1 class="newspaper-name" style="font-size: 42px">The Times-Picayune</h1>
+      <div class="meta-bar">
+        <span>Serving New Orleans Since 1837</span>
+        <span>Monday, November 25, 1957</span>
+        <span>Weather: Cold, High 48°</span>
+      </div>
+    </div>
+
+    <div class="article-container">
+      <h2 class="headline-lg">POLICE SEEK "MYSTERY WOMAN" IN TRAIN MURDER</h2>
+      <div class="subhead">$500 Reward for Information Leading to Identification</div>
+
+      <div class="cols-3">
+        <span class="drop-cap">N</span>EW ORLEANS — Police have issued an urgent appeal for a woman seen speaking with
+        murder victim Vivienne Marchand hours before her death. <br /><br />
+        A witness aboard the Silver Comet has described a woman in a "distinctive burgundy suit" conversing with Miss
+        Marchand near her compartment around 10:45 p.m. on the night of the murder. This woman has not come forward, and
+        her name does not appear on the official passenger manifest under that description.
+        <br /><br />
+        "This woman may have critical information regarding the victim's state of mind or final movements," said
+        Detective Holloway. "We urge her to contact authorities immediately."
+
+        <div class="ad-box">
+          <div class="ad-title">LUCKY STRIKE</div>
+          <p>IT'S TOASTED<br />Light up a Lucky, it's light-up time!</p>
+        </div>
+
+        <p>
+          A reward of $500 is being offered for information leading to the identification of this mystery woman. She is
+          described as white, blonde, petite, and approximately 30 years of age.
+        </p>
+
+        <p>
+          The train had stopped in Memphis shortly before the sighting. Investigators are verifying if the woman could
+          have boarded or disembarked at intermediate stops, though conductor logs show no such passenger.
+        </p>
+      </div>
+    </div>
+
+    <!-- ISSUE 4: PROGRESS REPORT -->
+    <div class="meta-bar">
+      <span>Friday, December 20, 1957</span>
+      <span>Jackson Daily News</span>
+      <span>Page 5</span>
+    </div>
+
+    <div class="article-container">
+      <h2 class="headline-md">TRAIN MURDER INVESTIGATION CONTINUES</h2>
+      <div class="cols-2">
+        <span class="drop-cap">O</span>NE MONTH after the shocking murder of Vivienne Marchand, police admit that new
+        leads are scarce. <br /><br />
+        "We have interviewed every passenger from Car 7 multiple times," said Chief Thornton. "We have checked alibis in
+        three states. It is a frustrating case."
+        <br /><br />
+        The lack of physical evidence continues to hamper efforts. The missing scarf—the alleged murder weapon—has never
+        been found. Without it, linking a suspect to the crime is proving difficult.
+        <br /><br />
+        Miss Marchand was laid to rest in Chicago on November 20th. Friends described her as a "talented, beloved
+        performer" who had no known enemies. "She lived for her music," said a fellow musician. "It makes no sense."
+      </div>
+    </div>
+
+    <!-- ISSUE 5: CASE GOING COLD -->
+    <div class="meta-bar">
+      <span>Wednesday, January 15, 1958</span>
+      <span>Jackson Daily News</span>
+      <span>Page 2</span>
+    </div>
+
+    <div class="article-container">
+      <h2 class="headline-md">MARCHAND CASE GROWS COLD</h2>
+      <div class="cols-2">
+        <span class="drop-cap">T</span>WO MONTHS have passed, and the trail of the "Silver Comet Killer" has grown ice
+        cold. <br /><br />
+        Investigators express private frustration with the case. "Without the weapon or a positive identification of the
+        mystery woman, our hands are tied," a source close to the investigation revealed.
+        <br /><br />
+        Witnesses have scattered across the country, making follow-up interviews nearly impossible. The "Locked Room"
+        nature of the crime has led some to dub it a "perfect crime," a label police vehemently reject.
+        <br /><br />
+        "We are not closing the file," Det. Holloway insisted. "But active daily investigation is being scaled back."
+      </div>
+    </div>
+
+    <!-- ISSUE 6: CASE CLOSURE -->
+    <div class="meta-bar">
+      <span>Friday, February 28, 1958</span>
+      <span>Jackson Daily News</span>
+      <span>Final Edition</span>
+    </div>
+
+    <div class="article-container">
+      <h2 class="headline-lg">TRAIN MURDER CASE OFFICIALLY CLOSED UNSOLVED</h2>
+
+      <div class="cols-3">
+        <span class="drop-cap">A</span>FTER 107 DAYS of exhaustive investigation, the Jackson Police Department has
+        officially suspended active inquiry into the murder of Vivienne Marchand. <br /><br />
+        "We have exhausted every avenue," stated Detective James Holloway in a press conference yesterday. "We have
+        chased every lead, interviewed every witness, and analyzed every scrap of evidence. At this time, we have
+        insufficient evidence to charge any individual."
+        <br /><br />
+        The investigation clocked over 200 man-hours and spanned four states. Yet, the killer of the 32-year-old jazz
+        singer remains free.
+
+        <div class="pull-quote">"Perhaps someday, new evidence will emerge to shine a light on the truth."</div>
+
+        <p>
+          The Seaboard Air Line Railroad has resumed normal operations. Mr. Vincent DeLuca, the victim's fiancé, has
+          announced the establishment of a memorial fund for young musicians in Miss Marchand's name.
+        </p>
+
+        <p>"I will never stop hoping for justice," DeLuca told reporters. "Vivienne deserves that."</p>
+
+        <p>
+          For now, however, the mystery of what happened in Compartment 7 remains a secret known only to the killer—and
+          the silent rails of the Silver Comet.
+        </p>
+      </div>
+    </div>
+
+    <!-- ARTICLE 7: OBITUARY -->
+    <div class="obit-box">
+      <div style="text-align: center; border-bottom: 1px solid #000; margin-bottom: 15px">
+        <h3>OBITUARY</h3>
+        <em>Chicago Tribune, November 17, 1957</em>
+      </div>
+
+      <div style="column-count: 2; column-gap: 30px; font-size: 13px; text-align: justify">
+        <div class="photo-box" style="width: 100px; float: left; margin: 0 15px 10px 0; padding: 20px">[PHOTO]</div>
+        <strong>MARCHAND, Vivienne (1925-1957)</strong>
+        <br /><br />
+        Vivienne Marie Marchand, 32, passed away suddenly on November 14, 1957. Born in Paris, France, she emigrated to
+        the United States in 1943.
+        <br /><br />
+        A gifted vocalist, she graced the stages of Chicago's finest jazz clubs and was renowned for her interpretations
+        of French chansons. She was traveling to New Orleans to begin a new chapter of her life and career.
+        <br /><br />
+        She is survived by her parents, Pierre and Solange Marchand of Lyon, France, and her fiancé, Mr. Vincent DeLuca
+        of New Orleans.
+        <br /><br />
+        A memorial service will be held at St. James Cathedral this Tuesday. Her voice was silenced too soon, but her
+        melody lingers on.
+      </div>
+    </div>
+  </body>
+</html>
+
+

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Transcript - Charlotte Devereaux (2024)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            color: #2c2c2c;
+            max-width: 950px;
+            margin: 40px auto;
+            padding: 40px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.15);
+        }
+        .header {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            padding: 30px;
+            margin: -40px -40px 30px -40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 28px;
+            margin: 10px 0;
+        }
+        .badge {
+            display: inline-block;
+            background-color: #155724;
+            color: white;
+            padding: 8px 20px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 10px 20px;
+            margin: 25px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-left: 5px solid #dc3545;
+        }
+        .label {font-weight: bold; color: #dc3545;}
+        .transcript {
+            background-color: #fefefe;
+            border: 1px solid #dee2e6;
+            padding: 25px;
+            line-height: 2.0;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+        }
+        .speaker {font-weight: bold; color: #1e3c72;}
+        .emphasis {background-color: #fff3cd; padding: 2px 5px;}
+        .note-box {
+            background-color: #d1ecf1;
+            border-left: 5px solid #0c5460;
+            padding: 20px;
+            margin: 25px 0;
+            font-style: italic;
+        }
+    /* ========================================
+   PRINT-OPTIMIZED CSS
+   Saves ink, prevents cutoff, controls page breaks
+   ======================================== */
+@page {
+  margin: 0.5in !important;
+}
+@media print {
+  /* Reset to printer-friendly colors */
+  body {
+    background-color: white !important;
+    background: white !important;
+    color: black !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove all dark backgrounds and shadows */
+  .document-container,
+  .header-box,
+  table,
+  th,
+  td,
+  div,
+  section {
+    background-color: white !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-color: black !important;
+  }
+
+  /* Ensure text is always black */
+  h1, h2, h3, h4, h5, h6, p, li, td, th, span, div {
+    color: black !important;
+  }
+
+  /* Keep ONLY red stamps visible (but lighter) */
+  .stamp {
+    color: #c0392b !important;
+    border-color: #c0392b !important;
+    opacity: 0.6 !important;
+    background: transparent !important;
+  }
+
+  /* Remove colored highlight backgrounds - keep border only */
+  .evidence-highlight,
+  .sig-critical,
+  .sig-supporting,
+  .sig-context {
+    background-color: white !important;
+    background: white !important;
+    border-left-width: 3px !important;
+    border-left-color: black !important;
+  }
+
+  /* Simplify evidence tags for printing */
+  .evidence-tag {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+
+  /* Control page breaks - prevent awkward splits */
+  table {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group; /* Repeat header on each page */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Keep related content together */
+  .evidence-highlight,
+  .signature-block,
+  .header-meta {
+    page-break-inside: avoid;
+  }
+
+  /* Remove unnecessary spacing for print */
+  .document-container {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Ensure tables fit on page */
+  table {
+    width: 100% !important;
+    font-size: 11pt !important;
+  }
+
+  th, td {
+    padding: 6pt !important;
+  }
+
+  /* Adjust font sizes for readability */
+  body {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  h1 {
+    font-size: 18pt !important;
+  }
+
+  h2 {
+    font-size: 14pt !important;
+  }
+
+  /* Show URLs for links (optional - comment out if not wanted) */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  /* Hide elements that shouldn't print */
+  .no-print {
+    display: none !important;
+  }
+}
+</style>
+</head>
+<body>
+    <div class="header">
+        <h1>NOPD Cold Case Unit</h1>
+        <p>Suspect Interview Transcript</p>
+        <div class="badge">CONFESSION OBTAINED</div>
+    </div>
+
+    <div class="info-grid">
+        <div class="label">Case Number:</div>
+        <div>NOPD-COLD-2024-0847</div>
+        
+        <div class="label">Interview Subject:</div>
+        <div>Charlotte "Lottie" Devereaux</div>
+        
+        <div class="label">Date of Birth:</div>
+        <div>March 17, 1929 (Age 95)</div>
+        
+        <div class="label">Interview Date:</div>
+        <div>November 18, 2024</div>
+        
+        <div class="label">Interview Location:</div>
+        <div>Ochsner Medical Center, Room 412 (Subject hospitalized, terminal cancer diagnosis)</div>
+        
+        <div class="label">Interviewing Officers:</div>
+        <div>Det. Lt. Sarah Chen, Det. Marcus Williams</div>
+        
+        <div class="label">Legal Representation:</div>
+        <div>Subject declined attorney (competent, informed decision)</div>
+        
+        <div class="label">Recording:</div>
+        <div>Audio/Video recorded with subject's consent</div>
+    </div>
+
+    <div class="transcript">
+        <p><span class="speaker">Det. Chen:</span> Ms. Devereaux, you've been read your rights and you understand that you're not obligated to speak with us?</p>
+
+        <p><span class="speaker">Devereaux:</span> Yes. But I want to talk. I've waited sixty-seven years. I'm dying anyway. It's time.</p>
+
+        <p><span class="speaker">Det. Chen:</span> We recovered a trunk from your residence. Your nephew William turned it over. Do you know what we found?</p>
+
+        <p><span class="speaker">Devereaux:</span> [Long pause] The scarf. Vivienne's scarf. And the letters. I kept everything. I couldn't... I couldn't let her go.</p>
+
+        <p><span class="speaker">Det. Chen:</span> Ms. Devereaux, I need to ask you directly. <span class="emphasis">Did you kill Vivienne Marchand on November 14, 1957, aboard the Silver Comet train?</span></p>
+
+        <p><span class="speaker">Devereaux:</span> [Crying] Yes. God forgive me, yes. I killed her.</p>
+
+        <p><span class="speaker">Det. Williams:</span> Can you tell us what happened?</p>
+
+        <p><span class="speaker">Devereaux:</span> We were in love. For three years, we were together. Secret, always secret. She was Vivienne Marchand, the jazz singer. I was Charlotte Devereaux, the shipping heiress. Two women couldn't... we couldn't be together openly. Not then. It was illegal. We could have been arrested, institutionalized. Our families would have disowned us. Her career would have been destroyed.</p>
+
+        <p><span class="speaker">Det. Chen:</span> But something changed?</p>
+
+        <p><span class="speaker">Devereaux:</span> Vincent. Vincent DeLuca. She got engaged to him. Said she had to marry, had to have a normal life. Said we could still see each other in secret, as "friends." But I knew. Once she married him, I would lose her forever. [Pause] And I was terrified she would tell him about us. About me. In 1957, that would have destroyed my entire life.</p>
+
+        <p><span class="speaker">Det. Chen:</span> So you followed her onto the train?</p>
+
+        <p><span class="speaker">Devereaux:</span> I bought a ticket for the same train. First-class sleeper, two compartments away from hers. I don't know what I was planning. I just... I needed to see her. To talk to her. To make her understand.</p>
+
+        <p><span class="speaker">Det. Chen:</span> A witness saw you talking with her in the corridor around 10:45 PM.</p>
+
+        <p><span class="speaker">Devereaux:</span> Yes. I went to her compartment. She was surprised to see me, but she invited me in. We talked. She was wearing that scarf—the one I'd given her for her birthday in '55. Gold and burgundy, her favorite colors. She said she still loved me, but she had to marry Vincent. Society demanded it. Her career demanded it. She begged me to understand.</p>
+
+        <p><span class="speaker">Det. Chen:</span> What happened next?</p>
+
+        <p><span class="speaker">Devereaux:</span> [Long pause, crying] I left around 11:30. Went back to my compartment. I couldn't sleep. I kept thinking about losing her. About her with him. About what would happen if she told him about me. Around 3:00 in the morning, I... I went back.</p>
+
+        <p><span class="speaker">Det. Williams:</span> You went back to her compartment?</p>
+
+        <p><span class="speaker">Devereaux:</span> She'd told me she never locked her door until she was ready to sleep. Said it made her feel less alone on the train. The door was unlocked. I went in. She was asleep. <span class="emphasis">The scarf was on her bedside table. I picked it up. I don't remember deciding. I just... I was standing over her with the scarf in my hands, and then I was wrapping it around her neck.</span></p>
+
+        <p><span class="speaker">Det. Chen:</span> Did she wake up? Did she struggle?</p>
+
+        <p><span class="speaker">Devereaux:</span> [Sobbing] She opened her eyes. She looked at me. She tried to say my name, but she couldn't. I pulled tighter. I kept thinking, "If I can't have you, he can't either. No one can." It was over in maybe two minutes. She stopped moving. Her eyes were still open, looking at me.</p>
+
+        <p><span class="speaker">Det. Williams:</span> What did you do after?</p>
+
+        <p><span class="speaker">Devereaux:</span> I stood there for a long time. Maybe ten minutes. I couldn't believe what I'd done. Then I realized I had to leave. I took the scarf—I couldn't leave it there. I locked her door from the inside using the privacy latch, then I left and closed the door behind me. The corridor was empty. Everyone was asleep. I went back to my compartment and put the scarf in my luggage.</p>
+
+        <p><span class="speaker">Det. Chen:</span> You locked the door from inside. How?</p>
+
+        <p><span class="speaker">Devereaux:</span> The privacy latch. You can engage it and then close the door and it stays latched. I'd learned that trick when I was young, sneaking out of my parents' house. Same type of latch.</p>
+
+        <p><span class="speaker">Det. Chen:</span> The next morning, when the police came?</p>
+
+        <p><span class="speaker">Devereaux:</span> I'd changed into different clothes. I'd been wearing the burgundy suit—I put that in my trunk, at the bottom. When they interviewed me, I said I didn't know her, had never met her. They had no reason not to believe me. No one knew about our relationship. It was perfectly secret. I was just another passenger.</p>
+
+        <p><span class="speaker">Det. Williams:</span> Why did you keep the scarf? The letters? Why not destroy them?</p>
+
+        <p><span class="speaker">Devereaux:</span> [Whispers] Because I loved her. Even after what I did, I loved her. The trunk was my shrine to her. To us. To the only real love I ever had. I locked it away in 1958 and I never opened it again. I couldn't bear to see it, but I couldn't bear to destroy it either. It was all I had left of her.</p>
+
+        <p><span class="speaker">Det. Chen:</span> Did you ever feel remorse?</p>
+
+        <p><span class="speaker">Devereaux:</span> Every day for sixty-seven years. I killed the only person I ever loved. I've lived in hell ever since. I never had another relationship. Never let anyone close. I've been dead inside since that night. This cancer is a mercy. I'm ready to face whatever judgment comes.</p>
+
+        <p><span class="speaker">Det. Chen:</span> Is there anything else you want to tell us?</p>
+
+        <p><span class="speaker">Devereaux:</span> [Very quiet] Tell her family I'm sorry. Tell them she was loved. Tell them that what I did was unforgivable, but it came from love twisted into something terrible by a world that wouldn't let us exist. We were victims of that world before I made her a victim of my own desperation. I'm so sorry. I'm so, so sorry.</p>
+    </div>
+
+    <div class="note-box">
+        <strong>Interviewing Officer's Assessment (Det. Lt. Sarah Chen):</strong> Subject provided full, voluntary confession to 1957 murder of Vivienne Marchand. Confession is credible, consistent with physical evidence, and contains details only the perpetrator would know. Subject demonstrated genuine remorse and understanding of the gravity of her actions. Medical staff confirms subject is mentally competent despite terminal illness. Subject died November 24, 2024 (6 days after this interview). Case officially closed with confession obtained.
+    </div>
+
+    <div style="background-color: #155724; color: white; padding: 25px; margin: 35px 0; text-align: center;">
+        <h3 style="margin-top: 0;">CASE STATUS: SOLVED</h3>
+        <p><strong>Perpetrator:</strong> Charlotte "Lottie" Devereaux (Deceased 11/24/2024)</p>
+        <p><strong>Confession Obtained:</strong> November 18, 2024</p>
+        <p><strong>Justice Achieved:</strong> Historical truth established after 67 years</p>
+    </div>
+
+    <div class="footer" style="margin-top: 40px; text-align: center; font-size: 11px; color: #6c757d; border-top: 2px solid #dee2e6; padding-top: 25px;">
+        <p>NEW ORLEANS POLICE DEPARTMENT - COLD CASE UNIT</p>
+        <p>Official Interview Transcript - Confidential</p>
+        <p>Case: NOPD-COLD-2024-0847 | Document #20 | Page 1 of 1</p>
+    </div>
+</body>
+</html>
+
+

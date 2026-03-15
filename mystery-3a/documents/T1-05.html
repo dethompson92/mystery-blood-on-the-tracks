@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informe de Policía Municipal — FGE-QR-2025-07-0847</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@400;600;700&family=IBM+Plex+Mono:wght@400;700&display=swap');
+  :root {
+    --primary: #FF4D6D; --secondary: #00D4FF; --accent: #FFD700;
+    --dark: #0D0D1A; --dark2: #1A1A2E; --light: #FFFFFF;
+    --muted: #A0A0B0; --success: #00E676; --warning: #FF9100;
+    --mx-green: #006847; --mx-red: #CE1126;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--dark); color: var(--light); font-family: 'Inter', Arial, sans-serif; font-size: 15px; line-height: 1.75; }
+
+  /* LANGUAGE TOGGLE */
+  .lang-toggle {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    z-index: 1000;
+    display: flex;
+    gap: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  .lang-btn {
+    padding: 8px 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s, color 0.2s;
+  }
+  .lang-btn.active { background: var(--secondary); color: var(--dark); }
+  .lang-btn:not(.active) { background: rgba(255,255,255,0.08); color: var(--muted); }
+  .lang-btn:hover:not(.active) { background: rgba(255,255,255,0.15); color: var(--light); }
+
+  /* Language visibility */
+  .es { display: block; }
+  .en { display: block; }
+  body.show-es .en { display: none; }
+  body.show-en .es { display: none; }
+
+  /* HEADER — Mexican government style */
+  .gov-header {
+    background: linear-gradient(180deg, #0a1205 0%, #0d0d1a 100%);
+    border-top: 6px solid var(--mx-green);
+    border-bottom: 3px solid rgba(206,17,38,0.6);
+    padding: 36px 60px 28px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    align-items: start;
+  }
+  .gov-seal { font-size: 44px; }
+  .gov-agency {}
+  .agency-name-es {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--light);
+    margin-bottom: 4px;
+  }
+  .agency-sub-es {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+  .agency-name-en {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 6px;
+    font-style: italic;
+  }
+  .case-meta { text-align: right; }
+  .case-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 14px;
+    color: var(--mx-green);
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .case-meta-line {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-bottom: 3px;
+  }
+  .classified-mx {
+    display: inline-block;
+    background: rgba(206,17,38,0.12);
+    border: 1px solid rgba(206,17,38,0.4);
+    color: var(--mx-red);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 2px;
+    padding: 3px 8px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    margin-top: 8px;
+  }
+
+  /* Title band */
+  .title-band {
+    background: rgba(0,104,71,0.12);
+    border-bottom: 1px solid rgba(0,104,71,0.3);
+    padding: 16px 60px;
+  }
+  .doc-title-es {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--light);
+    margin-bottom: 4px;
+  }
+  .doc-title-en {
+    font-size: 13px;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 1px;
+  }
+
+  /* Content */
+  .container { max-width: 900px; margin: 0 auto; padding: 48px 60px 80px; }
+  .section { margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .section:last-child { border-bottom: none; }
+
+  /* Bilingual section */
+  .bilingual-block { margin-bottom: 32px; }
+  .lang-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-bottom: 12px;
+    display: inline-block;
+  }
+  .lang-label.es { background: rgba(0,104,71,0.2); color: #4caf82; }
+  .lang-label.en { background: rgba(0,212,255,0.1); color: var(--secondary); }
+  .section-header-es {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--light);
+    margin-bottom: 16px;
+  }
+  .section-header-en {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 14px;
+    padding-top: 20px;
+    border-top: 1px dashed rgba(0,212,255,0.2);
+    margin-top: 20px;
+  }
+  p, .text-es, .text-en { color: rgba(255,255,255,0.82); margin-bottom: 14px; font-size: 14px; }
+
+  /* Field grid */
+  .field-grid {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 0;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .fl { background: rgba(0,104,71,0.1); border-right: 1px solid rgba(255,255,255,0.08); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 9px 14px; font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: #4caf82; font-weight: 700; display: flex; align-items: center; }
+  .fv { background: rgba(255,255,255,0.02); border-bottom: 1px solid rgba(255,255,255,0.06); padding: 9px 14px; font-size: 13px; color: rgba(255,255,255,0.82); display: flex; align-items: center; }
+  .fl:last-of-type, .fv:last-of-type { border-bottom: none; }
+
+  /* Evidence tags */
+  .evidence-item {
+    background: rgba(255,215,0,0.05);
+    border: 1px solid rgba(255,215,0,0.2);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .ev-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--accent);
+    background: rgba(255,215,0,0.1);
+    border: 1px solid rgba(255,215,0,0.3);
+    padding: 3px 8px;
+    border-radius: 3px;
+    flex-shrink: 0;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+  .ev-desc { font-size: 13px; color: rgba(255,255,255,0.8); }
+  .ev-desc-en { font-size: 12px; color: var(--muted); font-style: italic; margin-top: 4px; }
+
+  /* Officer notes */
+  .officer-note {
+    background: rgba(255,77,109,0.06);
+    border-left: 3px solid var(--primary);
+    padding: 14px 18px;
+    border-radius: 0 6px 6px 0;
+    margin: 16px 0;
+    font-size: 13px;
+    color: rgba(255,255,255,0.82);
+  }
+  .officer-note-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--primary);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  /* Signature block */
+  .sig-block {
+    margin-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    padding-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .sig-name { font-weight: 700; font-size: 14px; margin-bottom: 3px; }
+  .sig-rank { font-size: 12px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; letter-spacing: 1px; }
+  .sig-badge { font-size: 11px; color: var(--muted); }
+
+  /* Footer */
+  .page-footer {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  @media print {
+    body { background: white; color: #111; }
+    .gov-header { background: #f0f5f0; }
+    p, .text-es, .text-en, .ev-desc, .fv { color: #333; }
+    .lang-toggle { display: none; }
+  }
+  @media (max-width: 768px) {
+    .gov-header { grid-template-columns: 1fr; padding: 28px 24px; }
+    .case-meta { text-align: left; }
+    .container { padding: 36px 24px; }
+    .field-grid { grid-template-columns: 1fr; }
+    .fl { border-right: none; }
+    .sig-block { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Language Toggle -->
+<div class="lang-toggle">
+  <button class="lang-btn active" onclick="setLang('both')" id="btn-both">ES + EN</button>
+  <button class="lang-btn" onclick="setLang('es')" id="btn-es">ES</button>
+  <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+</div>
+
+<script>
+function setLang(lang) {
+  document.body.className = lang === 'both' ? '' : 'show-' + lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('btn-' + lang).classList.add('active');
+}
+</script>
+
+<header class="gov-header">
+  <div class="gov-seal">🇲🇽</div>
+  <div class="gov-agency">
+    <div class="agency-name-es">Dirección de Seguridad Pública Municipal de Benito Juárez</div>
+    <div class="agency-sub-es es">Subdirección de Investigación Criminal · Cancún, Quintana Roo</div>
+    <div class="agency-name-en en">Municipal Public Security Department · Benito Juárez, Quintana Roo</div>
+  </div>
+  <div class="case-meta">
+    <div class="case-num">FGE-QR-2025-07-0847</div>
+    <div class="case-meta-line es">Tipo: Muerte Bajo Investigación</div>
+    <div class="case-meta-line en">Type: Death Under Investigation</div>
+    <div class="case-meta-line">Date: July 20, 2025 · 06:45 hrs</div>
+    <div class="case-meta-line">Subinspector: Marco A. Estrada Huerta</div>
+    <div class="classified-mx">INVESTIGACIÓN EN CURSO</div>
+  </div>
+</header>
+
+<div class="title-band">
+  <div class="doc-title-es es">Informe Inicial de Policía — Muerte Bajo Investigación</div>
+  <div class="doc-title-en en">Initial Police Report — Death Under Investigation</div>
+  <div class="doc-title-es en" style="display:block; font-size:12px; color:var(--muted); font-style:italic; margin-top:3px;">Gran Horizonte Resort &amp; Spa, Cancún, Quintana Roo · July 20, 2025</div>
+</div>
+
+<div class="container">
+
+  <!-- DATOS DEL CASO -->
+  <section class="section">
+    <div class="bilingual-block">
+      <span class="lang-label es es">🇲🇽 Español</span>
+      <div class="section-header-es es">I. Datos del Caso</div>
+      <div class="field-grid es">
+        <div class="fl">Número de Caso</div><div class="fv">FGE-QR-2025-07-0847</div>
+        <div class="fl">Fecha y Hora</div><div class="fv">19–20 de julio de 2025 · Cuerpo hallado a la 01:15 hrs</div>
+        <div class="fl">Lugar</div><div class="fv">Gran Horizonte Resort &amp; Spa — Piscina Principal, Zona B, Blvd. Kukulcán Km 14.5, Zona Hotelera, Cancún, Q.R.</div>
+        <div class="fl">Tipo de Caso</div><div class="fv">Muerte bajo investigación — presunto homicidio doloso</div>
+        <div class="fl">Víctima</div><div class="fv">Solomon Vance, masculino, 33 años, nacional estadounidense</div>
+        <div class="fl">Oficiales Respondientes</div><div class="fv">Subinspector Marco A. Estrada Huerta · Agente Lucía Ramírez Ortega</div>
+        <div class="fl">Hora de Llegada</div><div class="fv">01:29 hrs — 7 minutos tras la llamada de emergencia</div>
+        <div class="fl">Jurisdicción Transferida</div><div class="fv">FGE Quintana Roo — Subinspector Estrada como agente a cargo</div>
+      </div>
+
+      <span class="lang-label en en">🇺🇸 English Translation</span>
+      <div class="section-header-en en">I. Case Information</div>
+      <div class="field-grid en">
+        <div class="fl">Case Number</div><div class="fv">FGE-QR-2025-07-0847</div>
+        <div class="fl">Date / Time</div><div class="fv">July 19–20, 2025 · Body discovered at 01:15 AM</div>
+        <div class="fl">Location</div><div class="fv">Gran Horizonte Resort &amp; Spa — Main Pool, Zone B, Blvd. Kukulcán Km 14.5, Hotel Zone, Cancún, Q.R.</div>
+        <div class="fl">Case Type</div><div class="fv">Death under investigation — suspected homicide</div>
+        <div class="fl">Victim</div><div class="fv">Solomon Vance, male, 33, American national</div>
+        <div class="fl">Responding Officers</div><div class="fv">Subinspector Marco A. Estrada Huerta · Officer Lucía Ramírez Ortega</div>
+        <div class="fl">Arrival Time</div><div class="fv">01:29 AM — 7 minutes after emergency call</div>
+        <div class="fl">Jurisdiction</div><div class="fv">FGE Quintana Roo — Subinspector Estrada as lead investigator</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESCRIPCIÓN DE LA ESCENA -->
+  <section class="section">
+    <div class="bilingual-block">
+      <span class="lang-label es es">🇲🇽 Español</span>
+      <div class="section-header-es es">II. Descripción de la Escena del Incidente</div>
+
+      <p class="text-es es">
+        Al llegar a las 01:29 hrs, los agentes encontraron al sujeto previamente extraído del agua por personal 
+        de seguridad del hotel, tendido sobre la cubierta norte de la piscina. El personal de emergencias médicas 
+        ya se encontraba en el lugar intentando maniobras de reanimación. El sujeto fue declarado muerto a las 01:44 hrs.
+      </p>
+      <p class="text-es es">
+        En la cubierta de la piscina, en la esquina noreste, se localizaron una <strong>secadora de cabello</strong> 
+        y una <strong>extensión eléctrica de color naranja</strong>. La secadora se encontraba en posición de encendido 
+        (interruptor en ON). La extensión estaba desconectada del contacto al momento de la llegada de los agentes. 
+        El contacto GFCI ubicado detrás de la barra de la piscina se hallaba en estado de <strong>desactivación manual</strong>, 
+        confirmado por el personal de mantenimiento del hotel.
+      </p>
+      <p class="text-es es">
+        Se observaron <strong>quemaduras visibles en la mano y antebrazo izquierdo</strong> del sujeto fallecido, 
+        consistentes con quemaduras por descarga eléctrica, según observación del paramédico de turno, 
+        Técnico Eduardo Mora Segura.
+      </p>
+
+      <span class="lang-label en en">🇺🇸 English Translation</span>
+      <div class="section-header-en en">II. Scene Description</div>
+
+      <p class="text-en en">
+        Upon arrival at 01:29 AM, officers found the subject had already been extracted from the water by hotel security 
+        staff and was lying on the pool's north deck. Emergency medical personnel were already on scene attempting 
+        resuscitation. The subject was pronounced deceased at 01:44 AM.
+      </p>
+      <p class="text-en en">
+        Located on the pool deck, in the northeast corner, were one (1) <strong>hair dryer</strong> and one (1) 
+        <strong>orange extension cord</strong>. The hair dryer's power switch was in the ON position. The extension cord 
+        was disconnected from the outlet at the time of officer arrival. The GFCI safety outlet behind the pool bar 
+        was found in a <strong>manually disabled state</strong>, confirmed by hotel maintenance staff.
+      </p>
+      <p class="text-en en">
+        <strong>Visible burn marks on the left hand and left forearm</strong> of the deceased were observed by attending 
+        paramedic Eduardo Mora Segura, consistent with electrical contact injury.
+      </p>
+
+      <div class="officer-note">
+        <div class="officer-note-label">Officer Note — Subinspector Estrada</div>
+        The hair dryer and extension cord were immediately secured as potential evidence (items marked EV-001 and EV-002). 
+        The GFCI circuit bypass is significant: this circuit, if functioning, would have automatically cut power to the outlet 
+        within milliseconds of detecting ground fault (i.e., the dryer contacting the water). Its deliberate disabling 
+        indicates prior knowledge of the circuit's protective function. This is not consistent with an accident.
+      </div>
+    </div>
+  </section>
+
+  <!-- EVIDENCIA ASEGURADA -->
+  <section class="section">
+    <div class="bilingual-block">
+      <span class="lang-label es es">🇲🇽 Español</span>
+      <div class="section-header-es es">III. Evidencia Asegurada en la Escena</div>
+      <span class="lang-label en en">🇺🇸 English</span>
+      <div class="section-header-en en">III. Evidence Secured at Scene</div>
+
+      <div class="evidence-item">
+        <div class="ev-tag">EV-001</div>
+        <div>
+          <div class="ev-desc es">Secadora de cabello, negra, marca "ProStyle Production Series" — perteneciente al inventario de producción (no a las habitaciones del hotel). Interruptor en ON.</div>
+          <div class="ev-desc en">Black hair dryer, "ProStyle Production Series" — from production inventory (not guest room issue). Power switch in ON position.</div>
+        </div>
+      </div>
+      <div class="evidence-item">
+        <div class="ev-tag">EV-002</div>
+        <div>
+          <div class="ev-desc es">Extensión eléctrica naranja de 10 metros, calibre 16AWG — perteneciente al inventario de producción. Huellas latentes pendientes de análisis.</div>
+          <div class="ev-desc en">Orange 10-meter, 16AWG extension cord — from production inventory. Latent fingerprints pending analysis.</div>
+        </div>
+      </div>
+      <div class="evidence-item">
+        <div class="ev-tag">EV-003</div>
+        <div>
+          <div class="ev-desc es">Dos vasos de vidrio (vaso rocks): uno vacío en la cubierta norte de la piscina, uno parcialmente consumido en la barra. Residuos consistentes con bebida alcohólica (ron/whisky). Enviados a laboratorio.</div>
+          <div class="ev-desc en">Two rocks glasses — one empty on pool deck, one partially consumed at pool bar. Residue consistent with rum or whiskey. Sent to lab.</div>
+        </div>
+      </div>
+      <div class="evidence-item">
+        <div class="ev-tag">EV-004</div>
+        <div>
+          <div class="ev-desc es">Registro de acceso por tarjeta electrónica (keycard) — zonas A a D del resort, periodo 19:00 hrs 19/07 a 04:00 hrs 20/07. Solicitado y asegurado de la gerencia del hotel. Contenido en análisis.</div>
+          <div class="ev-desc en">Electronic keycard access log — Zones A–D, July 19 19:00 through July 20 04:00. Secured from hotel management. Contents under analysis. <strong>[Note: This log will be made available at Checkpoint 1.]</strong></div>
+        </div>
+      </div>
+      <div class="evidence-item">
+        <div class="ev-tag">EV-005</div>
+        <div>
+          <div class="ev-desc es">Teléfono celular de la víctima (iPhone, sin desbloquear) recuperado de la barra de la piscina. Asegurado y enviado a análisis forense digital.</div>
+          <div class="ev-desc en">Victim's cell phone (iPhone, locked) recovered from pool bar surface. Secured and sent for digital forensic analysis.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OBSERVACIONES INICIALES -->
+  <section class="section">
+    <div class="bilingual-block">
+      <span class="lang-label es es">🇲🇽 Español</span>
+      <div class="section-header-es es">IV. Observaciones del Oficial Investigador</div>
+
+      <p class="text-es es">
+        Con base en la inspección inicial de la escena y los testimonios preliminares del personal del hotel, 
+        el Subinspector Estrada concluye que la muerte del señor Solomon Vance no presenta características 
+        consistentes con accidente ni con suicidio. La desactivación deliberada del circuito de seguridad GFCI, 
+        la presencia de equipo de producción fuera del área de almacenamiento habitual y la interrupción no programada 
+        de las cámaras de vigilancia durante casi tres horas indican la planificación previa de un delito.
+      </p>
+      <p class="text-es es">
+        El caso ha sido clasificado provisionalmente como <strong>homicidio doloso</strong> bajo el 
+        artículo 302 del Código Penal Federal, y está sujeto a investigación por la FGE del Estado de Quintana Roo 
+        con apoyo de la SSPC. Se han notificado autoridades consulares de los Estados Unidos.
+      </p>
+
+      <span class="lang-label en en">🇺🇸 English Translation</span>
+      <div class="section-header-en en">IV. Investigating Officer's Observations</div>
+
+      <p class="text-en en">
+        Based on the initial scene inspection and preliminary statements from hotel staff, Subinspector Estrada 
+        concludes that the death of Solomon Vance is not consistent with accident or suicide. The deliberate 
+        disabling of the GFCI safety circuit, the presence of production equipment outside its designated storage, 
+        and the unscheduled interruption of surveillance cameras for nearly three hours are all consistent with 
+        premeditated criminal action.
+      </p>
+      <p class="text-en en">
+        The case has been provisionally classified as <strong>premeditated homicide (homicidio doloso)</strong> 
+        under Article 302 of the Federal Penal Code, and is under investigation by the FGE of Quintana Roo with 
+        SSPC support. United States Consular authorities have been notified.
+      </p>
+
+      <div class="officer-note">
+        <div class="officer-note-label">Key Investigator Notes — For Investigators</div>
+        1. The extension cord (EV-002) came from the production equipment room — not a guest room. Ask: who had access to that room?<br>
+        2. The GFCI was manually disabled. This is not something that happens by accident. Someone who knew about electrical safety systems did this deliberately.<br>
+        3. The cameras were offline for 2h 45m. This is far too long for a random malfunction, and it perfectly covers the estimated window of death.<br>
+        4. Two drinks were at the pool. Did the victim meet someone there?
+      </div>
+    </div>
+  </section>
+
+  <!-- FIRMA -->
+  <section class="section" style="border-bottom:none;">
+    <div class="bilingual-block">
+      <span class="lang-label es es">🇲🇽 Español</span>
+      <div class="section-header-es es">V. Firma del Oficial</div>
+      <span class="lang-label en en">🇺🇸 English</span>
+      <div class="section-header-en en">V. Officer Signature</div>
+
+      <div class="sig-block">
+        <div>
+          <div class="sig-name">Subinspector Marco A. Estrada Huerta</div>
+          <div class="sig-rank es">Subdirección de Investigación Criminal</div>
+          <div class="sig-rank en">Criminal Investigation Division</div>
+          <div class="sig-badge">Placa #4471 · FGE-QR · 20 de julio de 2025 · 06:45 hrs</div>
+        </div>
+        <div>
+          <div class="sig-name">Agente Lucía Ramírez Ortega</div>
+          <div class="sig-rank es">Agente de Primer Respondiente</div>
+          <div class="sig-rank en">First Responding Officer</div>
+          <div class="sig-badge">Placa #6203 · DSPMJ · 20 de julio de 2025 · 06:45 hrs</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="page-footer">
+  <span>FGE-QR — Benito Juárez, Cancún</span>
+  <span>FGE-QR-2025-07-0847</span>
+  <span>T1-05 · Police Initial Report · Tier 1 · Bilingual</span>
+</footer>
+
+</body>
+</html>

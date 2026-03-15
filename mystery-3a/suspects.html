@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suspect Dossiers | The Algorithm Knows | MMC</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/mystery-3a.css">
+    <style>
+        .suspect-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-sm);
+        }
+
+        @media (min-width: 768px) {
+            .suspect-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body class="mystery-3a">
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-container">
+            <a href="../index.html" class="nav-logo">MMC.</a>
+            <div class="nav-links">
+                <a href="investigation.html" class="nav-link">&larr; Hub</a>
+                <a href="suspects.html" class="nav-link active">Suspects</a>
+                <a href="evidence.html" class="nav-link">Evidence Board</a>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+            </div>
+            <button class="hamburger">☰</button>
+        </div>
+    </nav>
+
+    <header class="page-header"
+        style="padding: var(--spacing-lg) 0; text-align: center; border-bottom: 1px solid var(--color-slate); margin-bottom: var(--spacing-md);">
+        <div class="container">
+            <h1>Suspect Dossiers</h1>
+            <p class="mono" style="color: var(--color-gray);">Primary Persons of Interest | Gran Horizonte Resort</p>
+        </div>
+    </header>
+
+    <main class="section pt-0">
+        <div class="container">
+
+            <div class="suspect-grid">
+
+                <!-- Kavya Nair -->
+                <div class="dossier-card">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <img src="images/03A-kavya-nair-portrait.png" alt="Kavya Nair" class="dossier-image"
+                            onerror="this.src='https://placehold.co/150x150/101015/00D4FF?text=03A'">
+                        <div style="flex: 1; min-width: 200px;">
+                            <h3 style="margin-bottom: 0;">Kavya Nair</h3>
+                            <p class="mono" style="font-size: 0.85rem; color: var(--color-gray);">Age 28 | Data
+                                Scientist & Contestant</p>
+
+                            <hr style="border: none; border-top: 1px solid var(--color-slate); margin: 0.5rem 0;">
+
+                            <p style="font-size: 0.9rem;"><strong>Motive Theory:</strong> Discovered her EROS algorithm
+                                score was manipulated to force a romantic match with Solomon for TV ratings.</p>
+                            <p style="font-size: 0.9rem;"><strong>Alibi:</strong> Claims she was in her suite with Zara
+                                Mirza.</p>
+
+                            <div class="mt-2">
+                                <span class="suspicion-tag">MOTIVE: ALGORITHM FRAUD</span>
+                                <span class="suspicion-tag"
+                                    style="border-color: var(--color-gray); color: var(--color-gray);">ALIBI
+                                    CORROBORATED</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dominic Wallace -->
+                <div class="dossier-card">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <img src="images/03B-dominic-wallace-portrait.png" alt="Dominic Wallace" class="dossier-image"
+                            onerror="this.src='https://placehold.co/150x150/101015/00D4FF?text=03B'">
+                        <div style="flex: 1; min-width: 200px;">
+                            <h3 style="margin-bottom: 0;">Dominic Wallace</h3>
+                            <p class="mono" style="font-size: 0.85rem; color: var(--color-gray);">Age 45 | Executive
+                                Producer</p>
+
+                            <hr style="border: none; border-top: 1px solid var(--color-slate); margin: 0.5rem 0;">
+
+                            <p style="font-size: 0.9rem;"><strong>Motive Theory:</strong> Solomon was demanding a cut of
+                                syndication rights or threatening to walk off set, jeopardizing a $50M deal.</p>
+                            <p style="font-size: 0.9rem;"><strong>Alibi:</strong> Claims he was in the production office
+                                alone.</p>
+
+                            <div class="mt-2">
+                                <span class="suspicion-tag" style="border-color: #FFD700; color: #FFD700;">FINANCIAL
+                                    MOTIVE</span>
+                                <span class="suspicion-tag">NO WITNESS EVIDENCE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vivian Fong -->
+                <div class="dossier-card">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <img src="images/03C-vivian-fong-portrait.png" alt="Vivian Fong" class="dossier-image"
+                            onerror="this.src='https://placehold.co/150x150/101015/00D4FF?text=03C'">
+                        <div style="flex: 1; min-width: 200px;">
+                            <h3 style="margin-bottom: 0;">Vivian Fong</h3>
+                            <p class="mono" style="font-size: 0.85rem; color: var(--color-gray);">Age 31 | Network
+                                Executive</p>
+
+                            <hr style="border: none; border-top: 1px solid var(--color-slate); margin: 0.5rem 0;">
+
+                            <p style="font-size: 0.9rem;"><strong>Motive Theory:</strong> Former romantic partner of
+                                Solomon. Bitter breakup, now handling his contract dispute for the network. She knew his
+                                secrets.</p>
+                            <p style="font-size: 0.9rem;"><strong>Alibi:</strong> Resort bar until 11:30 PM.</p>
+
+                            <div class="mt-2">
+                                <span class="suspicion-tag"
+                                    style="border-color: var(--color-primary); color: var(--color-primary);">PERSONAL
+                                    MOTIVE</span>
+                                <span class="suspicion-tag" style="border-color: #00D4FF; color: #00D4FF;">PARTIAL
+                                    ALIBI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rafael Rios -->
+                <div class="dossier-card">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <img src="images/03D-rafael-rios-portrait.png" alt="Rafael Rios" class="dossier-image"
+                            onerror="this.src='https://placehold.co/150x150/101015/00D4FF?text=03D'">
+                        <div style="flex: 1; min-width: 200px;">
+                            <h3 style="margin-bottom: 0;">Rafael Rios</h3>
+                            <p class="mono" style="font-size: 0.85rem; color: var(--color-gray);">Age 32 | Contestant
+                            </p>
+
+                            <hr style="border: none; border-top: 1px solid var(--color-slate); margin: 0.5rem 0;">
+
+                            <p style="font-size: 0.9rem;"><strong>Motive Theory:</strong> Solomon was digging into his
+                                past. Investigation shows his background check is highly suspicious; possible false
+                                identity.</p>
+                            <p style="font-size: 0.9rem;"><strong>Alibi:</strong> Room 412 until midnight.</p>
+
+                            <div class="mt-2">
+                                <span class="suspicion-tag">FALSE IDENTITY</span>
+                                <span class="suspicion-tag" style="border-color: #FFD700; color: #FFD700;">AVOIDING
+                                    QUESTIONS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Zara Mirza -->
+                <div class="dossier-card">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <img src="images/03E-zara-mirza-portrait.png" alt="Zara Mirza" class="dossier-image"
+                            onerror="this.src='https://placehold.co/150x150/101015/00D4FF?text=03E'">
+                        <div style="flex: 1; min-width: 200px;">
+                            <h3 style="margin-bottom: 0;">Zara Mirza</h3>
+                            <p class="mono" style="font-size: 0.85rem; color: var(--color-gray);">Age 36 | Show
+                                Therapist</p>
+
+                            <hr style="border: none; border-top: 1px solid var(--color-slate); margin: 0.5rem 0;">
+
+                            <p style="font-size: 0.9rem;"><strong>Motive Theory:</strong> Conducted all psychological
+                                evaluations. Knew Solomon's darkest secrets and those of every contestant. A gatekeeper
+                                of information.</p>
+                            <p style="font-size: 0.9rem;"><strong>Alibi:</strong> With Kavya Nair in suite.</p>
+
+                            <div class="mt-2">
+                                <span class="suspicion-tag" style="border-color: #00D4FF; color: #00D4FF;">CONFIDENTIAL
+                                    KNOWLEDGE</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Victor Delgado -->
+                <div class="dossier-card">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <img src="images/03F-victor-delgado-portrait.png" alt="Victor Delgado" class="dossier-image"
+                            onerror="this.src='https://placehold.co/150x150/101015/00D4FF?text=03F'">
+                        <div style="flex: 1; min-width: 200px;">
+                            <h3 style="margin-bottom: 0;">Victor Delgado (Soto-Guerrero)</h3>
+                            <p class="mono" style="font-size: 0.85rem; color: var(--color-gray);">Age 38 | AV/IT
+                                Technician</p>
+
+                            <hr style="border: none; border-top: 1px solid var(--color-slate); margin: 0.5rem 0;">
+
+                            <p style="font-size: 0.9rem;"><strong>Motive Theory:</strong> Has full access to the EROS
+                                algorithm backend, all production cameras, and equipment rooms. Real name differs from
+                                staff badge.</p>
+                            <p style="font-size: 0.9rem;"><strong>Alibi:</strong> Claims he went back to his quarters
+                                after shift ended at 11:00 PM.</p>
+
+                            <div class="mt-2">
+                                <span class="suspicion-tag"
+                                    style="background-color: rgba(255, 77, 109, 0.4); border-color: #FF4D6D; color: #fff;">EQUIPMENT
+                                    ACCESS</span>
+                                <span class="suspicion-tag">UNVERIFIED ALIBI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../assets/js/nav.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Overview — FGE-QR-2025-07-0847</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@400;600;700&family=IBM+Plex+Mono:wght@400;700&display=swap');
+  :root {
+    --primary: #FF4D6D; --secondary: #00D4FF; --accent: #FFD700;
+    --dark: #0D0D1A; --dark2: #1A1A2E; --light: #FFFFFF;
+    --muted: #A0A0B0; --success: #00E676; --warning: #FF9100;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--dark); color: var(--light); font-family: 'Inter', Arial, sans-serif; font-size: 15px; line-height: 1.75; }
+
+  /* HEADER */
+  .doc-header {
+    background: linear-gradient(135deg, var(--dark2) 0%, #0d1530 100%);
+    border-bottom: 3px solid var(--primary);
+    padding: 48px 60px 36px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: start;
+  }
+  .header-agency {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .header-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--light);
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+  .header-subtitle {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+  }
+  .header-meta { text-align: right; }
+  .meta-case {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--primary);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .meta-line {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .classified-stamp {
+    display: inline-block;
+    border: 2px solid var(--warning);
+    color: var(--warning);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    padding: 4px 10px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    margin-top: 10px;
+    transform: rotate(-2deg);
+    display: inline-block;
+  }
+
+  /* CONTENT */
+  .container { max-width: 900px; margin: 0 auto; padding: 60px 60px 80px; }
+  .section { margin-bottom: 56px; }
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--secondary);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(0,212,255,0.2);
+  }
+  .section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--light);
+    margin: 12px 0 16px;
+  }
+  p { color: rgba(255,255,255,0.82); margin-bottom: 14px; }
+
+  /* Summary box */
+  .summary-box {
+    background: rgba(255,77,109,0.06);
+    border-left: 4px solid var(--primary);
+    padding: 24px 28px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 32px;
+  }
+  .summary-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--primary);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .summary-text {
+    font-size: 15px;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* Info grid */
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .info-item {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+    padding: 14px 18px;
+  }
+  .info-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .info-value {
+    font-size: 14px;
+    color: var(--light);
+    font-weight: 600;
+  }
+
+  /* People of interest quick-list */
+  .poi-list { list-style: none; margin-top: 16px; }
+  .poi-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    gap: 16px;
+  }
+  .poi-item:last-child { border-bottom: none; }
+  .poi-name { font-weight: 700; font-size: 14px; color: var(--light); margin-bottom: 3px; }
+  .poi-detail { font-size: 12px; color: var(--muted); }
+  .poi-role-badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .badge-victim { background: rgba(255,77,109,0.15); color: var(--primary); border: 1px solid rgba(255,77,109,0.3); }
+  .badge-suspect { background: rgba(0,212,255,0.10); color: var(--secondary); border: 1px solid rgba(0,212,255,0.2); }
+
+  /* Timeline mini */
+  .mini-timeline { margin-top: 16px; }
+  .mt-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 12px;
+    font-size: 13px;
+  }
+  .mt-time {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--secondary);
+    width: 70px;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+  .mt-text { color: rgba(255,255,255,0.8); }
+  .mt-text strong { color: var(--light); }
+
+  /* Key questions */
+  .key-questions {
+    background: rgba(0,212,255,0.05);
+    border: 1px solid rgba(0,212,255,0.2);
+    border-radius: 8px;
+    padding: 28px;
+    margin-top: 16px;
+  }
+  .kq-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--secondary);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .kq-list { list-style: none; }
+  .kq-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 14px;
+    color: rgba(255,255,255,0.82);
+    display: flex;
+    gap: 10px;
+  }
+  .kq-list li:last-child { border-bottom: none; }
+  .kq-n { color: var(--secondary); font-weight: 700; font-family: 'IBM Plex Mono', monospace; font-size: 12px; flex-shrink: 0; }
+
+  /* Location box */
+  .location-box {
+    background: rgba(255,215,0,0.05);
+    border: 1px solid rgba(255,215,0,0.2);
+    border-radius: 8px;
+    padding: 24px;
+    margin-top: 16px;
+  }
+  .loc-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .loc-detail { font-size: 13px; color: rgba(255,255,255,0.72); line-height: 1.6; }
+
+  /* Footer */
+  .page-footer {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 24px 60px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  @media print {
+    body { background: white; color: #111; }
+    .doc-header { background: #f5f5f5; }
+    .header-title, .section-title, .poi-name, .loc-name { color: #111; }
+    p, .mt-text, .summary-text, .kq-list li { color: #333; }
+    .summary-box, .info-item, .location-box, .key-questions { background: #f9f9f9; border-color: #ccc; }
+  }
+  @media (max-width: 768px) {
+    .doc-header { grid-template-columns: 1fr; padding: 32px 24px; }
+    .header-meta { text-align: left; }
+    .container { padding: 40px 24px; }
+    .info-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="doc-header">
+  <div>
+    <div class="header-agency">Mystery 3A — The Algorithm Knows · Case Overview Document</div>
+    <div class="header-title">Suspicious Death at Gran Horizonte Resort</div>
+    <div class="header-subtitle">Cancún, Quintana Roo, Mexico · July 20, 2025</div>
+  </div>
+  <div class="header-meta">
+    <div class="meta-case">FGE-QR-2025-07-0847</div>
+    <div class="meta-line">Classification: Homicidio Doloso (Suspected)</div>
+    <div class="meta-line">Jurisdiction: FGE Estado de Quintana Roo</div>
+    <div class="meta-line">Reporting Officer: Subinspector Marco A. Estrada</div>
+    <div class="meta-line">Report Date: July 20, 2025 · 09:15 hrs</div>
+    <div class="classified-stamp">Investigator Access</div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- SUMMARY -->
+  <section class="section">
+    <div class="section-label">Summary</div>
+
+    <div class="summary-box">
+      <div class="summary-label">Incident Summary</div>
+      <p class="summary-text">
+        At approximately 01:15 AM on July 20, 2025, the body of a 33-year-old male American contestant 
+        was discovered face-down in the main swimming pool of the Gran Horizonte Resort &amp; Spa, 
+        Cancún, Mexico. The victim was a participant in the American reality television program 
+        <em>Forever Match</em>, produced by Solara Entertainment Group, currently filming Season 4 at the resort. 
+        Responding officers noted the presence of a hair dryer connected to an extension cord at the pool's edge. 
+        The pool area's GFCI circuit breaker had been manually disabled. 
+        The death is being investigated as a suspected homicide.
+      </p>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-item">
+        <div class="info-label">Incident Date</div>
+        <div class="info-value">July 19–20, 2025 (overnight)</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Body Discovered</div>
+        <div class="info-value">01:15 AM, July 20, 2025</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Location</div>
+        <div class="info-value">Gran Horizonte Resort, Main Pool (Zone B)</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Estimated Time of Death</div>
+        <div class="info-value">Approx. 11:55 PM – 12:10 AM (pending autopsy)</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Manner of Death</div>
+        <div class="info-value">Suspected homicide — electrocution</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Case Status</div>
+        <div class="info-value">Open — Active Investigation</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">Investigating Agency</div>
+        <div class="info-value">FGE Quintana Roo — SSPC Support</div>
+      </div>
+      <div class="info-item">
+        <div class="info-label">US Consular Notification</div>
+        <div class="info-value">Filed 02:40 AM, July 20, 2025</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section class="section">
+    <div class="section-label">Location</div>
+    <h2 class="section-title">Where It Happened</h2>
+
+    <div class="location-box">
+      <div class="loc-name">Gran Horizonte Resort &amp; Spa</div>
+      <p class="loc-detail">
+        Blvd. Kukulcán Km 14.5, Zona Hotelera, Cancún, Quintana Roo, México 77500.<br>
+        5-star all-inclusive resort currently under partial exclusive production contract with Solara Entertainment Group 
+        for the duration of <em>Forever Match</em> Season 4 filming (July 1–28, 2025).<br><br>
+        The incident occurred at the <strong>Main Pool (Zone B)</strong> — a 25-meter free-form pool on the resort's 
+        south terrace, accessible from the pool bar and the residential production wing. 
+        The pool area is covered by two surveillance cameras: <strong>C-7</strong> (pool deck, east side) 
+        and <strong>C-8</strong> (pool terrace entry). Both cameras were offline at the time of death.
+      </p>
+    </div>
+  </section>
+
+  <!-- PEOPLE OF INTEREST -->
+  <section class="section">
+    <div class="section-label">People of Interest</div>
+    <h2 class="section-title">Victim &amp; Suspects</h2>
+
+    <p>The following individuals have been identified as the victim or persons of interest. 
+    Full profiles are available in the individual dossier files.</p>
+
+    <ul class="poi-list">
+      <li class="poi-item">
+        <div>
+          <div class="poi-name">Solomon Vance</div>
+          <div class="poi-detail">33 · Haitian-American · Tech investor and startup founder · Season 4 Contestant</div>
+        </div>
+        <span class="poi-role-badge badge-victim">Victim</span>
+      </li>
+      <li class="poi-item">
+        <div>
+          <div class="poi-name">Victor Delgado</div>
+          <div class="poi-detail">42 · Dominican-American · Host &amp; Executive Producer, Forever Match</div>
+        </div>
+        <span class="poi-role-badge badge-suspect">Suspect</span>
+      </li>
+      <li class="poi-item">
+        <div>
+          <div class="poi-name">Kavya Nair</div>
+          <div class="poi-detail">29 · Indian-American · Biotech researcher · Season 4 Contestant</div>
+        </div>
+        <span class="poi-role-badge badge-suspect">Suspect</span>
+      </li>
+      <li class="poi-item">
+        <div>
+          <div class="poi-name">Dominic Wallace</div>
+          <div class="poi-detail">31 · African-American · Personal trainer and fitness brand owner · Season 4 Contestant</div>
+        </div>
+        <span class="poi-role-badge badge-suspect">Suspect</span>
+      </li>
+      <li class="poi-item">
+        <div>
+          <div class="poi-name">Vivian Fong</div>
+          <div class="poi-detail">27 · Chinese-American · Associate Producer, Solara Entertainment Group</div>
+        </div>
+        <span class="poi-role-badge badge-suspect">Suspect</span>
+      </li>
+      <li class="poi-item">
+        <div>
+          <div class="poi-name">Rafael Rios</div>
+          <div class="poi-detail">35 · Mexican-American · Restaurateur and entrepreneur · Season 4 Contestant</div>
+        </div>
+        <span class="poi-role-badge badge-suspect">Suspect</span>
+      </li>
+      <li class="poi-item">
+        <div>
+          <div class="poi-name">Zara Mirza</div>
+          <div class="poi-detail">30 · Pakistani-American · Immigration attorney · Season 4 Contestant</div>
+        </div>
+        <span class="poi-role-badge badge-suspect">Suspect</span>
+      </li>
+    </ul>
+  </section>
+
+  <!-- WHAT WE KNOW -->
+  <section class="section">
+    <div class="section-label">Established Facts</div>
+    <h2 class="section-title">What the Evidence Confirms</h2>
+
+    <div class="mini-timeline">
+      <div class="mt-item">
+        <span class="mt-time">21:00</span>
+        <span class="mt-text">Poolside gathering. Cast witnesses a public altercation between two contestants. One contestant makes a <strong>verbal threat</strong> directed at the victim, overheard by multiple witnesses.</span>
+      </div>
+      <div class="mt-item">
+        <span class="mt-time">22:00</span>
+        <span class="mt-text">A group of contestants departs for the resort dining room for a scheduled late dinner. They remain there until after midnight.</span>
+      </div>
+      <div class="mt-item">
+        <span class="mt-time">22:15</span>
+        <span class="mt-text">Surveillance cameras covering the main pool (C-7) and pool terrace (C-8) <strong>go offline</strong>. No scheduled maintenance was logged for this period.</span>
+      </div>
+      <div class="mt-item">
+        <span class="mt-time">23:02</span>
+        <span class="mt-text">Victim posts a selfie to Instagram from the <strong>pool bar area</strong>. Caption: "Pool party for one. 🌊 #ForeverMatch." This is his last confirmed living communication.</span>
+      </div>
+      <div class="mt-item">
+        <span class="mt-time">~00:05</span>
+        <span class="mt-text">Based on preliminary forensic assessment, death likely occurred in this window. A <strong>hair dryer attached to an extension cord</strong> was found at the pool's edge, still connected to a service outlet. The GFCI circuit for this outlet had been manually bypassed.</span>
+      </div>
+      <div class="mt-item">
+        <span class="mt-time">01:00</span>
+        <span class="mt-text">Surveillance cameras C-7 and C-8 <strong>come back online</strong>. No footage of the pool area exists for the 2 hour 45 minute outage window.</span>
+      </div>
+      <div class="mt-item">
+        <span class="mt-time">01:15</span>
+        <span class="mt-text">Night-shift pool attendant discovers the victim's body in the pool. Security is alerted. Emergency services arrive at 01:29.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEY QUESTIONS -->
+  <section class="section">
+    <div class="section-label">For Investigators</div>
+    <h2 class="section-title">Questions to Pursue</h2>
+
+    <div class="key-questions">
+      <div class="kq-label">Investigator Focus Areas</div>
+      <ul class="kq-list">
+        <li><span class="kq-n">Q1</span><span>The camera outage lasted nearly 3 hours. Was this a technical failure or a deliberate act — and who had the ability to cause it?</span></li>
+        <li><span class="kq-n">Q2</span><span>The hair dryer found at the scene is not a guest room unit. Where did it come from, and who had access to it?</span></li>
+        <li><span class="kq-n">Q3</span><span>The GFCI circuit was manually disabled. This requires physical access to an electrical panel. Where is that panel located, and who could reach it that night?</span></li>
+        <li><span class="kq-n">Q4</span><span>A public threat was made against the victim earlier that evening. Is the threatening party actually responsible — or are they a distraction?</span></li>
+        <li><span class="kq-n">Q5</span><span>Why was the victim alone at the pool after midnight? Did he arrange to meet someone there?</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- RELATED FILES -->
+  <section class="section">
+    <div class="section-label">Related Documents</div>
+    <h2 class="section-title">See Also</h2>
+    <p style="color:rgba(255,255,255,0.6); font-size:13px;">
+      T1-03 — Forever Match Show Overview &nbsp;·&nbsp;
+      T1-04 — Gran Horizonte Resort Incident Report &nbsp;·&nbsp;
+      T1-05 — Municipal Police Initial Report &nbsp;·&nbsp;
+      T1-06 — Victim Profile (Solomon Vance) &nbsp;·&nbsp;
+      T1-07 through T1-12 — Suspect Dossiers &nbsp;·&nbsp;
+      T1-14 — Camera Malfunction Report
+    </p>
+  </section>
+
+</div>
+
+<footer class="page-footer">
+  <span>Mystery 3A — The Algorithm Knows</span>
+  <span>Case File FGE-QR-2025-07-0847</span>
+  <span>T1-02 · Case Overview · Tier 1</span>
+</footer>
+
+</body>
+</html>

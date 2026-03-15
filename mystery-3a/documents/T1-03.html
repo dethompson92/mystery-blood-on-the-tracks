@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Forever Match — Show Overview · Season 4</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@400;600;700&family=IBM+Plex+Mono:wght@400;700&display=swap');
+  :root {
+    --primary: #FF4D6D; --secondary: #00D4FF; --accent: #FFD700;
+    --dark: #0D0D1A; --dark2: #1A1A2E; --light: #FFFFFF;
+    --muted: #A0A0B0; --success: #00E676; --warning: #FF9100;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--dark); color: var(--light); font-family: 'Inter', Arial, sans-serif; font-size: 15px; line-height: 1.75; }
+
+  /* HEADER — show branding style */
+  .show-header {
+    background: linear-gradient(160deg, #1a0010 0%, #0d0d1a 40%, #001018 100%);
+    border-bottom: 3px solid var(--primary);
+    padding: 60px 60px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .show-header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 30% 60%, rgba(255,77,109,0.12) 0%, transparent 55%),
+                radial-gradient(ellipse at 70% 40%, rgba(0,212,255,0.08) 0%, transparent 55%);
+  }
+  .header-inner { position: relative; }
+  .header-logo { font-size: 48px; margin-bottom: 12px; display: block; }
+  .header-show-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 50px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .header-tagline {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--secondary);
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .header-season {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .doc-badge {
+    display: inline-block;
+    background: rgba(255,215,0,0.1);
+    border: 1px solid rgba(255,215,0,0.4);
+    color: var(--accent);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    padding: 5px 14px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+
+  /* BODY */
+  .container { max-width: 900px; margin: 0 auto; padding: 60px 60px 80px; }
+  .section { margin-bottom: 56px; }
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--primary);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(255,77,109,0.2);
+  }
+  .section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--light);
+    margin: 12px 0 16px;
+  }
+  p { color: rgba(255,255,255,0.82); margin-bottom: 14px; }
+
+  /* ARIA Feature Box */
+  .aria-box {
+    background: linear-gradient(135deg, rgba(0,212,255,0.07) 0%, rgba(0,20,40,0.5) 100%);
+    border: 1px solid rgba(0,212,255,0.3);
+    border-radius: 10px;
+    padding: 36px;
+    margin: 20px 0;
+  }
+  .aria-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 18px;
+    color: var(--secondary);
+    font-weight: 700;
+    letter-spacing: 3px;
+    margin-bottom: 6px;
+  }
+  .aria-subtitle {
+    font-size: 12px;
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .aria-spec-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .aria-spec {
+    text-align: center;
+    padding: 16px;
+    background: rgba(0,212,255,0.06);
+    border-radius: 6px;
+    border: 1px solid rgba(0,212,255,0.15);
+  }
+  .aria-spec-value {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px;
+    color: var(--secondary);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .aria-spec-label {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 1px;
+  }
+
+  /* People grid */
+  .people-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .person-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 20px;
+    transition: border-color 0.2s;
+  }
+  .person-card:hover { border-color: rgba(255,77,109,0.3); }
+  .person-name {
+    font-weight: 700;
+    font-size: 15px;
+    color: var(--light);
+    margin-bottom: 4px;
+  }
+  .person-title {
+    font-size: 12px;
+    color: var(--primary);
+    font-family: 'IBM Plex Mono', monospace;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .person-desc {
+    font-size: 12px;
+    color: rgba(255,255,255,0.62);
+    line-height: 1.5;
+  }
+
+  /* Production facts */
+  .facts-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  .facts-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    font-size: 13px;
+    vertical-align: top;
+  }
+  .facts-table tr:last-child td { border-bottom: none; }
+  .fact-label { color: var(--accent); font-weight: 700; width: 220px; }
+  .fact-value { color: rgba(255,255,255,0.82); }
+
+  /* Season 4 conflict box */
+  .conflict-box {
+    background: rgba(255,77,109,0.06);
+    border: 1px solid rgba(255,77,109,0.25);
+    border-radius: 8px;
+    padding: 28px;
+    margin-top: 16px;
+  }
+  .conflict-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+
+  /* Stakes box */
+  .stakes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .stake-card {
+    background: rgba(255,215,0,0.05);
+    border: 1px solid rgba(255,215,0,0.2);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+  }
+  .stake-number {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .stake-label { font-size: 12px; color: var(--muted); line-height: 1.4; }
+
+  /* Footer */
+  .page-footer {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 24px 60px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  @media print {
+    body { background: white; color: #111; }
+    .show-header { background: #f5f5f5; }
+    .header-show-title { -webkit-text-fill-color: #111; background: none; color: #111; }
+    p, .person-desc, .fact-value { color: #333; }
+  }
+  @media (max-width: 768px) {
+    .show-header { padding: 40px 24px; }
+    .header-show-title { font-size: 32px; }
+    .container { padding: 40px 24px; }
+    .aria-spec-grid { grid-template-columns: 1fr 1fr; }
+    .stakes-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="show-header">
+  <div class="header-inner">
+    <span class="header-logo">💘⚡</span>
+    <div class="header-show-title">Forever Match</div>
+    <div class="header-tagline">The Algorithm Never Lies</div>
+    <div class="header-season">Season 4 — The Cancún Cycle · NovaStar Network</div>
+    <div class="doc-badge">📺 Show Overview — Investigator Briefing Document</div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- WHAT IS FOREVER MATCH -->
+  <section class="section">
+    <div class="section-label">Show Concept</div>
+    <h2 class="section-title">What is Forever Match?</h2>
+
+    <p><strong>Forever Match</strong> is a luxury reality competition series produced by 
+    <strong>Solara Entertainment Group (SEG)</strong> and streamed exclusively on the <strong>NovaStar Network</strong>. 
+    Now in its fourth season, the show has become one of the most-streamed unscripted programs in North America, 
+    averaging 11.4 million viewers per episode in its third season.</p>
+
+    <p>The premise is simple on the surface: twelve single adults enter a luxury resort and are matched by an artificial intelligence 
+    called <strong>ARIA</strong> — the Adaptive Relationship Intelligence Architecture. Unlike other dating shows, 
+    there are no roses, no public votes, and no subjective human decisions. ARIA's compatibility algorithm 
+    makes every pairing decision. The contestants must choose: trust the algorithm, or trust their instincts?</p>
+
+    <p>The winner of each season — the couple with the highest combined ARIA compatibility score who also choose to 
+    stay together — receives a <strong>$2 million prize</strong>. The show's marketing tagline has been the same since Season 1:</p>
+
+    <div style="text-align:center; padding:24px; font-family:'Playfair Display',Georgia,serif; font-size:22px; font-style:italic; color:var(--accent); margin:16px 0;">
+      "Your Perfect Match. Guaranteed."
+    </div>
+  </section>
+
+  <!-- ARIA THE ALGORITHM -->
+  <section class="section">
+    <div class="section-label">The Algorithm</div>
+    <h2 class="section-title">ARIA — The Technology Behind the Show</h2>
+
+    <div class="aria-box">
+      <div class="aria-title">ARIA v4.2</div>
+      <div class="aria-subtitle">Adaptive Relationship Intelligence Architecture</div>
+
+      <p style="color:rgba(255,255,255,0.75); font-size:13px; margin-bottom:16px;">
+        ARIA is presented to the public as the most sophisticated human compatibility system ever built. 
+        According to Solara Entertainment Group, it was trained on seven years of relationship outcome data 
+        and can predict long-term compatibility with 94.7% accuracy. Contestants consent to biometric monitoring 
+        throughout filming — heart rate, stress response, micro-expressions — which ARIA uses to refine its matches in real time.
+      </p>
+
+      <div class="aria-spec-grid">
+        <div class="aria-spec">
+          <div class="aria-spec-value">94.7%</div>
+          <div class="aria-spec-label">Claimed compatibility accuracy</div>
+        </div>
+        <div class="aria-spec">
+          <div class="aria-spec-value">7 yrs</div>
+          <div class="aria-spec-label">Training data window</div>
+        </div>
+        <div class="aria-spec">
+          <div class="aria-spec-value">847</div>
+          <div class="aria-spec-label">Data points per contestant daily</div>
+        </div>
+      </div>
+    </div>
+
+    <p>What the public doesn't know — and what investigators are beginning to discover — is that ARIA's backend 
+    is not as transparent as Solara's marketing claims. Access to ARIA's source code is restricted to a 
+    small number of senior production staff. Its compatibility scores can, in theory, be overridden by 
+    someone with the right system credentials.</p>
+
+    <p>A source code audit is pending. The results will be available to investigators at a later stage of the investigation.</p>
+  </section>
+
+  <!-- KEY PERSONNEL -->
+  <section class="section">
+    <div class="section-label">Key Personnel</div>
+    <h2 class="section-title">Show Staff &amp; Production Team</h2>
+
+    <p>The following individuals were present at the Gran Horizonte Resort during the incident and are considered 
+    persons of interest in the investigation. Full dossiers are available separately.</p>
+
+    <div class="people-grid">
+      <div class="person-card">
+        <div class="person-name">Victor Delgado</div>
+        <div class="person-title">Host &amp; Executive Producer</div>
+        <div class="person-desc">
+          The face of Forever Match since Season 1. Manages all on-camera hosting duties and holds executive authority 
+          over production decisions. Has final approval on ARIA overrides. Sole holder of the production override credentials.
+        </div>
+      </div>
+      <div class="person-card">
+        <div class="person-name">Vivian Fong</div>
+        <div class="person-title">Associate Producer</div>
+        <div class="person-desc">
+          On-site production management. Manages contestant scheduling, confessional booth logistics, 
+          and daily production reports. Reports directly to Victor Delgado.
+        </div>
+      </div>
+      <div class="person-card">
+        <div class="person-name">Daniel Kwan</div>
+        <div class="person-title">Head of Technical Operations</div>
+        <div class="person-desc">
+          Manages all surveillance, AV, and equipment systems on location. 
+          Responsible for the camera system and electrical infrastructure. 
+          Was not on-site the night of July 19–20.
+        </div>
+      </div>
+      <div class="person-card">
+        <div class="person-name">Rosa Alcántara</div>
+        <div class="person-title">Legal &amp; Compliance, SEG</div>
+        <div class="person-desc">
+          Oversees all contestant contracts, NDA enforcement, and production liability. 
+          Based in Los Angeles; not present at the resort during the incident.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEASON 4 CAST -->
+  <section class="section">
+    <div class="section-label">Season 4 Contestants</div>
+    <h2 class="section-title">The Cast — Season 4, "The Cancún Cycle"</h2>
+
+    <p>Season 4 began filming on July 1, 2025. By July 19 — day 19 of production — the original twelve 
+    contestants had been reduced to eight through ARIA's elimination process. The victim and all six suspects 
+    listed below were still active contestants or production staff on July 19.</p>
+
+    <div class="people-grid">
+      <div class="person-card" style="border-left:3px solid var(--primary);">
+        <div class="person-name">Solomon Vance</div>
+        <div class="person-title" style="color:var(--primary);">Victim · Contestant</div>
+        <div class="person-desc">33. Tech investor, startup founder. Haitian-American. 
+        Brought onto the show partly for his high public profile. 
+        ARIA assigned him a compatibility score of 91.3 with Kavya Nair — the highest in Season 4 history.</div>
+      </div>
+      <div class="person-card">
+        <div class="person-name">Kavya Nair</div>
+        <div class="person-title">Contestant</div>
+        <div class="person-desc">29. Biotech researcher. Indian-American. 
+        ARIA's top match for Solomon. Their pairing was the most-discussed storyline of Season 4. 
+        Last spoke to Solomon at 8:30 PM on July 19.</div>
+      </div>
+      <div class="person-card">
+        <div class="person-name">Dominic Wallace</div>
+        <div class="person-title">Contestant</div>
+        <div class="person-desc">31. Personal trainer and fitness brand owner. African-American. 
+        Publicly threatened Solomon at the pool earlier in the evening. 
+        Known for a volatile temper on-camera. Has a fitness supplement brand competing with Solomon's investors.</div>
+      </div>
+      <div class="person-card">
+        <div class="person-name">Rafael Rios</div>
+        <div class="person-title">Contestant</div>
+        <div class="person-desc">35. Restaurateur and hospitality entrepreneur. Mexican-American. 
+        Season 4's most-eliminated-then-reinstated contestant. 
+        Familiar with the resort layout from pre-production location scouting.</div>
+      </div>
+      <div class="person-card">
+        <div class="person-name">Zara Mirza</div>
+        <div class="person-title">Contestant</div>
+        <div class="person-desc">30. Immigration attorney. Pakistani-American. 
+        Known for being methodical and observant. Was ARIA's original match for Solomon before the score was revised upward for Kavya.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S AT STAKE -->
+  <section class="section">
+    <div class="section-label">Stakes</div>
+    <h2 class="section-title">What Was at Stake on July 19, 2025</h2>
+
+    <div class="stakes-grid">
+      <div class="stake-card">
+        <div class="stake-number">$2M</div>
+        <div class="stake-label">Prize money for the Season 4 winning couple</div>
+      </div>
+      <div class="stake-card">
+        <div class="stake-number">$50M</div>
+        <div class="stake-label">Series B franchise expansion deal — closing date September 2025</div>
+      </div>
+      <div class="stake-card">
+        <div class="stake-number">11.4M</div>
+        <div class="stake-label">Average viewers per episode, Season 3 — the deal's valuation anchor</div>
+      </div>
+      <div class="stake-card">
+        <div class="stake-number">9 days</div>
+        <div class="stake-label">Remaining filming days before the Season 4 finale was scheduled</div>
+      </div>
+    </div>
+
+    <div class="conflict-box" style="margin-top:28px;">
+      <div class="conflict-title">The $50M Franchise Deal</div>
+      <p>
+        In May 2025, Solara Entertainment Group entered negotiations with NovaStar and a consortium of investors 
+        to expand Forever Match into an international franchise — licensing the ARIA algorithm and production format 
+        to networks in 12 countries. The deal was valued at <strong>$50 million</strong> and scheduled to close 
+        in September 2025, contingent on Season 4 completing production without major incident.
+      </p>
+      <p style="margin-top:12px;">
+        A death on set — particularly one involving production negligence or misconduct — would almost certainly 
+        kill the deal. Several parties with knowledge of this deal had strong financial incentives to prevent 
+        any scandal from reaching the press before the contract closed.
+      </p>
+    </div>
+  </section>
+
+  <!-- PRODUCTION FACTS -->
+  <section class="section">
+    <div class="section-label">Production Details</div>
+    <h2 class="section-title">Season 4 — Key Facts</h2>
+
+    <table class="facts-table">
+      <tr><td class="fact-label">Filming Period</td><td class="fact-value">July 1–28, 2025 (28 days)</td></tr>
+      <tr><td class="fact-label">Filming Day of Incident</td><td class="fact-value">Day 19 of 28</td></tr>
+      <tr><td class="fact-label">Location</td><td class="fact-value">Gran Horizonte Resort &amp; Spa, Cancún, Quintana Roo, Mexico</td></tr>
+      <tr><td class="fact-label">Exclusive Use Agreement</td><td class="fact-value">SEG holds a production exclusivity agreement for Zones A–D of the resort, including the main pool area (Zone B)</td></tr>
+      <tr><td class="fact-label">Surveillance System</td><td class="fact-value">32 production cameras installed in addition to resort's existing 12 cameras. Override access held by Head of Technical Operations and Executive Producer.</td></tr>
+      <tr><td class="fact-label">Cast Size at Incident</td><td class="fact-value">8 active contestants (down from 12 at start). All 8 were present on-site July 19–20.</td></tr>
+      <tr><td class="fact-label">NDA Status</td><td class="fact-value">All contestants, staff, and crew have signed comprehensive NDAs. Legal enforcement active.</td></tr>
+      <tr><td class="fact-label">Network Contact</td><td class="fact-value">NovaStar Network legal team notified at 03:15 AM, July 20, 2025.</td></tr>
+    </table>
+  </section>
+
+  <!-- RELATED FILES -->
+  <section class="section">
+    <div class="section-label">Related Documents</div>
+    <h2 class="section-title">See Also</h2>
+    <p style="color:rgba(255,255,255,0.6); font-size:13px;">
+      T1-02 — Case Overview &nbsp;·&nbsp;
+      T1-04 — Gran Horizonte Resort Incident Report &nbsp;·&nbsp;
+      T1-06 — Victim Profile (Solomon Vance) &nbsp;·&nbsp;
+      T1-07 through T1-12 — Suspect Dossiers &nbsp;·&nbsp;
+      T1-14 — Camera Malfunction Report &nbsp;·&nbsp;
+      T2-03 — Producer Communications Archive (unlocks at Checkpoint 1)
+    </p>
+  </section>
+
+</div>
+
+<footer class="page-footer">
+  <span>Mystery 3A — The Algorithm Knows</span>
+  <span>Case File FGE-QR-2025-07-0847</span>
+  <span>T1-03 · Show Overview · Tier 1</span>
+</footer>
+
+</body>
+</html>

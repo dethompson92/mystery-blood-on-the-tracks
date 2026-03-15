@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T3-03 | EROS Algorithm Audit | Forever Match</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --pink:#FF4D6D; --cyan:#00D4FF; --gold:#FFD700; --dark:#0a0a0f; --panel:#12121a; --border:#2a2a3a; --text:#e0e0f0; --muted:#8888aa; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--dark); color:var(--text); font-family:'Inter',sans-serif; min-height:100vh; }
+  .letterhead { background:linear-gradient(135deg,#001020 0%,#101000 100%); border-bottom:3px solid var(--gold); padding:30px 40px 20px; display:flex; align-items:center; justify-content:space-between; }
+  .agency-block h1 { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--gold); letter-spacing:3px; text-transform:uppercase; }
+  .agency-block h2 { font-size:0.8rem; color:var(--muted); letter-spacing:2px; margin-top:4px; }
+  .doc-meta { text-align:right; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--muted); line-height:1.8; }
+  .doc-meta .case-id { color:var(--gold); font-size:0.85rem; }
+  .classification-banner { background:var(--gold); color:#000; text-align:center; padding:8px; font-family:'IBM Plex Mono',monospace; font-size:0.75rem; font-weight:700; letter-spacing:4px; }
+  .tier-badge { background:#1e0030; border:2px solid #9B59B6; color:#9B59B6; text-align:center; padding:6px; margin:0 40px; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; letter-spacing:3px; }
+  .container { max-width:960px; margin:0 auto; padding:40px; }
+  .doc-title { font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; color:var(--gold); border-bottom:2px solid var(--border); padding-bottom:16px; margin-bottom:8px; }
+  .doc-subtitle { font-size:0.85rem; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:30px; }
+  .meta-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:30px; }
+  .meta-card { background:var(--panel); border:1px solid var(--border); border-top:2px solid var(--gold); padding:14px; border-radius:4px; }
+  .meta-card .label { font-size:0.65rem; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:6px; }
+  .meta-card .value { font-family:'IBM Plex Mono',monospace; font-size:0.85rem; color:var(--gold); }
+  .section { margin-bottom:32px; }
+  .section-title { font-family:'Playfair Display',serif; font-size:1.25rem; color:var(--gold); border-left:4px solid var(--gold); padding-left:14px; margin-bottom:16px; }
+  p { font-size:0.9rem; line-height:1.75; color:#c8c8e0; margin-bottom:12px; }
+  .code-block { background:#0a0a18; border:1px solid var(--border); border-left:4px solid var(--cyan); padding:20px; border-radius:4px; margin:16px 0; font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:#c0e0ff; line-height:1.7; overflow-x:auto; white-space:pre; }
+  .code-comment { color:var(--muted); }
+  .code-string { color:#98C379; }
+  .code-keyword { color:#C678DD; }
+  .code-number { color:var(--gold); }
+  .code-function { color:#61AFEF; }
+  .code-var { color:#E06C75; }
+  .critical-box { background:#1a0a0a; border:1px solid var(--pink); border-left:4px solid var(--pink); padding:20px; border-radius:4px; margin:16px 0; }
+  .critical-box .critical-label { font-size:0.65rem; color:var(--pink); letter-spacing:3px; text-transform:uppercase; margin-bottom:8px; }
+  .critical-box p { color:#f0c0c0; }
+  .finding-box { background:#0d1a0d; border:1px solid #2a5a2a; border-left:4px solid #4CAF50; padding:20px; border-radius:4px; margin:16px 0; }
+  .finding-box .finding-label { font-size:0.65rem; color:#4CAF50; letter-spacing:3px; text-transform:uppercase; margin-bottom:8px; }
+  .finding-box p { color:#c0e0c0; }
+  .comparison-table { width:100%; border-collapse:collapse; margin:16px 0; font-size:0.82rem; }
+  .comparison-table th { background:#1a1a2e; color:var(--cyan); padding:10px 14px; text-align:left; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; border-bottom:1px solid var(--border); }
+  .comparison-table td { padding:10px 14px; border-bottom:1px solid var(--border); color:#c8c8e0; vertical-align:top; }
+  .comparison-table .claimed { color:#98C379; }
+  .comparison-table .actual { color:var(--pink); }
+  .score-box { background:var(--panel); border:1px solid var(--border); padding:20px; border-radius:4px; margin:16px 0; }
+  .score-row { display:flex; align-items:center; justify-content:space-between; padding:8px 0; border-bottom:1px solid var(--border); font-size:0.82rem; }
+  .score-row:last-child { border-bottom:none; }
+  .score-bar-container { flex:1; margin:0 16px; background:#1a1a2a; border-radius:4px; height:8px; overflow:hidden; }
+  .score-bar { height:100%; background:var(--pink); border-radius:4px; }
+  .score-value { font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--gold); min-width:40px; text-align:right; }
+  .slack-msg { background:#1a1428; border:1px solid #3a2a5a; border-radius:8px; padding:16px; margin:10px 0; }
+  .slack-sender { font-weight:600; font-size:0.85rem; color:var(--cyan); margin-bottom:4px; }
+  .slack-time { font-size:0.65rem; color:var(--muted); font-family:'IBM Plex Mono',monospace; float:right; }
+  .slack-text { font-size:0.82rem; line-height:1.5; color:#c8c8e0; }
+  .footer { margin-top:60px; border-top:1px solid var(--border); padding-top:16px; font-size:0.7rem; color:var(--muted); display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; }
+</style>
+</head>
+<body>
+
+<div class="letterhead">
+  <div class="agency-block">
+    <h1>Independent Technical Audit — EROS Algorithm</h1>
+    <h2>Commissioned by: FGE-QR · Executed by: Cipher Analytics Group, LLC · Mexico City</h2>
+  </div>
+  <div class="doc-meta">
+    <div class="case-id">FGE-QR-2025-07-0847</div>
+    <div>Audit Report No. CAG-2025-0847-EROS</div>
+    <div>Completed: 23 Julio 2025 — 09:00 hrs</div>
+    <div>Lead Auditor: Dr. James Okonkwo, PhD (Computer Science, MIT)</div>
+  </div>
+</div>
+<div class="classification-banner">◈ CONFIDENTIAL — COURT PROCEEDING USE — MOTIVE EVIDENCE ◈</div>
+<div class="tier-badge">🔒 TIER 3 EVIDENCE — ADVANCED INVESTIGATION ONLY</div>
+
+<div class="container">
+  <div class="doc-title">EROS Algorithm Source Code Audit</div>
+  <div class="doc-subtitle">Technical Examination · "Forever Match" Show Algorithm · Solara Entertainment Group</div>
+
+  <div class="meta-grid">
+    <div class="meta-card">
+      <div class="label">Algorithm Name</div>
+      <div class="value">EROS v2.3.1</div>
+    </div>
+    <div class="meta-card">
+      <div class="label">Source Obtained From</div>
+      <div class="value">Vivian Fong's USB Drive</div>
+    </div>
+    <div class="meta-card">
+      <div class="label">Codebase Size</div>
+      <div class="value">14,892 lines (Python)</div>
+    </div>
+    <div class="meta-card">
+      <div class="label">Claimed Functionality</div>
+      <div class="value">AI Biometric Matchmaking</div>
+    </div>
+    <div class="meta-card">
+      <div class="label">Actual Functionality</div>
+      <div class="value">Scripted Random Assignment</div>
+    </div>
+    <div class="meta-card">
+      <div class="label">Audit Verdict</div>
+      <div class="value" style="color:var(--pink);">FRAUDULENT SYSTEM</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">I. Audit Mandate</div>
+    <p>This audit was commissioned by Investigadora Dra. Sofía Montoya-Reyes (FGE-QR) as part of the investigation into the death of Solomon Vance. A USB drive recovered from the possession of production associate Vivian Fong (Exhibit EX-011-USB) contained the complete source code of "EROS" (Emotional Resonance Optimization System), the proprietary algorithm at the center of the Forever Match television production.</p>
+    <p>Solomon Vance, according to witness statements and digital evidence, had reverse-engineered the algorithm in the weeks prior to his death and threatened to expose it. This audit was conducted to determine the validity of those claims and the system's actual technical nature — which has direct bearing on establishing the motive of multiple suspects, particularly Victor Delgado.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">II. What EROS Claims to Be</div>
+    <p>Marketing materials, production documents, and on-air content describe EROS as follows: <em>"A proprietary machine-learning system that analyzes over 200 biometric and psychometric data points — including heart rate variability, galvanic skin response, pupil dilation during photograph exposure, micro-expression analysis, and 47-dimension personality assessment — to identify neurologically-compatible romantic matches with 94.7% long-term relationship accuracy."</em></p>
+    <p>Solara Entertainment Group has invested $4.2 million in production infrastructure attributed to EROS, including biometric scanning hardware, a purported data center in Austin, TX, and a dedicated "AI Lab" set piece. The network has used EROS's supposed scientific credibility as the cornerstone of the show's marketing, commanding premium advertising rates.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">III. Source Code Findings</div>
+    <p>Examination of the EROS v2.3.1 codebase revealed the following:</p>
+
+    <div class="code-block"><span class="code-comment"># EROS v2.3.1 — Core Matching Engine
+# eros_core/matcher.py — Lines 847–912
+# "Emotional Resonance Optimization System"
+# Solara Entertainment Group — CONFIDENTIAL</span>
+
+<span class="code-keyword">def</span> <span class="code-function">compute_compatibility_score</span>(subject_a, subject_b, round_num):
+    <span class="code-comment">"""
+    EROS CORE MATCHING ALGORITHM
+    
+    NOTE: This function is the heart of the EROS system.
+    IT DOES NOT PERFORM AI ANALYSIS.
+    The biometric data is collected but NOT USED in score computation.
+    Scores are pre-assigned by production team and loaded from
+    the manual_scores.json file. This function simply retrieves
+    and applies minor random variation for 'believability.'
+    
+    - Vivian, 2025-03-12
+    """</span>
+    
+    <span class="code-comment"># Load pre-assigned scores from production team spreadsheet</span>
+    <span class="code-var">manual_scores</span> = load_json(<span class="code-string">'data/manual_scores.json'</span>)
+    
+    <span class="code-comment"># Get the score assigned by producers for this pairing</span>
+    <span class="code-var">base_score</span> = manual_scores[subject_a.id][subject_b.id]
+    
+    <span class="code-comment"># Add ±3% random noise to make it look algorithmic</span>
+    <span class="code-var">noise</span> = random.uniform(<span class="code-number">-0.03</span>, <span class="code-number">0.03</span>)
+    
+    <span class="code-comment"># The biometric data is NEVER used in scoring</span>
+    <span class="code-comment"># It's collected to satisfy the scientific narrative</span>
+    <span class="code-var">_ </span>= subject_a.biometric_data  <span class="code-comment"># discarded</span>
+    <span class="code-var">_ </span>= subject_b.biometric_data  <span class="code-comment"># discarded</span>
+    
+    <span class="code-keyword">return</span> round(<span class="code-var">base_score</span> + <span class="code-var">noise</span>, <span class="code-number">4</span>)
+
+
+<span class="code-keyword">def</span> <span class="code-function">display_eros_analysis</span>(subject_a, subject_b, score):
+    <span class="code-comment">"""Generate plausible-sounding scientific explanation for the score."""</span>
+    
+    <span class="code-comment"># Pick random technical-sounding reasons from pre-written pool</span>
+    <span class="code-var">reasons</span> = random.sample(EXPLANATION_POOL, <span class="code-number">4</span>)
+    
+    <span class="code-comment"># Map score to percentage for display (always 70-98% range)</span>
+    <span class="code-var">display_pct</span> = int(score * <span class="code-number">100</span>) + <span class="code-number">70</span>
+    
+    <span class="code-keyword">return</span> {
+        <span class="code-string">"compatibility_percentage"</span>: min(<span class="code-var">display_pct</span>, <span class="code-number">99</span>),
+        <span class="code-string">"scientific_justification"</span>: <span class="code-var">reasons</span>,
+        <span class="code-string">"confidence_level"</span>: <span class="code-string">"HIGH"</span>  <span class="code-comment"># always "HIGH"</span>
+    }</div>
+
+    <div class="critical-box">
+      <div class="critical-label">⚠ Critical Finding — Algorithm Is a Sham</div>
+      <p>The EROS algorithm is not an AI system. It does not perform machine learning, biometric analysis, or any form of data-driven compatibility calculation. All match scores are pre-assigned by production staff in a manually curated JSON file. The biometric hardware collects data that is immediately discarded. The "scientific explanations" displayed on screen are randomly selected from a pool of pre-written phrases. Solomon Vance's assessment — that the algorithm was fake — was entirely correct.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">IV. Claimed vs. Actual Capabilities</div>
+    <table class="comparison-table">
+      <thead>
+        <tr><th>Feature</th><th>Claimed by Production</th><th>Actual Code Behavior</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Biometric Data Processing</td>
+          <td class="claimed">Analyzes 200+ biometric data points in real time</td>
+          <td class="actual">Biometric data collected, immediately discarded (lines 895–896)</td>
+        </tr>
+        <tr>
+          <td>Machine Learning Engine</td>
+          <td class="claimed">Proprietary neural network trained on 2M+ relationship outcomes</td>
+          <td class="actual">No neural network exists. Zero ML frameworks imported in entire codebase.</td>
+        </tr>
+        <tr>
+          <td>Compatibility Scores</td>
+          <td class="claimed">Calculated dynamically based on individual data analysis</td>
+          <td class="actual">Pre-assigned by producers in manual_scores.json, ±3% random noise added</td>
+        </tr>
+        <tr>
+          <td>Scientific Justifications</td>
+          <td class="claimed">Specific analysis of each individual's psychometric profile</td>
+          <td class="actual">Randomly sampled from pool of 312 pre-written phrases (EXPLANATION_POOL)</td>
+        </tr>
+        <tr>
+          <td>94.7% Accuracy Claim</td>
+          <td class="claimed">Based on longitudinal study of matched couples</td>
+          <td class="actual">Fabricated statistic. No study exists. Number hardcoded in marketing config file.</td>
+        </tr>
+        <tr>
+          <td>Data Center (Austin, TX)</td>
+          <td class="claimed">Houses EROS processing infrastructure</td>
+          <td class="actual">A leased server rack hosting a basic web server. No AI processing.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">V. Financial & Legal Implications</div>
+    <p>The fraudulent nature of the EROS algorithm has significant financial implications for Solara Entertainment Group and its senior staff. The network (Pulse) pays a premium production fee partly justified by the proprietary AI technology. Advertiser contracts reference EROS's scientific credibility. The total estimated financial exposure from fraud discovery exceeds <strong>$14 million</strong> in production contracts, advertising agreements, and potential civil liability.</p>
+    <p>For Victor Delgado specifically: his $2.1 million annual hosting contract includes an IP clause explicitly attributing a portion of his compensation to his role as "the human face of the EROS system." Exposure of the algorithm's fraudulent nature would not merely end the show — it would terminate his contract and potentially expose him to secondary fraud liability for actively promoting false scientific claims on air.</p>
+    <div class="score-box">
+      <div style="font-size:0.7rem; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:14px;">Stakeholder Financial Exposure from EROS Exposure</div>
+      <div class="score-row">
+        <div style="min-width:160px; font-size:0.82rem;">Solara Entertainment</div>
+        <div class="score-bar-container"><div class="score-bar" style="width:95%; background:#E74C3C;"></div></div>
+        <div class="score-value">$14M+</div>
+      </div>
+      <div class="score-row">
+        <div style="min-width:160px; font-size:0.82rem;">Victor Delgado (hosting)</div>
+        <div class="score-bar-container"><div class="score-bar" style="width:70%;"></div></div>
+        <div class="score-value">$2.1M</div>
+      </div>
+      <div class="score-row">
+        <div style="min-width:160px; font-size:0.82rem;">Vivian Fong (career)</div>
+        <div class="score-bar-container"><div class="score-bar" style="width:45%; background:#E67E22;"></div></div>
+        <div class="score-value">Career</div>
+      </div>
+      <div class="score-row">
+        <div style="min-width:160px; font-size:0.82rem;">Pulse Network (ad revenue)</div>
+        <div class="score-bar-container"><div class="score-bar" style="width:60%; background:#E74C3C;"></div></div>
+        <div class="score-value">$8M+</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">VI. Solomon Vance's Discovery — Corroboration</div>
+    <p>Cross-referencing the SMS blackmail chain (Exhibit T3-02) with this audit confirms that Solomon Vance successfully identified the fraudulent nature of EROS through technical reverse engineering during his time on the show. His July 11 text message references knowing "the algorithm data" — consistent with having accessed the manual_scores.json data or observed statistical anomalies in match scores.</p>
+    <p>Victor Delgado's July 11 response acknowledges Vance's correct assessment: <em>"I know you've figured out EROS is fake... One call and you, me, and this whole production go down together."</em> This admission, combined with this technical audit, establishes that Delgado recognized Vance's knowledge as an existential threat to his identity, freedom, and $2.1M annual income — providing a compelling triple motive for homicide.</p>
+    <div class="finding-box">
+      <div class="finding-label">✓ Motive Established — Technical Corroboration</div>
+      <p>Victor Delgado had three simultaneous motives to silence Solomon Vance permanently: (1) Vance knew Delgado's real identity (Víctor Manuel Soto-Guerrero) and his 2011 wire fraud conviction; (2) Vance had reversed-engineered the EROS algorithm and could expose the production's multi-million dollar fraud; (3) Mutual blackmail had reached a stalemate where Vance's knowledge made continued coercion impossible — elimination was the only remaining option. This audit provides the technical foundation for motive #2, corroborating the digital and physical evidence in this case.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>CAG-2025-0847-EROS · FGE-QR-2025-07-0847</div>
+    <div>T3-03 · EROS ALGORITHM AUDIT REPORT</div>
+    <div>Forever Match // Murder Mystery · Player Evidence</div>
+  </div>
+</div>
+</body>
+</html>

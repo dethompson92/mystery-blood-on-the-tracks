@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Dossiers - Blood on the Tracks</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(to bottom, #2c2416 0%, #4a3f2e 100%);
+            color: #f5f5dc;
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 40px;
+        }
+        .container {
+            background-color: #f9f6f0;
+            color: #2c2c2c;
+            padding: 50px;
+            border-radius: 8px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 4px double #8b0000;
+            padding-bottom: 25px;
+            margin-bottom: 40px;
+        }
+        h1 {
+            color: #8b0000;
+            font-size: 42px;
+            margin: 0;
+            font-family: 'Georgia', serif;
+            letter-spacing: 2px;
+        }
+        .subtitle {
+            color: #555;
+            font-size: 18px;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        .dossier {
+            background-color: #ffffff;
+            border: 3px solid #8b0000;
+            padding: 30px;
+            margin: 30px 0;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .dossier-header {
+            background-color: #8b0000;
+            color: white;
+            padding: 15px;
+            margin: -30px -30px 25px -30px;
+            border-radius: 2px 2px 0 0;
+        }
+        .dossier-name {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+        .dossier-title {
+            font-size: 16px;
+            font-style: italic;
+            margin: 5px 0 0 0;
+            opacity: 0.9;
+        }
+        .section-heading {
+            color: #8b0000;
+            font-size: 18px;
+            font-weight: bold;
+            border-bottom: 2px solid #8b0000;
+            padding-bottom: 5px;
+            margin: 25px 0 15px 0;
+            font-family: 'Georgia', serif;
+        }
+        .info-grid {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #333;
+        }
+        .info-value {
+            color: #555;
+        }
+        .narrative {
+            line-height: 1.8;
+            color: #444;
+            text-align: justify;
+            margin: 15px 0;
+        }
+        .badge {
+            display: inline-block;
+            background-color: #ffc107;
+            color: #2c2c2c;
+            padding: 4px 12px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 5px 5px 5px 0;
+        }
+        .badge-victim {
+            background-color: #dc3545;
+            color: white;
+        }
+        .badge-killer {
+            background-color: #000000;
+            color: white;
+        }
+        .badge-suspect {
+            background-color: #ff6b35;
+            color: white;
+        }
+        .badge-witness {
+            background-color: #17a2b8;
+            color: white;
+        }
+        .badge-cleared {
+            background-color: #28a745;
+            color: white;
+        }
+        .secret {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .quote {
+            background-color: #e9ecef;
+            border-left: 5px solid #6c757d;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 3px double #8b0000;
+            color: #666;
+            font-size: 13px;
+        }
+    /* ========================================
+   PRINT-OPTIMIZED CSS
+   Saves ink, prevents cutoff, controls page breaks
+   ======================================== */
+@page {
+  margin: 0.5in !important;
+}
+@media print {
+  /* Reset to printer-friendly colors */
+  body {
+    background-color: white !important;
+    background: white !important;
+    color: black !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove all dark backgrounds and shadows */
+  .document-container,
+  .header-box,
+  table,
+  th,
+  td,
+  div,
+  section {
+    background-color: white !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-color: black !important;
+  }
+
+  /* Ensure text is always black */
+  h1, h2, h3, h4, h5, h6, p, li, td, th, span, div {
+    color: black !important;
+  }
+
+  /* Keep ONLY red stamps visible (but lighter) */
+  .stamp {
+    color: #c0392b !important;
+    border-color: #c0392b !important;
+    opacity: 0.6 !important;
+    background: transparent !important;
+  }
+
+  /* Remove colored highlight backgrounds - keep border only */
+  .evidence-highlight,
+  .sig-critical,
+  .sig-supporting,
+  .sig-context {
+    background-color: white !important;
+    background: white !important;
+    border-left-width: 3px !important;
+    border-left-color: black !important;
+  }
+
+  /* Simplify evidence tags for printing */
+  .evidence-tag {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+
+  /* Control page breaks - prevent awkward splits */
+  table {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group; /* Repeat header on each page */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Keep related content together */
+  .evidence-highlight,
+  .signature-block,
+  .header-meta {
+    page-break-inside: avoid;
+  }
+
+  /* Remove unnecessary spacing for print */
+  .document-container {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Ensure tables fit on page */
+  table {
+    width: 100% !important;
+    font-size: 11pt !important;
+  }
+
+  th, td {
+    padding: 6pt !important;
+  }
+
+  /* Adjust font sizes for readability */
+  body {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  h1 {
+    font-size: 18pt !important;
+  }
+
+  h2 {
+    font-size: 14pt !important;
+  }
+
+  /* Show URLs for links (optional - comment out if not wanted) */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  /* Hide elements that shouldn't print */
+  .no-print {
+    display: none !important;
+  }
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 CHARACTER DOSSIERS</h1>
+            <div class="subtitle">Mystery #2B: Blood on the Tracks</div>
+            <div class="subtitle">Complete Profiles of All Persons Involved</div>
+        </div>
+
+        <!-- VICTIM -->
+        <div class="dossier">
+            <div class="dossier-header">
+                <div class="dossier-name">Vivienne Claire Marchand</div>
+                <div class="dossier-title">The Victim - Jazz Singer</div>
+            </div>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <span class="badge badge-victim">VICTIM</span>
+                <span class="badge">PRIMARY SUBJECT</span>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-label">Date of Birth:</div>
+                <div class="info-value">March 15, 1925 (age 32 at death)</div>
+                
+                <div class="info-label">Date of Death:</div>
+                <div class="info-value">November 14, 1957 (approx. 2:45-3:00 AM)</div>
+                
+                <div class="info-label">Location of Death:</div>
+                <div class="info-value">Silver Comet Train, Car 7 "Magnolia," Compartment #7</div>
+                
+                <div class="info-label">Cause of Death:</div>
+                <div class="info-value">Ligature strangulation (silk scarf)</div>
+                
+                <div class="info-label">Residence:</div>
+                <div class="info-value">New Orleans, Louisiana (French Quarter)</div>
+                
+                <div class="info-label">Occupation:</div>
+                <div class="info-value">Jazz vocalist at Vincent's Blue Note Club</div>
+                
+                <div class="info-label">Physical Description:</div>
+                <div class="info-value">5'6", slender build, dark hair worn in elegant updo, striking features, sophisticated appearance</div>
+                
+                <div class="info-label">Marital Status:</div>
+                <div class="info-value">Unmarried (engaged to Vincent DeLuca)</div>
+            </div>
+
+            <div class="section-heading">Background & Biography</div>
+            <div class="narrative">
+                Vivienne Marchand was one of New Orleans' most celebrated jazz vocalists in the mid-1950s. Born to a middle-class Creole family in the French Quarter, she showed exceptional musical talent from childhood. By age 22, she was performing regularly at prestigious clubs throughout the city. Her rich contralto voice and sophisticated stage presence drew comparisons to Billie Holiday and Ella Fitzgerald.
+            </div>
+            <div class="narrative">
+                In 1952, she began performing at Vincent's Blue Note Club, where she caught the attention of the club's owner, Vincent DeLuca. Their professional relationship gradually evolved into romance. By 1955, they were publicly dating, and in October 1957, Vincent proposed marriage. The engagement was announced in the New Orleans Times-Picayune society pages.
+            </div>
+            <div class="narrative">
+                What the public—and Vincent—did not know was that Vivienne had been conducting a secret three-year relationship with Charlotte Devereaux, an aspiring actress. The two women met in 1954 at an after-hours bohemian gathering in the French Quarter. Their relationship remained clandestine due to the extreme social and legal consequences of homosexuality in 1957 Louisiana.
+            </div>
+
+            <div class="section-heading">Secret Life & Hidden Relationship</div>
+            <div class="secret">
+                <strong>CONCEALED INFORMATION:</strong> Vivienne maintained a passionate romantic and physical relationship with Charlotte Devereaux from 1954-1957. They met discreetly in Charlotte's apartment, communicated through coded letters, and presented themselves publicly as mere acquaintances. Vivienne kept Charlotte's existence entirely separate from her professional life and engagement to Vincent.
+            </div>
+            <div class="narrative">
+                By late 1957, Vivienne had decided to end her relationship with Charlotte and commit fully to her engagement to Vincent. This decision was driven by several factors: societal pressure, fear of exposure and scandal, genuine affection for Vincent (though not the same passion she felt for Charlotte), and the stability and respectability marriage would provide. She believed marriage to Vincent would protect her reputation and career.
+            </div>
+            <div class="narrative">
+                In the weeks before her death, Vivienne attempted to gently distance herself from Charlotte, gradually reducing their meetings and communications. She drafted several letters to Charlotte explaining her decision but never found the courage to send them. On the night of November 13-14, 1957, Charlotte confronted her aboard the Silver Comet train during Vivienne's journey to New York for a recording audition.
+            </div>
+
+            <div class="section-heading">Personal Effects & Evidence</div>
+            <div class="info-grid">
+                <div class="info-label">Clothing:</div>
+                <div class="info-value">Emerald green silk nightgown, matching robe (found at scene)</div>
+                
+                <div class="info-label">Jewelry:</div>
+                <div class="info-value">Engagement ring from Vincent DeLuca, pearl earrings, gold necklace (all recovered)</div>
+                
+                <div class="info-label">Personal Items:</div>
+                <div class="info-value">Sheet music, makeup case, travel documents, wallet with $247</div>
+                
+                <div class="info-label">Missing Item:</div>
+                <div class="info-value">Burgundy silk scarf (murder weapon, later found in Charlotte's trunk in 2024)</div>
+            </div>
+
+            <div class="section-heading">Character Assessment</div>
+            <div class="narrative">
+                Vivienne was described by friends and colleagues as warm, talented, and deeply conflicted. She struggled to reconcile her authentic feelings for Charlotte with the overwhelming social pressure to conform to heterosexual norms. Vincent DeLuca described her as "the love of my life" and "a woman of grace and mystery." Charlotte Devereaux's journal entries portray her as passionate, sensual, and ultimately heartbreaking in her choice to prioritize social acceptance over true love.
+            </div>
+            <div class="quote">
+                "She had this way of making you feel like you were the only person in the world when she looked at you. On stage, she commanded the room. In private, she was soft, vulnerable, scared of her own heart." — Charlotte Devereaux, 2024 confession
+            </div>
+
+            <div class="section-heading">Victim Impact Statement (2024)</div>
+            <div class="narrative">
+                Vivienne's death devastated the New Orleans jazz community. She left behind her parents (both deceased by 1980), a younger brother (died 1992), and Vincent DeLuca, who never married and kept Vivienne's photograph in his office until his death in 2003. When the case was solved in 2024, her surviving niece (daughter of Vivienne's brother) issued a statement expressing relief that justice had finally been achieved and acknowledging the tragic circumstances that led to both women's destruction by societal homophobia.
+            </div>
+        </div>
+
+        <!-- KILLER -->
+        <div class="dossier">
+            <div class="dossier-header">
+                <div class="dossier-name">Charlotte "Lottie" Devereaux</div>
+                <div class="dossier-title">The Killer - Aspiring Actress</div>
+            </div>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <span class="badge badge-killer">PERPETRATOR</span>
+                <span class="badge badge-suspect">UNIDENTIFIED IN 1957</span>
+                <span class="badge">CONFESSED 2024</span>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-label">Date of Birth:</div>
+                <div class="info-value">April 2, 1928 (age 29 at time of murder; age 96 at death)</div>
+                
+                <div class="info-label">Date of Death:</div>
+                <div class="info-value">November 18, 2024 (terminal pancreatic cancer)</div>
+                
+                <div class="info-label">Residence (1957):</div>
+                <div class="info-value">Birmingham, Alabama (French Quarter apartment in New Orleans for rendezvous)</div>
+                
+                <div class="info-label">Occupation (1957):</div>
+                <div class="info-value">Aspiring actress; secretary at Birmingham insurance firm</div>
+                
+                <div class="info-label">Physical Description:</div>
+                <div class="info-value">5'7", slender build, auburn hair, green eyes, elegant bearing</div>
+                
+                <div class="info-label">Distinguishing Details:</div>
+                <div class="info-value">Wore burgundy suit on night of murder; described as "striking" and "sophisticated"</div>
+            </div>
+
+            <div class="section-heading">Background & Biography</div>
+            <div class="narrative">
+                Charlotte Devereaux was born into a respectable middle-class family in Birmingham, Alabama. She harbored dreams of becoming a stage actress and frequently traveled to New Orleans to attend theater performances and audition for roles. In 1954, at age 26, she met Vivienne Marchand at a bohemian gathering in the French Quarter. The attraction was immediate and intense.
+            </div>
+            <div class="narrative">
+                For three years, Charlotte and Vivienne conducted a passionate, clandestine relationship. Charlotte would travel to New Orleans under the pretense of theater auditions, and the two women would meet in Charlotte's rented French Quarter apartment. They exchanged dozens of love letters using coded language and kept their relationship completely hidden from friends and family. Charlotte never publicly identified as lesbian or bisexual; the social stigma and legal consequences in 1957 Alabama were severe.
+            </div>
+            <div class="narrative">
+                By day, Charlotte worked as a secretary at Birmingham Southern Insurance Company—a respectable but unfulfilling job that paid for her New Orleans trips. She described herself in journal entries as living a "double life" and feeling increasingly desperate as Vivienne began distancing herself in late 1957. When Vivienne announced her engagement to Vincent DeLuca, Charlotte experienced what she described as "complete devastation."
+            </div>
+
+            <div class="section-heading">The Murder - November 14, 1957</div>
+            <div class="narrative">
+                Charlotte learned of Vivienne's train journey to New York through a mutual acquaintance (a theater stagehand who had seen Vivienne's travel itinerary). Desperate and enraged, Charlotte purchased a last-minute ticket on the same train—the Silver Comet—departing Birmingham on November 13, 1957. She boarded at Birmingham and rode one car away from Vivienne, booking Compartment 5 in Car 7 "Magnolia."
+            </div>
+            <div class="narrative">
+                According to her 2024 confession, Charlotte spent the evening of November 13 working up the courage to confront Vivienne. Around 10:45 PM, she approached Vivienne in the observation car wearing a distinctive burgundy suit. Witness Margaret Sinclair observed them in conversation—appearing intimate but tense. Around 11:15 PM, Charlotte followed Vivienne back to Compartment 7.
+            </div>
+            <div class="narrative">
+                Inside the compartment, Charlotte pleaded with Vivienne to abandon the engagement to Vincent and continue their relationship. Vivienne, exhausted and overwhelmed, refused—explaining that she couldn't live a lie anymore and needed the stability and respectability Vincent offered. According to Charlotte's confession, Vivienne said: <em>"I love you, Lottie, but I can't live like this. I can't be what the world won't let us be."</em>
+            </div>
+            <div class="narrative">
+                Charlotte left the compartment around midnight, devastated. She returned to her own compartment and spent hours in anguish, writing in her journal (later discovered in her trunk). Around 2:30 AM, in what she described as a "moment of insanity," she returned to Compartment 7. Vivienne had left the door unlocked—believing Charlotte had gone to sleep and wanting to allow the possibility of reconciliation.
+            </div>
+            <div class="narrative">
+                Charlotte entered quietly. Vivienne was asleep. In a sudden, impulsive act—fueled by rage, betrayal, and fear of exposure—Charlotte took Vivienne's burgundy silk scarf from a hook near the door and strangled her. The attack was swift; Vivienne struggled briefly but was overpowered. Death occurred within 2-3 minutes. Charlotte immediately panicked, realizing what she had done. She took the scarf (the only physical evidence linking her to the crime), locked the compartment from inside using Vivienne's key, and exited through the door, locking it behind her with the interior latch mechanism.
+            </div>
+            <div class="narrative">
+                Charlotte returned to Compartment 5, packed the scarf deep in her steamer trunk, and spent the rest of the night in terrified silence. When the train arrived in Chattanooga the next morning and police began investigating, Charlotte—using her theatrical skills—presented herself as a shocked, uninvolved passenger who barely knew the victim. She disembarked in Atlanta, returned to Birmingham, and never spoke of the murder to anyone for 67 years.
+            </div>
+
+            <div class="section-heading">Life After the Murder (1957-2024)</div>
+            <div class="narrative">
+                Charlotte never performed on stage again. She left Birmingham in 1958, moved to Savannah, Georgia, and married a businessman named Robert Hayes in 1960. The marriage was stable but emotionally distant; Charlotte described it as "convenient" and "safe." Robert never knew about Charlotte's relationship with Vivienne or her role in the murder. They had no children. Robert died in 2010.
+            </div>
+            <div class="narrative">
+                Charlotte lived a quiet, unremarkable life—volunteering at a local theater, attending church, maintaining friendships. She never mentioned Vivienne Marchand to anyone. The locked steamer trunk containing the murder weapon, journal, and love letters remained in her attic for 67 years, a secret burden she carried alone.
+            </div>
+            <div class="narrative">
+                In November 2024, at age 96 and dying from terminal pancreatic cancer, Charlotte instructed her estate executor to deliver the trunk to the New Orleans Police Department after her death. On November 12, 2024, cold case detectives opened the trunk and discovered the evidence. Charlotte died six days later, but not before giving a full voluntary confession to Detective Lt. Sarah Chen in a videotaped interview.
+            </div>
+
+            <div class="section-heading">Confession & Motive (2024)</div>
+            <div class="quote">
+                "I killed the only person I ever truly loved. I did it because she chose a lie over the truth, but the real lie was believing I could live with what I'd done. I've carried Vivienne with me every day for 67 years. I see her face when I close my eyes. I hear her voice. I destroyed her, and I destroyed myself. I'm not asking for forgiveness—there is none to be had. I only want the truth to be known before I die." — Charlotte Devereaux, November 12, 2024
+            </div>
+            <div class="narrative">
+                Charlotte expressed genuine remorse in her confession, but also revealed the depth of her rage and betrayal in 1957. She explained that her motive was not premeditated murder but rather a crime of passion—jealousy, heartbreak, and fear of exposure colliding in a single, irreversible moment. She acknowledged that she could have walked away, but instead, she made the choice that ended two lives: Vivienne's literally, and her own spiritually.
+            </div>
+
+            <div class="section-heading">Psychological Profile (Retrospective Assessment)</div>
+            <div class="narrative">
+                Modern psychological analysis suggests Charlotte suffered from undiagnosed depression, anxiety, and identity suppression due to internalized homophobia and societal persecution. In 1957, LGBTQ+ individuals faced criminalization, job loss, family rejection, and involuntary psychiatric institutionalization. Charlotte's decision to hide her identity and relationship was a survival mechanism, but it also created a pressure-cooker environment that culminated in violence.
+            </div>
+            <div class="narrative">
+                Her ability to compartmentalize the murder and live 67 years without detection suggests significant dissociation and avoidance coping mechanisms. Her decision to confess at the end of her life indicates a desire for truth and accountability, as well as relief from carrying the secret alone.
+            </div>
+
+            <div class="section-heading">Legal Outcome</div>
+            <div class="narrative">
+                Charlotte Devereaux died on November 18, 2024, before any charges could be filed. The Orleans Parish District Attorney determined that the case was solved through confession and corroborating evidence, but criminal prosecution was impossible due to the perpetrator's death. The case was officially closed as SOLVED on December 1, 2024. No estate penalties or civil judgments were pursued.
+            </div>
+        </div>
+
+        <!-- VINCENT DELUCA -->
+        <div class="dossier">
+            <div class="dossier-header">
+                <div class="dossier-name">Vincent Anthony DeLuca</div>
+                <div class="dossier-title">Victim's Fiancé - Club Owner</div>
+            </div>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <span class="badge badge-witness">KEY WITNESS</span>
+                <span class="badge badge-cleared">CLEARED</span>
+                <span class="badge">ALIBIED</span>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-label">Date of Birth:</div>
+                <div class="info-value">June 8, 1920 (age 37 in 1957)</div>
+                
+                <div class="info-label">Status (2024):</div>
+                <div class="info-value">Deceased (died March 14, 2003, age 82)</div>
+                
+                <div class="info-label">Residence (1957):</div>
+                <div class="info-value">New Orleans, Louisiana (Garden District)</div>
+                
+                <div class="info-label">Occupation:</div>
+                <div class="info-value">Owner of Vincent's Blue Note Club (jazz venue)</div>
+                
+                <div class="info-label">Relationship to Victim:</div>
+                <div class="info-value">Fiancé (engaged October 1957)</div>
+                
+                <div class="info-label">Alibi:</div>
+                <div class="info-value">In New Orleans at time of murder; verified by multiple witnesses</div>
+            </div>
+
+            <div class="section-heading">Background</div>
+            <div class="narrative">
+                Vincent DeLuca was a first-generation Italian-American who opened Vincent's Blue Note Club in 1948 after serving in World War II. The club became one of New Orleans' premier jazz venues, hosting legendary performers. Vincent met Vivienne Marchand in 1952 when she auditioned for a residency at his club. He was immediately captivated by her talent and elegance.
+            </div>
+            <div class="narrative">
+                Their professional relationship evolved into romance over three years. Vincent courted Vivienne with old-fashioned gentility—dinners, flowers, attendance at her every performance. He proposed in October 1957 with a two-carat diamond ring and plans for a spring 1958 wedding. Vincent described Vivienne as "the love of my life" and was devastated by her murder.
+            </div>
+
+            <div class="section-heading">Interview Summary (1957)</div>
+            <div class="narrative">
+                Vincent was interviewed by Detective Holloway on November 15, 1957. He provided a solid alibi (he was in New Orleans managing his club on the night of the murder) and had no known motive. He described Vivienne's burgundy silk scarf—the murder weapon—in detail, confirming it was a gift he had given her. He expressed shock and grief, and investigators found no evidence of involvement.
+            </div>
+            <div class="quote">
+                "Vivienne was everything to me. We were going to build a life together—she'd perform, I'd manage the club, we'd have a family. Someone took all of that away, and I don't understand why. She had no enemies. Everyone loved her." — Vincent DeLuca, November 15, 1957
+            </div>
+
+            <div class="section-heading">Life After Vivienne's Death</div>
+            <div class="narrative">
+                Vincent never married. He continued operating Vincent's Blue Note Club until 1985, when he sold it to retire. He kept Vivienne's photograph in his office and wore a mourning band on his left arm for five years. Friends described him as a man who never fully recovered from the loss. He followed the investigation closely and expressed frustration when the case went cold in 1958.
+            </div>
+            <div class="narrative">
+                Vincent died of heart failure in 2003, never knowing that Vivienne's killer was Charlotte Devereaux or that Vivienne had been in a secret relationship with another woman. When the case was solved in 2024, Vincent's surviving nephew expressed relief that the family finally had answers.
+            </div>
+        </div>
+
+        <!-- MARGARET SINCLAIR -->
+        <div class="dossier">
+            <div class="dossier-header">
+                <div class="dossier-name">Margaret "Maggie" Sinclair</div>
+                <div class="dossier-title">Critical Witness - Schoolteacher</div>
+            </div>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <span class="badge badge-witness">CRITICAL WITNESS</span>
+                <span class="badge badge-cleared">CLEARED</span>
+                <span class="badge">KEY OBSERVATION</span>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-label">Date of Birth:</div>
+                <div class="info-value">May 12, 1923 (age 34 in 1957)</div>
+                
+                <div class="info-label">Status (2024):</div>
+                <div class="info-value">Living (age 101, resides in assisted living facility, Atlanta)</div>
+                
+                <div class="info-label">Residence (1957):</div>
+                <div class="info-value">Chattanooga, Tennessee</div>
+                
+                <div class="info-label">Occupation:</div>
+                <div class="info-value">Elementary school teacher (4th grade)</div>
+                
+                <div class="info-label">Compartment Assignment:</div>
+                <div class="info-value">Car 7 "Magnolia," Compartment #8 (adjacent to victim)</div>
+            </div>
+
+            <div class="section-heading">Critical Observation</div>
+            <div class="narrative">
+                Margaret Sinclair provided the most important witness testimony in the entire investigation. On the evening of November 13, 1957, at approximately 10:45 PM, she observed Vivienne Marchand in conversation with an unidentified woman in a burgundy suit in the observation car. Margaret described the woman as "elegant," "well-dressed," and appearing "intimate" with Vivienne—though not in an obviously romantic way that would have raised 1957 suspicions.
+            </div>
+            <div class="narrative">
+                Margaret could not identify the mystery woman and did not see her again after that encounter. This sighting became known in the investigation as the "woman in burgundy"—the unidentified person who was never located during the 1957 investigation. In 2024, when Charlotte Devereaux's trunk was discovered, detectives realized the "woman in burgundy" was Charlotte herself.
+            </div>
+            <div class="quote">
+                "I remember thinking they seemed close—like old friends, maybe. The other woman was striking, very put-together. I didn't think much of it at the time. I certainly never imagined..." — Margaret Sinclair, 1957 statement
+            </div>
+
+            <div class="section-heading">Additional Observations</div>
+            <div class="narrative">
+                Margaret also reported hearing a door closing softly around 2:00-3:00 AM (she could not be more specific) and hearing muffled movement in the corridor. She did not investigate, assuming it was another passenger using the washroom. This timing aligns with Charlotte's confession that she entered Vivienne's compartment around 2:30 AM.
+            </div>
+
+            <div class="section-heading">2024 Follow-Up</div>
+            <div class="narrative">
+                In 2024, at age 101, Margaret was contacted by Detective Lt. Sarah Chen. Though her memory of specific details had faded, she confirmed her original statement and expressed shock upon learning the identity of the "woman in burgundy." She provided a recorded statement for the cold case file.
+            </div>
+        </div>
+
+        <!-- DETECTIVE JAMES HOLLOWAY -->
+        <div class="dossier">
+            <div class="dossier-header">
+                <div class="dossier-name">Detective James Robert Holloway</div>
+                <div class="dossier-title">Lead Investigator (1957-1958)</div>
+            </div>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <span class="badge">LEAD DETECTIVE</span>
+                <span class="badge">1957 INVESTIGATION</span>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-label">Date of Birth:</div>
+                <div class="info-value">February 3, 1915 (age 42 in 1957)</div>
+                
+                <div class="info-label">Status (2024):</div>
+                <div class="info-value">Deceased (died April 1989, age 74)</div>
+                
+                <div class="info-label">Agency:</div>
+                <div class="info-value">Georgia Bureau of Investigation (assigned to railroad police liaison)</div>
+                
+                <div class="info-label">Rank (1957):</div>
+                <div class="info-value">Detective Sergeant</div>
+                
+                <div class="info-label">Years of Service:</div>
+                <div class="info-value">22 years (1935-1957 at time of case)</div>
+            </div>
+
+            <div class="section-heading">Investigator Profile</div>
+            <div class="narrative">
+                Detective James Holloway was a decorated investigator with an excellent clearance rate. He served in the U.S. Army during World War II and joined the Georgia Bureau of Investigation in 1946. By 1957, he had solved 47 of 52 homicide cases assigned to him. The Vivienne Marchand case would become one of only five unsolved cases in his career—a failure that haunted him until his death.
+            </div>
+            <div class="narrative">
+                Holloway conducted a thorough, professional investigation. He interviewed all passengers and crew, processed the crime scene meticulously, and pursued every lead. However, he faced insurmountable obstacles: the complete absence of physical evidence (Charlotte had taken the murder weapon), the lack of apparent motive (no one knew about Vivienne and Charlotte's relationship), and the limitations of 1957 forensic technology (no DNA analysis, limited fingerprint databases).
+            </div>
+
+            <div class="section-heading">Investigation Challenges</div>
+            <div class="narrative">
+                Holloway's investigation notes reveal his frustration with the "locked-room" nature of the crime and the mysterious "woman in burgundy" who vanished without a trace. He pursued multiple theories—a jealous lover, a robbery gone wrong, a crime of opportunity—but none fit the evidence. The case was officially closed as unsolved in February 1958 after 107 days of investigation.
+            </div>
+            <div class="quote">
+                "I've investigated murders for twenty-two years, and this one defies explanation. There's a missing piece—someone who was there, someone who knew the victim in a way we haven't uncovered. I believe we'll solve this case someday, but it won't be with the tools we have in 1958." — Detective Holloway, February 28, 1958, case closure report
+            </div>
+
+            <div class="section-heading">Legacy</div>
+            <div class="narrative">
+                Holloway retired from the GBI in 1975. He kept the Marchand case file in his personal office until his death in 1989, occasionally reviewing it in hopes of a breakthrough. His daughter donated his personal case files to the Georgia Archives in 2010, which helped cold case detectives in 2024 when the trunk was discovered. Holloway's meticulous documentation and insightful theories proved invaluable to solving the case 67 years later.
+            </div>
+        </div>
+
+        <!-- DR. EVELYN HAYES -->
+        <div class="dossier">
+            <div class="dossier-header">
+                <div class="dossier-name">Dr. Evelyn Margaret Hayes</div>
+                <div class="dossier-title">Person of Interest - Physician</div>
+            </div>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <span class="badge badge-suspect">PERSON OF INTEREST (1957)</span>
+                <span class="badge badge-cleared">CLEARED</span>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-label">Date of Birth:</div>
+                <div class="info-value">November 8, 1918 (age 39 in 1957)</div>
+                
+                <div class="info-label">Status (2024):</div>
+                <div class="info-value">Deceased (died June 2008, age 89)</div>
+                
+                <div class="info-label">Residence (1957):</div>
+                <div class="info-value">Charleston, South Carolina</div>
+                
+                <div class="info-label">Occupation:</div>
+                <div class="info-value">Physician (general practice)</div>
+                
+                <div class="info-label">Compartment Assignment:</div>
+                <div class="info-value">Car 7 "Magnolia," Compartment #4</div>
+            </div>
+
+            <div class="section-heading">Investigation Summary</div>
+            <div class="narrative">
+                Dr. Hayes initially drew investigative attention because she was awake and in the corridor at approximately 3:00 AM—within the estimated time window of the murder. She reported using the communal washroom at the end of the car. As a physician, she had medical knowledge that could theoretically have been relevant to the strangulation method.
+            </div>
+            <div class="narrative">
+                However, Detective Holloway found no connection between Dr. Hayes and the victim, no motive, and no evidence of involvement. Dr. Hayes' alibi was partially verified by the porter, who saw her returning to her compartment around 3:15 AM. She was formally cleared on November 20, 1957.
+            </div>
+
+            <div class="section-heading">Background</div>
+            <div class="narrative">
+                Dr. Hayes was one of the few female physicians practicing in the South in 1957. She had graduated from the Medical College of South Carolina in 1945 and established a respected general practice in Charleston. She was traveling to New York for a medical conference. She was cooperative with investigators and expressed shock at the murder.
+            </div>
+        </div>
+
+        <!-- ERNEST WASHINGTON -->
+        <div class="dossier">
+            <div class="dossier-header">
+                <div class="dossier-name">Ernest James Washington</div>
+                <div class="dossier-title">Porter - Witness Who Discovered Body</div>
+            </div>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <span class="badge badge-witness">KEY WITNESS</span>
+                <span class="badge badge-cleared">CLEARED</span>
+                <span class="badge">DISCOVERED VICTIM</span>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-label">Date of Birth:</div>
+                <div class="info-value">August 19, 1912 (age 45 in 1957)</div>
+                
+                <div class="info-label">Status (2024):</div>
+                <div class="info-value">Deceased (died September 1993, age 81)</div>
+                
+                <div class="info-label">Residence (1957):</div>
+                <div class="info-value">Atlanta, Georgia</div>
+                
+                <div class="info-label">Occupation:</div>
+                <div class="info-value">Pullman porter, Silver Comet line (employed since 1935)</div>
+                
+                <div class="info-label">Assignment:</div>
+                <div class="info-value">Car 7 "Magnolia" porter</div>
+            </div>
+
+            <div class="section-heading">Discovery of Body</div>
+            <div class="narrative">
+                Ernest Washington discovered Vivienne Marchand's body at approximately 7:15 AM on November 14, 1957. He had attempted to deliver a wake-up call to Compartment 7 by knocking on the door. When there was no response after repeated knocking, he used his master key to unlock the door. He found Vivienne deceased on the bed, immediately recognized foul play, and alerted the conductor.
+            </div>
+            <div class="narrative">
+                Ernest had worked as a porter for 22 years and was known for his professionalism and reliability. He provided critical testimony about the timeline of events, his observations of passengers during the night, and the locked-door mystery. He confirmed that he had seen no one in the Magnolia car corridor between his 11:00 PM rounds and his 7:00 AM wake-up calls.
+            </div>
+
+            <div class="section-heading">Investigation & Clearance</div>
+            <div class="narrative">
+                Ernest was never considered a serious suspect. He had no motive, no connection to the victim, and a verified alibi (he was in the porter's compartment from midnight to 6:30 AM, confirmed by other crew members). His testimony about train procedures and passenger movements was invaluable to the investigation.
+            </div>
+            <div class="quote">
+                "I've seen a lot in my years on the railroad, but nothing like this. That poor woman—she had her whole life ahead of her. Whoever did this walked right past me, and I never knew. That's what haunts me." — Ernest Washington, November 14, 1957
+            </div>
+
+            <div class="section-heading">Post-Investigation Life</div>
+            <div class="narrative">
+                Ernest continued working as a porter until mandatory retirement at age 65 in 1977. He was deeply affected by the unsolved case and spoke about it to family members throughout his life. He died in 1993, thirty-six years before the case was solved. His family was contacted in 2024 when the case was closed and expressed gratitude that answers had finally been found.
+            </div>
+        </div>
+
+        <!-- THEODORE BLACKWOOD -->
+        <div class="dossier">
+            <div class="dossier-header">
+                <div class="dossier-name">Theodore "Ted" Blackwood</div>
+                <div class="dossier-title">Head Conductor - Witness</div>
+            </div>
+
+            <div style="text-align: center; margin: 20px 0;">
+                <span class="badge badge-witness">WITNESS</span>
+                <span class="badge badge-cleared">CLEARED</span>
+                <span class="badge">SECURITY ROUNDS</span>
+            </div>
+
+            <div class="info-grid">
+                <div class="info-label">Date of Birth:</div>
+                <div class="info-value">March 22, 1909 (age 48 in 1957)</div>
+                
+                <div class="info-label">Status (2024):</div>
+                <div class="info-value">Deceased (died January 1998, age 88)</div>
+                
+                <div class="info-label">Residence (1957):</div>
+                <div class="info-value">Birmingham, Alabama</div>
+                
+                <div class="info-label">Occupation:</div>
+                <div class="info-value">Head conductor, Silver Comet line (employed since 1930)</div>
+            </div>
+
+            <div class="section-heading">Critical Timeline Evidence</div>
+            <div class="narrative">
+                Theodore Blackwood conducted a routine security check of all passenger cars at 2:30 AM on November 14, 1957. He walked through the Magnolia car corridor and observed that all compartment doors were closed and locked. He did not see anyone in the corridor during his rounds. This observation helped detectives narrow the time window of the murder to between 2:30 AM (Blackwood's rounds) and 7:15 AM (body discovered by porter).
+            </div>
+            <div class="narrative">
+                Combined with Margaret Sinclair's observation of hearing a door closing around 2:00-3:00 AM, investigators believed the murder occurred between 2:30 AM and 3:15 AM. Charlotte Devereaux's 2024 confession confirmed the murder took place at approximately 2:45 AM—perfectly within this window.
+            </div>
+
+            <div class="section-heading">Investigation Role</div>
+            <div class="narrative">
+                Blackwood cooperated fully with the investigation and provided detailed information about train operations, security protocols, and passenger manifests. He had no connection to the victim and was cleared immediately. He expressed professional frustration that the murder occurred on his train and remained unsolved.
+            </div>
+        </div>
+
+        <!-- Additional Brief Profiles -->
+        <div class="dossier">
+            <div class="dossier-header">
+                <div class="dossier-name">Additional Persons of Interest</div>
+                <div class="dossier-title">Brief Profiles (All Cleared)</div>
+            </div>
+
+            <div class="section-heading">Billy Ray Henderson - Bar Car Attendant</div>
+            <div class="info-grid">
+                <div class="info-label">Age (1957):</div>
+                <div class="info-value">28 years old</div>
+                <div class="info-label">Status:</div>
+                <div class="info-value">Cleared (verified alibi in crew quarters from 3:00 AM)</div>
+            </div>
+            <div class="narrative">
+                Bar car attendant with no connection to victim. Provided general observations about passengers but had no relevant information. Deceased 1982.
+            </div>
+
+            <div class="section-heading">Arthur Whitmore - Photographer</div>
+            <div class="info-grid">
+                <div class="info-label">Age (1957):</div>
+                <div class="info-value">41 years old</div>
+                <div class="info-label">Compartment:</div>
+                <div class="info-value">#6 (adjacent to victim)</div>
+                <div class="info-label">Status:</div>
+                <div class="info-value">Cleared (no motive, no connection)</div>
+            </div>
+            <div class="narrative">
+                Professional photographer traveling for work. May have photographed jazz venues where Vivienne performed but no personal connection established. Deceased 2001.
+            </div>
+
+            <div class="section-heading">Dr. Richard Caldwell - Medical Examiner</div>
+            <div class="info-grid">
+                <div class="info-label">Agency (1957):</div>
+                <div class="info-value">Georgia State Medical Examiner's Office</div>
+                <div class="info-label">Role:</div>
+                <div class="info-value">Conducted autopsy</div>
+            </div>
+            <div class="narrative">
+                Medical examiner who performed Vivienne's autopsy. Determined cause of death as ligature strangulation with detailed forensic analysis. Professional role only; no investigative involvement beyond autopsy. Deceased 1987.
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>DOSSIER COMPILED: DECEMBER 2024</strong></p>
+            <p>New Orleans Cold Case Unit - Detective Lt. Sarah Chen</p>
+            <p>Based on 1957 investigation files (Detective James Holloway) and 2024 reopened case evidence</p>
+            <p>CASE STATUS: SOLVED - December 1, 2024</p>
+            <p>---</p>
+            <p>Mystery #2B: Blood on the Tracks - Character Dossiers Document #24</p>
+        </div>
+    </div>
+</body>
+</html>
+
+

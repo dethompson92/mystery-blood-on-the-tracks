@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Transcript - Dr. Evelyn Hayes</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #f4f1e8;
+            color: #2c2c2c;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            background-image: linear-gradient(0deg, transparent 24%, rgba(0,0,0,.03) 25%, rgba(0,0,0,.03) 26%, transparent 27%, transparent 74%, rgba(0,0,0,.03) 75%, rgba(0,0,0,.03) 76%, transparent 77%, transparent),
+                              linear-gradient(90deg, transparent 24%, rgba(0,0,0,.03) 25%, rgba(0,0,0,.03) 26%, transparent 27%, transparent 74%, rgba(0,0,0,.03) 75%, rgba(0,0,0,.03) 76%, transparent 77%, transparent);
+            background-size: 50px 50px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px double #2c2c2c;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 24px;
+            margin: 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .header p {
+            margin: 5px 0;
+            font-size: 12px;
+        }
+        .stamp {
+            display: inline-block;
+            border: 2px solid #8b0000;
+            color: #8b0000;
+            padding: 5px 15px;
+            margin: 10px 0;
+            transform: rotate(2deg);
+            font-weight: bold;
+        }
+        .info-table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+        .info-table td {
+            padding: 8px;
+            border: 1px solid #666;
+        }
+        .info-table td:first-child {
+            font-weight: bold;
+            width: 200px;
+            background-color: #e8e5d8;
+        }
+        .section {
+            margin: 30px 0;
+        }
+        .section h2 {
+            font-size: 16px;
+            text-transform: uppercase;
+            border-bottom: 2px solid #2c2c2c;
+            padding-bottom: 5px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        .statement-text {
+            line-height: 1.8;
+            text-align: justify;
+            font-size: 13px;
+            padding: 20px;
+            background-color: #fefefe;
+            border-left: 4px solid #8b0000;
+        }
+        .interviewer-note {
+            font-style: italic;
+            color: #555;
+            background-color: #f9f7f0;
+            padding: 10px;
+            margin: 15px 0;
+            border-left: 3px solid #888;
+        }
+        .highlighted {
+            background-color: #fffacd;
+            padding: 2px 5px;
+            border-left: 3px solid #ffd700;
+        }
+        .signature-section {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .signature-box {
+            width: 45%;
+            border-top: 2px solid #2c2c2c;
+            padding-top: 10px;
+        }
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+            border-top: 1px solid #ccc;
+            padding-top: 20px;
+        }
+    /* ========================================
+   PRINT-OPTIMIZED CSS
+   Saves ink, prevents cutoff, controls page breaks
+   ======================================== */
+@page {
+  margin: 0.5in !important;
+}
+@media print {
+  /* Reset to printer-friendly colors */
+  body {
+    background-color: white !important;
+    background: white !important;
+    color: black !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove all dark backgrounds and shadows */
+  .document-container,
+  .header-box,
+  table,
+  th,
+  td,
+  div,
+  section {
+    background-color: white !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-color: black !important;
+  }
+
+  /* Ensure text is always black */
+  h1, h2, h3, h4, h5, h6, p, li, td, th, span, div {
+    color: black !important;
+  }
+
+  /* Keep ONLY red stamps visible (but lighter) */
+  .stamp {
+    color: #c0392b !important;
+    border-color: #c0392b !important;
+    opacity: 0.6 !important;
+    background: transparent !important;
+  }
+
+  /* Remove colored highlight backgrounds - keep border only */
+  .evidence-highlight,
+  .sig-critical,
+  .sig-supporting,
+  .sig-context {
+    background-color: white !important;
+    background: white !important;
+    border-left-width: 3px !important;
+    border-left-color: black !important;
+  }
+
+  /* Simplify evidence tags for printing */
+  .evidence-tag {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+
+  /* Control page breaks - prevent awkward splits */
+  table {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group; /* Repeat header on each page */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Keep related content together */
+  .evidence-highlight,
+  .signature-block,
+  .header-meta {
+    page-break-inside: avoid;
+  }
+
+  /* Remove unnecessary spacing for print */
+  .document-container {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Ensure tables fit on page */
+  table {
+    width: 100% !important;
+    font-size: 11pt !important;
+  }
+
+  th, td {
+    padding: 6pt !important;
+  }
+
+  /* Adjust font sizes for readability */
+  body {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  h1 {
+    font-size: 18pt !important;
+  }
+
+  h2 {
+    font-size: 14pt !important;
+  }
+
+  /* Show URLs for links (optional - comment out if not wanted) */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  /* Hide elements that shouldn't print */
+  .no-print {
+    display: none !important;
+  }
+}
+</style>
+</head>
+<body>
+    <div class="header">
+        <h1>Jackson Police Department</h1>
+        <p>Homicide Division - Formal Interview Transcript</p>
+        <p>142 East Capitol Street, Jackson, Mississippi</p>
+        <div class="stamp">PERSON OF INTEREST</div>
+    </div>
+
+    <table class="info-table">
+        <tr>
+            <td>Case Number:</td>
+            <td><strong>57-1114-HOMI</strong></td>
+        </tr>
+        <tr>
+            <td>Interview Date & Time:</td>
+            <td>November 14, 1957 - 15:30 hours</td>
+        </tr>
+        <tr>
+            <td>Interviewee Name:</td>
+            <td>Dr. Evelyn Charlotte Hayes</td>
+        </tr>
+        <tr>
+            <td>Date of Birth:</td>
+            <td>September 3, 1922 (Age 35)</td>
+        </tr>
+        <tr>
+            <td>Race / Sex:</td>
+            <td>White / Female</td>
+        </tr>
+        <tr>
+            <td>Occupation:</td>
+            <td>Physician - Internal Medicine, Tulane University Hospital</td>
+        </tr>
+        <tr>
+            <td>Residential Address:</td>
+            <td>1547 St. Charles Avenue, New Orleans, Louisiana</td>
+        </tr>
+        <tr>
+            <td>Travel Destination:</td>
+            <td>Medical conference, Chicago, Illinois</td>
+        </tr>
+        <tr>
+            <td>Compartment Assignment:</td>
+            <td>Magnolia Car - Compartment 4</td>
+        </tr>
+        <tr>
+            <td>Interviewing Officer:</td>
+            <td>Detective James Holloway (Badge #402)</td>
+        </tr>
+        <tr>
+            <td>Secondary Officer:</td>
+            <td>Detective Marion Ross (Badge #318)</td>
+        </tr>
+        <tr>
+            <td>Location of Interview:</td>
+            <td>Jackson PD Headquarters, Interview Room 3</td>
+        </tr>
+        <tr>
+            <td>Legal Representation:</td>
+            <td>None (declined; voluntarily cooperating)</td>
+        </tr>
+    </table>
+
+    <div class="section">
+        <h2>Interview Transcript</h2>
+        <div class="statement-text">
+            <p><strong>Detective Holloway:</strong> Dr. Hayes, thank you for your cooperation. For the record, you've been informed that you're not under arrest, you're free to leave at any time, and you've declined legal representation. Is that correct?</p>
+
+            <p><strong>Dr. Hayes:</strong> Yes, that's correct. I want to help however I can. What happened to that poor woman is horrifying.</p>
+
+            <p><strong>Detective Holloway:</strong> Please state your full name, occupation, and reason for travel.</p>
+
+            <p><strong>Dr. Hayes:</strong> Dr. Evelyn Charlotte Hayes. I'm a physician specializing in internal medicine at Tulane University Hospital in New Orleans. I was traveling to Chicago to attend the American Medical Association's annual conference on cardiac research. I'm presenting a paper on hypertension treatment protocols.</p>
+
+            <p><strong>Detective Holloway:</strong> How long have you been practicing medicine?</p>
+
+            <p><strong>Dr. Hayes:</strong> I completed my residency in 1950, so seven years in practice. Before that, I did my medical training at Tulane School of Medicine during the war years.</p>
+
+            <p><strong>Detective Holloway:</strong> You were assigned to Compartment 4 in the Magnolia sleeper car. When did you board the train?</p>
+
+            <p><strong>Dr. Hayes:</strong> I boarded in New Orleans around 7:30 PM on the evening of November 13th. I wanted to get settled before departure. I had quite a bit of reading material—medical journals, my presentation notes—so I was looking forward to a quiet journey.</p>
+
+            <p><strong>Detective Holloway:</strong> Did you know any of the other passengers in your car before boarding?</p>
+
+            <p><strong>Dr. Hayes:</strong> No, not at all. I don't socialize much when I travel. I tend to keep to myself and focus on my work.</p>
+
+            <p><strong>Detective Holloway:</strong> Walk me through your evening after the train departed.</p>
+
+            <p><strong>Dr. Hayes:</strong> After we left Union Station, I went to the dining car for dinner around 8:45. I ate alone, reviewed some notes. I returned to my compartment around 10:00 PM. I changed into my night clothes, read for about an hour, and then turned off the light. I'd estimate I was asleep by 11:30 PM.</p>
+
+            <p><strong>Detective Holloway:</strong> Did you leave your compartment at any time during the night?</p>
+
+            <p><strong>Dr. Hayes:</strong> <span class="highlighted">Yes, once. I woke up around 3:00 AM needing to use the washroom facility at the end of the car. I'd say I was out of my compartment for perhaps five to seven minutes—just long enough to use the facilities and return.</span></p>
+
+            <p><strong>Detective Holloway:</strong> This is important, Dr. Hayes. You were in the corridor around 3:00 AM. That's within the estimated time frame of the murder. Did you see or hear anything unusual?</p>
+
+            <p><strong>Dr. Hayes:</strong> I've been thinking about this constantly since this morning. The corridor was very dark—just the small safety lights at floor level. I didn't see anyone else. I didn't hear any sounds of struggle or distress. Everything was quiet.</p>
+
+            <p><strong>Detective Holloway:</strong> Did you pass by Compartment 7, the victim's compartment?</p>
+
+            <p><strong>Dr. Hayes:</strong> Yes, I would have. My compartment is Number 4, and the washroom is at the opposite end of the car. So I would have walked past Compartments 5, 6, and 7 on my way there and back.</p>
+
+            <p><strong>Detective Holloway:</strong> Did you notice if the door to Compartment 7 was open or closed?</p>
+
+            <p><strong>Dr. Hayes:</strong> Closed. I remember all the doors being closed. I wasn't paying close attention—I was half-asleep, to be honest—but I don't recall seeing any open doors or anyone in the corridor.</p>
+
+            <p><strong>Detective Holloway:</strong> Did you hear any sounds coming from Compartment 7 or any other compartment?</p>
+
+            <p><strong>Dr. Hayes:</strong> No. It was completely quiet. The only sound was the train itself—the mechanical noises, the movement on the tracks. Nothing human.</p>
+
+            <p><strong>Detective Holloway:</strong> Are you certain of the time? You said approximately 3:00 AM?</p>
+
+            <p><strong>Dr. Hayes:</strong> I checked my wristwatch when I got up. It's a habit—I keep irregular hours at the hospital, so I'm conditioned to note the time when I wake. It was 2:58 AM when I looked. I'd estimate the whole trip to the washroom and back took me until about 3:05 AM.</p>
+
+            <p><strong>Detective Holloway:</strong> Dr. Hayes, as a physician, you would have medical knowledge about various methods of... causing death. Have you ever had training in forensic medicine or toxicology?</p>
+
+            <p><strong>Dr. Hayes:</strong> I had standard medical school coursework in pathology and pharmacology, yes. All physicians do. But I'm an internist—I treat living patients with chronic conditions. I don't work with forensics or criminal cases. If you're asking whether I know how someone could be killed, I suppose I have the academic knowledge any doctor would have, but that's very different from actual experience or inclination.</p>
+
+            <p><strong>Detective Holloway:</strong> I have to ask—did you have any interaction with the victim, Miss Vivienne Marchand, at any point during the journey?</p>
+
+            <p><strong>Dr. Hayes:</strong> No, none. I didn't even know her name until this morning when the porter told us what had happened. I might have seen her briefly—a woman in elegant evening clothes—but I didn't speak with her. I keep to myself when I travel, as I said.</p>
+
+            <p><strong>Detective Holloway:</strong> Did you notice anyone showing unusual interest in her or behaving suspiciously?</p>
+
+            <p><strong>Dr. Hayes:</strong> I wouldn't have noticed, honestly. I was focused on my work and my rest. I'm not particularly observant of other passengers unless there's a medical emergency.</p>
+
+            <p><strong>Detective Holloway:</strong> Have you ever been to Chicago before on this route?</p>
+
+            <p><strong>Dr. Hayes:</strong> Yes, I attend the AMA conference most years. I typically take the Silver Comet—it's the most convenient schedule from New Orleans.</p>
+
+            <p><strong>Detective Holloway:</strong> Have you ever witnessed or been involved in any violent incidents?</p>
+
+            <p><strong>Dr. Hayes:</strong> Only in my professional capacity. I've treated victims of violence in the emergency room—gunshot wounds, stabbings, assault injuries. It's part of working at a city hospital. But I've never been personally involved in violence, if that's what you're asking.</p>
+
+            <p><strong>Detective Holloway:</strong> Dr. Hayes, you seem very calm discussing this matter.</p>
+
+            <p><strong>Dr. Hayes:</strong> I'm a physician, Detective. I'm trained to remain calm in crisis situations. That doesn't mean I'm not deeply disturbed by what happened. A woman is dead—murdered—in a space just a few yards from where I was sleeping. It's profoundly unsettling. But my professional training helps me maintain composure.</p>
+
+            <p><strong>Detective Ross:</strong> Dr. Hayes, you mentioned reading medical journals last night. What specifically were you reading?</p>
+
+            <p><strong>Dr. Hayes:</strong> The New England Journal of Medicine—the October issue. Articles on cardiovascular disease and hypertension protocols. I also reviewed my presentation notes for the conference.</p>
+
+            <p><strong>Detective Ross:</strong> Would those materials still be in your compartment?</p>
+
+            <p><strong>Dr. Hayes:</strong> Yes, they're in my briefcase. You're welcome to examine them if you wish.</p>
+
+            <p><strong>Detective Holloway:</strong> One final question, Dr. Hayes. As a medical professional, if you had examined Miss Marchand's body this morning, what would your assessment have been?</p>
+
+            <p><strong>Dr. Hayes:</strong> I didn't examine her—that wouldn't have been appropriate. But from what I observed when they removed her body... the facial discoloration, the positioning... it appeared consistent with asphyxiation. But that's just a preliminary observation. The medical examiner will provide a definitive cause of death.</p>
+
+            <p><strong>Detective Holloway:</strong> Thank you for your cooperation, Dr. Hayes. We may have follow-up questions. Please provide your contact information in Chicago and in New Orleans to Officer Knowles.</p>
+
+            <p><strong>Dr. Hayes:</strong> Of course. I'll be staying at the Palmer House Hotel in Chicago for the next week. After that, I'll return to New Orleans. You can reach me at the hospital.</p>
+        </div>
+
+        <div class="interviewer-note">
+            <strong>Interviewing Officer's Notes (Det. Holloway):</strong> Subject is highly intelligent, composed, and cooperative. Medical background gives her knowledge of anatomy and potential methods of causing death, but no apparent motive has been established. SIGNIFICANT: She was in the corridor during the estimated time of the murder (3:00 AM) and passed directly by the victim's compartment. However, she observed nothing unusual. Her demeanor is professional—perhaps too composed given the circumstances, but this may be attributed to medical training. No signs of deception detected, but her proximity to the crime scene during the critical timeframe makes her a person of ongoing interest. Recommend verification of her conference attendance and professional credentials.
+        </div>
+
+        <div class="interviewer-note">
+            <strong>Interviewing Officer's Notes (Det. Ross):</strong> I concur with Det. Holloway's assessment. Dr. Hayes presents as credible but should remain on the persons-of-interest list due to: (1) presence in corridor during murder timeframe, (2) medical knowledge, (3) proximity to crime scene. No apparent motive or connection to victim identified at this time. Her account is internally consistent. Recommend follow-up interview if additional evidence emerges.
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Investigative Assessment</h2>
+        <div class="statement-text">
+            <p><strong>Opportunity:</strong> HIGH - Subject was awake and mobile in the corridor at approximately 3:00 AM, placing her at the scene during the estimated time of death.</p>
+
+            <p><strong>Means:</strong> MODERATE - Medical training provides knowledge of anatomy and methods of causing death, including asphyxiation. Physical capability present.</p>
+
+            <p><strong>Motive:</strong> NONE IDENTIFIED - No known connection to victim. No apparent reason for animosity or violence.</p>
+
+            <p><strong>Credibility:</strong> HIGH - Professional credentials verified. Story is internally consistent. Cooperative demeanor.</p>
+
+            <p><strong>Status:</strong> Person of Interest (due to proximity and opportunity only). No evidence of involvement at this time.</p>
+
+            <p><strong>Follow-Up Required:</strong> Verify conference attendance. Cross-reference timeline with conductor's night check and other witness accounts. Re-interview if new evidence emerges linking her to victim.</p>
+        </div>
+    </div>
+
+    <div class="signature-section">
+        <div class="signature-box">
+            <p><strong>Interviewee Signature:</strong></p>
+            <p style="font-family: 'Brush Script MT', cursive; font-size: 20px; margin: 10px 0;">Dr. Evelyn C. Hayes</p>
+            <p>Date: November 14, 1957</p>
+        </div>
+        <div class="signature-box">
+            <p><strong>Interviewing Officers:</strong></p>
+            <p style="font-family: 'Brush Script MT', cursive; font-size: 18px; margin: 10px 0;">Det. James Holloway</p>
+            <p style="font-family: 'Brush Script MT', cursive; font-size: 18px; margin: 5px 0;">Det. Marion Ross</p>
+            <p>Date: November 14, 1957</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>JACKSON POLICE DEPARTMENT - HOMICIDE DIVISION</p>
+        <p>This interview was conducted voluntarily with the subject's full cooperation.</p>
+        <p>Case File: 57-1114-HOMI | Document #14 | Page 1 of 1</p>
+    </div>
+</body>
+</html>
+
+
