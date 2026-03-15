@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Victim Profile — Solomon Vance | Mystery 3A</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #FF4D6D; --cyan: #00D4FF; --gold: #FFD700;
+    --dark: #0A0A0F; --card: #12121A; --border: #1E1E2E;
+    --text: #E8E8F0; --muted: #888899;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--dark); color:var(--text); font-family:'Inter',sans-serif; min-height:100vh; }
+  .doc-header { background:linear-gradient(135deg,#1A0010 0%,#0A0A1F 60%,#001A1A 100%); border-bottom:2px solid var(--red); padding:2rem; text-align:center; position:relative; }
+  .show-logo { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--cyan); letter-spacing:0.3em; text-transform:uppercase; margin-bottom:0.5rem; }
+  .doc-title { font-family:'Playfair Display',serif; font-size:2.4rem; font-weight:900; color:var(--gold); margin-bottom:0.4rem; }
+  .doc-subtitle { font-size:0.85rem; color:var(--muted); font-family:'IBM Plex Mono',monospace; letter-spacing:0.1em; }
+  .tier-badge { display:inline-block; background:var(--red); color:#fff; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; font-weight:700; letter-spacing:0.15em; padding:0.3rem 0.9rem; border-radius:2px; margin-bottom:1rem; }
+  .container { max-width:900px; margin:0 auto; padding:2.5rem 2rem; }
+  .victim-hero { background:linear-gradient(135deg,#1A0515 0%,#0D0D1F 100%); border:1px solid var(--red); border-radius:6px; padding:2rem; margin-bottom:2rem; display:grid; grid-template-columns:1fr 2fr; gap:2rem; align-items:start; }
+  .victim-id { text-align:center; }
+  .victim-tag { font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--red); letter-spacing:0.2em; margin-bottom:0.5rem; text-transform:uppercase; }
+  .victim-name { font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; color:#fff; line-height:1.2; margin-bottom:0.3rem; }
+  .victim-stats { display:grid; grid-template-columns:1fr 1fr; gap:0.5rem; margin-top:1rem; }
+  .stat { background:rgba(255,77,109,0.1); border:1px solid rgba(255,77,109,0.3); border-radius:4px; padding:0.5rem; text-align:center; }
+  .stat-label { font-family:'IBM Plex Mono',monospace; font-size:0.6rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; display:block; }
+  .stat-val { font-size:0.9rem; font-weight:600; color:var(--text); display:block; margin-top:0.15rem; }
+  .victim-bio h2 { font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--gold); margin-bottom:0.7rem; }
+  .victim-bio p { color:var(--muted); font-size:0.9rem; line-height:1.7; margin-bottom:0.8rem; }
+  .section { background:var(--card); border:1px solid var(--border); border-radius:6px; padding:1.8rem; margin-bottom:1.5rem; }
+  .section-title { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--cyan); margin-bottom:1.2rem; padding-bottom:0.5rem; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:0.5rem; }
+  .section-title .icon { font-size:1.1rem; }
+  p { color:var(--muted); font-size:0.9rem; line-height:1.75; margin-bottom:0.8rem; }
+  .info-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; }
+  .info-item { background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:4px; padding:1rem; }
+  .info-label { font-family:'IBM Plex Mono',monospace; font-size:0.65rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.12em; margin-bottom:0.3rem; display:block; }
+  .info-val { font-size:0.9rem; color:var(--text); font-weight:500; }
+  .known-conflicts { list-style:none; }
+  .known-conflicts li { display:flex; gap:0.8rem; padding:0.8rem 0; border-bottom:1px solid rgba(255,255,255,0.05); font-size:0.88rem; color:var(--muted); line-height:1.6; }
+  .known-conflicts li:last-child { border-bottom:none; }
+  .conflict-icon { color:var(--red); font-size:1.1rem; flex-shrink:0; }
+  .quote-block { background:rgba(0,212,255,0.05); border-left:3px solid var(--cyan); padding:1rem 1.2rem; border-radius:0 4px 4px 0; margin:1rem 0; font-style:italic; color:var(--text); font-size:0.88rem; line-height:1.7; }
+  .evidence-tag { display:inline-block; background:rgba(255,215,0,0.1); border:1px solid rgba(255,215,0,0.3); color:var(--gold); font-family:'IBM Plex Mono',monospace; font-size:0.65rem; padding:0.2rem 0.6rem; border-radius:2px; margin:0.2rem; }
+  .case-meta { display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border); }
+  .meta-item { font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--muted); }
+  .meta-item span { color:var(--text); }
+  .status-bar { background:rgba(255,77,109,0.08); border:1px solid rgba(255,77,109,0.2); border-radius:4px; padding:0.8rem 1.2rem; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:0.75rem; color:var(--red); letter-spacing:0.1em; margin-bottom:2rem; }
+  .physical-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.8rem; }
+  .phys-item { background:rgba(255,255,255,0.02); border:1px solid var(--border); border-radius:4px; padding:0.8rem; }
+  .phys-label { font-family:'IBM Plex Mono',monospace; font-size:0.62rem; color:var(--muted); text-transform:uppercase; letter-spacing:0.1em; display:block; margin-bottom:0.25rem; }
+  .phys-val { font-size:0.85rem; color:var(--text); }
+  @media(max-width:600px){ .victim-hero{grid-template-columns:1fr;} .physical-grid{grid-template-columns:repeat(2,1fr);} }
+</style>
+</head>
+<body>
+<div class="doc-header">
+  <div class="show-logo">Forever Match · Gran Horizonte Resort · Cancún, Mexico</div>
+  <div class="tier-badge">TIER 1 — PLAYER DOCUMENT · T1-06</div>
+  <div class="doc-title">Victim Profile</div>
+  <div class="doc-subtitle">FGE-QR-2025-07-0847 · Issued by: Fiscalía General del Estado de Quintana Roo · July 19, 2025</div>
+</div>
+
+<div class="container">
+  <div class="status-bar">⚠ STATUS: DECEASED — HOMICIDE INVESTIGATION ACTIVE — DO NOT CONTACT FAMILY WITHOUT AUTHORIZATION</div>
+
+  <div class="victim-hero">
+    <div class="victim-id">
+      <div class="victim-tag">Victim</div>
+      <div class="victim-name">Solomon Vance</div>
+      <div style="font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--muted);margin-top:0.3rem;">DOD: July 19, 2025 · approx. 12:05–12:15 AM</div>
+      <div class="victim-stats">
+        <div class="stat"><span class="stat-label">Age</span><span class="stat-val">33</span></div>
+        <div class="stat"><span class="stat-label">Nationality</span><span class="stat-val">American</span></div>
+        <div class="stat"><span class="stat-label">Ethnicity</span><span class="stat-val">Haitian-American</span></div>
+        <div class="stat"><span class="stat-label">Role on Show</span><span class="stat-val">Contestant</span></div>
+      </div>
+    </div>
+    <div class="victim-bio">
+      <h2>Overview</h2>
+      <p>Solomon Vance, 33, was a Miami-based technology entrepreneur and co-founder of Clarity Pay, a FinTech application acquired for $14 million in 2023. He was a registered contestant on <em>Forever Match</em>, Season 1, in the third week of filming at the Gran Horizonte Resort & Spa in Cancún, Mexico.</p>
+      <p>His body was discovered by resort security guard Sergio Jiménez at approximately 1:15 AM on July 19, 2025, in the North Tower rooftop infinity pool (Floor 15). Initial assessment by resort medical staff identified possible electrocution. FGE-QR investigators were notified at 1:30 AM. SEMEFO forensic examination is ongoing.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="icon">👤</span> Physical Description</div>
+    <div class="physical-grid">
+      <div class="phys-item"><span class="phys-label">Height</span><span class="phys-val">6'1" / 185 cm</span></div>
+      <div class="phys-item"><span class="phys-label">Build</span><span class="phys-val">Athletic</span></div>
+      <div class="phys-item"><span class="phys-label">Skin Tone</span><span class="phys-val">Dark brown</span></div>
+      <div class="phys-item"><span class="phys-label">Hair</span><span class="phys-val">Close-cropped, natural</span></div>
+      <div class="phys-item"><span class="phys-label">Eyes</span><span class="phys-val">Dark brown</span></div>
+      <div class="phys-item"><span class="phys-label">Distinguishing</span><span class="phys-val">Sharp jawline; usually wears smartwatch</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="icon">📋</span> Background & Identity</div>
+    <div class="info-grid">
+      <div class="info-item"><span class="info-label">Born</span><span class="info-val">Port-au-Prince, Haiti</span></div>
+      <div class="info-item"><span class="info-label">Raised</span><span class="info-val">Miami, Florida</span></div>
+      <div class="info-item"><span class="info-label">Occupation</span><span class="info-val">Tech Entrepreneur / Investor</span></div>
+      <div class="info-item"><span class="info-label">Company</span><span class="info-val">Clarity Pay (acquired, 2023)</span></div>
+      <div class="info-item"><span class="info-label">Education</span><span class="info-val">Florida A&M University, Computer Science</span></div>
+      <div class="info-item"><span class="info-label">Residence</span><span class="info-val">Miami, FL (primary)</span></div>
+    </div>
+    <p style="margin-top:1rem;">Solomon Vance built his reputation in Miami's technology and startup ecosystem. His FinTech app Clarity Pay was acquired for $14 million in 2023, positioning him as a rising figure in the early-stage investment community. He was known publicly as charming, sharp, and relentlessly networked. Colleagues described him as someone who "always knew something you didn't."</p>
+    <p>According to production records, Solomon applied for <em>Forever Match</em> through standard contestant intake in March 2025. His application cited personal reasons — "looking for a genuine connection outside the transactional world of tech." He was matched at 94.7% compatibility with fellow contestant Kavya Nair — the highest compatibility score of the season.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="icon">💔</span> Show Participation & Known Conflicts</div>
+    <p>By the time of his death, Solomon was completing Day 19 of a 42-day filming schedule. Despite being paired with Kavya Nair under the EROS compatibility algorithm, his behavior on the show generated significant interpersonal conflict. The following incidents are documented in production records and contestant witness accounts:</p>
+    <ul class="known-conflicts">
+      <li><span class="conflict-icon">⚡</span><strong style="color:var(--text);">Public rejection of Kavya Nair (Day 12):</strong> During a filmed compatibility challenge, Solomon publicly declared he felt no romantic connection with his algorithmically assigned match, Kavya Nair. The interaction was described by witnesses as "deliberately humiliating." The clip circulated on social media before the episode aired.</li>
+      <li><span class="conflict-icon">⚡</span><strong style="color:var(--text);">Confrontation with Dominic Wallace (Day 18, 9:47 PM):</strong> Less than 3 hours before his death, contestant Dominic Wallace confronted Solomon poolside in front of witnesses and on camera, stating: <em>"You're a snake. You play games with real people's feelings. You're dead to me — dead to me."</em> The confrontation was captured on two production cameras.</li>
+      <li><span class="conflict-icon">⚡</span><strong style="color:var(--text);">Reports of unsanctioned contestant interactions:</strong> Multiple crew members noted that Solomon engaged in off-camera interactions with contestants not assigned as his match, in apparent violation of show protocols.</li>
+      <li><span class="conflict-icon">⚡</span><strong style="color:var(--text);">Unverified rumor circulation:</strong> An unverified allegation was circulating among contestants in the days before the murder concerning Solomon's role in spreading personal information about other cast members. Investigators are pursuing the details of this claim.</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="icon">📍</span> Last Known Movements — July 18, 2025</div>
+    <div class="info-grid">
+      <div class="info-item"><span class="info-label">6:00–8:00 PM</span><span class="info-val">Day 19 compatibility pool party, Roof 15 (all contestants)</span></div>
+      <div class="info-item"><span class="info-label">9:00 PM</span><span class="info-val">Informal poolside group conversation (Room G pool bar)</span></div>
+      <div class="info-item"><span class="info-label">9:47 PM</span><span class="info-val">Confrontation with Dominic Wallace — on camera</span></div>
+      <div class="info-item"><span class="info-label">10:35 PM</span><span class="info-val">Cast dinner at Las Brisas Restaurant — status unclear (did not confirm attendance)</span></div>
+      <div class="info-item"><span class="info-label">11:02 PM</span><span class="info-val">Observed on Camera C-14 entering North Tower rooftop stairwell with a towel</span></div>
+      <div class="info-item"><span class="info-label">1:15 AM</span><span class="info-val">Body discovered by security guard Sergio Jiménez in rooftop infinity pool, Floor 15</span></div>
+    </div>
+    <div class="quote-block">"He had a towel over his shoulder — like he was going to swim. He looked calm, not agitated. He didn't look like someone in danger." — Resort staff witness, informal statement</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="icon">🔍</span> Scene & Preliminary Findings</div>
+    <p>Solomon Vance was found submerged in the shallow end of the Roof 15 infinity pool, face-up. An electrical appliance was recovered from the pool area. Resort medical staff who responded at 1:18 AM noted visible burn marks at the extremities consistent with electrical contact. Official cause of death is pending SEMEFO forensic examination.</p>
+    <p>The North Tower security camera system experienced a malfunction beginning at approximately 10:02 PM on July 18, which remained active until approximately 1:00 AM on July 19. A total of 38 cameras were affected. FGE-QR investigators are treating the malfunction as potentially significant to the investigation.</p>
+    <p>Personal effects recovered from Solomon's person at scene: one room keycard (Room 1201), one Apple Watch (screen cracked), no mobile phone. Solomon's mobile phone has not yet been located.</p>
+    <div style="margin-top:1rem;">
+      <span class="evidence-tag">Evidence #E-001: Electrical Appliance (pool)</span>
+      <span class="evidence-tag">Evidence #E-002: Apple Watch (Room 1201)</span>
+      <span class="evidence-tag">Evidence #E-003: Room Keycard (Room 1201)</span>
+      <span class="evidence-tag">Evidence #E-004: Mobile phone (MISSING)</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span class="icon">🧑‍🤝‍🧑</span> Persons of Interest — Initial Identification</div>
+    <p>The following individuals have been identified as persons of interest based on documented relationship conflicts with Solomon Vance, access to the resort's restricted areas, or proximity to the victim in the hours preceding his death. Each has been requested to remain on property and submit to voluntary interviews.</p>
+    <div class="info-grid">
+      <div class="info-item"><span class="info-label">Person of Interest 1</span><span class="info-val">Kavya Nair — Contestant (Assigned Match)</span></div>
+      <div class="info-item"><span class="info-label">Person of Interest 2</span><span class="info-val">Dominic Wallace — Contestant (On-camera threat)</span></div>
+      <div class="info-item"><span class="info-label">Person of Interest 3</span><span class="info-val">Vivian Fong — Associate Producer</span></div>
+      <div class="info-item"><span class="info-label">Person of Interest 4</span><span class="info-val">Rafael Rios — Contestant</span></div>
+      <div class="info-item"><span class="info-label">Person of Interest 5</span><span class="info-val">Zara Mirza — Contestant</span></div>
+      <div class="info-item"><span class="info-label">Person of Interest 6</span><span class="info-val">Victor Delgado — Show Host</span></div>
+    </div>
+  </div>
+
+  <div class="case-meta">
+    <div class="meta-item">Case: <span>FGE-QR-2025-07-0847</span></div>
+    <div class="meta-item">Document: <span>T1-06 · Victim Profile</span></div>
+    <div class="meta-item">Prepared by: <span>Investigadora Dra. Sofía Montoya-Reyes</span></div>
+    <div class="meta-item">Date: <span>July 19, 2025</span></div>
+  </div>
+</div>
+</body>
+</html>

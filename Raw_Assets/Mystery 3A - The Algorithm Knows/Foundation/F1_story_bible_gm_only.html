@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⚠️ GAME MASTER ONLY — Story Bible | Mystery 3A</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Playfair+Display:wght@700;900&display=swap');
+
+  :root {
+    --coral: #FF4D6D;
+    --teal: #00D4FF;
+    --gold: #FFD700;
+    --dark: #0D0D1A;
+    --mid: #1A1A2E;
+    --panel: #16213E;
+    --text: #E8E8F0;
+    --muted: #8888AA;
+    --green: #00FF88;
+    --warning: #FF8C00;
+    --danger: #FF2244;
+    --spoiler-bg: #1A0010;
+    --spoiler-border: #FF0040;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--dark);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.75;
+    padding: 0;
+  }
+
+  /* SPOILER BANNER */
+  .spoiler-banner {
+    background: linear-gradient(135deg, var(--spoiler-bg), #330020);
+    border-bottom: 3px solid var(--spoiler-border);
+    padding: 20px 40px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(255,0,64,0.4);
+  }
+  .spoiler-banner h1 {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--spoiler-border);
+    font-size: 1.1rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+  .spoiler-banner p {
+    color: #FF8899;
+    font-size: 0.85rem;
+    margin-top: 4px;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 30px 80px;
+  }
+
+  /* HEADER */
+  .doc-header {
+    background: linear-gradient(135deg, var(--mid), var(--panel));
+    border: 1px solid rgba(255,77,109,0.3);
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .doc-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--coral), var(--teal), var(--gold));
+  }
+  .doc-header .show-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--coral), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+  }
+  .doc-header .mystery-code {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--teal);
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .doc-header .title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-top: 24px;
+  }
+  .meta-item {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+  }
+  .meta-item .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .meta-item .value {
+    font-weight: 600;
+    color: var(--coral);
+    font-size: 0.95rem;
+  }
+
+  /* TABLE OF CONTENTS */
+  .toc {
+    background: var(--panel);
+    border: 1px solid rgba(0,212,255,0.2);
+    border-radius: 10px;
+    padding: 28px 32px;
+    margin-bottom: 40px;
+  }
+  .toc h2 {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--teal);
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,212,255,0.2);
+  }
+  .toc ol {
+    list-style: decimal;
+    padding-left: 20px;
+  }
+  .toc ol li {
+    margin-bottom: 6px;
+    color: var(--teal);
+    font-size: 0.9rem;
+  }
+  .toc ol li a {
+    color: var(--teal);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .toc ol li a:hover { color: var(--gold); }
+
+  /* SECTIONS */
+  .section {
+    background: var(--panel);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 10px;
+    padding: 32px;
+    margin-bottom: 28px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .section-num {
+    background: linear-gradient(135deg, var(--coral), var(--gold));
+    color: var(--dark);
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--text);
+  }
+
+  /* SOLUTION HIGHLIGHT */
+  .solution-box {
+    background: linear-gradient(135deg, var(--spoiler-bg), #200015);
+    border: 2px solid var(--spoiler-border);
+    border-radius: 10px;
+    padding: 24px;
+    margin: 20px 0;
+  }
+  .solution-box .solution-label {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--spoiler-border);
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .solution-box .killer-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--spoiler-border);
+    font-weight: 900;
+  }
+  .solution-box .killer-role {
+    color: #FF8899;
+    font-size: 1rem;
+    margin-top: 4px;
+  }
+
+  /* CHARACTER CARDS */
+  .character-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .character-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 24px;
+    position: relative;
+  }
+  .character-card.victim {
+    border-color: rgba(255,215,0,0.4);
+    background: rgba(255,215,0,0.03);
+  }
+  .character-card.killer {
+    border-color: rgba(255,34,68,0.5);
+    background: rgba(255,34,68,0.04);
+  }
+  .character-card.red-herring {
+    border-color: rgba(255,140,0,0.4);
+    background: rgba(255,140,0,0.03);
+  }
+  .char-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-weight: 700;
+  }
+  .badge-victim { background: rgba(255,215,0,0.2); color: var(--gold); border: 1px solid var(--gold); }
+  .badge-killer { background: rgba(255,34,68,0.2); color: var(--danger); border: 1px solid var(--danger); }
+  .badge-suspect { background: rgba(0,212,255,0.1); color: var(--teal); border: 1px solid var(--teal); }
+  .badge-red-herring { background: rgba(255,140,0,0.2); color: var(--warning); border: 1px solid var(--warning); }
+
+  .char-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .char-role {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+  }
+  .char-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .char-field label {
+    display: block;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .char-field p {
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+  .char-field.full { grid-column: 1 / -1; }
+  .motive-highlight {
+    background: rgba(255,77,109,0.1);
+    border-left: 3px solid var(--coral);
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+  .secret-highlight {
+    background: rgba(255,34,68,0.08);
+    border-left: 3px solid var(--danger);
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+  .alibi-highlight {
+    background: rgba(0,212,255,0.08);
+    border-left: 3px solid var(--teal);
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--coral), var(--teal));
+  }
+  .timeline-item {
+    position: relative;
+    margin-bottom: 16px;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 18px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--coral);
+    border: 2px solid var(--dark);
+  }
+  .timeline-item.critical {
+    border-color: rgba(255,34,68,0.4);
+    background: rgba(255,34,68,0.06);
+  }
+  .timeline-item.critical::before { background: var(--danger); }
+  .timeline-item .time {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--teal);
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-bottom: 4px;
+  }
+  .timeline-item .event {
+    color: var(--text);
+    font-size: 0.9rem;
+  }
+  .timeline-item .notes {
+    color: var(--muted);
+    font-size: 0.8rem;
+    margin-top: 4px;
+    font-style: italic;
+  }
+
+  /* OBJECTIVES */
+  .objective-card {
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid;
+  }
+  .obj-1 { border-color: rgba(0,212,255,0.4); background: rgba(0,212,255,0.05); }
+  .obj-2 { border-color: rgba(255,215,0,0.4); background: rgba(255,215,0,0.04); }
+  .obj-3 { border-color: rgba(255,77,109,0.4); background: rgba(255,77,109,0.05); }
+  .objective-card .obj-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .obj-1 .obj-num { color: var(--teal); }
+  .obj-2 .obj-num { color: var(--gold); }
+  .obj-3 .obj-num { color: var(--coral); }
+  .objective-card h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+  .answer-box {
+    background: rgba(0,255,136,0.08);
+    border: 1px solid rgba(0,255,136,0.3);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 10px 0;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--green);
+  }
+  .hint-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+  }
+  .hint-list li {
+    padding: 6px 12px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 4px;
+    margin-bottom: 6px;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .hint-list li::before {
+    content: '💡 HINT ';
+    color: var(--gold);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+
+  /* EVIDENCE CATALOG */
+  table.evidence-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+  }
+  table.evidence-table th {
+    background: rgba(255,255,255,0.06);
+    color: var(--muted);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 10px 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  table.evidence-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: top;
+  }
+  table.evidence-table tr:hover td {
+    background: rgba(255,255,255,0.02);
+  }
+  .tier-tag {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: 600;
+  }
+  .tier-1 { background: rgba(0,212,255,0.15); color: var(--teal); }
+  .tier-2 { background: rgba(255,215,0,0.15); color: var(--gold); }
+  .tier-3 { background: rgba(255,77,109,0.15); color: var(--coral); }
+  .tier-s { background: rgba(255,34,68,0.2); color: var(--danger); }
+  .key-clue { color: var(--coral); font-weight: 600; }
+  .red-herring-clue { color: var(--warning); }
+
+  /* EXPANSION NOTES */
+  .expansion-box {
+    background: rgba(0,212,255,0.05);
+    border: 1px dashed rgba(0,212,255,0.3);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 16px;
+  }
+  .expansion-box h4 {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--teal);
+    font-size: 0.75rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .expansion-box ul {
+    list-style: none;
+    padding: 0;
+  }
+  .expansion-box ul li {
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+  .expansion-box ul li::before {
+    content: '→ ';
+    color: var(--teal);
+    font-weight: 700;
+  }
+
+  /* INFO BLOCKS */
+  .info-block {
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+  }
+  .info-block h4 {
+    font-size: 0.8rem;
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--coral);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .info-block p, .info-block ul li {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .info-block ul {
+    list-style: disc;
+    padding-left: 20px;
+  }
+  .info-block ul li {
+    margin-bottom: 4px;
+  }
+
+  /* FOOTER */
+  .doc-footer {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="spoiler-banner">
+  <h1>⚠️ GAME MASTER EYES ONLY ⚠️</h1>
+  <p>THIS DOCUMENT CONTAINS THE COMPLETE SOLUTION. DO NOT SHARE WITH PLAYERS.</p>
+</div>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="doc-header">
+    <div class="show-name">Forever Match</div>
+    <div class="mystery-code">Mystery 3A · "The Algorithm Knows" · GM Story Bible v1.0</div>
+    <div class="title">Complete Game Master Reference — Full Solution Included</div>
+    <div class="meta-grid">
+      <div class="meta-item"><div class="label">Difficulty</div><div class="value">Easy (1/3)</div></div>
+      <div class="meta-item"><div class="label">Playtime</div><div class="value">1.5 – 2.5 hrs</div></div>
+      <div class="meta-item"><div class="label">Players</div><div class="value">1 – 8</div></div>
+      <div class="meta-item"><div class="label">Setting</div><div class="value">Cancún, Mexico · July 2025</div></div>
+      <div class="meta-item"><div class="label">Case No.</div><div class="value">FGE-QR-2025-07-0847</div></div>
+      <div class="meta-item"><div class="label">Checkpoints</div><div class="value">3 Objectives</div></div>
+    </div>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <div class="toc">
+    <h2>📋 Contents</h2>
+    <ol>
+      <li><a href="#overview">Mystery Overview & Core Concept</a></li>
+      <li><a href="#setting">Setting & World — Forever Match / Gran Horizonte Resort</a></li>
+      <li><a href="#solution">⚠️ The Complete Solution (Spoiler)</a></li>
+      <li><a href="#characters">Complete Character Roster — Renamed</a></li>
+      <li><a href="#timeline">Full Murder Timeline (Minute-by-Minute)</a></li>
+      <li><a href="#objectives">3-Objective System — Questions, Answers & Hints</a></li>
+      <li><a href="#evidence">Evidence Catalog — All Tiers</a></li>
+      <li><a href="#red-herrings">Red Herrings & Misdirects Explained</a></li>
+      <li><a href="#adult-themes">Adult Content & Sensitive Themes Guide</a></li>
+      <li><a href="#expansion">Complexity Expansion Notes (Future Medium/Hard)</a></li>
+      <li><a href="#gm-notes">GM Facilitation Notes</a></li>
+    </ol>
+  </div>
+
+  <!-- SECTION 1: OVERVIEW -->
+  <div class="section" id="overview">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2>Mystery Overview & Core Concept</h2>
+    </div>
+
+    <div class="info-block">
+      <h4>The Hook</h4>
+      <p>On the set of <em>Forever Match</em> — a Cancún-based reality dating show where a proprietary AI algorithm called <strong>EROS</strong> (Enhanced Relationship Optimization System) "guarantees" perfect soulmate matches using biometric and psychological data — a contestant is found dead in the resort's infinity pool. The death is initially reported as a tragic accident. But the cameras were "malfunctioning" for two hours. And the resort's electrical equipment storage room was accessed by someone who had no business being there. This is not an accident. This is murder.</p>
+    </div>
+
+    <div class="info-block">
+      <h4>The Satire Engine</h4>
+      <p>The show's central conceit — that an AI algorithm can guarantee love — is a lie. EROS is entirely fabricated; matches are scripted by producers for maximum drama and ratings. The victim discovered this fraud and used the information as leverage. The entire show's $50M franchise value depends on the algorithm's perceived legitimacy. This creates a suspect whose motive is not personal — it is existential.</p>
+    </div>
+
+    <div class="info-block">
+      <h4>Why This Is Easy Difficulty</h4>
+      <ul>
+        <li>Only 6 people had keycard access to the electrical equipment storage room</li>
+        <li>The murder weapon (a hair dryer) was recovered near the pool</li>
+        <li>Physical fingerprint evidence on the hair dryer cord identifies one person conclusively</li>
+        <li>Each of the 6 suspects has a clear, documented motive</li>
+        <li>The 2-hour camera blackout narrows the time window significantly</li>
+        <li>Cross-referencing alibis eliminates 5 suspects through documentary evidence</li>
+      </ul>
+    </div>
+
+    <div class="info-block">
+      <h4>Genre Blend</h4>
+      <p><em>Love Island</em> meets <em>Black Mirror</em> "Hang the DJ" — reality TV's performative romance meets tech dystopia. Players investigate both a murder AND a massive corporate fraud. The question of who killed the victim is answerable; the question of what kind of society creates a show like <em>Forever Match</em> is left open.</p>
+    </div>
+  </div>
+
+  <!-- SECTION 2: SETTING -->
+  <div class="section" id="setting">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2>Setting & World</h2>
+    </div>
+
+    <div class="info-block">
+      <h4>The Show: Forever Match</h4>
+      <ul>
+        <li><strong>Network:</strong> Pulse (fictional streaming platform owned by Solara Entertainment Group)</li>
+        <li><strong>Production Company:</strong> Stellar Content Studios, Los Angeles, CA</li>
+        <li><strong>Format:</strong> 6-week filming, 12 contestants (6 men, 6 women), algorithmic matching, weekly elimination "compatibility challenges"</li>
+        <li><strong>Algorithm:</strong> EROS (Enhanced Relationship Optimization System) — purportedly uses biometric data (heart rate, pupil dilation, galvanic skin response) + psychological profiling (5-hour pre-show assessment) to compute "soulmate compatibility scores" up to 99.7%</li>
+        <li><strong>The Truth:</strong> EROS is not real. Matches are pre-scripted by producers based on anticipated drama, demographics, advertiser appeal, and storyline needs. The "biometric data" is collected but never actually processed by any meaningful AI. The algorithm outputs are manually entered by the executive producer.</li>
+        <li><strong>Status at Time of Murder:</strong> Week 3 of filming. 8 of 12 contestants remain.</li>
+      </ul>
+    </div>
+
+    <div class="info-block">
+      <h4>The Location: Gran Horizonte Resort & Spa</h4>
+      <ul>
+        <li><strong>Address:</strong> Blvd. Kukulcán Km 14.5, Zona Hotelera, Cancún, Quintana Roo, México 77500 (fictional luxury resort)</li>
+        <li><strong>Relevant Spaces:</strong> North Tower (contestant suites, floors 8–12), Production Suite Block (ground floor, restricted), Infinity Pool Area (North Tower rooftop, Floor 15), Electrical/AV Equipment Room (basement level B1), Confessional Booth Studio (ground floor, Room G-07), Main Restaurant (Las Brisas, ground floor)</li>
+        <li><strong>Security:</strong> Keycard access system for restricted areas (Production Suite Block, Equipment Room B1, Camera Control Room). Resort security does rounds every 90 minutes. Pool area is "always open" to contestants but closed to public after 10 PM.</li>
+        <li><strong>Camera Coverage:</strong> 94 cameras total. Show cameras cover all contestant areas. Resort security cameras cover common areas. During the malfunction, 38 cameras in the North Tower area went offline.</li>
+      </ul>
+    </div>
+
+    <div class="info-block">
+      <h4>Jurisdiction & Investigation Authority</h4>
+      <ul>
+        <li><strong>Initial Response:</strong> Gran Horizonte Resort Security (private)</li>
+        <li><strong>Primary Investigation:</strong> Fiscalía General del Estado de Quintana Roo (FGE-QR) — State Attorney General's Office</li>
+        <li><strong>Lead Investigator:</strong> Agente del Ministerio Público (AMP) Investigadora <strong>Dra. Sofía Montoya-Reyes</strong>, 41, FGE-QR Cancún Unit</li>
+        <li><strong>Forensic Support:</strong> SEMEFO (Servicio Médico Forense) Quintana Roo — Medical Examiner</li>
+        <li><strong>Case Number:</strong> FGE-QR-2025-07-0847</li>
+        <li><strong>Note for Documents:</strong> Mexican criminal procedure differs from US — the AMP is both investigator and prosecutor. Documents will reflect Mexican legal formatting (actas, dictámenes periciales, etc.)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 3: THE COMPLETE SOLUTION -->
+  <div class="section" id="solution">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2>⚠️ The Complete Solution</h2>
+    </div>
+
+    <div class="solution-box">
+      <div class="solution-label">🔴 THE KILLER — DO NOT REVEAL TO PLAYERS</div>
+      <div class="killer-name">Victor Delgado</div>
+      <div class="killer-role">42 · Dominican-American · Host of "Forever Match"</div>
+    </div>
+
+    <div class="info-block">
+      <h4>The Motive</h4>
+      <p>The victim, <strong>Solomon Vance</strong>, discovered that Victor Delgado's entire public identity is a fabrication. Victor's real name is <strong>Víctor Manuel Soto-Guerrero</strong>. In 2011, he was convicted of wire fraud and identity theft in New Jersey under that name, serving 14 months in federal prison. After release, he legally changed his name, relocated to California, and over 10 years built "Victor Delgado" — TV host, on-air personality, the charming face of Pulse Network's flagship show.</p>
+      <p style="margin-top:12px;">Solomon uncovered this during Week 2 when he cross-referenced Victor's face through a reverse image search and found a 2011 court document photo. Solomon confronted Victor privately three days before the murder and began demanding payments — $5,000/week in crypto — to stay silent. Victor paid the first installment. But Solomon was escalating: by the night of the murder, he had demanded $25,000 upfront or he would livestream the court documents during the next filming day.</p>
+      <p style="margin-top:12px;">Victor could not pay. He could not allow exposure. Exposure meant immediate termination, civil liability to Solara Entertainment Group, potential re-incarceration for identity fraud, and the complete destruction of everything he had rebuilt.</p>
+    </div>
+
+    <div class="info-block">
+      <h4>The Method — Step-by-Step</h4>
+      <ul>
+        <li><strong>Days before murder:</strong> Victor identifies the infinity pool on Roof 15 as the location — no cameras after the malfunction, isolated at night, easily accessible from the production stairwell.</li>
+        <li><strong>10:02 PM, July 18, 2025:</strong> Victor remotely triggers a circuit overload in the AV server room, which causes the North Tower camera system to go into failsafe mode ("malfunction"). He knows this from his time in A/V production in the early 2010s.</li>
+        <li><strong>10:22 PM:</strong> Victor's first visit to Equipment Room B1 — he retrieves a standard hotel-branded hair dryer (Conair 1875W) from the equipment storage shelf. The dryer is one of six identical units stored for show use (used in confessional booth prep).</li>
+        <li><strong>10:35 PM – 11:00 PM:</strong> Victor arranges for all other key staff to be occupied. The cast dinner at Las Brisas is already scheduled; he confirms it proceeds. He texts Solomon requesting a "private meeting at the roof pool" to "finalize the arrangement."</li>
+        <li><strong>11:02 PM:</strong> Solomon, believing he will receive cash, goes to the roof pool alone. He is seen briefly on one surviving camera angle before full blackout at 11:08 PM.</li>
+        <li><strong>11:15 PM – 11:45 PM:</strong> Victor goes to the pool via the production stairwell (not the main elevator — no camera). Solomon is waiting. Victor keeps him talking for approximately 20 minutes, building Solomon's confidence that payment is coming.</li>
+        <li><strong>11:47 PM:</strong> Victor returns to Equipment Room B1 (keycard logged — this is the critical evidence). He retrieves an extension cord.</li>
+        <li><strong>~12:00 – 12:15 AM:</strong> Victor returns to the pool. While Solomon sits at the pool edge with his feet in the water — relaxed, believing the transaction is happening — Victor drops the powered-on hair dryer into the pool. The electrocution is rapid (cardiac arrest from ventricular fibrillation). Death is estimated at 12:05–12:15 AM.</li>
+        <li><strong>12:15 – 12:40 AM:</strong> Victor leaves the pool area. He briefly touches the hair dryer cord when it is not fully submerged, leaving partial prints on the rubber-coated cord grip. He does not realize this. He returns to the production suite via the stairwell.</li>
+        <li><strong>12:47 AM:</strong> Victor is seen on the hallway camera outside Production Suite B — his alibi claim that he was there all evening is undermined by this timestamp, because the camera also shows he was not there between approximately 11:10 PM and 12:47 AM.</li>
+        <li><strong>1:15 AM:</strong> Resort security guard discovers the body during routine check.</li>
+      </ul>
+    </div>
+
+    <div class="info-block">
+      <h4>The Physical Evidence That Solves the Case</h4>
+      <ul>
+        <li><strong>Keycard Access Log:</strong> Victor's production keycard accessed Equipment Room B1 at 10:22 PM and 11:47 PM — no legitimate production reason for either access during the camera blackout period.</li>
+        <li><strong>Fingerprint on Hair Dryer Cord:</strong> Partial right index and middle finger prints on the rubber-grip section of the Conair 1875W cord. Matched to Victor Delgado's prints via Stellar Content Studios' voluntary biometric intake form (all staff submitted fingerprints for equipment security purposes).</li>
+        <li><strong>Hallway Camera Gap:</strong> Victor's alibi is "I was in Production Suite B reviewing footage from 10 PM to 2 AM." The hallway camera shows him returning to the suite at 12:47 AM, meaning he was absent for ~1 hour 37 minutes with no camera-verified location.</li>
+        <li><strong>Solomon's Phone:</strong> Text message from Victor at 10:48 PM: "Come to the roof. I have what you need. Come alone. Don't tell anyone." Deleted from Victor's phone but recovered from Solomon's device via SEMEFO forensics.</li>
+        <li><strong>Victor's Hidden Past:</strong> Court records from New Jersey, 2011: Víctor Manuel Soto-Guerrero, conviction for wire fraud and identity theft. Photo matches Victor Delgado. This establishes the blackmail motive.</li>
+      </ul>
+    </div>
+
+    <div class="info-block">
+      <h4>Why the Investigation Initially Stalled</h4>
+      <ul>
+        <li>The camera malfunction made it appear technical, not sinister</li>
+        <li>Dominic Wallace's on-camera threat made him the most obvious suspect</li>
+        <li>Victor is the show's host — seemingly above suspicion, trusted by the production company</li>
+        <li>The blackmail motive was completely hidden (Solomon told no one)</li>
+        <li>Initially classified as possible accidental drowning + electrocution (hair dryer "fell in")</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 4: CHARACTER ROSTER -->
+  <div class="section" id="characters">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2>Complete Character Roster — All Names Renamed</h2>
+    </div>
+
+    <div class="character-grid">
+
+      <!-- VICTIM -->
+      <div class="character-card victim">
+        <span class="char-badge badge-victim">VICTIM</span>
+        <div class="char-name">Solomon Vance</div>
+        <div class="char-role">33 · Haitian-American · Tech Investor · Contestant</div>
+        <div class="char-details">
+          <div class="char-field">
+            <label>Physical Description</label>
+            <p>6'1", athletic build, close-cropped natural hair, dark brown skin, sharp jawline. Wears high-end streetwear and tech-bro accessories. Usually seen with AirPods and a smartwatch.</p>
+          </div>
+          <div class="char-field">
+            <label>Background</label>
+            <p>Born in Port-au-Prince, raised in Miami. Co-founded a FinTech app (Clarity Pay) acquired for $14M in 2023. Joined <em>Forever Match</em> for exposure and investor networking — not genuinely seeking romance. Sophisticated, charming on camera, manipulative off it.</p>
+          </div>
+          <div class="char-field full">
+            <label>What He Was Doing on the Show</label>
+            <p>Solomon's primary goal was business — using the show's platform to attract investor attention and expand his brand. He secretly pursued multiple non-matched contestants simultaneously, recording conversations as "insurance." Within two weeks, he had discovered Victor's fraud, the algorithm's fakeness, and the private secrets of at least four other contestants.</p>
+          </div>
+          <div class="char-field full">
+            <label>His Secret</label>
+            <p class="secret-highlight">Solomon was blackmailing Victor Delgado, had slept with a matched contestant belonging to another suspect, had outed a contestant's private sexuality in a private conversation that leaked, and had spread false health rumors about a fifth contestant. He was the show's most active source of conflict — and its most dangerous player.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUSPECT 1: KAVYA NAIR -->
+      <div class="character-card">
+        <span class="char-badge badge-suspect">SUSPECT 1</span>
+        <div class="char-name">Kavya Nair</div>
+        <div class="char-role">29 · Indian-American · UX Designer · Contestant</div>
+        <div class="char-details">
+          <div class="char-field">
+            <label>Physical Description</label>
+            <p>5'5", medium-dark complexion, long black hair usually worn in a loose braid or half-up style, expressive dark eyes. Favors bold colors and statement jewelry.</p>
+          </div>
+          <div class="char-field">
+            <label>Background</label>
+            <p>San Jose–raised, UC Berkeley grad. Works as a senior UX designer at a Bay Area startup. Parents are first-generation Indian immigrants with traditional marriage expectations. Applied to the show partly to find a genuine connection, partly to prove to her parents she is "trying."</p>
+          </div>
+          <div class="char-field full">
+            <label>Relationship to Victim</label>
+            <p>EROS "matched" Kavya and Solomon at 94.7% compatibility — the show's highest score of the season. This was a producer decision (dramatic pairing). On Day 12, during a filmed compatibility challenge, Solomon publicly and brutally rejected her: "The algorithm made a mistake. I don't feel it. I'm done." The clip went viral before it even aired. Kavya has been publicly humiliated in front of millions of viewers before the season is even over.</p>
+          </div>
+          <div class="char-field">
+            <label>True Motive</label>
+            <p class="motive-highlight">Profound public humiliation. On the show's platform, Solomon's rejection felt like a spectacle designed for ratings — which it was, but Kavya didn't know EROS was fake. She genuinely believed the algorithm. The betrayal is doubled: she trusted a machine, and a man made it a weapon.</p>
+          </div>
+          <div class="char-field">
+            <label>Alibi</label>
+            <p class="alibi-highlight">Kavya was at the cast dinner at Las Brisas Restaurant from 10:35 PM until approximately 12:20 AM. Multiple witnesses (staff + contestants). She left the dinner early, went to her room, and called her sister at 12:31 AM (phone records confirm). <strong>She did NOT commit the murder.</strong></p>
+          </div>
+          <div class="char-field full">
+            <label>What She's Hiding</label>
+            <p>Kavya attempted to confront Solomon privately two days before the murder. She knows about his non-algorithm "side connections" on the show — she saw him leave Zara Mirza's suite at 2 AM. She has not told investigators this, fearing she'll be portrayed as the jealous rejected match.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUSPECT 2: DOMINIC WALLACE (RED HERRING) -->
+      <div class="character-card red-herring">
+        <span class="char-badge badge-red-herring">SUSPECT 2 — RED HERRING</span>
+        <div class="char-name">Dominic Wallace</div>
+        <div class="char-role">31 · Black American · Physical Trainer · Contestant</div>
+        <div class="char-details">
+          <div class="char-field">
+            <label>Physical Description</label>
+            <p>6'2", very muscular build, medium-brown skin, close-fade haircut, full beard. Intense physical presence. Often wears athletic clothing on show downtime.</p>
+          </div>
+          <div class="char-field">
+            <label>Background</label>
+            <p>Atlanta-raised, former Division II football player. Runs his own personal training business in Charlotte, NC. Genuine romantic — applied to the show seeking a real relationship, not fame.</p>
+          </div>
+          <div class="char-field full">
+            <label>Relationship to Victim</label>
+            <p>Dominic's algorithm match is <strong>Zara Mirza</strong>. He discovered that Solomon had been secretly intimate with Zara for at least a week while also stringing along his own match (Kavya). On Day 18, the night before the murder, during a poolside group event, Dominic confronted Solomon directly, on camera: <em>"You're a snake. You play games with real people's feelings. You're dead to me, you know that? Dead to me."</em> This is the most damning verbal threat in the entire case — captured on camera at 9:47 PM.</p>
+          </div>
+          <div class="char-field">
+            <label>True Motive</label>
+            <p class="motive-highlight">Genuine romantic betrayal. Dominic is protective of Zara and deeply angry at Solomon's manipulation. His on-camera threat feels explosive — but it is the honest emotion of a non-violent person who feels powerless.</p>
+          </div>
+          <div class="char-field">
+            <label>Alibi — SOLID</label>
+            <p class="alibi-highlight"><strong>Dominic was at the cast dinner at Las Brisas from 10:35 PM to 12:40 AM — the entire blackout window.</strong> Confirmed by: 3 other contestants, 2 servers, a bartender, and his own appearance on the restaurant's internal security camera at 11:52 PM. He is the show's strongest red herring and the player's first instinct. But he cannot have done it.</p>
+          </div>
+          <div class="char-field full">
+            <label>What He's Hiding</label>
+            <p>Dominic has been secretly recording conversations on his personal phone — he suspected the show was manipulating matches and wanted evidence. He has a recording of a producer (not Vivian) telling a contestant to "play up the connection" with someone they don't like. He hasn't shared this with investigators.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUSPECT 3: VIVIAN FONG -->
+      <div class="character-card">
+        <span class="char-badge badge-suspect">SUSPECT 3</span>
+        <div class="char-name">Vivian Fong</div>
+        <div class="char-role">27 · Chinese-American · Reality TV Producer · Show Staff</div>
+        <div class="char-details">
+          <div class="char-field">
+            <label>Physical Description</label>
+            <p>5'4", slim, straight black hair worn in a blunt bob, professional attire — usually production-branded clothing or sleek business casual. Always has a tablet or clipboard.</p>
+          </div>
+          <div class="char-field">
+            <label>Background</label>
+            <p>UCLA Film School grad. Two years as a reality TV production assistant before landing the Associate Producer role on <em>Forever Match</em>. Ambitious, sharp, keeps detailed production notes. This is her first major show credit.</p>
+          </div>
+          <div class="char-field full">
+            <label>Relationship to Victim</label>
+            <p>Solomon approached Vivian in Week 2, claiming he had "reverse engineered" the EROS algorithm from the data he'd collected. He told her: "I know there's no real algorithm. I can prove it. If I go public, your show is finished, your career is finished, and your company faces a class-action from every contestant who signed up believing in this." He was not bluffing. He had a copy of the raw match data exported from the production tablet.</p>
+          </div>
+          <div class="char-field">
+            <label>True Motive</label>
+            <p class="motive-highlight">Career survival. Vivian knows the algorithm is fake — she manually enters match scores as directed by the executive producer. If exposed, she faces a lawsuit, probable termination, and industry blacklisting. But she is 27 and terrified, not homicidal.</p>
+          </div>
+          <div class="char-field">
+            <label>Alibi</label>
+            <p class="alibi-highlight">Vivian was in Camera Control Room B (keycard logged 10:08 PM – 2:33 AM) troubleshooting the camera malfunction all night. She is the primary suspect in <em>causing</em> the malfunction for coverage reasons, but she did not leave the Control Room during the critical window. The malfunction was actually caused by Victor, but Vivian is blamed initially because it is her domain. She had <em>motive</em> but no <em>opportunity</em>.</p>
+          </div>
+          <div class="char-field full">
+            <label>What She's Hiding</label>
+            <p>Vivian knows the algorithm is fake and has been falsifying match scores for 3 weeks. She is also covering for the Executive Producer (show hierarchy above her). She has a USB drive with the original unmanipulated data — Solomon found this and copied it. She doesn't know what happened to his copy.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUSPECT 4: RAFAEL RIOS -->
+      <div class="character-card">
+        <span class="char-badge badge-suspect">SUSPECT 4</span>
+        <div class="char-name">Rafael Rios</div>
+        <div class="char-role">35 · Mexican · Architect · Contestant</div>
+        <div class="char-details">
+          <div class="char-field">
+            <label>Physical Description</label>
+            <p>5'11", medium build, tan complexion, dark eyes, well-groomed stubble. Stylish dresser — linen shirts, good watches. Carries himself with quiet confidence.</p>
+          </div>
+          <div class="char-field">
+            <label>Background</label>
+            <p>Born in Guadalajara, Mexico City–educated (UNAM Architecture). Runs a successful sustainable architecture practice in Mexico City. Applied to the show at a friend's urging and at the encouragement of his publicist, who thought US exposure would benefit his brand. He is closeted — his family is traditional Catholic, and his father is a prominent Guadalajara businessman.</p>
+          </div>
+          <div class="char-field full">
+            <label>Relationship to Victim</label>
+            <p>Solomon overheard Rafael in a late-night conversation with another male crew member (not romantic, but intimate) and drew his own conclusions. He then confronted Rafael privately and told him: "I know about you. I won't say anything — as long as we're friends." This was coercive. Solomon never demanded money from Rafael — just compliance and loyalty. He used Rafael as a social ally to gain information about other contestants.</p>
+          </div>
+          <div class="char-field">
+            <label>True Motive</label>
+            <p class="motive-highlight">Fear of being outed on national television. For Rafael, exposure would mean estrangement from his family, potential professional damage in a conservative client base, and a public loss of privacy he has carefully maintained. The threat is existential to his private life.</p>
+          </div>
+          <div class="char-field">
+            <label>Alibi</label>
+            <p class="alibi-highlight">Rafael was at the cast dinner (10:35 PM – 12:10 AM), then retired to his suite (Room 1104). His key card shows him entering his room at 12:14 AM and not leaving until 7:30 AM. <strong>He did not commit the murder.</strong></p>
+          </div>
+          <div class="char-field full">
+            <label>What He's Hiding</label>
+            <p>Rafael is deeply closeted and will deny everything Solomon implied. He is actually aware that another contestant is also gay but has never spoken to them about it. He is the most emotionally damaged by Solomon's manipulation but the least likely to have acted violently.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUSPECT 5: ZARA MIRZA -->
+      <div class="character-card">
+        <span class="char-badge badge-suspect">SUSPECT 5</span>
+        <div class="char-name">Zara Mirza</div>
+        <div class="char-role">30 · Pakistani-American · Physician (Resident) · Contestant</div>
+        <div class="char-details">
+          <div class="char-field">
+            <label>Physical Description</label>
+            <p>5'6", light-brown complexion, dark wavy hair, almond-shaped dark eyes, elegant features. Carries herself with the understated confidence of someone used to high-stakes environments.</p>
+          </div>
+          <div class="char-field">
+            <label>Background</label>
+            <p>Chicago-born, Johns Hopkins Medical School. Currently a second-year OB/GYN resident at Northwestern Memorial Hospital. Applied to the show on a 6-week leave of absence — her attending was skeptical but supportive. Conservative Muslim family (her parents don't know she's on a dating show).</p>
+          </div>
+          <div class="char-field full">
+            <label>Relationship to Victim</label>
+            <p>Solomon and Zara had a secret intimate relationship for approximately 10 days on the show (behind the camera blackout periods — Solomon knew the schedule). Solomon then deliberately spread rumors among crew that Zara had told him she had an untreated STI — a complete fabrication. When this rumor reached Zara, she confronted him. His response: "Prove I said it." The rumor damaged her relationship with her algorithm match (Dominic) and threatened her professional reputation, as she feared it would leak to the public and damage her medical career.</p>
+          </div>
+          <div class="char-field">
+            <label>True Motive</label>
+            <p class="motive-highlight">Defamation, professional destruction, and personal betrayal. Zara is intelligent enough to know that a false STI rumor following a reality show appearance could follow her through her medical career. She is furious — but her training makes her methodical and controlled. She had means and motive. But she also has a solid alibi.</p>
+          </div>
+          <div class="char-field">
+            <label>Alibi</label>
+            <p class="alibi-highlight">Zara was at the cast dinner from 10:35 PM – 12:05 AM, confirmed by staff. After dinner, she went to Kavya's suite (Room 1108) and the two of them talked until approximately 1:00 AM (Kavya confirms this). <strong>She did not commit the murder.</strong></p>
+          </div>
+          <div class="char-field full">
+            <label>What She's Hiding</label>
+            <p>Zara was briefly intimate with Solomon and is embarrassed and professionally concerned. She has not disclosed this to investigators. She also knows about his secret non-algorithm romantic activities with at least one other contestant.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUSPECT 6: VICTOR DELGADO — KILLER -->
+      <div class="character-card killer">
+        <span class="char-badge badge-killer">⚠️ SUSPECT 6 — THE KILLER</span>
+        <div class="char-name">Victor Delgado</div>
+        <div class="char-role">42 · Dominican-American · Television Host · Show Staff</div>
+        <div class="char-details">
+          <div class="char-field">
+            <label>Physical Description</label>
+            <p>5'10", medium-athletic build, light-brown Dominican complexion, salt-and-pepper hair (styled impeccably), deep-set eyes, practiced warm smile. Tailored clothing, always on-brand. On camera he is magnetic, charismatic, the perfect host.</p>
+          </div>
+          <div class="char-field">
+            <label>Background (Public)</label>
+            <p>"Victor Delgado" — born in Santo Domingo, raised in the Bronx. TV career began as a bilingual correspondent, rose to entertainment hosting. 5 prior show credits. Respected in the industry. Engaged briefly in 2019, now single. Has a production deal with Solara Entertainment Group.</p>
+          </div>
+          <div class="char-field full">
+            <label>Background (REAL — HIDDEN)</label>
+            <p class="secret-highlight">Born <strong>Víctor Manuel Soto-Guerrero</strong> in Newark, NJ (not Santo Domingo). In 2010–2011, ran a wire fraud scheme targeting immigrant communities, creating fraudulent investment vehicles. Convicted October 2011, Union County, NJ. Sentence: 18 months, served 14. After release in 2013, legally changed his name, relocated to California, constructed an entirely new biography. His TV career was built on a false identity. His production deal with Solara Entertainment Group is valued at $2.1M annually — all at risk if the truth emerges.</p>
+          </div>
+          <div class="char-field">
+            <label>True Motive</label>
+            <p class="motive-highlight">The most existential motive of all 6 suspects: complete and total destruction of everything he has built. Not just his career. His freedom. Re-incarceration for identity fraud. Bankruptcy. The loss of a life he created from nothing.</p>
+          </div>
+          <div class="char-field">
+            <label>Claimed Alibi</label>
+            <p class="alibi-highlight">Victor claims he was in Production Suite B (ground floor) from approximately 10:00 PM until 2:00 AM reviewing camera footage and coordinating with the camera technician on the malfunction. <strong>This alibi is FALSE.</strong> The hallway camera shows him entering Production Suite B at 12:47 AM — not 10:00 PM. The camera technician (on-call, off-site) confirms Victor did not contact them until 1:05 AM.</p>
+          </div>
+          <div class="char-field full">
+            <label>Key Behavioral Tells During Investigation</label>
+            <ul style="margin-top:8px; padding-left:20px; list-style: disc;">
+              <li>Exceptionally cooperative and charming with investigators — almost performatively so</li>
+              <li>Is the first to point out Dominic's on-camera threat</li>
+              <li>Subtly steers conversations toward Kavya's emotional state</li>
+              <li>Does not mention the blackmail payments (obviously)</li>
+              <li>Becomes visibly uncomfortable when the camera malfunction timeline is discussed</li>
+              <li>His alibi covers a production role that can be verified independently — and doesn't hold up</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /character-grid -->
+  </div>
+
+  <!-- SECTION 5: TIMELINE -->
+  <div class="section" id="timeline">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2>Full Murder Timeline — July 18–19, 2025</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item"><div class="time">6:00 PM – 8:00 PM</div><div class="event">Filming of Day 19 "Compatibility Pool Party" on Roof 15 infinity pool. All 8 remaining contestants and full camera crew present.</div></div>
+      <div class="timeline-item"><div class="time">8:15 PM</div><div class="event">Victor Delgado receives encrypted message from Solomon demanding escalated payment — $25,000 in crypto by the next morning or he goes public.</div><div class="notes">Victor later deletes this from his phone. Recovered by SEMEFO forensics.</div></div>
+      <div class="timeline-item"><div class="time">9:00 PM</div><div class="event">Solomon publicly embarrasses Kavya Nair again during an informal poolside conversation, referencing the algorithm rejection in front of other contestants.</div></div>
+      <div class="timeline-item critical"><div class="time">9:47 PM</div><div class="event">🔴 ON CAMERA: Dominic Wallace confronts Solomon in the pool bar area: "You're a snake. You play games with real people. You're dead to me — dead to me." Victor is present. Two cameras capture this confrontation.</div><div class="notes">This becomes the primary red herring. All players will focus on Dominic first.</div></div>
+      <div class="timeline-item"><div class="time">10:02 PM</div><div class="event">Victor remotely triggers a circuit overload in AV Server Room B1-AV via the production tablet, initiating the camera "malfunction" for the North Tower system. He knows the failsafe will lock out 38 cameras for a minimum of 90 minutes.</div></div>
+      <div class="timeline-item"><div class="time">10:08 PM</div><div class="event">Vivian Fong's keycard logs her into Camera Control Room B — she is now trying to diagnose the malfunction, unknowingly providing a cover story for Victor.</div></div>
+      <div class="timeline-item critical"><div class="time">10:22 PM</div><div class="event">🔴 Victor's keycard logs FIRST ENTRY to Equipment Room B1. He retrieves the Conair 1875W hair dryer (Unit #4 of 6, serial SN-4472-B). He also retrieves a 25-foot extension cord.</div></div>
+      <div class="timeline-item"><div class="time">10:35 PM</div><div class="event">Cast dinner begins at Las Brisas Restaurant (ground floor). All 6 contestant suspects, Victor's assistant, and several crew members are present. Victor is NOT at dinner — he claims to be in Production Suite B.</div></div>
+      <div class="timeline-item"><div class="time">10:48 PM</div><div class="event">Victor texts Solomon: "Come to the roof. I have what you need. Come alone. Don't tell anyone." Solomon responds: "15 min." Solomon tells no one he is leaving.</div></div>
+      <div class="timeline-item"><div class="time">11:02 PM</div><div class="event">Solomon is captured on Camera C-14 (one of 5 cameras NOT in the malfunction zone) entering the North Tower rooftop stairwell with a towel — suggesting he believes he is going to a pool meeting to receive a cash settlement.</div></div>
+      <div class="timeline-item"><div class="time">11:08 PM</div><div class="event">Full North Tower camera blackout complete. Camera C-14 goes offline. No camera coverage of rooftop, stairwell, or pool area.</div></div>
+      <div class="timeline-item"><div class="time">11:15 PM – 11:45 PM</div><div class="event">Victor and Solomon meet at the infinity pool. Victor keeps the meeting calm, acting as though payment transfer is happening. He needs Solomon relaxed and near the water.</div></div>
+      <div class="timeline-item critical"><div class="time">11:47 PM</div><div class="event">🔴 Victor's keycard logs SECOND ENTRY to Equipment Room B1. Duration: 4 minutes. He retrieves the extension cord he staged earlier and checks the equipment.</div><div class="notes">This second access has no legitimate production explanation. This is the key access log entry players need to find in Tier 2.</div></div>
+      <div class="timeline-item critical"><div class="time">~12:05 – 12:15 AM</div><div class="event">🔴 MURDER. Victor returns to roof pool. Solomon is seated at pool edge, feet in the water. Victor plugs in the extension cord, connects the powered-on hair dryer, and drops it into the pool. Cardiac arrest from ventricular fibrillation. Solomon Vance dies within 90 seconds.</div></div>
+      <div class="timeline-item"><div class="time">12:15 – 12:40 AM</div><div class="event">Victor removes extension cord. He briefly touches the hair dryer cord when repositioning it — partial fingerprints left on the rubber grip. He does not retrieve the dryer from the pool (water + electrocution risk). He exits via production stairwell.</div></div>
+      <div class="timeline-item critical"><div class="time">12:47 AM</div><div class="event">🔴 Hallway camera (not in malfunction zone) captures Victor entering Production Suite B from the corridor — confirming he was NOT in the suite during the period 10:10 PM – 12:47 AM.</div></div>
+      <div class="timeline-item"><div class="time">1:00 AM</div><div class="event">North Tower camera system begins coming back online. Victor calls the A/V technician (on-call, off-site) at 1:05 AM, pretending to just have noticed the cameras are restoring.</div></div>
+      <div class="timeline-item critical"><div class="time">1:15 AM</div><div class="event">🔴 Resort security guard Sergio Jiménez discovers Solomon's body in the infinity pool during routine perimeter check. Pool alarm triggered. Resort security supervisor contacted immediately.</div></div>
+      <div class="timeline-item"><div class="time">1:30 AM</div><div class="event">Resort security contacts Quintana Roo State Police (FGE-QR). Investigadora Dra. Sofía Montoya-Reyes dispatched. All persons in the resort requested to remain on property.</div></div>
+      <div class="timeline-item"><div class="time">2:15 AM</div><div class="event">FGE-QR investigators arrive. SEMEFO (forensic medical examiner) called. All 6 suspects and key staff identified and asked not to leave their rooms. Production of <em>Forever Match</em> formally halted pending investigation.</div></div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: OBJECTIVES -->
+  <div class="section" id="objectives">
+    <div class="section-header">
+      <span class="section-num">06</span>
+      <h2>3-Objective System — Questions, Answers &amp; Hints</h2>
+    </div>
+
+    <div class="objective-card obj-1">
+      <div class="obj-num">🔵 Objective 1 — Unlock Tier 2</div>
+      <h3>"Confirm this was not an accident. Using the initial evidence, identify the murder weapon and establish how Solomon Vance was killed."</h3>
+      <p style="color:var(--muted); font-size:0.85rem; margin-bottom:12px;">Players read Tier 1 documents. The initial police report describes the scene as a "possible accidental electrocution." The autopsy preliminary and resort incident report contain enough to contradict this. The hair dryer is present in the scene. Players must confirm: murder weapon = hair dryer / method = electrocution (intentional).</p>
+      <div class="answer-box">✅ CORRECT ANSWER: A hair dryer / electrocution / the hair dryer was deliberately placed in the pool to electrocute Solomon Vance</div>
+      <ul class="hint-list">
+        <li>The resort incident report describes an "electrical appliance recovered from the pool" — what kind of appliance would be near a pool that could cause electrocution?</li>
+        <li>The preliminary medical examiner's assessment mentions "external burn marks at the extremities consistent with electrical current entry points" — this is not consistent with accidental drowning.</li>
+        <li>The camera malfunction report confirms 38 cameras went offline in the exact area where Solomon died — if this were an accident, why would someone disable the cameras in that specific area 73 minutes before his death?</li>
+      </ul>
+    </div>
+
+    <div class="objective-card obj-2">
+      <div class="obj-num">🟡 Objective 2 — Unlock Tier 3</div>
+      <h3>"Examine the Electrical Equipment Room B1 access log. Which person accessed the equipment room during the camera blackout window with no legitimate production justification?"</h3>
+      <p style="color:var(--muted); font-size:0.85rem; margin-bottom:12px;">Tier 2 gives players the Equipment Room Access Log and Producer Communications. The log shows who entered Room B1 during 10:00 PM – 2:00 AM and how many times. Players cross-reference with alibis, production roles, and legitimate reasons to be there. One person's access is unexplained twice — and their claimed alibi does not survive scrutiny.</p>
+      <div class="answer-box">✅ CORRECT ANSWER: Victor Delgado / the show host / Victor (accessed the room twice — 10:22 PM and 11:47 PM — with no verifiable production justification and a false alibi)</div>
+      <ul class="hint-list">
+        <li>The access log shows 4 people entered Equipment Room B1 during the blackout window. Cross-reference each person's role against a legitimate reason to be in that room during a camera malfunction.</li>
+        <li>Three of the four people who accessed the room have verifiable alibis or legitimate production reasons. One person claimed to be somewhere else entirely — and a hallway camera shows them arriving at their claimed location nearly two hours later than they said.</li>
+        <li>The person who accessed the room TWICE has no A/V technical role. Their first access (10:22 PM) is 20 minutes after the malfunction began. Their second access (11:47 PM) is 73 minutes later — right before the estimated time of death.</li>
+      </ul>
+    </div>
+
+    <div class="objective-card obj-3">
+      <div class="obj-num">🔴 Objective 3 — Unlock Solution Package</div>
+      <h3>"Name the person responsible for the death of Solomon Vance."</h3>
+      <p style="color:var(--muted); font-size:0.85rem; margin-bottom:12px;">Tier 3 delivers the fingerprint analysis report, the recovered text messages between the killer and victim, the algorithm source code audit (establishing the blackmail motive), and the overlooked witness statement. The fingerprint match is definitive. Players should be able to name the killer with certainty.</p>
+      <div class="answer-box">✅ CORRECT ANSWER: Victor Delgado</div>
+      <ul class="hint-list">
+        <li>The fingerprint analysis report identifies a partial right index and middle finger print on the hair dryer cord — cross-reference with the biometric intake forms all Stellar Content Studios staff signed at the start of production.</li>
+        <li>The recovered text messages show that the victim was meeting someone that night specifically at the killer's invitation — "Come to the roof. I have what you need." Which suspect had reason to invite the victim to the pool alone, after midnight?</li>
+        <li>The New Jersey court records confirm the killer's real identity — and the motive. Only one suspect had something this catastrophic to hide from the victim's blackmail.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 7: EVIDENCE CATALOG -->
+  <div class="section" id="evidence">
+    <div class="section-header">
+      <span class="section-num">07</span>
+      <h2>Evidence Catalog — All Tiers</h2>
+    </div>
+    <table class="evidence-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Evidence Item</th>
+          <th>Tier</th>
+          <th>Document Source</th>
+          <th>Significance</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>E-001</td><td>Conair 1875W Hair Dryer (recovered from pool)</td><td><span class="tier-tag tier-1">T1</span></td><td>Resort Incident Report</td><td>Murder weapon. Identified as cause of electrocution.</td></tr>
+        <tr><td>E-002</td><td>Camera Malfunction — North Tower, 10:02–1:00 AM</td><td><span class="tier-tag tier-1">T1</span></td><td>Camera Malfunction Report</td><td>Establishes the 2-hour window. Suspicious timing.</td></tr>
+        <tr><td>E-003</td><td>On-camera threat by Dominic Wallace (9:47 PM)</td><td><span class="tier-tag tier-1">T1</span></td><td>Confessional Interview Transcripts / Production Timeline</td><td class="red-herring-clue">RED HERRING. Documented but Dominic's alibi is solid.</td></tr>
+        <tr><td>E-004</td><td>Camera C-14 footage — Solomon entering North Tower stairwell (11:02 PM)</td><td><span class="tier-tag tier-1">T1</span></td><td>Security Camera Footage Log</td><td>Establishes victim's final known movements. He went to the pool voluntarily.</td></tr>
+        <tr><td>E-005</td><td>Cast Dinner Attendance Record — Las Brisas, 10:35 PM – 1 AM</td><td><span class="tier-tag tier-1">T1</span></td><td>Production Timeline / Resort F&amp;B Records</td><td>Alibis Kavya, Dominic, Rafael, Zara. Victor NOT present.</td></tr>
+        <tr><td>E-006</td><td>Preliminary Medical Examiner Assessment</td><td><span class="tier-tag tier-1">T1</span></td><td>Resort Incident Report (attached)</td><td>Burn marks at extremities. Electrical current. Contradiction to "accidental" narrative. Answers Objective 1.</td></tr>
+        <tr><td>E-007</td><td class="key-clue">Equipment Room B1 Keycard Access Log</td><td><span class="tier-tag tier-2">T2</span></td><td>Electrical Equipment Room Access Log</td><td class="key-clue">KEY EVIDENCE. Victor accessed room at 10:22 PM and 11:47 PM. No legitimate reason. Answers Objective 2.</td></tr>
+        <tr><td>E-008</td><td>Victor's Alibi Contradiction — Hallway Camera</td><td><span class="tier-tag tier-2">T2</span></td><td>Resort Security Camera Footage Log (Tier 2)</td><td class="key-clue">Victor shown entering Production Suite B at 12:47 AM — not 10 PM as claimed. Destroys his alibi.</td></tr>
+        <tr><td>E-009</td><td>Producer Slack Archive — Post-Malfunction Panic</td><td><span class="tier-tag tier-2">T2</span></td><td>Forever Match Producer Communications</td><td>Vivian's messages show she knew nothing about Solomon's death until told by security. Eliminates her as suspect.</td></tr>
+        <tr><td>E-010</td><td>Full Autopsy Report (SEMEFO)</td><td><span class="tier-tag tier-2">T2</span></td><td>Preliminary Autopsy &amp; Electrocution Report</td><td>Confirms deliberate homicide. Ventricular fibrillation. No defensive wounds (victim was relaxed when attacked). Consistent with being killed while seated at pool edge.</td></tr>
+        <tr><td>E-011</td><td class="key-clue">Fingerprint Analysis — Hair Dryer Cord Grip</td><td><span class="tier-tag tier-3">T3</span></td><td>Forensic Fingerprint Analysis Report</td><td class="key-clue">DECISIVE. Partial right index + middle finger prints matched to Victor Delgado via Stellar Content Studios biometric intake database. Answers Objective 3.</td></tr>
+        <tr><td>E-012</td><td class="key-clue">Recovered Text Messages — Solomon's Phone</td><td><span class="tier-tag tier-3">T3</span></td><td>Private Communications Archive</td><td class="key-clue">Victor's 10:48 PM text: "Come to the roof. I have what you need. Come alone." Establishes the invitation and sole opportunity for meeting.</td></tr>
+        <tr><td>E-013</td><td class="key-clue">NJ Court Records — Víctor Manuel Soto-Guerrero (2011)</td><td><span class="tier-tag tier-3">T3</span></td><td>Private Communications Archive / Background Check</td><td class="key-clue">Establishes the blackmail motive. Wire fraud conviction, prison time. Photo matches Victor Delgado. This is what Solomon found.</td></tr>
+        <tr><td>E-014</td><td>EROS Algorithm Source Code Audit</td><td><span class="tier-tag tier-3">T3</span></td><td>Forever Match Algorithm Source Code Audit</td><td>Confirms algorithm is fake. Establishes Vivian's involvement (matching fraud) but also confirms MULTIPLE people had reason to silence Solomon — establishes why his threat was credible.</td></tr>
+        <tr><td>E-015</td><td>Overlooked Witness: Room Service Attendant (Héctor Bustamante)</td><td><span class="tier-tag tier-3">T3</span></td><td>Overlooked Witness Statement</td><td>Héctor was delivering to Room 1501 (adjacent to production stairwell) at 12:40 AM. He saw a man in a dark jacket exit the stairwell quickly. Matches Victor's description. Ties the physical person to the location at the right time.</td></tr>
+        <tr><td>E-016</td><td>Solomon's Blackmail Payment Records</td><td><span class="tier-tag tier-s">SOL</span></td><td>Solution Package</td><td>Crypto wallet records confirming first $5K payment from Victor to Solomon on July 15, 2025. Establishes ongoing blackmail.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 8: RED HERRINGS -->
+  <div class="section" id="red-herrings">
+    <div class="section-header">
+      <span class="section-num">08</span>
+      <h2>Red Herrings &amp; Misdirects — Explained</h2>
+    </div>
+    <div class="info-block">
+      <h4>Primary Red Herring: Dominic Wallace's On-Camera Threat</h4>
+      <p>This is intentionally the most visually dramatic piece of evidence available in Tier 1. Dominic explicitly says "you're dead to me" on camera — 3 hours before the murder. Players will almost universally suspect him first. His solid, multi-source alibi (restaurant camera + 3 witnesses + server + his own presence at table through 12:40 AM) completely exonerates him — but players must work to verify it. The lesson: the loudest suspect is not always the killer.</p>
+    </div>
+    <div class="info-block">
+      <h4>Secondary Red Herring: Vivian Fong's Algorithm Access &amp; Motive</h4>
+      <p>Vivian had arguably the most professionally motivated reason to silence Solomon — he threatened to expose her show's central fraud. She is present in all production documents, her name is on every algorithm-related file. Players who focus on motive will land on her. But she was physically locked in Camera Control Room B the entire night — a room with its own keycard log — and her Slack messages in real-time show she was troubleshooting the malfunction continuously. Opportunity eliminates her.</p>
+    </div>
+    <div class="info-block">
+      <h4>Tertiary Red Herring: Kavya's Emotional State</h4>
+      <p>Kavya's public humiliation and clear emotional distress in her confessional interview create sympathy but also suspicion. However, her alibi is strong (dinner + sister phone call at 12:31 AM), and she had no access to the equipment room. Victor subtly highlights Kavya's emotional state during early investigation — this is a behavioral tell that a perceptive player might notice.</p>
+    </div>
+    <div class="info-block">
+      <h4>False Lead: The Algorithm Fraud</h4>
+      <p>The algorithm being fake creates a massive motive for anyone associated with the show. Players may go down a long path investigating the show's production fraud — this is valuable investigation but ultimately the fraud is the motive, not the act. The murder was personal (blackmail), not institutional (protecting the show).</p>
+    </div>
+  </div>
+
+  <!-- SECTION 9: ADULT THEMES -->
+  <div class="section" id="adult-themes">
+    <div class="section-header">
+      <span class="section-num">09</span>
+      <h2>Adult Content &amp; Sensitive Themes Guide</h2>
+    </div>
+    <div class="info-block">
+      <h4>Content Present in This Game</h4>
+      <ul>
+        <li>Graphic electrocution death description (in autopsy documents)</li>
+        <li>Explicit sexual content implied in contestant interactions (not graphic in text, but narratively present)</li>
+        <li>Alcohol abuse / open bar culture (referenced in social media archive and confessional booth transcripts)</li>
+        <li>Cocaine reference (cast dinner afterparty mentions, social media posts, not a plot element)</li>
+        <li>Closeted LGBTQ+ character and the emotional reality of involuntary outing</li>
+        <li>False STI defamation (not graphic, but present as plot element)</li>
+        <li>Emotional manipulation and psychological coercion (Solomon's behavior across the board)</li>
+        <li>Identity theft, wire fraud, and criminal history</li>
+        <li>Blackmail and financial coercion</li>
+        <li>Reality TV exploitation and producer manipulation of contestants</li>
+        <li>24/7 surveillance and privacy violation (show format)</li>
+        <li>Toxic masculinity dynamics in competitive dating environment</li>
+      </ul>
+    </div>
+    <div class="info-block">
+      <h4>GM Notes — Sensitive Handling</h4>
+      <ul>
+        <li>Rafael Rios's outing storyline should be handled with care — emphasize the systemic homophobia that creates the motive, not the sexuality itself as "the problem"</li>
+        <li>The algorithm fraud storyline is a genuine commentary on AI ethics and reality TV exploitation — worth a debrief conversation after solving</li>
+        <li>Solomon Vance is the victim, but he is also depicted as a manipulator and blackmailer — this complexity is intentional; victims can be flawed</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 10: EXPANSION NOTES -->
+  <div class="section" id="expansion">
+    <div class="section-header">
+      <span class="section-num">10</span>
+      <h2>Complexity Expansion Notes — Future Medium/Hard Versions</h2>
+    </div>
+    <div class="expansion-box">
+      <h4>🔵 Path to Medium Difficulty (Add these elements)</h4>
+      <ul>
+        <li>Victor had technical help from an inside accomplice (a production tech) who triggered the malfunction for him — implicating a 7th character</li>
+        <li>The crypto payment trail is obfuscated through a mixer wallet — requires a blockchain forensics report to trace</li>
+        <li>Vivian Fong actually knew about the blackmail and was deciding whether to warn Victor or expose Solomon herself — she becomes a more active, morally complex character</li>
+        <li>A second threatened victim: Rafael Rios also received a blackmail demand from Solomon — creating an additional suspect with technical opportunity</li>
+        <li>The Executive Producer (unnamed in Easy version) becomes a named suspect with their own motive to eliminate Solomon</li>
+      </ul>
+    </div>
+    <div class="expansion-box" style="margin-top:16px;">
+      <h4>🔴 Path to Hard Difficulty (Add these elements in addition to Medium)</h4>
+      <ul>
+        <li>Victor's real identity was known to ONE other person on the production — that person is protecting him and providing a false corroborating alibi</li>
+        <li>Solomon had encrypted backups of all his blackmail material hidden in a cloud account — finding the password requires solving a cipher embedded in his social media posts</li>
+        <li>An international angle: the New Jersey fraud scheme had a second conviction in Puerto Rico under yet another alias — connecting to an organized crime element that also had reason to silence Solomon</li>
+        <li>The fake algorithm was itself covering a real data harvesting operation — Stellar Content Studios was selling contestant biometric data to insurance companies. This creates a corporate conspiracy layer above the personal murder.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- SECTION 11: GM NOTES -->
+  <div class="section" id="gm-notes">
+    <div class="section-header">
+      <span class="section-num">11</span>
+      <h2>GM Facilitation Notes</h2>
+    </div>
+    <div class="info-block">
+      <h4>Recommended Play Flow</h4>
+      <ul>
+        <li><strong>Solo Play:</strong> Full game estimated 1.5–2 hours. All documents available digitally on the website. Objectives submitted through the checkpoint system.</li>
+        <li><strong>2–4 Players:</strong> Divide Tier 1 documents among players, discuss before submitting Objective 1. 2–2.5 hours.</li>
+        <li><strong>5–8 Players:</strong> Create teams — "Show Investigation" team (production documents) vs. "Police Investigation" team (forensic/legal documents). Compare findings. 2.5–3 hours.</li>
+      </ul>
+    </div>
+    <div class="info-block">
+      <h4>Discussion Prompts After Solving</h4>
+      <ul>
+        <li>What does it say about our culture that we trust algorithms to make important personal decisions?</li>
+        <li>Solomon was the victim and the villain. Does being a victim require being innocent?</li>
+        <li>The show exploited everyone — contestants, viewers, and ultimately got someone killed. Who bears responsibility?</li>
+        <li>Rafael's storyline: what does it mean that someone's biggest fear wasn't a crime but being known?</li>
+      </ul>
+    </div>
+    <div class="info-block">
+      <h4>Pacing Note</h4>
+      <p>The red herring (Dominic) is designed to be resolved by any player who carefully reads the cast dinner attendance records in Tier 1. Don't let groups get stuck on Dominic for more than 20 minutes — the evidence to clear him is all in Tier 1. If players are stuck, guide them toward the cast dinner records as their first cross-reference tool.</p>
+    </div>
+  </div>
+
+  <div class="doc-footer">
+    <p>MYSTERY 3A · "THE ALGORITHM KNOWS" · STORY BIBLE v1.0</p>
+    <p style="margin-top:6px;">GAME MASTER DOCUMENT · DO NOT DISTRIBUTE · © Stellar Content Studios (Fictional)</p>
+    <p style="margin-top:6px;">Case No. FGE-QR-2025-07-0847 · Gran Horizonte Resort &amp; Spa · Cancún, Q.R., México · July 18–19, 2025</p>
+  </div>
+
+</div>
+</body>
+</html>

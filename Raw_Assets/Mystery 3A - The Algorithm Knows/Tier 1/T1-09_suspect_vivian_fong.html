@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suspect Profile — Vivian Fong | Mystery 3A</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#FF4D6D;--cyan:#00D4FF;--gold:#FFD700;--dark:#0A0A0F;--card:#12121A;--border:#1E1E2E;--text:#E8E8F0;--muted:#888899;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;}
+  .doc-header{background:linear-gradient(135deg,#001A10 0%,#0A0A1F 100%);border-bottom:2px solid var(--gold);padding:2rem;text-align:center;}
+  .show-logo{font-family:'Playfair Display',serif;font-size:1rem;color:var(--cyan);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:0.5rem;}
+  .doc-title{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:#fff;margin-bottom:0.3rem;}
+  .doc-sub{font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--muted);}
+  .tier-badge{display:inline-block;background:var(--gold);color:#000;font-family:'IBM Plex Mono',monospace;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;padding:0.3rem 0.9rem;border-radius:2px;margin-bottom:1rem;}
+  .container{max-width:900px;margin:0 auto;padding:2.5rem 2rem;}
+  .suspect-hero{background:linear-gradient(135deg,#001A10 0%,#0D0D1F 100%);border:2px solid var(--gold);border-radius:6px;padding:2rem;margin-bottom:2rem;display:grid;grid-template-columns:220px 1fr;gap:2rem;align-items:start;}
+  .suspect-card{background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.2);border-radius:6px;padding:1.5rem;text-align:center;}
+  .suspect-label{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.5rem;}
+  .suspect-name{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:#fff;margin-bottom:0.3rem;}
+  .suspect-role{font-size:0.8rem;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-bottom:1rem;}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;margin-top:1rem;}
+  .stat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:3px;padding:0.4rem;text-align:center;}
+  .slabel{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;display:block;}
+  .sval{font-size:0.82rem;color:var(--text);display:block;margin-top:0.1rem;}
+  .suspect-intro h2{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);margin-bottom:0.8rem;}
+  p{color:var(--muted);font-size:0.9rem;line-height:1.75;margin-bottom:0.8rem;}
+  .section{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.8rem;margin-bottom:1.5rem;}
+  .section-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--cyan);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.8rem;}
+  .info-item{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:4px;padding:0.8rem;}
+  .info-label{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;display:block;margin-bottom:0.2rem;}
+  .info-val{font-size:0.88rem;color:var(--text);}
+  .quote-block{background:rgba(255,215,0,0.05);border-left:3px solid var(--gold);padding:1rem 1.2rem;border-radius:0 4px 4px 0;margin:1rem 0;font-style:italic;color:var(--text);font-size:0.88rem;line-height:1.7;}
+  .alert-box{background:rgba(255,77,109,0.07);border:1px solid rgba(255,77,109,0.25);border-radius:4px;padding:1rem 1.2rem;font-size:0.85rem;color:var(--text);line-height:1.6;margin:1rem 0;}
+  .alert-label{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--red);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:0.5rem;display:block;}
+  .timeline-entry{display:flex;gap:1rem;padding:0.8rem 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+  .timeline-entry:last-child{border-bottom:none;}
+  .t-time{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--cyan);white-space:nowrap;min-width:80px;}
+  .t-text{font-size:0.85rem;color:var(--muted);line-height:1.6;}
+  .case-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+  .meta-item{font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:var(--muted);}
+  .meta-item span{color:var(--text);}
+  @media(max-width:600px){.suspect-hero{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="doc-header">
+  <div class="show-logo">Forever Match · Mystery 3A — The Algorithm Knows</div>
+  <div class="tier-badge">TIER 1 — SUSPECT PROFILE · T1-09</div>
+  <div class="doc-title">Vivian Fong</div>
+  <div class="doc-sub">FGE-QR-2025-07-0847 · Person of Interest #3 · Production Staff — Associate Producer</div>
+</div>
+<div class="container">
+  <div class="suspect-hero">
+    <div class="suspect-card">
+      <div class="suspect-label">Suspect #3 — STAFF</div>
+      <div class="suspect-name">Vivian Fong</div>
+      <div class="suspect-role">Associate Producer · Show Staff</div>
+      <div class="stat-grid">
+        <div class="stat"><span class="slabel">Age</span><span class="sval">27</span></div>
+        <div class="stat"><span class="slabel">Origin</span><span class="sval">Los Angeles, CA</span></div>
+        <div class="stat"><span class="slabel">Ethnicity</span><span class="sval">Chinese-American</span></div>
+        <div class="stat"><span class="slabel">Role</span><span class="sval">Associate Producer</span></div>
+      </div>
+    </div>
+    <div class="suspect-intro">
+      <h2>Overview</h2>
+      <p>Vivian Fong, 27, is the Associate Producer of <em>Forever Match</em>, employed by Stellar Content Studios, Los Angeles. A UCLA Film School graduate with two years of prior production experience, this is her first major show credit. She is responsible for coordinating daily production logistics, managing the contestant schedule, and overseeing technical operations including the camera system.</p>
+      <p>Vivian is the only production staff member among the six persons of interest. Her significance to the investigation is twofold: she had professional access to the resort's technical infrastructure, and she was reportedly in Camera Control Room B during the camera malfunction that blacked out 38 cameras in the North Tower area — the same window in which Solomon Vance was killed.</p>
+    </div>
+  </div>
+
+  <div class="alert-box">
+    <span class="alert-label">⚠ Key Investigative Fact</span>
+    The North Tower camera system experienced a malfunction at 10:02 PM that eliminated surveillance coverage of the pool area, stairwells, and equipment room for approximately 3 hours. Vivian Fong's role gives her both the technical knowledge and the system access to influence the camera infrastructure. Investigators are examining whether the malfunction was accidental or deliberate.
+  </div>
+
+  <div class="section">
+    <div class="section-title">👤 Background & Professional Profile</div>
+    <div class="info-grid">
+      <div class="info-item"><span class="info-label">Full Name</span><span class="info-val">Vivian Wei Fong</span></div>
+      <div class="info-item"><span class="info-label">Education</span><span class="info-val">UCLA School of Theater, Film & Television</span></div>
+      <div class="info-item"><span class="info-label">Employer</span><span class="info-val">Stellar Content Studios, Los Angeles</span></div>
+      <div class="info-item"><span class="info-label">Role</span><span class="info-val">Associate Producer, Forever Match S1</span></div>
+      <div class="info-item"><span class="info-label">Prior Credits</span><span class="info-val">2 years PA / production assistant roles</span></div>
+      <div class="info-item"><span class="info-label">Physical</span><span class="info-val">5'4", blunt bob, always with tablet/clipboard</span></div>
+    </div>
+    <p style="margin-top:1rem;">Vivian is described by colleagues as "sharp, detail-oriented, and occasionally difficult to read." She keeps extensive production notes and is known for running a tight schedule. Multiple crew members noted that she treated the EROS algorithm and production data with a degree of protectiveness unusual for an Associate Producer.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">⚡ Relationship to Victim & Documented Conflict</div>
+    <p>Solomon Vance interacted with Vivian professionally and, according to Vivian's own account, privately. She states that in Week 2, Solomon approached her and claimed to have analyzed data from the production system and had "questions about how the algorithm actually works." She says she rebuffed his inquiry and reported the interaction to her superior.</p>
+    <p>Production records show that a contestant-facing data display terminal was accessed with Solomon's credentials during Week 2 at times outside of normal contestant usage patterns. The nature and extent of what Solomon may have accessed is under active investigation.</p>
+    <div class="quote-block">"He was fishing for something. I told him the algorithm data isn't for contestants to analyze. He smiled and said, 'I already did.' I didn't know what that meant." — Vivian Fong, initial statement</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🕐 Last Known Movements — July 18, 2025</div>
+    <div class="timeline-entry"><span class="t-time">6:00 PM</span><span class="t-text">On set for Day 19 pool party filming. Overseeing production flow from the production deck (adjacent to Roof 15 pool).</span></div>
+    <div class="timeline-entry"><span class="t-time">9:47 PM</span><span class="t-text">Present near pool bar during Dominic-Solomon confrontation. Did not intervene.</span></div>
+    <div class="timeline-entry"><span class="t-time">10:08 PM</span><span class="t-text">Keycard access log confirms Vivian entered Camera Control Room B (ground floor, Room G-14). She states she was alerted to the camera malfunction and went to diagnose it.</span></div>
+    <div class="timeline-entry"><span class="t-time">10:08 PM–2:33 AM</span><span class="t-text">Claims to have been in Camera Control Room B for the entire duration — troubleshooting the malfunction. Keycard exit log confirms she did not leave until 2:33 AM.</span></div>
+    <div class="timeline-entry"><span class="t-time">2:33 AM</span><span class="t-text">Exited Camera Control Room B after being informed by resort security of Solomon's discovery.</span></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🗣 Statement to Investigators (Initial)</div>
+    <div class="quote-block">"I was in the control room all night. The system crashed — 38 cameras went down and I was trying to find the source. I had nothing to do with what happened to Solomon. I barely knew him outside of production interactions."</div>
+    <p>Vivian's keycard log supports her claim that she did not physically leave Camera Control Room B between 10:08 PM and 2:33 AM. However, investigators note that the control room contains terminals with remote access to resort systems. Her physical presence in the room does not necessarily account for all of her technical activity during that window.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🔎 Investigator's Notes — Points to Examine</div>
+    <p>· Vivian's keycard log appears to support her alibi. But the camera malfunction — within her domain of responsibility — raises questions: was it accidental or triggered?</p>
+    <p>· What specific systems can be accessed from Camera Control Room B terminals? Does this include the resort's electrical systems?</p>
+    <p>· Solomon claimed to have accessed production data. Does Vivian know what he found? Did that information create a professional threat to her?</p>
+    <p>· Vivian reported Solomon's "data fishing" to a superior. Who is that superior, and what action, if any, was taken?</p>
+    <p>· Cross-reference the timeline: the malfunction began at 10:02 PM. Vivian entered the control room at 10:08 PM — 6 minutes after the malfunction started. Why wasn't she alerted immediately?</p>
+  </div>
+
+  <div class="case-meta">
+    <div class="meta-item">Case: <span>FGE-QR-2025-07-0847</span></div>
+    <div class="meta-item">Document: <span>T1-09 · Suspect Profile — Vivian Fong</span></div>
+    <div class="meta-item">Prepared by: <span>Inv. Dra. Sofía Montoya-Reyes, FGE-QR</span></div>
+    <div class="meta-item">Date: <span>July 19, 2025</span></div>
+  </div>
+</div>
+</body>
+</html>

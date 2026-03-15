@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <title>2024 Press Release - Mystery #2B</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css" />
+    <style>
+      body {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+        color: #1a1a1a;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        line-height: 1.6;
+      }
+
+      /* Navigation Bar Simulation */
+      .nav-bar {
+        border-bottom: 1px solid #e0e0e0;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-family: 'Times New Roman', serif;
+        font-size: 32px;
+        font-weight: bold;
+        color: #000;
+        text-transform: uppercase;
+        letter-spacing: -1px;
+      }
+
+      .nav-links {
+        font-size: 14px;
+        font-weight: bold;
+        color: #555;
+        text-transform: uppercase;
+      }
+
+      .nav-item {
+        margin-left: 20px;
+        color: #333;
+        text-decoration: none;
+      }
+
+      /* Article Header */
+      .category-tag {
+        color: #d32f2f;
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
+
+      h1 {
+        font-family: 'Georgia', serif;
+        font-size: 42px;
+        line-height: 1.1;
+        margin-bottom: 15px;
+        color: #111;
+      }
+
+      .subhead {
+        font-family: 'Georgia', serif;
+        font-size: 22px;
+        color: #555;
+        margin-bottom: 20px;
+        line-height: 1.4;
+      }
+
+      .meta-info {
+        font-size: 13px;
+        color: #666;
+        border-bottom: 1px solid #e0e0e0;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+      }
+
+      .author {
+        font-weight: bold;
+        color: #333;
+        text-transform: uppercase;
+      }
+
+      .timestamp {
+        margin-left: 15px;
+      }
+
+      /* Layout Grid */
+      .content-grid {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 40px;
+      }
+
+      /* Main Article Content */
+      .article-body {
+        font-size: 18px;
+        color: #222;
+      }
+
+      .article-body p {
+        margin-bottom: 20px;
+      }
+
+      .drop-cap {
+        float: left;
+        font-size: 68px;
+        line-height: 0.8;
+        padding-right: 10px;
+        font-family: 'Georgia', serif;
+        font-weight: bold;
+      }
+
+      .pull-quote {
+        border-left: 4px solid #d32f2f;
+        padding-left: 20px;
+        font-family: 'Georgia', serif;
+        font-size: 24px;
+        font-style: italic;
+        color: #444;
+        margin: 30px 0;
+      }
+
+      /* Sidebar Content */
+      .sidebar {
+        border-left: 1px solid #e0e0e0;
+        padding-left: 30px;
+      }
+
+      .sidebar-box {
+        background-color: #f9f9f9;
+        padding: 20px;
+        margin-bottom: 30px;
+        border-top: 4px solid #333;
+      }
+
+      .sidebar-title {
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 14px;
+        margin-bottom: 10px;
+        color: #d32f2f;
+      }
+
+      .sidebar-headline {
+        font-family: 'Georgia', serif;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        line-height: 1.3;
+      }
+
+      .sidebar-text {
+        font-size: 14px;
+        color: #555;
+      }
+
+      /* Video Placeholder */
+      .video-placeholder {
+        background-color: #000;
+        color: #fff;
+        height: 250px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+        position: relative;
+        text-align: center;
+      }
+
+      .play-button {
+        width: 60px;
+        height: 60px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 30px;
+        color: #d32f2f;
+      }
+
+      /* Social Media Section */
+      .social-media-section {
+        margin-top: 40px;
+        border-top: 1px solid #e0e0e0;
+        padding-top: 30px;
+      }
+
+      .social-comment {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background-color: #fff;
+      }
+
+      .user-handle {
+        font-weight: bold;
+        font-size: 14px;
+        color: #555;
+        margin-bottom: 5px;
+      }
+
+      .comment-text {
+        font-size: 15px;
+      }
+
+      /* Footer */
+      .footer {
+        background-color: #111;
+        color: #fff;
+        padding: 40px;
+        margin-top: 60px;
+        text-align: center;
+        font-size: 12px;
+      }
+
+      .related-links {
+        margin-top: 30px;
+        border-top: 2px solid #000;
+        padding-top: 20px;
+      }
+
+      .related-link-item {
+        font-weight: bold;
+        color: #d32f2f;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 10px;
+        font-family: 'Georgia', serif;
+        font-size: 18px;
+      }
+    /* ========================================
+   PRINT-OPTIMIZED CSS
+   Saves ink, prevents cutoff, controls page breaks
+   ======================================== */
+@page {
+  margin: 0.5in !important;
+}
+@media print {
+  /* Reset to printer-friendly colors */
+  body {
+    background-color: white !important;
+    background: white !important;
+    color: black !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove all dark backgrounds and shadows */
+  .document-container,
+  .header-box,
+  table,
+  th,
+  td,
+  div,
+  section {
+    background-color: white !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-color: black !important;
+  }
+
+  /* Ensure text is always black */
+  h1, h2, h3, h4, h5, h6, p, li, td, th, span, div {
+    color: black !important;
+  }
+
+  /* Keep ONLY red stamps visible (but lighter) */
+  .stamp {
+    color: #c0392b !important;
+    border-color: #c0392b !important;
+    opacity: 0.6 !important;
+    background: transparent !important;
+  }
+
+  /* Remove colored highlight backgrounds - keep border only */
+  .evidence-highlight,
+  .sig-critical,
+  .sig-supporting,
+  .sig-context {
+    background-color: white !important;
+    background: white !important;
+    border-left-width: 3px !important;
+    border-left-color: black !important;
+  }
+
+  /* Simplify evidence tags for printing */
+  .evidence-tag {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+
+  /* Control page breaks - prevent awkward splits */
+  table {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group; /* Repeat header on each page */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Keep related content together */
+  .evidence-highlight,
+  .signature-block,
+  .header-meta {
+    page-break-inside: avoid;
+  }
+
+  /* Remove unnecessary spacing for print */
+  .document-container {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Ensure tables fit on page */
+  table {
+    width: 100% !important;
+    font-size: 11pt !important;
+  }
+
+  th, td {
+    padding: 6pt !important;
+  }
+
+  /* Adjust font sizes for readability */
+  body {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  h1 {
+    font-size: 18pt !important;
+  }
+
+  h2 {
+    font-size: 14pt !important;
+  }
+
+  /* Show URLs for links (optional - comment out if not wanted) */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  /* Hide elements that shouldn't print */
+  .no-print {
+    display: none !important;
+  }
+}
+</style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+      <div class="logo">The Times-Picayune</div>
+      <div class="nav-links">
+        <span class="nav-item">News</span>
+        <span class="nav-item">Crime & Justice</span>
+        <span class="nav-item">History</span>
+        <span class="nav-item">Opinion</span>
+      </div>
+    </div>
+
+    <!-- Article Header -->
+    <div class="category-tag">CRIME & JUSTICE / COLD CASES</div>
+    <h1>67-Year-Old Murder Mystery Solved: Woman Confesses to 1957 Train Killing</h1>
+    <div class="subhead">
+      Breakthrough in "Silver Comet" murder reveals a hidden history of forbidden love and fear during the Lavender
+      Scare era.
+    </div>
+
+    <div class="meta-info">
+      <span class="author">By MARCUS WILLIAMS, Crime Reporter</span>
+      <span class="timestamp"> | Updated: Dec 2, 2024 at 9:45 AM CST</span>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="content-grid">
+      <!-- Article Body -->
+      <div class="article-body">
+        <p>
+          <span class="drop-cap">N</span>EW ORLEANS — For nearly seven decades, the murder of jazz singer Vivienne
+          Marchand aboard the Silver Comet passenger train remained one of the South's most perplexing cold cases.
+          Today, New Orleans police announced the mystery is finally solved.
+        </p>
+
+        <p>
+          Charlotte "Lottie" Devereaux, a 95-year-old former actress and New Orleans socialite, confessed to the
+          November 1957 strangulation just six days before her death from cancer last week.
+        </p>
+
+        <p>
+          The confession was corroborated by a trove of physical evidence discovered in a locked steamer trunk in
+          Devereaux's attic, including the long-missing murder weapon—a burgundy and gold silk scarf belonging to the
+          victim.
+        </p>
+
+        <div class="pull-quote">
+          "This case was never just about a murder. It was about a love that society deemed criminal."
+        </div>
+
+        <p>
+          "Modern forensic analysis confirmed the presence of the victim's DNA on the scarf found in Ms. Devereaux's
+          possession," stated NOPD Detective Lt. Sarah Chen at a press conference this morning. "This physical evidence,
+          combined with Ms. Devereaux's detailed written confession and personal journals, leaves no doubt as to her
+          culpability."
+        </p>
+
+        <h3>A Motive Buried in History</h3>
+        <p>
+          The motive for the crime, investigators revealed, was rooted in the intense homophobia of the 1950s. Devereaux
+          and Marchand had been secret romantic partners for three years. When Marchand ended the relationship to marry
+          a man for financial security, Devereaux—fearing exposure and heartbroken—followed her onto the train.
+        </p>
+
+        <p>
+          "It was a crime of passion committed in an era of persecution," said District Attorney Jason Williams. "Ms.
+          Devereaux lived in fear that her sexual orientation would destroy her life. That fear, combined with jealousy,
+          led to a tragedy that silenced a talented artist."
+        </p>
+
+        <h3>Justice Delayed</h3>
+        <p>
+          While Devereaux cannot be prosecuted due to her death, authorities have officially closed the case as solved.
+          Distant relatives of Vivienne Marchand in France issued a statement expressing relief.
+        </p>
+
+        <p>
+          "We grew up hearing stories of our great-aunt's mysterious death," the statement read. "To finally know the
+          truth brings peace. We choose to remember Vivienne for her music, not just her tragic end."
+        </p>
+
+        <p>
+          The LGBTQ+ community has reacted with mixed emotions, noting how the "Lavender Scare"—the federal government's
+          persecution of gay employees in the 1950s—created a climate where honesty was impossible.
+        </p>
+
+        <p>
+          "This tragedy is a stark reminder of the cost of the closet," said a representative from the Louisiana
+          Transgender & Queer History Collective. "Vivienne and Charlotte were both victims of a society that refused to
+          let them exist authentically."
+        </p>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar 1 -->
+        <div class="sidebar-box">
+          <div class="sidebar-title">HISTORICAL CONTEXT</div>
+          <div class="sidebar-headline">The Lavender Scare: Understanding 1957</div>
+          <div class="sidebar-text">
+            <p>
+              To understand why Charlotte Devereaux hid her relationship with the victim for 67 years, one must
+              understand the "Lavender Scare."
+            </p>
+            <ul>
+              <li>
+                <strong>Federal Ban:</strong> In 1953, President Eisenhower signed an order banning gay people from
+                federal jobs.
+              </li>
+              <li>
+                <strong>Criminal Status:</strong> Sodomy was a felony in every state in 1957. Exposure meant prison.
+              </li>
+              <li><strong>Social Ruin:</strong> Being "outed" meant losing family, career, and housing.</li>
+            </ul>
+            <p>
+              <strong>Progress:</strong> Today, same-sex marriage is legal, and employment discrimination is banned.
+            </p>
+          </div>
+        </div>
+
+        <!-- Sidebar 2 -->
+        <div class="sidebar-box">
+          <div class="sidebar-title">FORENSIC SCIENCE</div>
+          <div class="sidebar-headline">How DNA Cracked the Code</div>
+          <div class="sidebar-text">
+            <p>In 1957, police couldn't link the missing scarf to the killer even if they found it. Today:</p>
+            <ul>
+              <li><strong>Touch DNA:</strong> Skin cells left on fabric can identify who handled an object.</li>
+              <li><strong>Preservation:</strong> The trunk's dry, dark environment preserved the DNA for decades.</li>
+              <li>
+                <strong>Comparison:</strong> This technique has solved dozens of cold cases, including the Golden State
+                Killer.
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Video Placeholder -->
+        <div class="video-placeholder">
+          <div>
+            <div class="play-button">▶</div>
+            <p style="margin-top: 10px; font-weight: bold">WATCH: Det. Chen Discusses the Breakthrough</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Media Reactions -->
+    <div class="social-media-section">
+      <h3>Social Media Reaction</h3>
+
+      <div class="social-comment">
+        <div class="user-handle">@HistoryUncovered ✅</div>
+        <div class="comment-text">
+          Incredible. Another cold case solved by DNA and a deathbed confession. The Silver Comet mystery is finally
+          over. #ColdCase #History
+        </div>
+      </div>
+
+      <div class="social-comment">
+        <div class="user-handle">@QueerHistoryArchive</div>
+        <div class="comment-text">
+          The Vivienne Marchand case isn't just a murder mystery; it's a tragedy of the closet. Two women destroyed by a
+          society that hated them. #LavenderScare #LGBTQHistory
+        </div>
+      </div>
+
+      <div class="social-comment">
+        <div class="user-handle">@TrueCrimeJunkie24</div>
+        <div class="comment-text">
+          67 years?! Imagine keeping a secret like that for your entire life. That trunk in the attic is literally the
+          stuff of movies. 🤯
+        </div>
+      </div>
+    </div>
+
+    <!-- Related Links -->
+    <div class="related-links">
+      <h3 style="font-family: sans-serif; text-transform: uppercase; font-size: 14px; color: #555">Read More</h3>
+      <a href="#" class="related-link-item">Timeline: The Silver Comet Murder (1957-2024)</a>
+      <a href="#" class="related-link-item">Other Cold Cases Awaiting Modern Solutions</a>
+      <a href="#" class="related-link-item">LGBTQ+ Rights Progress Since 1957</a>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      <p>© 2024 The Times-Picayune | NOLA.com. All rights reserved.</p>
+      <p>Privacy Policy | Terms of Service | About Us</p>
+    </div>
+  </body>
+</html>
+
+

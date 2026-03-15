@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gran Horizonte Resort — Incident Report #INC-GH-2025-0847</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@400;600;700&family=IBM+Plex+Mono:wght@400;700&display=swap');
+  :root {
+    --primary: #FF4D6D; --secondary: #00D4FF; --accent: #FFD700;
+    --dark: #0D0D1A; --dark2: #1A1A2E; --light: #FFFFFF;
+    --muted: #A0A0B0; --success: #00E676; --warning: #FF9100;
+    --hotel-gold: #C9A94A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--dark); color: var(--light); font-family: 'Inter', Arial, sans-serif; font-size: 15px; line-height: 1.75; }
+
+  /* Hotel-branded header */
+  .hotel-header {
+    background: linear-gradient(180deg, #0a0a12 0%, #111120 100%);
+    border-bottom: 4px solid var(--hotel-gold);
+    padding: 40px 60px 32px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 32px;
+    align-items: center;
+  }
+  .hotel-crest { font-size: 40px; }
+  .hotel-brand {}
+  .hotel-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--hotel-gold);
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .hotel-sub {
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .doc-info { text-align: right; }
+  .doc-number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    color: var(--hotel-gold);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .doc-meta-line {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    margin-bottom: 3px;
+  }
+
+  /* Doc title band */
+  .doc-title-band {
+    background: rgba(201,169,74,0.1);
+    border-bottom: 1px solid rgba(201,169,74,0.3);
+    padding: 20px 60px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .incident-badge {
+    background: rgba(255,77,109,0.15);
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    padding: 4px 12px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+  .doc-full-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--light);
+  }
+
+  /* Content */
+  .container { max-width: 900px; margin: 0 auto; padding: 48px 60px 80px; }
+  .section { margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .section:last-child { border-bottom: none; }
+  .section-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--hotel-gold);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--light);
+    margin-bottom: 16px;
+  }
+  p { color: rgba(255,255,255,0.82); margin-bottom: 14px; }
+
+  /* Field rows */
+  .field-grid {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 0;
+    margin-top: 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .field-row { display: contents; }
+  .field-label {
+    background: rgba(201,169,74,0.08);
+    border-right: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 10px 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--hotel-gold);
+    letter-spacing: 1px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+  }
+  .field-value {
+    background: rgba(255,255,255,0.02);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 10px 16px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.82);
+    display: flex;
+    align-items: center;
+  }
+  .field-row:last-child .field-label,
+  .field-row:last-child .field-value { border-bottom: none; }
+
+  /* Narrative block */
+  .narrative {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 8px;
+    padding: 28px;
+    margin-top: 12px;
+  }
+  .narrative-para { font-size: 14px; color: rgba(255,255,255,0.82); margin-bottom: 14px; line-height: 1.75; }
+  .narrative-para:last-child { margin-bottom: 0; }
+
+  /* Timeline */
+  .incident-timeline { margin-top: 12px; }
+  .it-row {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 16px;
+    margin-bottom: 14px;
+    font-size: 13px;
+  }
+  .it-time {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--secondary);
+    padding-top: 2px;
+    letter-spacing: 1px;
+  }
+  .it-event { color: rgba(255,255,255,0.82); }
+  .it-event strong { color: var(--light); }
+
+  /* Witness quote */
+  .witness-quote {
+    background: rgba(0,212,255,0.05);
+    border-left: 3px solid var(--secondary);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 6px 6px 0;
+  }
+  .wq-name {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--secondary);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .wq-text {
+    font-style: italic;
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+    margin: 0;
+  }
+
+  /* Action items */
+  .action-list { list-style: none; margin-top: 12px; }
+  .action-item {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    font-size: 13px;
+    color: rgba(255,255,255,0.78);
+  }
+  .action-item:last-child { border-bottom: none; }
+  .action-num {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--warning);
+    flex-shrink: 0;
+  }
+
+  /* Signatures */
+  .signature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 20px;
+  }
+  .sig-box {
+    border-top: 1px solid rgba(255,255,255,0.2);
+    padding-top: 12px;
+  }
+  .sig-name { font-weight: 700; font-size: 14px; margin-bottom: 2px; }
+  .sig-title { font-size: 11px; color: var(--muted); font-family: 'IBM Plex Mono', monospace; letter-spacing: 1px; }
+  .sig-date { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* Footer */
+  .page-footer {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  @media print {
+    body { background: white; color: #111; }
+    .hotel-header { background: #f5f5f5; border-bottom-color: #8a7030; }
+    .hotel-name, .doc-number { color: #8a7030; }
+    .field-label { color: #8a7030; background: #f9f6ee; }
+    p, .it-event, .narrative-para, .action-item { color: #333; }
+  }
+  @media (max-width: 768px) {
+    .hotel-header { grid-template-columns: 1fr; text-align: center; padding: 28px 24px; }
+    .doc-info { text-align: center; }
+    .container { padding: 36px 24px; }
+    .field-grid { grid-template-columns: 1fr; }
+    .field-label { border-right: none; }
+    .signature-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hotel-header">
+  <div class="hotel-crest">🏨</div>
+  <div class="hotel-brand">
+    <div class="hotel-name">Gran Horizonte Resort &amp; Spa</div>
+    <div class="hotel-sub">Blvd. Kukulcán Km 14.5 · Cancún, Quintana Roo, México · Safety &amp; Security Division</div>
+  </div>
+  <div class="doc-info">
+    <div class="doc-number">INC-GH-2025-0847</div>
+    <div class="doc-meta-line">Date: July 20, 2025</div>
+    <div class="doc-meta-line">Time: 09:30 hrs</div>
+    <div class="doc-meta-line">Prepared by: Jefe de Seguridad</div>
+    <div class="doc-meta-line">Police Ref: FGE-QR-2025-07-0847</div>
+  </div>
+</header>
+
+<div class="doc-title-band">
+  <span class="incident-badge">INCIDENT REPORT</span>
+  <span class="doc-full-title">Unexpected Guest Fatality — Main Pool, Zone B</span>
+</div>
+
+<div class="container">
+
+  <!-- INCIDENT DETAILS -->
+  <section class="section">
+    <div class="section-label">Incident Information</div>
+    <h2 class="section-title">Report Details</h2>
+
+    <div class="field-grid">
+      <div class="field-row">
+        <div class="field-label">Incident Number</div>
+        <div class="field-value">INC-GH-2025-0847</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Date / Time</div>
+        <div class="field-value">July 19–20, 2025 / Discovered at 01:15 AM</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Location</div>
+        <div class="field-value">Main Pool — Zone B (Production-Exclusive Area), Gran Horizonte Resort &amp; Spa</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Incident Type</div>
+        <div class="field-value">Unattended fatality — suspected criminal matter. Police jurisdiction assumed.</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Deceased Person</div>
+        <div class="field-value">Male, approximately 30–35 years of age, American national, guest of Solara Entertainment Group</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Discovered By</div>
+        <div class="field-value">Aurelio Vásquez Gutiérrez, Night Pool Attendant (Employee ID: GH-2847)</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Report Author</div>
+        <div class="field-value">Ernesto Camacho Reyes, Jefe de Seguridad (Security Chief), Gran Horizonte Resort</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">Police Notified</div>
+        <div class="field-value">01:22 AM — Dirección de Seguridad Pública Municipal de Benito Juárez</div>
+      </div>
+      <div class="field-row">
+        <div class="field-label">First Officers Arrived</div>
+        <div class="field-value">01:29 AM (7-minute response time)</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DISCOVERY NARRATIVE -->
+  <section class="section">
+    <div class="section-label">Discovery Account</div>
+    <h2 class="section-title">How the Body Was Found</h2>
+
+    <div class="narrative">
+      <p class="narrative-para">
+        At approximately 01:10 AM, night pool attendant Aurelio Vásquez Gutiérrez began his scheduled 
+        perimeter check of the Main Pool (Zone B). Zone B has been under an exclusive production agreement 
+        with Solara Entertainment Group since July 1, 2025, which restricts access to production-credentialed 
+        individuals only after 10:00 PM. Mr. Vásquez Gutiérrez holds a production-issued access credential 
+        for maintenance purposes.
+      </p>
+      <p class="narrative-para">
+        Upon approaching the pool's north edge at approximately 01:15 AM, Mr. Vásquez Gutiérrez observed 
+        a male individual floating face-down in the water, motionless, in the northeast section of the pool. 
+        He immediately called out to the individual and, receiving no response, retrieved the poolside 
+        emergency flotation device and attempted to reach the individual from the pool deck.
+      </p>
+      <p class="narrative-para">
+        Before entering the water, Mr. Vásquez Gutiérrez noticed a <strong>hair dryer</strong> and a 
+        <strong>coiled orange extension cord</strong> on the pool deck approximately two meters from the 
+        northeast corner. The hair dryer was not plugged in at the moment of discovery — the cord had been 
+        disconnected from the outlet, which is located behind the pool bar counter. 
+        Mr. Vásquez Gutiérrez did not handle the item.
+      </p>
+      <p class="narrative-para">
+        He contacted resort security via radio at 01:17 AM. Security Chief Camacho Reyes arrived at the pool 
+        within four minutes. Both attempted CPR on the extracted individual until emergency services arrived. 
+        The individual was pronounced dead at the scene by paramedics at 01:44 AM.
+      </p>
+    </div>
+
+    <div class="witness-quote">
+      <div class="wq-name">Aurelio Vásquez Gutiérrez — Night Pool Attendant · Initial Statement, 01:35 AM</div>
+      <p class="wq-text">
+        "I saw him in the water and I thought he was sleeping at first. Then I saw his arms were wrong — 
+        spread out. And I saw the cord on the deck. I didn't touch anything. I just called security and 
+        tried to reach him with the float."
+      </p>
+    </div>
+  </section>
+
+  <!-- SCENE CONDITION -->
+  <section class="section">
+    <div class="section-label">Scene Conditions</div>
+    <h2 class="section-title">State of the Pool Area at Discovery</h2>
+
+    <p>Security Chief Camacho Reyes documented the following conditions upon arrival at Zone B at approximately 01:21 AM:</p>
+
+    <div class="incident-timeline">
+      <div class="it-row">
+        <span class="it-time">Lighting</span>
+        <span class="it-event">Pool underwater lights active. Deck perimeter lights at 40% (overnight mode). Sufficient visibility to clearly observe the pool and surrounding deck.</span>
+      </div>
+      <div class="it-row">
+        <span class="it-time">Pool Area</span>
+        <span class="it-event"><strong>Single individual</strong> (the deceased) found face-down in the northeast section of the main pool. No other individuals present in Zone B. Pool water undisturbed aside from the body's position.</span>
+      </div>
+      <div class="it-row">
+        <span class="it-time">Equipment</span>
+        <span class="it-event">One (1) <strong>hair dryer</strong> (black, production-branded, model unidentified at time of report) and one (1) <strong>orange extension cord</strong> found on the pool deck, northeast corner. Cord disconnected from outlet. Hair dryer power switch in the ON position.</span>
+      </div>
+      <div class="it-row">
+        <span class="it-time">Electrical</span>
+        <span class="it-event">The GFCI (Ground Fault Circuit Interrupter) safety outlet behind the pool bar — the only outdoor outlet in Zone B — was found in a <strong>manually disabled state</strong>. The GFCI requires intentional physical action to bypass. Resort maintenance has confirmed this circuit was functioning correctly during a routine inspection on July 17, 2025.</span>
+      </div>
+      <div class="it-row">
+        <span class="it-time">Cameras</span>
+        <span class="it-event">Security confirmed that cameras <strong>C-7</strong> and <strong>C-8</strong>, which cover the Zone B pool deck and terrace entry, were offline. The system showed both cameras in an offline status from approximately 22:15 until approximately 01:00 AM — at which point they resumed normal operation. No recordings exist for this period.</span>
+      </div>
+      <div class="it-row">
+        <span class="it-time">Beverages</span>
+        <span class="it-event">One (1) empty glass (rocks glass, containing residue consistent with rum or whiskey) found on the pool deck's north edge, approximately 1.5 meters from the body's pool entry point. One (1) second glass, partially consumed, on the pool bar counter.</span>
+      </div>
+      <div class="it-row">
+        <span class="it-time">Physical Evidence</span>
+        <span class="it-event"><strong>Visible burn marks</strong> on the deceased's left hand and left forearm, noted by Security Chief Camacho Reyes and confirmed by paramedics. Consistent with electrical contact injury, per paramedic observation.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESORT TIMELINE -->
+  <section class="section">
+    <div class="section-label">Timeline of Resort Actions</div>
+    <h2 class="section-title">What Resort Staff Did and When</h2>
+
+    <div class="incident-timeline">
+      <div class="it-row"><span class="it-time">01:15</span><span class="it-event">Vásquez Gutiérrez discovers body in Main Pool, Zone B.</span></div>
+      <div class="it-row"><span class="it-time">01:17</span><span class="it-event">Radio call to resort security dispatch.</span></div>
+      <div class="it-row"><span class="it-time">01:21</span><span class="it-event">Security Chief Camacho Reyes arrives at Zone B.</span></div>
+      <div class="it-row"><span class="it-time">01:22</span><span class="it-event">Emergency services (066) called. Police called. Zone B declared a restricted area.</span></div>
+      <div class="it-row"><span class="it-time">01:25</span><span class="it-event">Body extracted from pool using floatation equipment. CPR initiated by Camacho Reyes and Vásquez Gutiérrez.</span></div>
+      <div class="it-row"><span class="it-time">01:29</span><span class="it-event">Municipal police officers arrive (2 units).</span></div>
+      <div class="it-row"><span class="it-time">01:33</span><span class="it-event">Emergency medical services arrive. CPR transferred to paramedics.</span></div>
+      <div class="it-row"><span class="it-time">01:40</span><span class="it-event">Victor Delgado (Executive Producer, Solara Entertainment Group) arrives at Zone B. States he was alerted by radio traffic.</span></div>
+      <div class="it-row"><span class="it-time">01:44</span><span class="it-event">Paramedics pronounce the individual deceased. Time of official death pronouncement: 01:44 AM, July 20, 2025.</span></div>
+      <div class="it-row"><span class="it-time">02:00</span><span class="it-event">FGE Quintana Roo investigator (Subinspector Estrada) arrives. Full scene control transferred to FGE.</span></div>
+      <div class="it-row"><span class="it-time">02:40</span><span class="it-event">US Consular notification filed by resort legal staff per international protocol.</span></div>
+    </div>
+  </section>
+
+  <!-- HOTEL ACTIONS TAKEN -->
+  <section class="section">
+    <div class="section-label">Actions Taken</div>
+    <h2 class="section-title">Resort Response Actions</h2>
+
+    <ul class="action-list">
+      <li class="action-item"><span class="action-num">01</span><span>Zone B (Main Pool area) sealed and declared off-limits to all personnel pending police investigation. Access restricted to law enforcement only.</span></li>
+      <li class="action-item"><span class="action-num">02</span><span>All resort surveillance footage for July 19 (from midnight) through July 20 (through 03:00 AM) preserved and made available to FGE investigators. Footage gap for cameras C-7 and C-8 (22:15–01:00) confirmed and documented.</span></li>
+      <li class="action-item"><span class="action-num">03</span><span>All production-credentialed personnel (Solara Entertainment Group cast and crew) were requested to remain in their assigned rooms and to not contact outside parties pending investigator notification.</span></li>
+      <li class="action-item"><span class="action-num">04</span><span>Resort legal counsel notified. Hotel general manager notified at 02:15 AM.</span></li>
+      <li class="action-item"><span class="action-num">05</span><span>Equipment inventory for Zone B production storage room (adjacent to the pool terrace back entrance) requested from resort facilities management. Inventory request submitted to FGE as evidence item GH-EV-001.</span></li>
+      <li class="action-item"><span class="action-num">06</span><span>Keycard access log for all electronic door entries in Zones A–D for the period July 19, 19:00 hrs through July 20, 04:00 hrs secured and submitted to FGE as evidence item GH-EV-002.</span></li>
+    </ul>
+  </section>
+
+  <!-- SIGNATURES -->
+  <section class="section" style="margin-bottom:0; padding-bottom:0; border-bottom:none;">
+    <div class="section-label">Authorization</div>
+    <h2 class="section-title">Report Authorization</h2>
+
+    <div class="signature-grid">
+      <div class="sig-box">
+        <div class="sig-name">Ernesto Camacho Reyes</div>
+        <div class="sig-title">Jefe de Seguridad — Gran Horizonte Resort &amp; Spa</div>
+        <div class="sig-date">July 20, 2025 · 09:30 hrs</div>
+      </div>
+      <div class="sig-box">
+        <div class="sig-name">Lic. Carmen Solís Paredes</div>
+        <div class="sig-title">Hotel Legal Counsel — Gran Horizonte Resort &amp; Spa</div>
+        <div class="sig-date">July 20, 2025 · 11:15 hrs</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer class="page-footer">
+  <span>Gran Horizonte Resort &amp; Spa · Security Division</span>
+  <span>FGE-QR-2025-07-0847 · INC-GH-2025-0847</span>
+  <span>T1-04 · Resort Incident Report · Tier 1</span>
+</footer>
+
+</body>
+</html>

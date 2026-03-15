@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>G2 | Player Debrief Guide | Forever Match</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --pink:#FF4D6D; --cyan:#00D4FF; --gold:#FFD700; --dark:#0a0a0f; --panel:#12121a; --border:#2a2a3a; --text:#e0e0f0; --muted:#8888aa; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--dark); color:var(--text); font-family:'Inter',sans-serif; min-height:100vh; }
+  .hero { background:linear-gradient(135deg,#050510 0%,#100520 100%); border-bottom:3px solid var(--pink); padding:60px 40px; text-align:center; }
+  .show-logo { font-family:'IBM Plex Mono',monospace; font-size:0.75rem; color:var(--muted); letter-spacing:4px; text-transform:uppercase; margin-bottom:16px; }
+  .hero-icon { font-size:3rem; margin-bottom:16px; }
+  .hero h1 { font-family:'Playfair Display',serif; font-size:3rem; font-weight:900; color:white; }
+  .hero h1 span { color:var(--pink); }
+  .hero .sub { font-size:0.9rem; color:var(--muted); margin-top:10px; font-style:italic; }
+  .container { max-width:900px; margin:0 auto; padding:40px; }
+  .congrats-box { background:linear-gradient(135deg,#0d1a0d,#0a1020); border:2px solid var(--cyan); border-radius:12px; padding:36px; text-align:center; margin-bottom:40px; }
+  .congrats-box h2 { font-family:'Playfair Display',serif; font-size:1.8rem; color:var(--cyan); margin-bottom:10px; }
+  .congrats-box p { font-size:0.9rem; color:#c0d8c0; max-width:600px; margin:0 auto; line-height:1.7; }
+  .section { margin-bottom:36px; }
+  .section-title { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--gold); border-left:4px solid var(--gold); padding-left:14px; margin-bottom:16px; }
+  p { font-size:0.9rem; line-height:1.75; color:#c8c8e0; margin-bottom:12px; }
+  .character-debrief { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px 0; }
+  .char-card { background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:18px; }
+  .char-card .char-name { font-family:'Playfair Display',serif; font-size:1.05rem; color:var(--text); margin-bottom:4px; }
+  .char-card .char-role { font-size:0.7rem; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:10px; }
+  .secret-reveal { background:#0a0a18; border-left:3px solid var(--pink); padding:10px 14px; font-size:0.82rem; color:#e0c0c0; margin-bottom:8px; line-height:1.5; border-radius:0 4px 4px 0; }
+  .secret-reveal::before { content:"🔓 Hidden Truth: "; font-weight:700; color:var(--pink); }
+  .outcome { font-size:0.8rem; color:#c0d8c0; line-height:1.5; }
+  .outcome::before { content:"➔ "; color:var(--cyan); }
+  .discussion-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin:16px 0; }
+  .disc-card { background:var(--panel); border:1px solid var(--border); border-top:2px solid var(--cyan); padding:16px; border-radius:4px; }
+  .disc-card h4 { font-family:'Playfair Display',serif; font-size:0.95rem; color:var(--text); margin-bottom:10px; }
+  .disc-card ul { list-style:none; padding:0; }
+  .disc-card ul li { font-size:0.8rem; color:#c0c0d8; padding:5px 0; border-bottom:1px solid var(--border); padding-left:14px; position:relative; line-height:1.4; }
+  .disc-card ul li::before { content:"?"; position:absolute; left:0; color:var(--cyan); font-size:0.7rem; top:7px; font-weight:700; }
+  .disc-card ul li:last-child { border-bottom:none; }
+  .theme-box { background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:24px; margin:16px 0; }
+  .theme-item { padding:12px 0; border-bottom:1px solid var(--border); }
+  .theme-item:last-child { border-bottom:none; }
+  .theme-title { font-weight:600; font-size:0.9rem; color:var(--text); margin-bottom:6px; }
+  .theme-desc { font-size:0.82rem; color:var(--muted); line-height:1.5; }
+  .rating-section { background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:24px; margin:16px 0; }
+  .rating-row { display:flex; align-items:center; gap:16px; padding:10px 0; border-bottom:1px solid var(--border); }
+  .rating-row:last-child { border-bottom:none; }
+  .rating-label { font-size:0.82rem; color:var(--text); flex:1; }
+  .stars { display:flex; gap:4px; }
+  .star { width:24px; height:24px; border:1px solid var(--border); border-radius:4px; display:flex; align-items:center; justify-content:center; font-size:0.7rem; cursor:pointer; }
+  .star.active { background:var(--gold); border-color:var(--gold); color:#000; }
+  .next-box { background:linear-gradient(135deg,#0a1020,#1a0a10); border:2px solid var(--pink); border-radius:12px; padding:30px; text-align:center; margin:30px 0; }
+  .next-box h3 { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--pink); margin-bottom:10px; }
+  .next-box p { max-width:600px; margin:0 auto; font-size:0.85rem; color:#c8c8e0; }
+  .footer { margin-top:60px; border-top:1px solid var(--border); padding-top:16px; font-size:0.7rem; color:var(--muted); display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="show-logo">Forever Match · Murder Mystery · Post-Game</div>
+  <div class="hero-icon">🔍</div>
+  <h1>Case <span>Closed.</span></h1>
+  <div class="sub">G2 — Player Debrief Guide · "The Algorithm Knows"</div>
+</div>
+
+<div class="container">
+
+  <div class="congrats-box">
+    <h2>The Investigation Is Complete</h2>
+    <p>Whether you solved the case, got close, or wandered productively in the wrong direction — you just engaged with a layered, adult mystery with six real suspects, seven independent lines of evidence, and a killer hiding in plain sight behind the most trusted smile on television. Well done, detective.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">The Full Truth — Every Character's Hidden Story</div>
+    <p>Now that the case is closed, here is what every suspect was really hiding — and what became of them.</p>
+
+    <div class="character-debrief">
+      <div class="char-card" style="border-top:3px solid var(--pink);">
+        <div class="char-name">Victor Delgado — THE KILLER</div>
+        <div class="char-role">Host · Forever Match</div>
+        <div class="secret-reveal">Real name: Víctor Manuel Soto-Guerrero. Convicted of wire fraud (2011). Bought a false identity to escape his past. Built a $2.1M career on TV. Was blackmailing Solomon — until Solomon started blackmailing back. With everything at stake, Victor chose elimination over exposure.</div>
+        <div class="outcome">Arrested July 24. Charged with first-degree homicide, extortion, and identity fraud. Faces 30+ years. Forever Match cancelled. Solara Entertainment Group filed for bankruptcy.</div>
+      </div>
+      <div class="char-card">
+        <div class="char-name">Solomon Vance — THE VICTIM</div>
+        <div class="char-role">Tech Investor · Contestant</div>
+        <div class="secret-reveal">Real regulatory complications in his past — an active SEC inquiry into offshore financial activity. Came on the show partly to disappear from scrutiny. Independently discovered EROS was fake. Tried to use that knowledge as leverage. Was outmatched.</div>
+        <div class="outcome">A technology ethics fellowship established in his name at Howard University. His family received a wrongful death settlement. His SEC matter was quietly dropped.</div>
+      </div>
+      <div class="char-card">
+        <div class="char-name">Vivian Fong — THE FRAUDSTER</div>
+        <div class="char-role">Associate Producer · Solara Entertainment</div>
+        <div class="secret-reveal">Built and maintained the fake EROS algorithm for years. Falsified match scores on producer direction. Had a USB drive with the original, damning code — the same drive that broke the case open when she surrendered it to investigators.</div>
+        <div class="outcome">Cooperated with prosecutors. Pleaded guilty to wire fraud. Received reduced sentence and permanent entertainment industry ban. Her USB drive was the most important piece of evidence in the case.</div>
+      </div>
+      <div class="char-card">
+        <div class="char-name">Dominic Wallace — THE HEARTBROKEN</div>
+        <div class="char-role">Physical Trainer · Contestant</div>
+        <div class="secret-reveal">Was recording private conversations — building a case that the show's matches were scripted. He knew his connection with Zara wasn't real and wanted proof. His public confrontation with Solomon was raw, real anger — not calculated violence.</div>
+        <div class="outcome">Cleared completely. His recordings confirmed show manipulation and contributed to the Solara lawsuit. Later seen publicly with Zara Mirza at a charity event in New York.</div>
+      </div>
+      <div class="char-card">
+        <div class="char-name">Rafael Rios — THE CLOSETED</div>
+        <div class="char-role">Architect · Contestant</div>
+        <div class="secret-reveal">Closeted gay man on a heterosexual dating show. Solomon was using that secret as low-level social coercion — nothing criminal, but deeply cruel. Rafael's fear was real. His response was confrontation, not violence. He chose to be free of it by telling his family the truth after the investigation.</div>
+        <div class="outcome">Cleared completely. Came out publicly six weeks after the case closed. His architectural firm saw a 40% increase in business following his media coverage.</div>
+      </div>
+      <div class="char-card">
+        <div class="char-name">Zara Mirza — THE WRONGED</div>
+        <div class="char-role">OB/GYN Resident · Contestant</div>
+        <div class="secret-reveal">Had a genuine 10-day intimate relationship with Solomon that she kept private. When he spread a false STI rumor about her — possibly to cover his own tracks — she was devastated. Her anger was justified and fierce. But she spent that night with Kavya, choosing grief over revenge.</div>
+        <div class="outcome">Cleared completely. Filed a separate defamation suit related to Solomon's rumor, which was settled. Completed her OB/GYN residency. Later seen with Dominic Wallace.</div>
+      </div>
+      <div class="char-card" style="border-top:3px solid var(--cyan);">
+        <div class="char-name">Kavya Nair — THE PROTECTOR</div>
+        <div class="char-role">UX Designer · Contestant</div>
+        <div class="secret-reveal">Knew about Solomon's "complicated connections" — his side relationships and some of his past. She chose to protect his reputation publicly even while privately frustrated. After his death, her first instinct was to shield him from posthumous judgment. She is the most morally complex innocent in the case.</div>
+        <div class="outcome">Cleared completely. Published a widely-read op-ed about reality TV exploitation and the show's psychological manipulation of contestants. Became a tech ethics consultant.</div>
+      </div>
+      <div class="char-card" style="border-top:3px solid #4CAF50;">
+        <div class="char-name">Rodrigo Espinoza-Vargas — THE WITNESS</div>
+        <div class="char-role">Night Security Guard · Gran Horizonte Resort</div>
+        <div class="secret-reveal">The man who discovered the body — and had seen the killer twenty minutes earlier. Didn't come forward immediately because he assumed it was authorized production work. When he understood the significance, he volunteered immediately. His testimony was the final, unbreakable link.</div>
+        <div class="outcome">Received a formal commendation from FGE-QR. Promoted to Head of Night Security at Gran Horizonte. His account was central to the prosecution's case.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Discussion Questions</div>
+    <p>These questions are designed to extend the experience into meaningful conversation about the story's themes.</p>
+    <div class="discussion-grid">
+      <div class="disc-card">
+        <h4>🔍 The Investigation</h4>
+        <ul>
+          <li>Which piece of evidence first made you suspect Victor? What changed your thinking?</li>
+          <li>Which red herring came closest to pulling you completely off track?</li>
+          <li>If you'd only had Tier 1 evidence, who would you have accused?</li>
+          <li>What single piece of evidence do you think was most damning to Victor?</li>
+        </ul>
+      </div>
+      <div class="disc-card">
+        <h4>🎭 The Characters</h4>
+        <ul>
+          <li>Which suspect did you feel the most sympathy for, and why?</li>
+          <li>Was Victor pure villain, or do you understand how he arrived at this moment?</li>
+          <li>Solomon was both victim and someone with his own moral complications. Does that change how you feel about the case?</li>
+          <li>Vivian enabled fraud for years. Is she as responsible as Victor?</li>
+        </ul>
+      </div>
+      <div class="disc-card">
+        <h4>📡 The Themes</h4>
+        <ul>
+          <li>The show promised "The Algorithm Never Lies" — but every relationship in the story is built on deception. What does that say?</li>
+          <li>How many of the characters' problems stemmed from secrets they were forced to keep? What does the story say about who gets to keep secrets?</li>
+          <li>Victor escaped his past by building a false identity. Do people deserve second chances — and at what cost?</li>
+        </ul>
+      </div>
+      <div class="disc-card">
+        <h4>🖥️ The Technology</h4>
+        <ul>
+          <li>The EROS algorithm was completely fake, but contestants believed in it. How does this reflect real AI claims in our world today?</li>
+          <li>Digital evidence — deleted texts, keycard logs, camera footage — solved this case. How do you feel about that level of surveillance in real life?</li>
+          <li>Solomon reversed-engineered an algorithm by watching its behavior. What does that tell us about claimed AI transparency?</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Themes of the Mystery</div>
+    <div class="theme-box">
+      <div class="theme-item">
+        <div class="theme-title">The Performance of Authenticity</div>
+        <div class="theme-desc">Every character on Forever Match is performing — their personality, their openness, their attraction. Victor performs integrity on screen while concealing a criminal past. The show performs science while running a scripted sham. "The Algorithm Never Lies" is the most ironic tagline possible in a story where everyone lies.</div>
+      </div>
+      <div class="theme-item">
+        <div class="theme-title">Secrets as Currency</div>
+        <div class="theme-desc">The murder doesn't begin with violence — it begins with information. Victor's leverage over Solomon. Solomon's leverage over Victor. Vivian's knowledge of the algorithm. Rafael's closeted identity. Everyone in this story is trading in secrets, and the economy eventually collapses into death.</div>
+      </div>
+      <div class="theme-item">
+        <div class="theme-title">The Myth of the Clean Slate</div>
+        <div class="theme-desc">Victor's entire life is built on the idea that you can erase who you were and become someone new. Solomon tried the same thing with his name and his reinvented identity. But the past doesn't disappear — it waits. Digital forensics, biometric traces, and one security guard who remembered a face all conspire to prove: you cannot outrun your history.</div>
+      </div>
+      <div class="theme-item">
+        <div class="theme-title">AI & Trust</div>
+        <div class="theme-desc">EROS represents the real-world tendency to trust systems labeled "AI" without interrogating their actual function. The show's cast, crew, and audience accepted a scientific claim at face value because it came wrapped in technology and authority. Solomon's instinct to verify — to actually look at the data — is presented as both his best quality and part of what got him killed.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Content Transparency Note</div>
+    <p>This mystery included the following mature themes for adult audiences. This debrief is a good moment to check in with players if any of this material resonated unexpectedly:</p>
+    <ul style="list-style:none; padding:0;">
+      <li style="padding:6px 0; font-size:0.83rem; color:#c0c0d8; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:var(--gold);">•</span>Closeted sexuality and fear of outing (Rafael)</li>
+      <li style="padding:6px 0; font-size:0.83rem; color:#c0c0d8; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:var(--gold);">•</span>Sexual defamation (false STI rumor) (Zara)</li>
+      <li style="padding:6px 0; font-size:0.83rem; color:#c0c0d8; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:var(--gold);">•</span>Extortion and coercive financial manipulation (Victor/Solomon)</li>
+      <li style="padding:6px 0; font-size:0.83rem; color:#c0c0d8; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:var(--gold);">•</span>Identity fraud and criminal history (Victor)</li>
+      <li style="padding:6px 0; font-size:0.83rem; color:#c0c0d8; padding-left:16px; position:relative;"><span style="position:absolute; left:0; color:var(--gold);">•</span>Corporate fraud and AI ethics (Vivian/EROS)</li>
+    </ul>
+    <p style="margin-top:12px;">All themes are handled with narrative purpose and are not presented gratuitously. The mystery is designed to use mature themes as character depth, not shock value.</p>
+  </div>
+
+  <div class="next-box">
+    <h3>Want More?</h3>
+    <p>This is Mystery 3A in the Forever Match collection — an Easy-difficulty entry point. The full mystery series includes harder cases, more suspects, and deeper moral complexity. Ask your GM about what's coming next in the Forever Match Murder Mystery universe.</p>
+  </div>
+
+  <div class="footer">
+    <div>G2 · PLAYER DEBRIEF GUIDE</div>
+    <div>Forever Match // Mystery 3A — The Algorithm Knows</div>
+    <div>Case FGE-QR-2025-07-0847 · Solved</div>
+  </div>
+</div>
+</body>
+</html>

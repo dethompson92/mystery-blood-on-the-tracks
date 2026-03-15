@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suspect Profile — Victor Delgado | Mystery 3A</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#FF4D6D;--cyan:#00D4FF;--gold:#FFD700;--dark:#0A0A0F;--card:#12121A;--border:#1E1E2E;--text:#E8E8F0;--muted:#888899;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;}
+  .doc-header{background:linear-gradient(135deg,#0A0A0A 0%,#1A1A0A 100%);border-bottom:3px solid var(--gold);padding:2rem;text-align:center;}
+  .show-logo{font-family:'Playfair Display',serif;font-size:1rem;color:var(--cyan);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:0.5rem;}
+  .doc-title{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:#fff;margin-bottom:0.3rem;}
+  .doc-sub{font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--muted);}
+  .tier-badge{display:inline-block;background:var(--gold);color:#000;font-family:'IBM Plex Mono',monospace;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;padding:0.3rem 0.9rem;border-radius:2px;margin-bottom:1rem;}
+  .container{max-width:900px;margin:0 auto;padding:2.5rem 2rem;}
+  .suspect-hero{background:linear-gradient(135deg,#1A1A00 0%,#0D0D0D 100%);border:2px solid var(--gold);border-radius:6px;padding:2rem;margin-bottom:2rem;display:grid;grid-template-columns:220px 1fr;gap:2rem;align-items:start;}
+  .suspect-card{background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.22);border-radius:6px;padding:1.5rem;text-align:center;}
+  .suspect-label{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--gold);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.5rem;}
+  .suspect-name{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:#fff;margin-bottom:0.3rem;}
+  .suspect-role{font-size:0.8rem;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-bottom:1rem;}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;margin-top:1rem;}
+  .stat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:3px;padding:0.4rem;text-align:center;}
+  .slabel{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;display:block;}
+  .sval{font-size:0.82rem;color:var(--text);display:block;margin-top:0.1rem;}
+  .suspect-intro h2{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);margin-bottom:0.8rem;}
+  p{color:var(--muted);font-size:0.9rem;line-height:1.75;margin-bottom:0.8rem;}
+  .section{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.8rem;margin-bottom:1.5rem;}
+  .section-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--cyan);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.8rem;}
+  .info-item{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:4px;padding:0.8rem;}
+  .info-label{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;display:block;margin-bottom:0.2rem;}
+  .info-val{font-size:0.88rem;color:var(--text);}
+  .quote-block{background:rgba(255,215,0,0.04);border-left:3px solid var(--gold);padding:1rem 1.2rem;border-radius:0 4px 4px 0;margin:1rem 0;font-style:italic;color:var(--text);font-size:0.88rem;line-height:1.7;}
+  .alibi-box{background:rgba(255,215,0,0.07);border:1px solid rgba(255,215,0,0.25);border-radius:4px;padding:1rem 1.2rem;margin:1rem 0;font-size:0.85rem;color:var(--text);line-height:1.65;}
+  .alibi-label{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:0.4rem;display:block;}
+  .timeline-entry{display:flex;gap:1rem;padding:0.8rem 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+  .timeline-entry:last-child{border-bottom:none;}
+  .t-time{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--cyan);white-space:nowrap;min-width:80px;}
+  .t-text{font-size:0.85rem;color:var(--muted);line-height:1.6;}
+  .case-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+  .meta-item{font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:var(--muted);}
+  .meta-item span{color:var(--text);}
+  @media(max-width:600px){.suspect-hero{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="doc-header">
+  <div class="show-logo">Forever Match · Mystery 3A — The Algorithm Knows</div>
+  <div class="tier-badge">TIER 1 — SUSPECT PROFILE · T1-12</div>
+  <div class="doc-title">Victor Delgado</div>
+  <div class="doc-sub">FGE-QR-2025-07-0847 · Person of Interest #6 · Show Host / Senior Production Staff</div>
+</div>
+<div class="container">
+  <div class="suspect-hero">
+    <div class="suspect-card">
+      <div class="suspect-label">Suspect #6 — SHOW HOST</div>
+      <div class="suspect-name">Victor Delgado</div>
+      <div class="suspect-role">Television Host · Stellar Content Studios</div>
+      <div class="stat-grid">
+        <div class="stat"><span class="slabel">Age</span><span class="sval">42</span></div>
+        <div class="stat"><span class="slabel">Origin</span><span class="sval">Santo Domingo / Bronx, NY</span></div>
+        <div class="stat"><span class="slabel">Ethnicity</span><span class="sval">Dominican-American</span></div>
+        <div class="stat"><span class="slabel">Role</span><span class="sval">Host, Forever Match S1</span></div>
+      </div>
+    </div>
+    <div class="suspect-intro">
+      <h2>Overview</h2>
+      <p>Victor Delgado, 42, is the on-screen host of <em>Forever Match</em> and the public face of Stellar Content Studios' most prominent production. He is a bilingual television personality with five prior show credits, employed through a production deal with Solara Entertainment Group valued publicly in the millions. On camera, he is magnetic — effortlessly charming, warm, and authoritative.</p>
+      <p>Victor is the only senior staff member — and the only non-contestant — among the six persons of interest. His access to all resort areas, including production systems, equipment storage, and administrative spaces, is the most extensive of any individual in the case. His inclusion as a person of interest is based on access and opportunity, not on any documented interpersonal conflict with the victim. <em>At least, not yet.</em></p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">👤 Professional Background & Public Record</div>
+    <div class="info-grid">
+      <div class="info-item"><span class="info-label">Full Name</span><span class="info-val">Victor Delgado</span></div>
+      <div class="info-item"><span class="info-label">Born (public bio)</span><span class="info-val">Santo Domingo; raised in the Bronx, NY</span></div>
+      <div class="info-item"><span class="info-label">Career Began</span><span class="info-val">Bilingual correspondent, early 2010s</span></div>
+      <div class="info-item"><span class="info-label">TV Credits</span><span class="info-val">5 prior productions (Pulse Network & affiliates)</span></div>
+      <div class="info-item"><span class="info-label">Production Deal</span><span class="info-val">Solara Entertainment Group (multi-year)</span></div>
+      <div class="info-item"><span class="info-label">Physical</span><span class="info-val">5'10", salt-and-pepper hair, light-brown complexion, always impeccably dressed</span></div>
+    </div>
+    <p style="margin-top:1rem;">Victor is one of the most recognizable faces on the Pulse streaming platform. His public image is cultivated — carefully maintained, warm, and entirely professional. In five seasons of prior work, no formal complaints, controversies, or legal issues appear in his public record. His reputation in the industry is positive. Network staff described him as "the most reliable host we have."</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">⚡ Relationship to Victim & Known Interactions</div>
+    <p>Victor Delgado had professional interactions with Solomon Vance as any host would with a contestant — on-camera segments, scripted challenges, and informal production check-ins. He is not known to have had any personal conflict with Solomon. When asked in his initial statement whether he had any private conversations with Solomon, Victor replied: "Not beyond what the production schedule requires."</p>
+    <p>Investigators note that Victor was present at the 9:47 PM confrontation between Dominic Wallace and Solomon. He did not intervene. A crew member notes he watched the confrontation to its end before quietly leaving the area.</p>
+    <div class="quote-block">"Solomon was a complicated personality — you could see that from Week 1. He pushed buttons. But every season has someone like that. It's good television." — Victor Delgado, initial statement</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🕐 Last Known Movements — July 18, 2025 (As Stated)</div>
+    <div class="timeline-entry"><span class="t-time">6:00 PM</span><span class="t-text">On set, overseeing Day 19 pool filming from production deck.</span></div>
+    <div class="timeline-entry"><span class="t-time">9:47 PM</span><span class="t-text">Present at pool bar area. Witnessed Dominic-Solomon confrontation. Did not intervene.</span></div>
+    <div class="timeline-entry"><span class="t-time">~10:00 PM</span><span class="t-text">CLAIMED: Went to Production Suite B (ground floor) to review footage and coordinate with camera technical staff on day's output.</span></div>
+    <div class="timeline-entry"><span class="t-time">10:00 PM–2:00 AM</span><span class="t-text">CLAIMED: Remained in Production Suite B. States he did not leave the ground floor during this window.</span></div>
+    <div class="timeline-entry"><span class="t-time">12:47 AM</span><span class="t-text">Hallway camera (G-corridor, ground floor) captures Victor entering Production Suite B from the main corridor. <em>Note: This contradicts his stated arrival time of ~10:00 PM.</em></span></div>
+    <div class="timeline-entry"><span class="t-time">1:05 AM</span><span class="t-text">Records show Victor contacted the off-site A/V technician by phone regarding the camera malfunction. (The technician confirms the call time.)</span></div>
+  </div>
+
+  <div class="alibi-box">
+    <span class="alibi-label">⚠ Alibi Discrepancy — Flagged for Investigation</span>
+    Victor claims to have been in Production Suite B from approximately 10:00 PM to 2:00 AM. The hallway corridor camera (outside Production Suite B) captures him <strong>entering</strong> the suite at <strong>12:47 AM</strong> — suggesting he was absent from his claimed location for approximately 1 hour and 47 minutes. His first contact with the off-site A/V technician occurred at 1:05 AM — not during the camera malfunction's active period (10:02 PM–1:00 AM). Investigators are examining this gap.
+  </div>
+
+  <div class="section">
+    <div class="section-title">🗣 Statement to Investigators (Initial)</div>
+    <div class="quote-block">"I was in Production Suite B from roughly ten PM. I was reviewing the day's footage and trying to coordinate on the camera issue. I know Dominic threatened Solomon — I was there. Look at him first. He's the one who said it out loud."</div>
+    <p>Victor was cooperative throughout the initial interview. He maintained eye contact, spoke clearly, and was notably the first person to mention Dominic Wallace's on-camera threat without being asked about it. Investigators characterized his demeanor as "polished" and noted that he appeared unsurprised when the camera malfunction was raised as a topic of investigation.</p>
+    <p>When asked specifically what time he entered Production Suite B, Victor stated "around ten, maybe a little after." He did not mention the hallway camera footage.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🔎 Investigator's Notes — Points to Examine</div>
+    <p>· The hallway camera at G-corridor shows Victor entering Production Suite B at 12:47 AM. If he arrived at 10:00 PM as claimed, where was he between those times? There are no camera records of his location between approximately 10:10 PM and 12:47 AM.</p>
+    <p>· Victor's keycard access log for the night of July 18–19 should be obtained and cross-referenced. What restricted areas did his production-level keycard access, and at what times?</p>
+    <p>· Victor was the first to name Dominic Wallace as a suspect. What motivated him to redirect attention? Is this consistent with someone who witnessed an obvious confrontation, or something more deliberate?</p>
+    <p>· Victor's TV career and production deal with Solara Entertainment Group: what contractual, reputational, or financial exposure does he have if the show's production is investigated or halted?</p>
+    <p>· What is the nature of Victor's A/V and production systems knowledge? Did he have the technical ability to trigger or influence the camera malfunction?</p>
+  </div>
+
+  <div class="case-meta">
+    <div class="meta-item">Case: <span>FGE-QR-2025-07-0847</span></div>
+    <div class="meta-item">Document: <span>T1-12 · Suspect Profile — Victor Delgado</span></div>
+    <div class="meta-item">Prepared by: <span>Inv. Dra. Sofía Montoya-Reyes, FGE-QR</span></div>
+    <div class="meta-item">Date: <span>July 19, 2025</span></div>
+  </div>
+</div>
+</body>
+</html>

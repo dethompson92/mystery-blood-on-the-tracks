@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S1 | Solution Reveal Guide (GM Only) | Forever Match</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --pink:#FF4D6D; --cyan:#00D4FF; --gold:#FFD700; --dark:#0a0a0f; --panel:#12121a; --border:#2a2a3a; --text:#e0e0f0; --muted:#8888aa; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--dark); color:var(--text); font-family:'Inter',sans-serif; min-height:100vh; }
+  .gm-banner { background:linear-gradient(90deg,#1a0020,#0a1020,#1a0020); border-bottom:3px solid #9B59B6; padding:20px 40px; text-align:center; }
+  .gm-banner h1 { font-family:'Playfair Display',serif; font-size:1rem; color:#9B59B6; letter-spacing:4px; text-transform:uppercase; }
+  .gm-banner p { font-size:0.75rem; color:var(--muted); margin-top:4px; }
+  .hero { background:linear-gradient(135deg,#0a0010 0%,#100020 50%,#0a0010 100%); border-bottom:3px solid var(--pink); padding:50px 40px; text-align:center; }
+  .show-title { font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--muted); letter-spacing:4px; text-transform:uppercase; margin-bottom:10px; }
+  .hero h2 { font-family:'Playfair Display',serif; font-size:3rem; font-weight:900; color:var(--pink); line-height:1.1; }
+  .hero .tagline { font-size:0.9rem; color:var(--muted); margin-top:10px; letter-spacing:2px; }
+  .container { max-width:900px; margin:0 auto; padding:40px; }
+  .section { margin-bottom:36px; }
+  .section-title { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--gold); border-left:4px solid var(--gold); padding-left:14px; margin-bottom:18px; }
+  p { font-size:0.9rem; line-height:1.75; color:#c8c8e0; margin-bottom:12px; }
+  .phase-card { background:var(--panel); border:1px solid var(--border); border-radius:8px; margin-bottom:20px; overflow:hidden; }
+  .phase-header { background:linear-gradient(90deg,#1a0a20,#0a1020); padding:16px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:14px; }
+  .phase-num { width:36px; height:36px; background:var(--pink); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.9rem; flex-shrink:0; }
+  .phase-name { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--text); }
+  .phase-time { font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--gold); margin-left:auto; }
+  .phase-body { padding:20px; }
+  .phase-body p { margin-bottom:10px; }
+  .script-box { background:#0a0018; border:1px solid #3a1a5a; border-left:4px solid #9B59B6; padding:16px 20px; border-radius:4px; margin:12px 0; font-style:italic; font-size:0.88rem; color:#d0c0e8; line-height:1.7; }
+  .script-box .script-label { font-style:normal; font-family:'IBM Plex Mono',monospace; font-size:0.65rem; color:#9B59B6; letter-spacing:3px; text-transform:uppercase; margin-bottom:8px; }
+  .tip-box { background:#0d180d; border:1px solid #2a5a2a; border-left:4px solid #4CAF50; padding:14px 18px; border-radius:4px; margin:12px 0; font-size:0.83rem; color:#b0d8b0; }
+  .tip-box::before { content:"💡 GM TIP: "; font-weight:700; color:#4CAF50; }
+  .warn-box { background:#1a1000; border:1px solid #4a3a00; border-left:4px solid var(--gold); padding:14px 18px; border-radius:4px; margin:12px 0; font-size:0.83rem; color:#e0d090; }
+  .warn-box::before { content:"⚠ GM NOTE: "; font-weight:700; color:var(--gold); }
+  .reveal-sequence { counter-reset:reveal; }
+  .reveal-step { display:flex; gap:16px; padding:14px 0; border-bottom:1px solid var(--border); }
+  .reveal-step:last-child { border-bottom:none; }
+  .reveal-step-num { width:28px; height:28px; background:#1a0a2a; border:1px solid #9B59B6; color:#9B59B6; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.78rem; font-weight:700; flex-shrink:0; }
+  .reveal-step-content { font-size:0.85rem; color:#c8c8e0; line-height:1.6; }
+  .reveal-step-content strong { color:var(--text); }
+  .suspect-verdict { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin:16px 0; }
+  .verdict-card { background:var(--panel); border:1px solid var(--border); padding:14px; border-radius:4px; }
+  .verdict-card .name { font-weight:600; font-size:0.9rem; color:var(--text); margin-bottom:4px; }
+  .verdict-card .verdict { font-family:'IBM Plex Mono',monospace; font-size:0.72rem; letter-spacing:2px; text-transform:uppercase; padding:3px 8px; border-radius:10px; display:inline-block; margin-bottom:8px; }
+  .verdict-card .verdict.innocent { background:#0d1a0d; color:#4CAF50; border:1px solid #2a5a2a; }
+  .verdict-card .verdict.killer { background:#1a0a0a; color:var(--pink); border:1px solid #5a1a1a; }
+  .verdict-card .secret { font-size:0.78rem; color:var(--muted); line-height:1.5; }
+  .footer { margin-top:60px; border-top:1px solid var(--border); padding-top:16px; font-size:0.7rem; color:var(--muted); display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; }
+</style>
+</head>
+<body>
+
+<div class="gm-banner">
+  <h1>⚠ GAME MASTER EYES ONLY — DO NOT DISTRIBUTE TO PLAYERS ⚠</h1>
+  <p>This document contains full solution spoilers. Reveal only at designated conclusion moment.</p>
+</div>
+
+<div class="hero">
+  <div class="show-title">Forever Match · Murder Mystery · Solution Package</div>
+  <h2>The Solution<br>Reveal Guide</h2>
+  <div class="tagline">S1 — GM-Only · Case FGE-QR-2025-07-0847</div>
+</div>
+
+<div class="container">
+
+  <div class="section">
+    <div class="section-title">Overview — How to Run the Reveal</div>
+    <p>The solution reveal is the emotional climax of the entire mystery experience. It should feel earned, dramatic, and satisfying — the moment where all the scattered evidence snaps into a single clear picture. This guide walks you through the reveal in five distinct phases, with scripted GM lines, pacing tips, and instructions for handling different player outcomes.</p>
+    <p>Total reveal runtime: <strong>20–35 minutes</strong> depending on player discussion. Do not rush it.</p>
+    <div class="tip-box">Set the atmosphere first. Dim lights slightly, play the Forever Match theme music softly if available. Ask all players to put down their evidence documents and gather together. Say: "The investigation is now closed. It's time to hear what the FGE has concluded."</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Pre-Reveal: Collect Accusations</div>
+    <p>Before beginning the reveal, ask each player (or team) to write down their accusation on a slip of paper:</p>
+    <ul style="list-style:none; padding:0; margin:12px 0;">
+      <li style="padding:8px 14px; border-left:3px solid var(--cyan); margin:6px 0; font-size:0.85rem; color:#c8c8e0;">• <strong>Accused:</strong> (suspect name)</li>
+      <li style="padding:8px 14px; border-left:3px solid var(--cyan); margin:6px 0; font-size:0.85rem; color:#c8c8e0;">• <strong>Murder Weapon:</strong> (what killed Solomon)</li>
+      <li style="padding:8px 14px; border-left:3px solid var(--cyan); margin:6px 0; font-size:0.85rem; color:#c8c8e0;">• <strong>Motive:</strong> (why they did it)</li>
+    </ul>
+    <p>Collect the papers. Do not reveal them yet. This creates accountability and prevents players from changing their answer once the reveal begins.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">The Five-Phase Reveal</div>
+
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-num">1</div>
+        <div class="phase-name">The Hook — Remind Them What's at Stake</div>
+        <div class="phase-time">~3 MIN</div>
+      </div>
+      <div class="phase-body">
+        <div class="script-box">
+          <div class="script-label">📢 GM Script</div>
+          "Solomon Vance came to this island looking for love. At least — that's what he told us. What he actually found was a man who knew his darkest secret. And on the night of July 18th, that man decided Solomon knew too much. The algorithm promised perfect matches. But the real match made that night was between a killer and his victim — and it was no accident."
+        </div>
+        <div class="tip-box">Pause here. Let the atmosphere land. If players try to jump in with guesses, say: "All will be revealed. Let the FGE build its case."</div>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-num">2</div>
+        <div class="phase-name">The Elimination — Clearing the Innocents</div>
+        <div class="phase-time">~8 MIN</div>
+      </div>
+      <div class="phase-body">
+        <p>Walk through each innocent suspect. Acknowledge their secrets and motives — but show why each one is cleared. This validates player investigation and honors the depth of the red herrings.</p>
+        <div class="reveal-sequence">
+          <div class="reveal-step">
+            <div class="reveal-step-num">A</div>
+            <div class="reveal-step-content"><strong>Kavya Nair</strong> — Had motive (humiliation) but cast dinner alibi confirmed by 6 witnesses and security footage. She was protecting Solomon's secret, not ending him.</div>
+          </div>
+          <div class="reveal-step">
+            <div class="reveal-step-num">B</div>
+            <div class="reveal-step-content"><strong>Dominic Wallace</strong> — Strongest emotional motive (betrayal). But solid alibi — never left cast dinner until 12:40 AM, confirmed multiple witnesses. His anger was real; his presence at the pool was impossible.</div>
+          </div>
+          <div class="reveal-step">
+            <div class="reveal-step-num">C</div>
+            <div class="reveal-step-content"><strong>Vivian Fong</strong> — Career motive was strong. But she never left Camera Control Room B. Ironically, she was trying to cover up the EROS fraud — without realizing her boss was doing something far more extreme to protect the same secret.</div>
+          </div>
+          <div class="reveal-step">
+            <div class="reveal-step-num">D</div>
+            <div class="reveal-step-content"><strong>Rafael Rios</strong> — Feared exposure of his sexuality. Significant motive. But keycard logs place him in his suite from 12:14 AM. He confronted Solomon verbally — he never considered violence.</div>
+          </div>
+          <div class="reveal-step">
+            <div class="reveal-step-num">E</div>
+            <div class="reveal-step-content"><strong>Zara Mirza</strong> — Furious about the false STI rumor. Legitimate motive. But she was with Kavya in her suite until 1 AM — cross-confirmed alibis. Her confrontation with Solomon happened days earlier.</div>
+          </div>
+        </div>
+        <div class="script-box">
+          <div class="script-label">📢 GM Script — Transition</div>
+          "Five suspects. Five people with reasons to want Solomon Vance gone. Five people who, on the night he died, were exactly where they said they were. All except one."
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-num">3</div>
+        <div class="phase-name">The Build — Victor's Evidence Cascade</div>
+        <div class="phase-time">~10 MIN</div>
+      </div>
+      <div class="phase-body">
+        <p>Present the evidence against Victor in mounting order — each piece building on the last. Pause after each item for effect.</p>
+        <div class="reveal-sequence">
+          <div class="reveal-step">
+            <div class="reveal-step-num">1</div>
+            <div class="reveal-step-content"><strong>The Double Keycard:</strong> Victor accessed Equipment Room B1 at 10:22 PM and again at 11:47 PM. Two entries. No maintenance work was scheduled. He retrieved the hair dryer and extension cord. The equipment was found with his fingerprints.</div>
+          </div>
+          <div class="reveal-step">
+            <div class="reveal-step-num">2</div>
+            <div class="reveal-step-content"><strong>The Blind Spot:</strong> Victor manipulated the resort's camera system to create a 94-camera blackout from 10:02 PM to 12:47 AM — including every camera covering the rooftop pool. He used his production access to trigger it from Camera Control Panel A — the panel that Vivian was NOT at. He created the darkness he needed.</div>
+          </div>
+          <div class="reveal-step">
+            <div class="reveal-step-num">3</div>
+            <div class="reveal-step-content"><strong>The Fingerprint:</strong> A partial left thumbprint on the extension cord plug — a gripping position consistent with insertion into a wall socket — matched Victor Delgado's elimination sample with 14 minutiae points. He was the last person to handle that cord before it killed Solomon Vance.</div>
+          </div>
+          <div class="reveal-step">
+            <div class="reveal-step-num">4</div>
+            <div class="reveal-step-content"><strong>The Deleted Messages:</strong> Forensics recovered 47 deleted SMS messages between Victor and Solomon — a six-week blackmail chain. Victor demanded $5,000, then $25,000 per week in cryptocurrency. Solomon tried to fight back. The final message, sent at 8:15 PM on July 18th: <em>"Come to the rooftop pool. Midnight. Alone. No cameras tonight — I've arranged it."</em></div>
+          </div>
+          <div class="reveal-step">
+            <div class="reveal-step-num">5</div>
+            <div class="reveal-step-content"><strong>The Eyewitness:</strong> Security guard Rodrigo Espinoza-Vargas saw Victor Delgado on the rooftop at 11:52 PM — carrying a hair dryer and an extension cord — heading toward the pool. Victor's own alibi claimed he was in Production Suite B. He was not.</div>
+          </div>
+          <div class="reveal-step">
+            <div class="reveal-step-num">6</div>
+            <div class="reveal-step-content"><strong>The Truth He Was Protecting:</strong> Victor Delgado's real name is Víctor Manuel Soto-Guerrero. In 2011, he was convicted of wire fraud and served time under a federal plea deal. He built a false identity to escape his past. Solomon Vance had discovered this — and had also discovered that the EROS algorithm was completely fake. Victor had two devastating secrets. Solomon knew both of them. Silence was the only option Victor could live with.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-num">4</div>
+        <div class="phase-name">The Accusation — Name the Killer</div>
+        <div class="phase-time">~4 MIN</div>
+      </div>
+      <div class="phase-body">
+        <div class="script-box">
+          <div class="script-label">📢 GM Script — The Accusation</div>
+          "On the night of July 18th, 2025, at approximately 12:05 AM, Victor Delgado — born Víctor Manuel Soto-Guerrero — carried a Conair 1875W hair dryer and an extension cord onto the rooftop pool deck of the Gran Horizonte Resort. He had arranged for the cameras to be blind. He had arranged for Solomon Vance to be there alone. And then he dropped that powered hair dryer into the pool. Solomon Vance was dead within seconds. Victor walked back to his suite, deleted every message on his phone, and in the morning, stood before investigators with a look of practiced grief on his face. The algorithm, he told the cameras, never lies. He was right about that. The algorithm — and the evidence — never lied. He did."
+        </div>
+        <div class="tip-box">Now reveal the player accusations. Read each one aloud. Celebrate correct answers. For partially correct answers (right person, wrong weapon), give partial credit.</div>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-num">5</div>
+        <div class="phase-name">The Epilogue — What Happened to Everyone</div>
+        <div class="phase-time">~5 MIN</div>
+      </div>
+      <div class="phase-body">
+        <div class="warn-box">Only read epilogue entries for suspects whose secrets players actually uncovered during play. This rewards thorough investigation.</div>
+        <div class="reveal-sequence">
+          <div class="reveal-step">
+            <div class="reveal-step-num">▶</div>
+            <div class="reveal-step-content"><strong>Victor Delgado</strong> — Arrested on July 24, 2025. Charged with first-degree murder, extortion, and identity fraud. The wire fraud conviction from 2011 was re-entered into the record. Faces 30+ years. Forever Match was cancelled the same day.</div>
+          </div>
+          <div class="reveal-step">
+            <div class="reveal-step-num">▶</div>
+            <div class="reveal-step-content"><strong>Vivian Fong</strong> — Cooperated fully with prosecutors. Pleaded guilty to wire fraud and misrepresentation. Received a reduced sentence and industry ban. She gave investigators the USB drive that broke the case.</div>
+          </div>
+          <div class="reveal-step">
+            <div class="reveal-step-num">▶</div>
+            <div class="reveal-step-content"><strong>Solara Entertainment Group</strong> — Filed for bankruptcy protection following the EROS fraud disclosure. Three executives indicted. The $4.2M "AI infrastructure" was sold at auction for $31,000.</div>
+          </div>
+          <div class="reveal-step">
+            <div class="reveal-step-num">▶</div>
+            <div class="reveal-step-content"><strong>Kavya, Dominic, Rafael, Zara</strong> — Each cleared completely. Their private secrets remained private. A settlement was reached with all contestants. Dominic and Zara were later seen together at a charity event in New York.</div>
+          </div>
+          <div class="reveal-step">
+            <div class="reveal-step-num">▶</div>
+            <div class="reveal-step-content"><strong>Solomon Vance</strong> — His full name, Malik Bernard Vance, was published posthumously. The SEC investigation was quietly closed. His family established a technology ethics fellowship in his name at Howard University.</div>
+          </div>
+        </div>
+        <div class="script-box">
+          <div class="script-label">📢 GM Closing Line</div>
+          "The Algorithm Never Lies. That was the show's tagline. And in the end — it was true. Every piece of digital evidence, every logged keycard entry, every recovered message — they all told the same story. The only one who lied was the man who built his entire life on a lie. Victor Delgado thought he had created the perfect crime. He forgot one thing: algorithms leave traces. And so do killers."
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Suspect Verdict Reference Card</div>
+    <div class="suspect-verdict">
+      <div class="verdict-card">
+        <div class="name">Victor Delgado</div>
+        <div class="verdict killer">KILLER — GUILTY</div>
+        <div class="secret">Real name: Víctor Manuel Soto-Guerrero. Wire fraud (2011). False identity. $2.1M at stake. Blackmailed Solomon, then killed him when the leverage reversed.</div>
+      </div>
+      <div class="verdict-card">
+        <div class="name">Kavya Nair</div>
+        <div class="verdict innocent">INNOCENT</div>
+        <div class="secret">Secret: Was protecting Solomon's reputation. Knew about his "side connections" but stayed silent out of care. Alibi: confirmed cast dinner + sister call.</div>
+      </div>
+      <div class="verdict-card">
+        <div class="name">Dominic Wallace</div>
+        <div class="verdict innocent">INNOCENT</div>
+        <div class="secret">Secret: Recording conversations; had producer confirm matches were scripted. Motive: betrayal. Alibi: unbreakable — cast dinner until 12:40 AM.</div>
+      </div>
+      <div class="verdict-card">
+        <div class="name">Vivian Fong</div>
+        <div class="verdict innocent">INNOCENT OF MURDER</div>
+        <div class="secret">Secret: Created and maintained EROS fraud. Career depended on silence. Alibi: Camera Control Room B, never left. Co-conspirator in fraud, not murder.</div>
+      </div>
+      <div class="verdict-card">
+        <div class="name">Rafael Rios</div>
+        <div class="verdict innocent">INNOCENT</div>
+        <div class="secret">Secret: Closeted. Solomon was coercing him with the threat of outing. Chose confrontation, not violence. Alibi: Suite 1104, keycard confirmed.</div>
+      </div>
+      <div class="verdict-card">
+        <div class="name">Zara Mirza</div>
+        <div class="verdict innocent">INNOCENT</div>
+        <div class="secret">Secret: Brief intimate relationship with Solomon, who spread a false STI rumor. Furious — but with Kavya until 1 AM. Grief was more present than rage by night's end.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div>S1 · SOLUTION REVEAL GUIDE · GM ONLY</div>
+    <div>Case FGE-QR-2025-07-0847 · Victor Delgado</div>
+    <div>Forever Match // Murder Mystery</div>
+  </div>
+</div>
+</body>
+</html>

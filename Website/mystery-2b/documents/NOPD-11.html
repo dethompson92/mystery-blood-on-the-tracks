@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Letters - Evidence Document</title>
+    <style>
+        body {
+            background-color: #f9f4e8;
+            color: #2b2b2b;
+            font-family: 'Georgia', serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fffef7;
+            padding: 50px;
+            border: 1px solid #d4c5a9;
+            box-shadow: 0 0 20px rgba(0,0,0,0.15);
+        }
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #8b7355;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            background-color: #e8f1f8;
+            padding: 20px;
+            margin: -50px -50px 30px -50px;
+        }
+        h1 {
+            font-size: 24px;
+            color: #2c5f8d;
+            margin: 0 0 10px 0;
+        }
+        h2 {
+            font-size: 18px;
+            color: #5c4033;
+            border-bottom: 2px solid #5c4033;
+            padding-bottom: 8px;
+            margin-top: 30px;
+        }
+        .letter {
+            background-color: #fffef7;
+            border: 2px solid #d4c5a9;
+            padding: 20px;
+            margin: 20px 0;
+            font-family: 'Brush Script MT', 'Lucida Handwriting', cursive;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+        }
+        .letter-header {
+            font-family: 'Georgia', serif;
+            font-size: 13px;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        .letter-body {
+            font-size: 15px;
+            line-height: 1.9;
+            color: #2b2b2b;
+        }
+        .signature {
+            text-align: right;
+            margin-top: 20px;
+            font-size: 18px;
+        }
+        .note {
+            font-family: 'Arial', sans-serif;
+            background-color: #e8f1f8;
+            border: 2px solid #2c5f8d;
+            padding: 15px;
+            margin: 20px 0;
+            font-size: 13px;
+            font-style: normal;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-family: 'Arial', sans-serif;
+            font-size: 13px;
+        }
+        th, td {
+            border: 1px solid #2c5f8d;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #2c5f8d;
+            color: white;
+        }
+    /* ========================================
+   PRINT-OPTIMIZED CSS
+   Saves ink, prevents cutoff, controls page breaks
+   ======================================== */
+@page {
+  margin: 0.5in !important;
+}
+@media print {
+  /* Reset to printer-friendly colors */
+  body {
+    background-color: white !important;
+    background: white !important;
+    color: black !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove all dark backgrounds and shadows */
+  .document-container,
+  .header-box,
+  table,
+  th,
+  td,
+  div,
+  section {
+    background-color: white !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-color: black !important;
+  }
+
+  /* Ensure text is always black */
+  h1, h2, h3, h4, h5, h6, p, li, td, th, span, div {
+    color: black !important;
+  }
+
+  /* Keep ONLY red stamps visible (but lighter) */
+  .stamp {
+    color: #c0392b !important;
+    border-color: #c0392b !important;
+    opacity: 0.6 !important;
+    background: transparent !important;
+  }
+
+  /* Remove colored highlight backgrounds - keep border only */
+  .evidence-highlight,
+  .sig-critical,
+  .sig-supporting,
+  .sig-context {
+    background-color: white !important;
+    background: white !important;
+    border-left-width: 3px !important;
+    border-left-color: black !important;
+  }
+
+  /* Simplify evidence tags for printing */
+  .evidence-tag {
+    background-color: white !important;
+    color: black !important;
+    border: 1px solid black !important;
+  }
+
+  /* Control page breaks - prevent awkward splits */
+  table {
+    page-break-inside: avoid;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group; /* Repeat header on each page */
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Keep related content together */
+  .evidence-highlight,
+  .signature-block,
+  .header-meta {
+    page-break-inside: avoid;
+  }
+
+  /* Remove unnecessary spacing for print */
+  .document-container {
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* Ensure tables fit on page */
+  table {
+    width: 100% !important;
+    font-size: 11pt !important;
+  }
+
+  th, td {
+    padding: 6pt !important;
+  }
+
+  /* Adjust font sizes for readability */
+  body {
+    font-size: 11pt !important;
+    line-height: 1.4 !important;
+  }
+
+  h1 {
+    font-size: 18pt !important;
+  }
+
+  h2 {
+    font-size: 14pt !important;
+  }
+
+  /* Show URLs for links (optional - comment out if not wanted) */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #666;
+  }
+
+  /* Hide elements that shouldn't print */
+  .no-print {
+    display: none !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>EVIDENCE ITEM #3</h1>
+        <div style="font-size: 16px;">Personal Correspondence - Love Letters</div>
+        <div style="font-size: 14px; margin-top: 5px;">Charlotte Devereaux ↔ Vivienne Marchand</div>
+        <div style="font-size: 14px;">1954 - 1957</div>
+    </div>
+
+    <table>
+        <tr>
+            <th>CASE NUMBER:</th>
+            <td>NOPD-COLD-2024-0847</td>
+        </tr>
+        <tr>
+            <th>EVIDENCE TAG:</th>
+            <td>EVID-2024-0847-003</td>
+        </tr>
+        <tr>
+            <th>RECOVERY DATE:</th>
+            <td>November 3, 2024</td>
+        </tr>
+        <tr>
+            <th>RECOVERY LOCATION:</th>
+            <td>Locked steamer trunk, 3847 Prytania Street, New Orleans, LA</td>
+        </tr>
+        <tr>
+            <th>DESCRIPTION:</th>
+            <td>Bundle of 47 handwritten personal letters exchanged between Charlotte Devereaux and Vivienne Marchand, tied with burgundy silk ribbon, dates ranging from August 1954 to September 1957</td>
+        </tr>
+        <tr>
+            <th>EVIDENTIAL VALUE:</th>
+            <td>Establishes romantic relationship between suspect and victim; documents motive (jealousy, abandonment); provides timeline of relationship deterioration</td>
+        </tr>
+    </table>
+
+    <div class="note">
+        <strong>ARCHIVAL NOTE:</strong> The following are transcribed excerpts from select letters representing key moments in the relationship. Full collection of 47 letters archived as physical evidence. Letters arranged chronologically from earliest (1954) to latest (1957).
+    </div>
+
+    <h2>EARLY RELATIONSHIP (1954-1955)</h2>
+
+    <div class="letter">
+        <div class="letter-header">Letter #3 - From Vivienne to Charlotte<br>Postmarked: September 15, 1954, Los Angeles, CA</div>
+        <div class="letter-body">
+            My Dearest Lottie,
+
+            I cannot stop thinking about our afternoon together yesterday. When I'm with you, I feel like I can finally breathe, like I've been holding my breath my entire life and only just now remembered how to exhale. You make me feel seen, truly seen, in a way I've never experienced before.
+
+            I know what we're doing is dangerous. I know the world would call us sinful, deviant, wrong. But when I look into your eyes, all I see is beauty and truth. How can love be wrong? How can something that feels this pure be a crime?
+
+            I'm counting the hours until I see you again on Friday. Meet me at the usual place, 8 o'clock. I'll be the woman in the burgundy dress, waiting for you.
+
+            Forever yours,<br>
+            <div class="signature">V.</div>
+        </div>
+    </div>
+
+    <div class="letter">
+        <div class="letter-header">Letter #8 - From Charlotte to Vivienne<br>Postmarked: December 28, 1955, Los Angeles, CA</div>
+        <div class="letter-body">
+            My Darling Vivienne,
+
+            Thank you for the most beautiful Christmas I've ever had. When I opened that silver locket and saw your photograph inside, I cried. I will wear it every day, close to my heart, where you belong.
+
+            The silk scarf I gave you—did you like it? I saved for weeks to buy it. When I saw it in the shop window, I thought of you immediately. Burgundy and gold, like your voice—rich, warm, precious. I hope you'll wear it and think of me.
+
+            I love you more than words can express. I know we have to hide, to pretend we're just friends when we're out in the world. But in my heart, you are my wife, my partner, my everything. One day, maybe the world will change. Maybe we'll be able to love each other openly. Until then, I'll treasure every stolen moment we have together.
+
+            All my love, always,<br>
+            <div class="signature">Lottie</div>
+        </div>
+    </div>
+
+    <h2>RELATIONSHIP TENSIONS (1957)</h2>
+
+    <div class="letter">
+        <div class="letter-header">Letter #39 - From Vivienne to Charlotte<br>Postmarked: August 8, 1957, Chicago, IL</div>
+        <div class="letter-body">
+            Lottie,
+
+            I need to be honest with you. Things have changed for me. I've received an offer—a very good offer—to perform at a club in New Orleans. The owner, Vincent DeLuca, has offered me a contract and... he's also expressed personal interest in me.
+
+            I know this will hurt you, but I have to think about my future. I'm thirty-two years old. I can't live in the shadows forever. I need security, stability, a life I can live openly. Vincent can give me that. He's a good man, successful, well-connected. He's offered me marriage.
+
+            Please don't make this harder than it already is. What we had was beautiful, but it was never sustainable. You must have known that. We both did.
+
+            I hope you can understand. I hope, in time, you can forgive me.
+
+            V.
+        </div>
+    </div>
+
+    <div class="letter">
+        <div class="letter-header">Letter #42 - From Charlotte to Vivienne<br>Postmarked: August 15, 1957, Los Angeles, CA</div>
+        <div class="letter-body">
+            Vivienne,
+
+            How can you do this? How can you throw away three years of love for a man you barely know? For money? For respectability?
+
+            I don't believe you when you say you love him. I don't believe you when you say this is what you want. I think you're scared. I think you're running away from us because it's easier than fighting for what we have.
+
+            I'm begging you—don't marry him. Come back to me. We can figure this out together. We can leave Los Angeles, go somewhere no one knows us. We can start over.
+
+            Please, Vivienne. Don't do this. I can't lose you.
+
+            Yours desperately,<br>
+            <div class="signature">Lottie</div>
+        </div>
+    </div>
+
+    <div class="letter">
+        <div class="letter-header">Letter #45 - From Vivienne to Charlotte<br>Postmarked: September 10, 1957, Chicago, IL</div>
+        <div class="letter-body">
+            Charlotte,
+
+            You need to stop calling me. You need to stop writing me. You need to accept that this is over.
+
+            I'm not running away. I'm moving forward with my life. Vincent has given me an opportunity for a real future—a home, a marriage, children perhaps. These are things we could never have together. You must see that.
+
+            I care about you. I will always care about you. But what we had was a fantasy, a beautiful dream that was never meant to last. It's time for both of us to wake up.
+
+            Please respect my decision. Don't contact me again.
+
+            Vivienne
+        </div>
+    </div>
+
+    <div class="letter">
+        <div class="letter-header">Letter #47 - From Charlotte to Vivienne (FINAL LETTER)<br>Postmarked: October 28, 1957, Los Angeles, CA<br>NOTE: This letter was never sent—found unsealed in Charlotte's trunk</div>
+        <div class="letter-body">
+            Vivienne,
+
+            I can't let you go. I won't let you go. You belong with me, not with him.
+
+            I know you're leaving for New Orleans on November 13th. I bought a ticket for the same train. We're going to talk, face to face, and you're going to remember what we had. You're going to remember that you love me.
+
+            I don't care if I have to follow you to the ends of the earth. You're mine, Vivienne. You'll always be mine.
+
+            <div class="signature">L.</div>
+        </div>
+    </div>
+
+    <div class="note">
+        <strong>FORENSIC ANALYSIS SUMMARY:</strong>
+        <ul style="margin: 10px 0; padding-left: 20px;">
+            <li>All letters authenticated via handwriting analysis (2024)</li>
+            <li>Postmarks verified as genuine</li>
+            <li>Letter #47 (final, unsent) shows premeditation—Charlotte purchased train ticket to pursue Vivienne</li>
+            <li>Emotional escalation clearly documented: devotion (1954-56) → desperation (Aug-Sept 1957) → obsession (Oct 1957)</li>
+            <li>Establishes motive: romantic rejection, fear of abandonment, jealous rage</li>
+            <li>References to burgundy/gold silk scarf (Charlotte's gift to Vivienne) confirm murder weapon origin</li>
+        </ul>
+    </div>
+
+</div>
+
+</body>
+</html>
+
+

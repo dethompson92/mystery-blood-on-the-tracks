@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>T3-02 | Recovered Deleted Text Messages | Forever Match</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pink: #FF4D6D; --cyan: #00D4FF; --gold: #FFD700;
+    --dark: #0a0a0f; --panel: #12121a; --border: #2a2a3a;
+    --text: #e0e0f0; --muted: #8888aa;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background: var(--dark); color: var(--text); font-family: 'Inter', sans-serif; min-height:100vh; }
+  .letterhead { background: linear-gradient(135deg,#0a1020 0%,#1a0a10 100%); border-bottom:3px solid var(--cyan); padding:30px 40px 20px; display:flex; align-items:center; justify-content:space-between; }
+  .agency-block h1 { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--cyan); letter-spacing:3px; text-transform:uppercase; }
+  .agency-block h2 { font-size:0.8rem; color:var(--muted); letter-spacing:2px; margin-top:4px; }
+  .doc-meta { text-align:right; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--muted); line-height:1.8; }
+  .doc-meta .case-id { color:var(--gold); font-size:0.85rem; }
+  .classification-banner { background:var(--cyan); color:#000; text-align:center; padding:8px; font-family:'IBM Plex Mono',monospace; font-size:0.75rem; font-weight:700; letter-spacing:4px; }
+  .tier-badge { background:#1e0030; border:2px solid #9B59B6; color:#9B59B6; text-align:center; padding:6px; margin:0 40px; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; letter-spacing:3px; }
+  .container { max-width:960px; margin:0 auto; padding:40px; }
+  .doc-title { font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; color:var(--cyan); border-bottom:2px solid var(--border); padding-bottom:16px; margin-bottom:8px; }
+  .doc-subtitle { font-size:0.85rem; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:30px; }
+  .meta-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:30px; }
+  .meta-card { background:var(--panel); border:1px solid var(--border); border-top:2px solid var(--pink); padding:14px; border-radius:4px; }
+  .meta-card .label { font-size:0.65rem; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:6px; }
+  .meta-card .value { font-family:'IBM Plex Mono',monospace; font-size:0.85rem; color:var(--gold); }
+  .section { margin-bottom:32px; }
+  .section-title { font-family:'Playfair Display',serif; font-size:1.25rem; color:var(--pink); border-left:4px solid var(--pink); padding-left:14px; margin-bottom:16px; }
+  p { font-size:0.9rem; line-height:1.75; color:#c8c8e0; margin-bottom:12px; }
+  .critical-box { background:#1a0a0a; border:1px solid var(--pink); border-left:4px solid var(--pink); padding:20px; border-radius:4px; margin:16px 0; }
+  .critical-box .critical-label { font-size:0.65rem; color:var(--pink); letter-spacing:3px; text-transform:uppercase; margin-bottom:8px; }
+  .critical-box p { color:#f0c0c0; }
+  .recovery-box { background:#0d1020; border:1px solid #1a3a5a; border-left:4px solid var(--cyan); padding:20px; border-radius:4px; margin:16px 0; }
+  .recovery-box .rec-label { font-size:0.65rem; color:var(--cyan); letter-spacing:3px; text-transform:uppercase; margin-bottom:8px; }
+  .phone-ui { background:#1a1a2e; border:1px solid var(--border); border-radius:16px; overflow:hidden; max-width:520px; margin:20px auto; }
+  .phone-header { background:#0f0f1a; padding:12px 20px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:12px; }
+  .phone-avatar { width:36px; height:36px; border-radius:50%; background:var(--pink); display:flex; align-items:center; justify-content:center; font-weight:700; font-size:0.85rem; color:white; }
+  .phone-contact { font-size:0.85rem; font-weight:600; color:var(--text); }
+  .phone-status { font-size:0.7rem; color:var(--muted); }
+  .phone-body { padding:20px; background:#14141e; min-height:200px; }
+  .msg-row { display:flex; margin-bottom:14px; }
+  .msg-row.sent { justify-content:flex-end; }
+  .msg-row.received { justify-content:flex-start; }
+  .msg-bubble { max-width:75%; padding:10px 14px; border-radius:16px; font-size:0.82rem; line-height:1.5; position:relative; }
+  .msg-row.sent .msg-bubble { background:#1a4a2a; border-bottom-right-radius:4px; color:#c0f0c0; }
+  .msg-row.received .msg-bubble { background:#2a1a3a; border-bottom-left-radius:4px; color:#e0c0f0; }
+  .msg-bubble.threat { background:#3a0a0a; color:#f0c0c0; border:1px solid var(--pink); }
+  .msg-time { font-size:0.65rem; color:var(--muted); margin-top:4px; text-align:right; font-family:'IBM Plex Mono',monospace; }
+  .msg-sender { font-size:0.65rem; color:var(--muted); margin-bottom:3px; text-align:left; }
+  .msg-deleted-badge { font-family:'IBM Plex Mono',monospace; font-size:0.65rem; color:#9B59B6; background:#1e0030; border:1px solid #9B59B6; padding:2px 8px; border-radius:10px; display:inline-block; margin-bottom:6px; }
+  .thread-divider { text-align:center; font-family:'IBM Plex Mono',monospace; font-size:0.65rem; color:var(--muted); padding:8px 0; border-top:1px dashed var(--border); border-bottom:1px dashed var(--border); margin:14px 0; }
+  .evidence-table { width:100%; border-collapse:collapse; margin:16px 0; font-size:0.82rem; }
+  .evidence-table th { background:#1a1a2e; color:var(--cyan); padding:10px 14px; text-align:left; font-size:0.7rem; letter-spacing:2px; text-transform:uppercase; border-bottom:1px solid var(--border); }
+  .evidence-table td { padding:10px 14px; border-bottom:1px solid var(--border); color:#c8c8e0; vertical-align:top; }
+  .finding-box { background:#0d1a0d; border:1px solid #2a5a2a; border-left:4px solid #4CAF50; padding:20px; border-radius:4px; margin:16px 0; }
+  .finding-box .finding-label { font-size:0.65rem; color:#4CAF50; letter-spacing:3px; text-transform:uppercase; margin-bottom:8px; }
+  .finding-box p { color:#c0e0c0; }
+  .footer { margin-top:60px; border-top:1px solid var(--border); padding-top:16px; font-size:0.7rem; color:var(--muted); display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; }
+</style>
+</head>
+<body>
+
+<div class="letterhead">
+  <div class="agency-block">
+    <h1>FGE — Fiscalía General del Estado de Quintana Roo</h1>
+    <h2>Unidad de Análisis Digital y Ciberforense · División de Telecomunicaciones</h2>
+  </div>
+  <div class="doc-meta">
+    <div class="case-id">FGE-QR-2025-07-0847</div>
+    <div>Informe Digital No. FGE-CYB-2025-0847-03</div>
+    <div>Emitido: 22 Julio 2025 — 10:18 hrs</div>
+    <div>Analista: Ing. Patricia Sosa-Ávila, Perito Ciberforense</div>
+  </div>
+</div>
+<div class="classification-banner">⬛ RESTRICTED — DIGITAL FORENSICS — ATTORNEY USE ONLY ⬛</div>
+<div class="tier-badge">🔒 TIER 3 EVIDENCE — ADVANCED INVESTIGATION ONLY</div>
+
+<div class="container">
+  <div class="doc-title">Recovered Deleted Text Messages</div>
+  <div class="doc-subtitle">Digital Forensics Report · Device Extraction & SMS Recovery · Case FGE-QR-2025-07-0847</div>
+
+  <div class="meta-grid">
+    <div class="meta-card">
+      <div class="label">Device (Primary)</div>
+      <div class="value">iPhone 15 Pro Max</div>
+    </div>
+    <div class="meta-card">
+      <div class="label">Owner of Device</div>
+      <div class="value">Victor Delgado</div>
+    </div>
+    <div class="meta-card">
+      <div class="label">Device Seized</div>
+      <div class="value">Jul 19 · 06:30 hrs</div>
+    </div>
+    <div class="meta-card">
+      <div class="label">Extraction Method</div>
+      <div class="value">GrayKey Full FS Extraction</div>
+    </div>
+    <div class="meta-card">
+      <div class="label">SMS Threads Analyzed</div>
+      <div class="value">287 threads total</div>
+    </div>
+    <div class="meta-card">
+      <div class="label">Deleted Messages Recovered</div>
+      <div class="value">47 messages (3 threads)</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">I. Recovery Overview</div>
+    <p>At 06:30 hrs on July 19, 2025, Investigator Dra. Sofía Montoya-Reyes (FGE-QR) executed a device seizure warrant (Auto Judicial No. 0847-D-19) against the mobile device of Victor Delgado, a person of interest in Case FGE-QR-2025-07-0847. The device — an Apple iPhone 15 Pro Max (IMEI: 35-4721-89034-3) — was secured and transported under chain of custody to the FGE Ciberforense Division.</p>
+    <p>Full-filesystem extraction was performed using GrayKey v4.1 (Grayshift LLC). The extraction yielded a complete image of 256GB internal storage. SQLite database analysis of the iOS Messages.db file revealed a deleted conversation thread between Victor Delgado (+52-998-XXX-4471) and Solomon Vance (+1-917-XXX-8832) spanning <strong>June 2 through July 18, 2025</strong> — 47 messages in total, the majority deliberately deleted from the device within the 24-hour window preceding the victim's death.</p>
+    <div class="critical-box">
+      <div class="critical-label">⚠ Critical Finding</div>
+      <p>The recovered message thread documents a systematic <strong>blackmail campaign</strong> conducted by Victor Delgado against Solomon Vance, escalating from $5,000 to $25,000 in weekly cryptocurrency payments. The final message in the thread — sent at <strong>8:15 PM on July 18, 2025</strong> — contains a direct threat and a demand that Vance meet Delgado alone at the rooftop pool at midnight. This message was sent approximately <strong>3 hours and 50 minutes before the victim's death</strong>.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">II. Full Recovered Blackmail Thread — Victor Delgado → Solomon Vance</div>
+    <div class="recovery-box">
+      <div class="rec-label">⚙ Recovery Note — All Messages Below Were Deleted from Victor Delgado's Device</div>
+      <p>Messages marked <span class="msg-deleted-badge">🗑 DELETED — RECOVERED</span> were erased from the device but reconstructed from SQLite journal/WAL files. Timestamps reflect UTC-5 (CST). Message integrity: verified (SHA-256 checksums match extraction image).</p>
+    </div>
+
+    <!-- THREAD 1: JUNE 2 -->
+    <div class="phone-ui">
+      <div class="phone-header">
+        <div class="phone-avatar">SV</div>
+        <div>
+          <div class="phone-contact">Solomon Vance · +1-917-XXX-8832</div>
+          <div class="phone-status">iMessage · Thread ID: 0847-MSG-001</div>
+        </div>
+      </div>
+      <div class="phone-body">
+        <div class="thread-divider">— June 2, 2025 · 11:42 PM CST —</div>
+        <div class="msg-row received">
+          <div>
+            <div class="msg-sender">VICTOR DELGADO</div>
+            <div class="msg-deleted-badge">🗑 DELETED — RECOVERED</div>
+            <div class="msg-bubble threat">Solomon. I know who you really are. I know about the SEC complaint in 2022. I know about the offshore account in the Caymans. I know about your real name on the Cayman filings. We should talk. — V</div>
+            <div class="msg-time">Jun 2 · 11:42 PM</div>
+          </div>
+        </div>
+        <div class="msg-row sent">
+          <div>
+            <div class="msg-sender" style="text-align:right;">SOLOMON VANCE</div>
+            <div class="msg-deleted-badge">🗑 DELETED — RECOVERED</div>
+            <div class="msg-bubble">Who is this. How did you get this number.</div>
+            <div class="msg-time">Jun 2 · 11:51 PM</div>
+          </div>
+        </div>
+        <div class="msg-row received">
+          <div>
+            <div class="msg-sender">VICTOR DELGADO</div>
+            <div class="msg-deleted-badge">🗑 DELETED — RECOVERED</div>
+            <div class="msg-bubble threat">You know exactly who this is. I've been watching you since you joined this show. Solomon Vance is a very good character. But Malik Bernard Vance is the man I'm interested in. $5,000 USDC per week to my wallet. Address to follow. Fail to pay and I make a call to your SEC case officer. Sleep well.</div>
+            <div class="msg-time">Jun 2 · 11:55 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THREAD 2: JUNE 16 -->
+    <div class="phone-ui" style="margin-top:20px;">
+      <div class="phone-header">
+        <div class="phone-avatar">SV</div>
+        <div>
+          <div class="phone-contact">Solomon Vance · +1-917-XXX-8832</div>
+          <div class="phone-status">iMessage · Continuation — June 16, 2025</div>
+        </div>
+      </div>
+      <div class="phone-body">
+        <div class="thread-divider">— June 16, 2025 · 2:07 PM CST —</div>
+        <div class="msg-row received">
+          <div>
+            <div class="msg-sender">VICTOR DELGADO</div>
+            <div class="msg-deleted-badge">🗑 DELETED — RECOVERED</div>
+            <div class="msg-bubble threat">Payment two missed. You have 48 hours. I have a journalist contact at the Times who covers financial crime. This is not a negotiation. $10,000 this week — you're behind. USDC wallet address unchanged.</div>
+            <div class="msg-time">Jun 16 · 2:07 PM</div>
+          </div>
+        </div>
+        <div class="msg-row sent">
+          <div>
+            <div class="msg-deleted-badge">🗑 DELETED — RECOVERED</div>
+            <div class="msg-bubble">Victor. I've been paying. The Cayman thing is nothing. You can't prove any of it. You'd expose yourself in the process. Stop.</div>
+            <div class="msg-time">Jun 16 · 2:44 PM</div>
+          </div>
+        </div>
+        <div class="msg-row received">
+          <div>
+            <div class="msg-sender">VICTOR DELGADO</div>
+            <div class="msg-deleted-badge">🗑 DELETED — RECOVERED</div>
+            <div class="msg-bubble threat">Expose myself? I'm a TV host with a 2.1 million dollar production contract and zero public criminal record. You're a man with a sealed SEC complaint and an identity built on paperwork. Let me be clear: I'd rather see you destroyed than collect another cent. Pay. Or I call.</div>
+            <div class="msg-time">Jun 16 · 3:01 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THREAD 3: JULY 11 — ESCALATION -->
+    <div class="phone-ui" style="margin-top:20px;">
+      <div class="phone-header">
+        <div class="phone-avatar">SV</div>
+        <div>
+          <div class="phone-contact">Solomon Vance · +1-917-XXX-8832</div>
+          <div class="phone-status">iMessage · Continuation — July 11, 2025</div>
+        </div>
+      </div>
+      <div class="phone-body">
+        <div class="thread-divider">— July 11, 2025 · 10:32 PM CST —</div>
+        <div class="msg-row sent">
+          <div>
+            <div class="msg-deleted-badge">🗑 DELETED — RECOVERED</div>
+            <div class="msg-bubble">Victor I'm done paying. I know what you're hiding too. I know about Víctor Manuel Soto-Guerrero and the wire fraud conviction. I know you bought a fake identity. We're even. This ends now.</div>
+            <div class="msg-time">Jul 11 · 10:32 PM</div>
+          </div>
+        </div>
+        <div class="msg-row received">
+          <div>
+            <div class="msg-sender">VICTOR DELGADO</div>
+            <div class="msg-deleted-badge">🗑 DELETED — RECOVERED</div>
+            <div class="msg-bubble threat">You think you know something. What I did in 2011 is buried. Your SEC investigation is ACTIVE. Very different situations. You want a war? I have the algorithm data too, Solomon. I know you've figured out EROS is fake. One call and you, me, and this whole production go down together — except you have a prison sentence waiting and I don't. Think carefully. $25,000 this week. Non-negotiable.</div>
+            <div class="msg-time">Jul 11 · 10:58 PM</div>
+          </div>
+        </div>
+        <div class="msg-row sent">
+          <div>
+            <div class="msg-deleted-badge">🗑 DELETED — RECOVERED</div>
+            <div class="msg-bubble">You are insane. This is extortion. I'm going to the police.</div>
+            <div class="msg-time">Jul 11 · 11:04 PM</div>
+          </div>
+        </div>
+        <div class="msg-row received">
+          <div>
+            <div class="msg-sender">VICTOR DELGADO</div>
+            <div class="msg-deleted-badge">🗑 DELETED — RECOVERED</div>
+            <div class="msg-bubble threat">Go to the police and tell them what exactly? That a man you're blackmailing is blackmailing you back? Good luck with that. 72 hours. $25,000. Or everything you've built disappears.</div>
+            <div class="msg-time">Jul 11 · 11:06 PM</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINAL MESSAGE: JULY 18 — THE SETUP -->
+    <div class="phone-ui" style="margin-top:20px; border:2px solid var(--pink);">
+      <div class="phone-header" style="background:#1a0a0a;">
+        <div class="phone-avatar" style="background:var(--pink);">⚠</div>
+        <div>
+          <div class="phone-contact" style="color:var(--pink);">Solomon Vance — FINAL MESSAGE</div>
+          <div class="phone-status" style="color:#f08080;">July 18, 2025 · 8:15 PM CST · CRITICAL EVIDENCE</div>
+        </div>
+      </div>
+      <div class="phone-body" style="background:#140a0a;">
+        <div class="thread-divider">— July 18, 2025 · 8:15 PM CST — NIGHT OF THE MURDER —</div>
+        <div class="msg-row received">
+          <div>
+            <div class="msg-sender">VICTOR DELGADO</div>
+            <div class="msg-deleted-badge">🗑 DELETED — RECOVERED</div>
+            <div class="msg-bubble threat" style="border:2px solid var(--pink);">Solomon. One last chance to end this quietly. Come to the rooftop pool. Midnight tonight. Alone. We settle everything face to face. No cameras up there tonight — I've arranged it. Bring the $25K transfer confirmation and we're done. Forever. If you don't come, your SEC officer gets an anonymous package tomorrow morning. Your call. — V</div>
+            <div class="msg-time">Jul 18 · 8:15 PM</div>
+          </div>
+        </div>
+        <div class="msg-row sent">
+          <div>
+            <div class="msg-deleted-badge">🗑 DELETED — RECOVERED</div>
+            <div class="msg-bubble">Fine. Midnight. But this is the last time.</div>
+            <div class="msg-time">Jul 18 · 8:47 PM</div>
+          </div>
+        </div>
+        <div style="text-align:center; margin-top:16px; padding:12px; background:#1a0a0a; border-radius:8px; border:1px dashed var(--pink);">
+          <div style="font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--pink); letter-spacing:2px;">⚠ NO FURTHER MESSAGES · SOLOMON VANCE DIED APPROX. 12:05–12:15 AM JUL 19</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">III. Thread Analysis Summary</div>
+    <table class="evidence-table">
+      <thead>
+        <tr><th>Date Range</th><th>Message Count</th><th>Key Content</th><th>Significance</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Jun 2 – Jun 15</td><td>8 messages</td><td>Initial blackmail demand; $5,000/week cryptocurrency ultimatum; threat of SEC exposure</td><td>Establishes extortion scheme, Delgado's knowledge of Vance's financial secrets</td></tr>
+        <tr><td>Jun 16 – Jul 10</td><td>22 messages</td><td>Missed payments; escalating threats; Delgado's confidence in his "clean record"</td><td>Demonstrates sustained psychological coercion; Delgado's calculated dominance</td></tr>
+        <tr><td>Jul 11 – Jul 17</td><td>14 messages</td><td>Vance threatens exposure of Delgado's identity/fraud; Delgado raises stakes to $25K; mutual blackmail stalemate</td><td>Motive escalation — Vance's knowledge of Delgado's real identity made him a lethal threat</td></tr>
+        <tr><td style="color:var(--pink); font-weight:600;">Jul 18 · 8:15 PM</td><td style="color:var(--pink); font-weight:600;">3 messages (final)</td><td style="color:var(--pink); font-weight:600;">Delgado lures Vance to rooftop pool at midnight; confirms cameras are disabled; Vance agrees to meet alone</td><td style="color:var(--pink); font-weight:600;">DIRECT EVIDENCE OF PREMEDITATION — Delgado arranged the murder location</td></tr>
+      </tbody>
+    </table>
+    <div class="finding-box">
+      <div class="finding-label">✓ Digital Forensics Conclusion</div>
+      <p>The recovered SMS thread establishes beyond reasonable doubt that Victor Delgado (a) conducted an ongoing extortion campaign against Solomon Vance, (b) was aware that Vance had discovered his false identity and could expose him, (c) deliberately arranged for the victim to be alone at the murder location at midnight on July 18, (d) confirmed the absence of camera coverage at that location — matching the independently verified camera blackout evidence — and (e) deleted all messages in an attempt to conceal this evidence. The deletion timing (within 24 hours of the murder) is consistent with post-offense evidence destruction.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">IV. Technical Recovery Details</div>
+    <p>Messages were stored in the iOS SQLite database at <code style="font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--gold);">/private/var/mobile/Library/SMS/sms.db</code>. Deletion in iOS removes the row from the main <code style="font-family:'IBM Plex Mono',monospace; font-size:0.8rem; color:var(--gold);">message</code> table but does not immediately overwrite the underlying pages. The messages were recovered from the SQLite Write-Ahead Log (WAL) file and from unallocated page space within the database file.</p>
+    <p>All recovered messages were verified using SHA-256 hash comparison against the full filesystem extraction image. No evidence of tampering or injection was found. The recovered content reflects the original messages as sent and received.</p>
+  </div>
+
+  <div class="footer">
+    <div>FGE-QR · Ciberforense · Case 2025-07-0847</div>
+    <div>T3-02 · RECOVERED DELETED TEXT MESSAGES</div>
+    <div>Forever Match // Murder Mystery · Player Evidence</div>
+  </div>
+</div>
+</body>
+</html>

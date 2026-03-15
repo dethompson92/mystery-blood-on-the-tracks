@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GM Portal | The Murder Mystery Collective</title>
+    <link rel="stylesheet" href="assets/css/global.css">
+    <style>
+        .portal-header {
+            padding: var(--spacing-lg) 0;
+            text-align: center;
+            border-bottom: 1px solid var(--color-slate);
+            margin-bottom: var(--spacing-lg);
+        }
+
+        #gm-login-container {
+            max-width: 400px;
+            margin: 0 auto;
+            text-align: center;
+            padding: var(--spacing-md);
+            background: var(--color-charcoal);
+            border: 1px solid var(--color-primary);
+            border-radius: 8px;
+        }
+
+        #gm-content-container {
+            display: none;
+        }
+
+        .password-input {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: var(--color-black);
+            border: 1px solid var(--color-slate);
+            color: var(--color-primary);
+            text-align: center;
+            letter-spacing: 2px;
+            font-family: var(--font-evidence);
+        }
+
+        .gm-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: var(--spacing-md);
+            background: var(--color-charcoal);
+        }
+
+        .gm-table th,
+        .gm-table td {
+            text-align: left;
+            padding: 1rem;
+            border-bottom: 1px solid var(--color-slate);
+        }
+
+        .gm-table th {
+            color: var(--color-primary);
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+        }
+
+        .gm-table tr:hover td {
+            background-color: rgba(22, 33, 62, 0.5);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">MMC.</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="mysteries.html" class="nav-link">Mysteries</a>
+                <a href="how-to-play.html" class="nav-link">How to Play</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="gm-portal.html" class="nav-link active">GM Portal</a>
+            </div>
+            <button class="hamburger">☰</button>
+        </div>
+        <div class="mobile-menu">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="mysteries.html" class="nav-link">Mysteries</a>
+            <a href="how-to-play.html" class="nav-link">How to Play</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="gm-portal.html" class="nav-link active">GM Portal</a>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="portal-header bg-charcoal">
+        <div class="container">
+            <h1>Game Master Portal</h1>
+            <p class="mono" style="margin: 0 auto; color: #E63946;">RESTRICTED ACCESS. UNAUTHORIZED ENTRY LOGGED.</p>
+        </div>
+    </header>
+
+    <main class="section pt-0">
+        <div class="container">
+
+            <!-- Login Container -->
+            <div id="gm-login-container">
+                <h3 class="mb-4">Enter Master Clearance Code</h3>
+                <form id="gm-login-form">
+                    <input type="password" id="gm-password" class="password-input mono" placeholder="XXXXXX-XXXX-XX"
+                        required>
+                    <p id="gm-error" style="color: #E63946; font-size: 0.85rem; margin-bottom: 1rem; height: 20px;"></p>
+                    <button type="submit" class="btn" style="width: 100%;">Access Portal</button>
+                </form>
+                <div class="mt-4 mono" style="font-size: 0.75rem; color: var(--color-gray);">
+                    By accessing this terminal, you agree to non-disclosure of critical case facts to players.
+                </div>
+            </div>
+
+            <!-- GM Content Container (Hidden by default) -->
+            <div id="gm-content-container">
+                <div
+                    style="background: rgba(45, 106, 79, 0.1); border-left: 4px solid #2D6A4F; padding: 1rem; margin-bottom: var(--spacing-md);">
+                    <h3 style="color: #2D6A4F; margin-bottom: 0.5rem;">Access Granted.</h3>
+                    <p>Welcome to the GM Command Center. Here you will find direct links to the Solution documents and
+                        passwords for all cases.</p>
+                </div>
+
+                <h2 class="mb-4" style="color: var(--color-primary);">Quick Reference Dictionary</h2>
+                <div style="overflow-x: auto;">
+                    <table class="gm-table">
+                        <thead>
+                            <tr>
+                                <th>Mystery</th>
+                                <th>Keys & Passcodes</th>
+                                <th>Solution Access</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <strong style="color: #FF4D6D;">Case 3A: The Algorithm Knows</strong><br>
+                                    <span class="mono"
+                                        style="font-size: 0.85rem; color: var(--color-gray);">FGE-QR-2025-07-0847</span>
+                                </td>
+                                <td>
+                                    <span class="mono">Tier 2:</span> <strong>FOREVER2025</strong><br>
+                                    <span class="mono">Tier 3:</span> <strong>EROS-AUDIT</strong><br>
+                                    <span class="mono">Solution:</span> <strong>VICTOR-SOTO-0847</strong>
+                                </td>
+                                <td>
+                                    <a href="mystery-3a/solution.html" class="btn btn-outline"
+                                        style="padding: 0.5rem 1rem; font-size: 0.85rem; border-color: #FF4D6D; color: #FF4D6D;">View
+                                        Solution</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong style="color: #2D6A4F;">Case 2A: The Final Prescription</strong><br>
+                                    <span class="mono" style="font-size: 0.85rem; color: var(--color-gray);">Riverside
+                                        Medical Dec 2024</span>
+                                </td>
+                                <td>
+                                    <span class="mono">Tier 2:</span> <strong>N/A</strong><br>
+                                    <span class="mono">Tier 3:</span> <strong>N/A</strong><br>
+                                    <span class="mono">Solution:</span> <strong>CLINICAL-TRIAL-VOID</strong>
+                                </td>
+                                <td>
+                                    <a href="mystery-2a/solution.html" class="btn btn-outline"
+                                        style="padding: 0.5rem 1rem; font-size: 0.85rem; border-color: #2D6A4F; color: #2D6A4F;">View
+                                        Solution</a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <strong style="color: #8B4513;">Case 2B: Blood on the Tracks</strong><br>
+                                    <span class="mono" style="font-size: 0.85rem; color: var(--color-gray);">Sunset
+                                        Limited Cold Case</span>
+                                </td>
+                                <td>
+                                    <span class="mono">Tier 2:</span> <strong>N/A</strong><br>
+                                    <span class="mono">Tier 3:</span> <strong>N/A</strong><br>
+                                    <span class="mono">Solution:</span> <strong>RED-SCARE-1957</strong>
+                                </td>
+                                <td>
+                                    <a href="mystery-2b/solution.html" class="btn btn-outline"
+                                        style="padding: 0.5rem 1rem; font-size: 0.85rem; border-color: #8B4513; color: #8B4513;">View
+                                        Solution</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer
+        style="padding: var(--spacing-md) 0; border-top: 1px solid var(--color-slate); margin-top: var(--spacing-lg); text-align: center;">
+        <div class="container">
+            <p class="mono" style="font-size: 0.85rem; color: var(--color-gray);">&copy; 2024-2025 The Murder Mystery
+                Collective. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/nav.js"></script>
+    <script src="assets/js/gm-portal.js"></script>
+</body>
+
+</html>

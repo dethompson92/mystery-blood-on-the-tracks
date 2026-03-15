@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Camera Malfunction Analysis Report | Mystery 3A</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#FF4D6D;--cyan:#00D4FF;--gold:#FFD700;--dark:#0A0A0F;--card:#12121A;--border:#1E1E2E;--text:#E8E8F0;--muted:#888899;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--dark);color:var(--text);font-family:'IBM Plex Mono',monospace;min-height:100vh;}
+  .doc-header{background:linear-gradient(135deg,#050A10 0%,#0A0510 100%);border-bottom:2px solid var(--cyan);padding:2rem;text-align:center;}
+  .show-logo{font-family:'Playfair Display',serif;font-size:1rem;color:var(--cyan);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:0.5rem;}
+  .doc-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:900;color:#fff;margin-bottom:0.3rem;}
+  .doc-sub{font-size:0.78rem;color:var(--muted);}
+  .tier-badge{display:inline-block;background:var(--cyan);color:#000;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;padding:0.3rem 0.9rem;border-radius:2px;margin-bottom:1rem;}
+  .container{max-width:960px;margin:0 auto;padding:2rem 1.5rem;}
+  .tier2-banner{background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.25);border-radius:4px;padding:0.8rem 1.2rem;font-size:0.75rem;color:var(--cyan);margin-bottom:1.5rem;text-align:center;}
+  .section{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.5rem;margin-bottom:1.5rem;}
+  .section-title{font-size:0.7rem;color:var(--gold);letter-spacing:0.15em;text-transform:uppercase;border-bottom:1px solid var(--border);padding-bottom:0.5rem;margin-bottom:1rem;}
+  p{color:var(--muted);font-size:0.85rem;line-height:1.75;margin-bottom:0.8rem;font-family:'Inter',sans-serif;}
+  table{width:100%;border-collapse:collapse;font-size:0.78rem;font-family:'Inter',sans-serif;}
+  thead th{background:rgba(0,212,255,0.1);color:var(--cyan);font-size:0.65rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.6rem 0.8rem;text-align:left;border-bottom:1px solid rgba(0,212,255,0.2);}
+  tbody td{padding:0.6rem 0.8rem;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.04);}
+  .flag-red{color:var(--red);}
+  .flag-green{color:#00FF88;}
+  .flag-yellow{color:var(--gold);}
+  .conclusion{background:rgba(255,77,109,0.07);border:1px solid rgba(255,77,109,0.25);border-radius:4px;padding:1.2rem;margin:1.5rem 0;}
+  .con-title{font-size:0.7rem;color:var(--red);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.6rem;display:block;}
+  .con-text{font-size:0.85rem;color:var(--text);line-height:1.75;font-family:'Inter',sans-serif;}
+  .case-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:0.7rem;color:var(--muted);}
+  .case-meta span{color:var(--text);}
+  .code-block{background:#050505;border:1px solid var(--border);border-radius:4px;padding:1rem;font-size:0.75rem;color:#00FF88;overflow-x:auto;line-height:1.8;margin:1rem 0;}
+</style>
+</head>
+<body>
+<div class="doc-header">
+  <div class="show-logo">Forever Match · FGE-QR Technical Analysis Division</div>
+  <div class="tier-badge">TIER 2 — INVESTIGATOR DOCUMENT · T2-04</div>
+  <div class="doc-title">North Tower Camera Malfunction — Technical Analysis</div>
+  <div class="doc-sub">FGE-QR-2025-07-0847 · Prepared by: Technical Unit, FGE-QR Cancún · July 19–20, 2025</div>
+</div>
+<div class="container">
+  <div class="tier2-banner">🔵 TIER 2 DOCUMENT — Technical analysis of the North Tower camera system failure on the night of July 18–19, 2025. This document covers the cause of the malfunction, timing, scope, and the six cameras that remained active. Players: examine what the surviving cameras did — and did not — capture.</div>
+
+  <div class="section">
+    <div class="section-title">I. Scope of Camera Failure</div>
+    <p>The Gran Horizonte Resort & Spa operates 94 cameras across the property: 67 resort security cameras (managed by Resort Security, Hikvision DS-9000 series) and 27 production cameras (managed by Stellar Content Studios, operated through an independent AV server in Room B1-AV). Both systems experienced partial failure on the night of July 18–19, 2025.</p>
+    <table>
+      <thead><tr><th>System</th><th>Total Cameras</th><th>Cameras Offline</th><th>Cameras Online</th><th>Area Affected</th></tr></thead>
+      <tbody>
+        <tr><td>Resort Security</td><td>67</td><td>22</td><td>45</td><td>North Tower (all floors), B1 corridor, external north façade</td></tr>
+        <tr><td>Production (Stellar Content)</td><td>27</td><td>16</td><td>11</td><td>Roof 15 pool, North Tower stairwells, contestant suites corridor</td></tr>
+        <tr><td><strong style="color:var(--text);">TOTAL</strong></td><td><strong style="color:var(--text);">94</strong></td><td class="flag-red"><strong>38 OFFLINE</strong></td><td class="flag-green"><strong>56 active</strong></td><td>North Tower + B1 zone entirely blind</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:1rem;">The 38 cameras that went offline are exclusively concentrated in the North Tower zone — the zone containing: the rooftop infinity pool (murder location), the production stairwell used by Victor Delgado, the North Tower contestant suites corridor, and the B1 basement corridor leading to Equipment Room B1. The south wing, lobby, restaurant, and exterior cameras remained fully operational.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">II. Technical Cause of Failure</div>
+    <p>FGE-QR technical analysts examined the AV Server (Room B1-AV) logs retrieved from the Stellar Content Studios production tablet backup and the Gran Horizonte SCADA (Building Automation System) event log.</p>
+    <div class="code-block">
+[B1-AV SERVER EVENT LOG — July 18, 2025]
+22:02:07 CST — AV_SERVER_B1: CIRCUIT_LOAD_ANOMALY detected on Node 04 (North Tower feeds)
+22:02:09 CST — AV_SERVER_B1: THERMAL_PROTECTION triggered — Node 04 load 187% nominal
+22:02:11 CST — AV_SERVER_B1: FAILSAFE_MODE engaged — Node 04 cameras suspended (38 units)
+22:02:11 CST — SYSTEM_NOTE: Manual override from device ID: PRD-TAB-001 (Production Admin Tablet)
+             — Override timestamp: 21:58:44 CST (logged before event — pre-staged)
+22:02:12 CST — Camera groups NT-A through NT-J: OFFLINE
+[END RELEVANT LOG SEGMENT]
+    </div>
+    <p>The critical finding is in line 4: the system event log records a <strong style="color:var(--red);">manual override command from device PRD-TAB-001 (the Production Admin Tablet)</strong> with a timestamp of 21:58:44 — approximately <strong style="color:var(--red);">3 minutes and 23 seconds before the malfunction event</strong>. This override was pre-staged: it was designed to trigger the failsafe when the server load reached threshold.</p>
+    <p>The production tablet (PRD-TAB-001) has admin credentials shared by two individuals: <strong style="color:var(--text);">Vivian Fong (Associate Producer)</strong> and <strong style="color:var(--text);">Victor Delgado (Show Host / Senior Production Staff)</strong>. The executive producer's credentials are remote-only and were not active during this window.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">III. Could the Malfunction Be Accidental?</div>
+    <p>Technical analysts examined whether the circuit overload could have been caused by normal production load. The North Tower camera system had been running at consistent load levels (63–71% nominal) for 18 consecutive days of production. Load records from the 30 days prior show no prior thermal protection events. The specific server node affected (Node 04) covers exclusively North Tower feeds — a deliberate or accidental overload on this node would require either a dramatic surge in camera activity (no production events were scheduled after 10 PM) or an externally introduced load spike.</p>
+    <p><strong style="color:var(--text);">Analyst Conclusion:</strong> The combination of the pre-staged override command (logged 3 minutes before the event), the specific targeting of the North Tower node, and the absence of any legitimate production reason for a 10 PM surge is inconsistent with accidental failure. This malfunction was <strong style="color:var(--red);">deliberately induced</strong>.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">IV. Six Cameras That Remained Active — Key Footage</div>
+    <table>
+      <thead><tr><th>Camera ID</th><th>Location</th><th>System</th><th>Key Captured Event</th></tr></thead>
+      <tbody>
+        <tr><td>C-14</td><td>North Tower main elevator lobby, Floor 11</td><td>Resort Security</td><td class="flag-yellow">11:02 PM — Solomon Vance enters rooftop stairwell with towel. Last confirmed sighting alive.</td></tr>
+        <tr><td>C-14</td><td>Same</td><td>Resort Security</td><td class="flag-red">Goes offline at 11:08 PM — 6 minutes after capturing Solomon.</td></tr>
+        <tr><td>G-CAM-04</td><td>G-corridor, Production Suite B entrance, ground floor</td><td>Resort Security</td><td class="flag-red">12:47 AM — Victor Delgado enters Production Suite B from corridor. Confirms he was NOT there before this time.</td></tr>
+        <tr><td>REST-CAM-02</td><td>Las Brisas Restaurant interior</td><td>Resort Security</td><td class="flag-green">11:52 PM — Dominic Wallace at table with drink. Full alibi confirmation in murder window.</td></tr>
+        <tr><td>REST-CAM-02</td><td>Las Brisas Restaurant</td><td>Resort Security</td><td class="flag-green">12:30–12:40 AM — Other dinner guests (Kavya, Zara, Rafael) captured departing.</td></tr>
+        <tr><td>CTRL-CAM-B</td><td>Camera Control Room B entrance</td><td>Resort Security</td><td class="flag-green">Continuous log — Vivian Fong did not exit between 10:08 PM and 2:33 AM. Full alibi.</td></tr>
+        <tr><td>P-04 / P-07</td><td>Pool bar area, Roof 15</td><td>Production</td><td class="flag-yellow">9:47 PM — Dominic-Solomon confrontation. Victor Delgado present and visible.</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:1rem;"><strong style="color:var(--text);">Critical Gap:</strong> Between 11:08 PM (Solomon's last confirmed sighting on C-14) and 12:47 AM (Victor's confirmed arrival at Production Suite B via G-CAM-04), there is a total camera blackout of Victor Delgado's location. No camera places him anywhere during this 99-minute window. This is the window of the murder.</p>
+  </div>
+
+  <div class="conclusion">
+    <span class="con-title">⚠ Technical Analyst Conclusion</span>
+    <span class="con-text">The North Tower camera malfunction was not accidental. It was triggered via a pre-staged command from the Production Admin Tablet (PRD-TAB-001) at 21:58:44 CST — before any malfunction symptoms appeared. The two individuals with admin access to PRD-TAB-001 are Vivian Fong and Victor Delgado. Vivian Fong's presence in Camera Control Room B from 10:08 PM is confirmed; she was responding to the malfunction, not causing it. Victor Delgado's location at 21:58:44 (the time the override was staged) is unknown. His next confirmed camera sighting is 12:47 AM. The person who staged the camera override did so knowing it would create a blind zone at a specific location and a specific time — the North Tower rooftop, where Solomon Vance would be dead within 90 minutes.</span>
+  </div>
+
+  <div class="case-meta">
+    <div>Case: <span>FGE-QR-2025-07-0847</span></div>
+    <div>Document: <span>T2-04 · Camera Malfunction Technical Analysis</span></div>
+    <div>Prepared by: <span>Technical Unit, FGE-QR Cancún</span></div>
+    <div>Date: <span>July 19–20, 2025</span></div>
+  </div>
+</div>
+</body>
+</html>

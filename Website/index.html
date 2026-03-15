@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Murder Mystery Collective | Can You Solve Them All?</title>
+    <link rel="stylesheet" href="assets/css/global.css">
+    <style>
+        .hero {
+            position: relative;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            background: linear-gradient(to bottom, rgba(10, 10, 15, 0.3) 0%, var(--color-black) 100%),
+                url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z" fill="%231a1a2e" fill-opacity="0.3" fill-rule="evenodd"/%3E%3C/svg%3E') center/cover;
+            padding: var(--spacing-sm);
+        }
+
+        .hero h1 {
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--color-gray);
+            margin: 0 auto var(--spacing-md);
+        }
+
+        .accent {
+            color: var(--color-primary);
+        }
+
+        .feature-flagship {
+            border: 2px solid var(--color-gold);
+            position: relative;
+        }
+
+        .feature-flagship::before {
+            content: "FLAGSHIP CASE";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--color-gold);
+            color: var(--color-black);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            letter-spacing: 1px;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-container">
+            <a href="index.html" class="nav-logo">MMC.</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="mysteries.html" class="nav-link">Mysteries</a>
+                <a href="how-to-play.html" class="nav-link">How to Play</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="gm-portal.html" class="nav-link">GM Portal</a>
+            </div>
+            <button class="hamburger">☰</button>
+        </div>
+        <div class="mobile-menu">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="mysteries.html" class="nav-link">Mysteries</a>
+            <a href="how-to-play.html" class="nav-link">How to Play</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="gm-portal.html" class="nav-link">GM Portal</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="container">
+            <h1>CAN YOU <span class="accent">SOLVE</span> THE MYSTERY?</h1>
+            <p>Every clue tells a story. Immersive, cinematic, interactive murder mysteries.</p>
+            <a href="mysteries.html" class="btn">View All Cases</a>
+        </div>
+    </header>
+
+    <!-- Mysteries Grid Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center mb-4">Current Cases</h2>
+            <div class="grid-3">
+                <!-- Mystery 3A -->
+                <article class="card feature-flagship" style="border-color: #FF4D6D;">
+                    <img src="mystery-3a/images/00C-rooftop-pool-crime-scene-night.png" alt="The Algorithm Knows"
+                        class="card-image"
+                        onerror="this.src='https://placehold.co/600x400/0A0A1A/FF4D6D?text=00C-rooftop-pool-crime-scene-night.png'"
+                        style="border-bottom-color: #FF4D6D">
+                    <div class="card-content">
+                        <h3 style="color: #FF4D6D">Mystery 3A: The Algorithm Knows</h3>
+                        <p class="mono mb-1" style="font-size: 0.85rem; color: #8A8A9A;">Case ID: FGE-QR-2025-07-0847
+                        </p>
+                        <p>The EROS algorithm matched him with his killer in this luxury resort tech-thriller.</p>
+                        <p><strong>Difficulty:</strong> HARD</p>
+                        <a href="mystery-3a/index.html" class="btn mt-4"
+                            style="background-color: #FF4D6D; width: 100%; text-align: center;">Investigate</a>
+                    </div>
+                </article>
+
+                <!-- Mystery 2A -->
+                <article class="card" style="border-color: #2D6A4F;">
+                    <img src="https://placehold.co/600x400/0A0F0A/2D6A4F?text=Medical+Thriller"
+                        alt="The Final Prescription" class="card-image" style="border-bottom-color: #2D6A4F;">
+                    <div class="card-content">
+                        <h3 style="color: #2D6A4F">Mystery 2A: The Final Prescription</h3>
+                        <p class="mono mb-1" style="font-size: 0.85rem; color: #8A8A9A;">Riverside Medical Research
+                            Institute</p>
+                        <p>A clinical cold, pharmaceutical horror where ethics and ambition collide fatally.</p>
+                        <p><strong>Difficulty:</strong> MEDIUM</p>
+                        <a href="mystery-2a/index.html" class="btn mt-4"
+                            style="background-color: #2D6A4F; color: #E9C46A; width: 100%; text-align: center;">Investigate</a>
+                    </div>
+                </article>
+
+                <!-- Mystery 2B -->
+                <article class="card" style="border-color: #8B4513;">
+                    <img src="https://placehold.co/600x400/0A0805/8B4513?text=Cold+Case+1957" alt="Blood on the Tracks"
+                        class="card-image" style="border-bottom-color: #8B4513;">
+                    <div class="card-content">
+                        <h3 style="color: #8B4513">Mystery 2B: Blood on the Tracks</h3>
+                        <p class="mono mb-1" style="font-size: 0.85rem; color: #8A8A9A;">Cold Case: Reopened 2024</p>
+                        <p>1957 noir. Cold War espionage and murder aboard the original Sunset Limited steam train.</p>
+                        <p><strong>Difficulty:</strong> MEDIUM</p>
+                        <a href="mystery-2b/index.html" class="btn mt-4"
+                            style="background-color: #8B4513; color: #F5DEB3; width: 100%; text-align: center;">Investigate</a>
+                    </div>
+                </article>
+
+                <!-- Mystery 2C Placeholder -->
+                <article class="card" style="border-color: #6A0DAD; opacity: 0.7;">
+                    <img src="https://placehold.co/600x400/101015/6A0DAD?text=Killer+Code" alt="Killer Code"
+                        class="card-image" style="border-bottom-color: #6A0DAD; filter: grayscale(80%);">
+                    <div class="card-content">
+                        <h3 style="color: #6A0DAD">Mystery 2C: Killer Code</h3>
+                        <p class="mono mb-1" style="font-size: 0.85rem; color: #00FF41;">Silicon Valley Start-Up</p>
+                        <p>Cyberpunk tech noir. A CEO victim and a malicious AI code.</p>
+                        <p><strong>Status:</strong> COMING SOON</p>
+                        <a href="mystery-2c/index.html" class="btn btn-outline mt-4"
+                            style="border-color: #6A0DAD; color: #6A0DAD; width: 100%; text-align: center; pointer-events: none;">Classified</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="section" style="background-color: var(--color-charcoal);">
+        <div class="container">
+            <h2 class="text-center mb-4">How It Works</h2>
+            <div class="grid-3 text-center">
+                <div>
+                    <div style="font-size: 3rem; margin-bottom: 1rem; color: var(--color-primary)">1</div>
+                    <h3 style="font-size: 1.5rem">Select a Case</h3>
+                    <p>Choose from our library of deeply researched, immersive mysteries spread across different eras
+                        and genres.</p>
+                </div>
+                <div>
+                    <div style="font-size: 3rem; margin-bottom: 1rem; color: var(--color-primary)">2</div>
+                    <h3 style="font-size: 1.5rem">Examine Evidence</h3>
+                    <p>Read physical documents, hacker logs, and witness statements. Unlock tiered evidence as you crack
+                        codes.</p>
+                </div>
+                <div>
+                    <div style="font-size: 3rem; margin-bottom: 1rem; color: var(--color-primary)">3</div>
+                    <h3 style="font-size: 1.5rem">Find the Killer</h3>
+                    <p>Cross-reference alibis, establish motive, means, and opportunity. Bring your findings to the Game
+                        Master.</p>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="how-to-play.html" class="btn btn-outline">Read The Full Guide</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer
+        style="padding: var(--spacing-md) 0; border-top: 1px solid var(--color-slate); margin-top: var(--spacing-lg); text-align: center;">
+        <div class="container">
+            <p class="mono" style="font-size: 0.85rem; color: var(--color-gray);">&copy; 2024-2025 The Murder Mystery
+                Collective. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="assets/js/nav.js"></script>
+</body>
+
+</html>

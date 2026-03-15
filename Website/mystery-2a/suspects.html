@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suspect Dossiers | The Final Prescription | MMC</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/mystery-2a.css">
+    <style>
+        .suspect-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-sm);
+        }
+
+        @media (min-width: 768px) {
+            .suspect-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body class="mystery-2a">
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-container">
+            <a href="../index.html" class="nav-logo">MMC.</a>
+            <div class="nav-links">
+                <a href="investigation.html" class="nav-link">&larr; Hub</a>
+                <a href="suspects.html" class="nav-link active">Suspects</a>
+                <a href="evidence.html" class="nav-link">Evidence Files</a>
+            </div>
+            <button class="hamburger">☰</button>
+        </div>
+    </nav>
+
+    <header class="page-header"
+        style="padding: var(--spacing-lg) 0; text-align: center; border-bottom: 1px solid var(--color-slate); margin-bottom: var(--spacing-md);">
+        <div class="container">
+            <h1>Subject Dossiers</h1>
+            <p class="mono" style="color: var(--color-gray);">Primary Persons of Interest | Riverside Medical Research
+                Institute</p>
+        </div>
+    </header>
+
+    <main class="section pt-0">
+        <div class="container">
+
+            <div class="suspect-grid">
+
+                <!-- Natasha Ivanova -->
+                <div class="dossier-card">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <img src="images/Dr_Natasha_Ivanova_Headshot.png" alt="Dr. Natasha Ivanova"
+                            class="dossier-image"
+                            onerror="this.src='https://placehold.co/150x150/101510/2D6A4F?text=Natasha'">
+                        <div style="flex: 1; min-width: 200px;">
+                            <h3 style="margin-bottom: 0;">Dr. Natasha Ivanova</h3>
+                            <p class="mono" style="font-size: 0.85rem; color: var(--color-gray);">Age 41 | Lead Clinical
+                                Researcher</p>
+
+                            <hr style="border: none; border-top: 1px solid var(--color-primary); margin: 0.5rem 0;">
+
+                            <p style="font-size: 0.9rem;"><strong>Notes:</strong> Voss's second-in-command. Denied
+                                promotion three times. Had direct access to the experimental drug locker.</p>
+                            <p style="font-size: 0.9rem;"><strong>Status:</strong> Under Investigation</p>
+
+                            <div class="mt-2">
+                                <span class="suspicion-tag">CAREER MOTIVE</span>
+                                <span class="suspicion-tag danger">DRUG ACCESS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Raymond Park -->
+                <div class="dossier-card">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <img src="images/Dr_Raymond_Park_Red_Herring_Suspect.png" alt="Dr. Raymond Park"
+                            class="dossier-image"
+                            onerror="this.src='https://placehold.co/150x150/101510/2D6A4F?text=Raymond'">
+                        <div style="flex: 1; min-width: 200px;">
+                            <h3 style="margin-bottom: 0;">Dr. Raymond Park</h3>
+                            <p class="mono" style="font-size: 0.85rem; color: var(--color-gray);">Age 55 | Head of
+                                Neurology</p>
+
+                            <hr style="border: none; border-top: 1px solid var(--color-primary); margin: 0.5rem 0;">
+
+                            <p style="font-size: 0.9rem;"><strong>Notes:</strong> Publicly clashed with Voss over
+                                funding allocation. Voss recently threatened to cut his lab's budget entirely.</p>
+                            <p style="font-size: 0.9rem;"><strong>Status:</strong> Cooperative</p>
+
+                            <div class="mt-2">
+                                <span class="suspicion-tag">FINANCIAL CONFLICT</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Amanda Foster -->
+                <div class="dossier-card">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <img src="images/Amanda_Foster_VP_Clinical_Development_With_Name.png" alt="Amanda Foster"
+                            class="dossier-image"
+                            onerror="this.src='https://placehold.co/150x150/101510/2D6A4F?text=Amanda'">
+                        <div style="flex: 1; min-width: 200px;">
+                            <h3 style="margin-bottom: 0;">Amanda Foster</h3>
+                            <p class="mono" style="font-size: 0.85rem; color: var(--color-gray);">Age 39 | VP Clinical
+                                Development</p>
+
+                            <hr style="border: none; border-top: 1px solid var(--color-primary); margin: 0.5rem 0;">
+
+                            <p style="font-size: 0.9rem;"><strong>Notes:</strong> In charge of pushing the trial data to
+                                the FDA. Rumors suggest she was pressuring Voss to hide negative side effects.</p>
+                            <p style="font-size: 0.9rem;"><strong>Status:</strong> Retained Legal Counsel</p>
+
+                            <div class="mt-2">
+                                <span class="suspicion-tag danger">CORPORATE COVER-UP</span>
+                                <span class="suspicion-tag">POOR COOPERATION</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- James Wu -->
+                <div class="dossier-card">
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <img src="images/james_wu_lab_technician.png" alt="James Wu" class="dossier-image"
+                            onerror="this.src='https://placehold.co/150x150/101510/2D6A4F?text=James'">
+                        <div style="flex: 1; min-width: 200px;">
+                            <h3 style="margin-bottom: 0;">James Wu</h3>
+                            <p class="mono" style="font-size: 0.85rem; color: var(--color-gray);">Age 28 | Senior Lab
+                                Technician</p>
+
+                            <hr style="border: none; border-top: 1px solid var(--color-primary); margin: 0.5rem 0;">
+
+                            <p style="font-size: 0.9rem;"><strong>Notes:</strong> Processed the drug batches. Discovered
+                                the body. Found with highly irregular logs showing late-night lab access.</p>
+                            <p style="font-size: 0.9rem;"><strong>Status:</strong> Under Investigation</p>
+
+                            <div class="mt-2">
+                                <span class="suspicion-tag danger">TAMPERED LOGS</span>
+                                <span class="suspicion-tag">WITNESS/FINDER</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <script src="../assets/js/nav.js"></script>
+</body>
+
+</html>

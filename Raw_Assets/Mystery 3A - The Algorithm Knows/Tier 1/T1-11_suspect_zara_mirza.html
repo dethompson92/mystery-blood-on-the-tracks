@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suspect Profile — Zara Mirza | Mystery 3A</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--red:#FF4D6D;--cyan:#00D4FF;--gold:#FFD700;--dark:#0A0A0F;--card:#12121A;--border:#1E1E2E;--text:#E8E8F0;--muted:#888899;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;}
+  .doc-header{background:linear-gradient(135deg,#050A1A 0%,#0A0518 100%);border-bottom:2px solid var(--red);padding:2rem;text-align:center;}
+  .show-logo{font-family:'Playfair Display',serif;font-size:1rem;color:var(--cyan);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:0.5rem;}
+  .doc-title{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:#fff;margin-bottom:0.3rem;}
+  .doc-sub{font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--muted);}
+  .tier-badge{display:inline-block;background:var(--red);color:#fff;font-family:'IBM Plex Mono',monospace;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;padding:0.3rem 0.9rem;border-radius:2px;margin-bottom:1rem;}
+  .container{max-width:900px;margin:0 auto;padding:2.5rem 2rem;}
+  .suspect-hero{background:linear-gradient(135deg,#0A051A 0%,#1A050A 100%);border:2px solid var(--red);border-radius:6px;padding:2rem;margin-bottom:2rem;display:grid;grid-template-columns:220px 1fr;gap:2rem;align-items:start;}
+  .suspect-card{background:rgba(255,77,109,0.06);border:1px solid rgba(255,77,109,0.22);border-radius:6px;padding:1.5rem;text-align:center;}
+  .suspect-label{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--red);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.5rem;}
+  .suspect-name{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:#fff;margin-bottom:0.3rem;}
+  .suspect-role{font-size:0.8rem;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-bottom:1rem;}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;margin-top:1rem;}
+  .stat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:3px;padding:0.4rem;text-align:center;}
+  .slabel{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;display:block;}
+  .sval{font-size:0.82rem;color:var(--text);display:block;margin-top:0.1rem;}
+  .suspect-intro h2{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);margin-bottom:0.8rem;}
+  p{color:var(--muted);font-size:0.9rem;line-height:1.75;margin-bottom:0.8rem;}
+  .section{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.8rem;margin-bottom:1.5rem;}
+  .section-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--cyan);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);}
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.8rem;}
+  .info-item{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:4px;padding:0.8rem;}
+  .info-label{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;display:block;margin-bottom:0.2rem;}
+  .info-val{font-size:0.88rem;color:var(--text);}
+  .quote-block{background:rgba(255,77,109,0.05);border-left:3px solid var(--red);padding:1rem 1.2rem;border-radius:0 4px 4px 0;margin:1rem 0;font-style:italic;color:var(--text);font-size:0.88rem;line-height:1.7;}
+  .motive-box{background:rgba(255,77,109,0.07);border:1px solid rgba(255,77,109,0.2);border-radius:6px;padding:1.2rem;margin-top:1rem;}
+  .motive-label{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--red);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:0.6rem;display:block;}
+  .motive-text{font-size:0.88rem;color:var(--text);line-height:1.7;}
+  .timeline-entry{display:flex;gap:1rem;padding:0.8rem 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+  .timeline-entry:last-child{border-bottom:none;}
+  .t-time{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--cyan);white-space:nowrap;min-width:80px;}
+  .t-text{font-size:0.85rem;color:var(--muted);line-height:1.6;}
+  .case-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+  .meta-item{font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:var(--muted);}
+  .meta-item span{color:var(--text);}
+  @media(max-width:600px){.suspect-hero{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="doc-header">
+  <div class="show-logo">Forever Match · Mystery 3A — The Algorithm Knows</div>
+  <div class="tier-badge">TIER 1 — SUSPECT PROFILE · T1-11</div>
+  <div class="doc-title">Zara Mirza</div>
+  <div class="doc-sub">FGE-QR-2025-07-0847 · Person of Interest #5 · Contestant (Assigned Match: Dominic Wallace)</div>
+</div>
+<div class="container">
+  <div class="suspect-hero">
+    <div class="suspect-card">
+      <div class="suspect-label">Suspect #5</div>
+      <div class="suspect-name">Zara Mirza</div>
+      <div class="suspect-role">Physician (OB/GYN Resident) · Contestant</div>
+      <div class="stat-grid">
+        <div class="stat"><span class="slabel">Age</span><span class="sval">30</span></div>
+        <div class="stat"><span class="slabel">Origin</span><span class="sval">Chicago, IL</span></div>
+        <div class="stat"><span class="slabel">Ethnicity</span><span class="sval">Pakistani-American</span></div>
+        <div class="stat"><span class="slabel">EROS Match</span><span class="sval">Dominic Wallace</span></div>
+      </div>
+    </div>
+    <div class="suspect-intro">
+      <h2>Overview</h2>
+      <p>Zara Mirza, 30, is a second-year OB/GYN resident at Northwestern Memorial Hospital in Chicago, currently on a six-week leave of absence for filming. She holds a medical degree from Johns Hopkins School of Medicine and is widely described by fellow contestants as "the most composed person in the house."</p>
+      <p>Zara is algorithmically matched with Dominic Wallace. She is a person of interest because of documented conflict with Solomon Vance in the week preceding his death — specifically, a confrontation following the spread of a false and medically damaging rumor attributed to Solomon.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">👤 Background & Professional Profile</div>
+    <div class="info-grid">
+      <div class="info-item"><span class="info-label">Full Name</span><span class="info-val">Zara Fareeha Mirza</span></div>
+      <div class="info-item"><span class="info-label">Born</span><span class="info-val">Chicago, Illinois</span></div>
+      <div class="info-item"><span class="info-label">Education</span><span class="info-val">Johns Hopkins School of Medicine</span></div>
+      <div class="info-item"><span class="info-label">Residency</span><span class="info-val">Northwestern Memorial Hospital — OB/GYN</span></div>
+      <div class="info-item"><span class="info-label">Year</span><span class="info-val">PGY-2 (2nd year resident)</span></div>
+      <div class="info-item"><span class="info-label">Family</span><span class="info-val">Conservative Muslim family; parents unaware of show appearance</span></div>
+    </div>
+    <p style="margin-top:1rem;">Zara took a six-week leave from her residency program to film. Multiple cast and crew members noted that she was among the most mature and socially attuned contestants. Her attending physician at Northwestern approved the leave, though with stated skepticism. Zara has described her reason for joining as "a genuine attempt to find balance in a demanding career."</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">⚡ Relationship to Victim & Documented Conflict</div>
+    <p>Zara and Solomon had a documented interaction that escalated into direct confrontation approximately five days before the murder. According to multiple crew members, a rumor began circulating among the cast that Solomon had told certain individuals that Zara had disclosed a personal health matter to him. Zara states that the information was fabricated entirely.</p>
+    <p>When the rumor reached Zara, she confronted Solomon directly. Two witnesses describe the confrontation as controlled but intense. Solomon's reported response — "Prove I said it" — left the matter unresolved.</p>
+    <p>Zara raised the incident to a production liaison, who documented it without escalation. The rumor's potential for professional damage was significant: Zara's medical career and reputation in a conservative family context were both in jeopardy if the story spread beyond the show.</p>
+    <div class="motive-box">
+      <span class="motive-label">🔍 Documented Motive (as known to investigators)</span>
+      <span class="motive-text">Defamation and professional harm. The false rumor attributed to Solomon could cause lasting damage to Zara's medical reputation. She had means (medical knowledge), motive (documented), and a known confrontation with the victim. However, she is also described as methodical and disciplined — investigators will need to weigh her behavioral profile carefully.</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🕐 Last Known Movements — July 18, 2025</div>
+    <div class="timeline-entry"><span class="t-time">6:00 PM</span><span class="t-text">Day 19 pool event, Roof 15. Present. Observed interacting primarily with Dominic Wallace and Kavya Nair.</span></div>
+    <div class="timeline-entry"><span class="t-time">9:47 PM</span><span class="t-text">Present at poolside gathering; witnesses confirm she was near the bar area. Did NOT participate in or intervene in Dominic's confrontation with Solomon — was observed moving away from the confrontation area.</span></div>
+    <div class="timeline-entry"><span class="t-time">10:35 PM</span><span class="t-text">Attending cast dinner, Las Brisas Restaurant. Confirmed present at main table.</span></div>
+    <div class="timeline-entry"><span class="t-time">12:05 AM</span><span class="t-text">Left dinner; went to Contestant Suite area, Floor 11.</span></div>
+    <div class="timeline-entry"><span class="t-time">12:10–1:00 AM</span><span class="t-text">Claims she went to Kavya Nair's suite (Room 1108) and the two talked until approximately 1:00 AM. Kavya Nair has been asked to corroborate this.</span></div>
+    <div class="timeline-entry"><span class="t-time">1:30 AM</span><span class="t-text">Received floor notification from resort security. Was in or near Room 1108.</span></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🗣 Statement to Investigators (Initial)</div>
+    <div class="quote-block">"I was at dinner until after midnight. Then I went to Kavya's room — we'd been having a rough few days for obvious reasons and we talked. I went back to my own room sometime around one. I didn't see Solomon after the pool event. What he said about me was a lie, and I told him that. But I wouldn't hurt someone over words. I'm a doctor."</div>
+    <p>Zara's statement is measured and notably precise. She referenced the rumor unprompted, which investigators noted could indicate either transparency or pre-rehearsal. She did not express grief about Solomon's death but did not appear indifferent either. She answered all questions and offered Kavya as a corroborating witness.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">🔎 Investigator's Notes — Points to Examine</div>
+    <p>· Corroborate Zara's alibi with Kavya Nair — are both accounts internally consistent, and do their timelines fully match?</p>
+    <p>· What specifically did Solomon say — and to whom — that constituted the "false rumor"? Who were the witnesses who heard it?</p>
+    <p>· Zara left dinner at 12:05 AM. The estimated murder window is 12:05–12:15 AM. How long does it take to walk from Las Brisas to the North Tower rooftop (Floor 15)?</p>
+    <p>· Zara's medical background: does knowledge of cardiac physiology or electrical injury patterns add any relevance to the method of murder?</p>
+    <p>· The connection between Zara and Solomon prior to the rumor incident — what was the nature of their interactions in Weeks 1 and 2?</p>
+  </div>
+
+  <div class="case-meta">
+    <div class="meta-item">Case: <span>FGE-QR-2025-07-0847</span></div>
+    <div class="meta-item">Document: <span>T1-11 · Suspect Profile — Zara Mirza</span></div>
+    <div class="meta-item">Prepared by: <span>Inv. Dra. Sofía Montoya-Reyes, FGE-QR</span></div>
+    <div class="meta-item">Date: <span>July 19, 2025</span></div>
+  </div>
+</div>
+</body>
+</html>

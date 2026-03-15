@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suspect Profile — Kavya Nair | Mystery 3A</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --red:#FF4D6D; --cyan:#00D4FF; --gold:#FFD700; --dark:#0A0A0F; --card:#12121A; --border:#1E1E2E; --text:#E8E8F0; --muted:#888899; }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;min-height:100vh;}
+  .doc-header{background:linear-gradient(135deg,#0A0A1F 0%,#1A0A10 100%);border-bottom:2px solid var(--cyan);padding:2rem;text-align:center;}
+  .show-logo{font-family:'Playfair Display',serif;font-size:1rem;color:var(--cyan);letter-spacing:0.3em;text-transform:uppercase;margin-bottom:0.5rem;}
+  .doc-title{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:900;color:#fff;margin-bottom:0.3rem;}
+  .doc-sub{font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--muted);letter-spacing:0.1em;}
+  .tier-badge{display:inline-block;background:var(--cyan);color:#000;font-family:'IBM Plex Mono',monospace;font-size:0.7rem;font-weight:700;letter-spacing:0.15em;padding:0.3rem 0.9rem;border-radius:2px;margin-bottom:1rem;}
+  .container{max-width:900px;margin:0 auto;padding:2.5rem 2rem;}
+  .suspect-hero{background:linear-gradient(135deg,#050520 0%,#0D0D1F 100%);border:2px solid var(--cyan);border-radius:6px;padding:2rem;margin-bottom:2rem;display:grid;grid-template-columns:220px 1fr;gap:2rem;align-items:start;}
+  .suspect-card{background:rgba(0,212,255,0.05);border:1px solid rgba(0,212,255,0.2);border-radius:6px;padding:1.5rem;text-align:center;}
+  .suspect-label{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--cyan);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:0.5rem;}
+  .suspect-name{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:900;color:#fff;margin-bottom:0.3rem;}
+  .suspect-role{font-size:0.8rem;color:var(--muted);font-family:'IBM Plex Mono',monospace;margin-bottom:1rem;}
+  .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:0.4rem;margin-top:1rem;}
+  .stat{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:3px;padding:0.4rem;text-align:center;}
+  .slabel{font-family:'IBM Plex Mono',monospace;font-size:0.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;display:block;}
+  .sval{font-size:0.82rem;color:var(--text);display:block;margin-top:0.1rem;}
+  .suspect-intro h2{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold);margin-bottom:0.8rem;}
+  p{color:var(--muted);font-size:0.9rem;line-height:1.75;margin-bottom:0.8rem;}
+  .section{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1.8rem;margin-bottom:1.5rem;}
+  .section-title{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--cyan);margin-bottom:1.2rem;padding-bottom:0.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:0.5rem;}
+  .info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:0.8rem;}
+  .info-item{background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:4px;padding:0.8rem;}
+  .info-label{font-family:'IBM Plex Mono',monospace;font-size:0.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;display:block;margin-bottom:0.2rem;}
+  .info-val{font-size:0.88rem;color:var(--text);}
+  .quote-block{background:rgba(0,212,255,0.05);border-left:3px solid var(--cyan);padding:1rem 1.2rem;border-radius:0 4px 4px 0;margin:1rem 0;font-style:italic;color:var(--text);font-size:0.88rem;line-height:1.7;}
+  .motive-box{background:rgba(255,215,0,0.06);border:1px solid rgba(255,215,0,0.25);border-radius:6px;padding:1.2rem;margin-top:1rem;}
+  .motive-label{font-family:'IBM Plex Mono',monospace;font-size:0.65rem;color:var(--gold);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:0.6rem;display:block;}
+  .motive-text{font-size:0.88rem;color:var(--text);line-height:1.7;}
+  .timeline-entry{display:flex;gap:1rem;padding:0.8rem 0;border-bottom:1px solid rgba(255,255,255,0.05);}
+  .timeline-entry:last-child{border-bottom:none;}
+  .t-time{font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--cyan);white-space:nowrap;min-width:80px;}
+  .t-text{font-size:0.85rem;color:var(--muted);line-height:1.6;}
+  .case-meta{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--border);}
+  .meta-item{font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:var(--muted);}
+  .meta-item span{color:var(--text);}
+  .investigation-note{background:rgba(255,77,109,0.07);border:1px solid rgba(255,77,109,0.2);border-radius:4px;padding:0.8rem 1.1rem;font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--red);line-height:1.6;margin-bottom:1.5rem;}
+  @media(max-width:600px){.suspect-hero{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="doc-header">
+  <div class="show-logo">Forever Match · Mystery 3A — The Algorithm Knows</div>
+  <div class="tier-badge">TIER 1 — SUSPECT PROFILE · T1-07</div>
+  <div class="doc-title">Kavya Nair</div>
+  <div class="doc-sub">FGE-QR-2025-07-0847 · Person of Interest #1 · Contestant</div>
+</div>
+<div class="container">
+  <div class="investigation-note">⚠ INVESTIGATION STATUS: Person of interest. Voluntary cooperation. Not charged. This document reflects information as known to investigators at the opening of the case. Players should treat all information as starting context — not conclusion.</div>
+
+  <div class="suspect-hero">
+    <div class="suspect-card">
+      <div class="suspect-label">Suspect #1</div>
+      <div class="suspect-name">Kavya Nair</div>
+      <div class="suspect-role">UX Designer · Contestant</div>
+      <div class="stat-grid">
+        <div class="stat"><span class="slabel">Age</span><span class="sval">29</span></div>
+        <div class="stat"><span class="slabel">Origin</span><span class="sval">San Jose, CA</span></div>
+        <div class="stat"><span class="slabel">Ethnicity</span><span class="sval">Indian-American</span></div>
+        <div class="stat"><span class="slabel">EROS Score</span><span class="sval">94.7% with victim</span></div>
+      </div>
+    </div>
+    <div class="suspect-intro">
+      <h2>Overview</h2>
+      <p>Kavya Nair, 29, is a senior UX Designer at a Bay Area technology startup based in San Jose, California. A UC Berkeley graduate with a degree in Cognitive Science & Design, she was assigned the highest algorithmic compatibility score of the season with Solomon Vance — 94.7% — making her his official "Forever Match" under the EROS system.</p>
+      <p>In the days preceding Solomon's death, Kavya experienced a highly public humiliation when Solomon rejected their assigned connection on camera, calling the match "a mistake." The clip became widely shared on social media. She is considered a person of interest due to her close proximity to the victim, documented emotional conflict, and the intensity of the public rejection she endured.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span>👤</span> Background & Personal Profile</div>
+    <div class="info-grid">
+      <div class="info-item"><span class="info-label">Full Name</span><span class="info-val">Kavya Priya Nair</span></div>
+      <div class="info-item"><span class="info-label">Hometown</span><span class="info-val">San Jose, CA</span></div>
+      <div class="info-item"><span class="info-label">Education</span><span class="info-val">UC Berkeley, Cognitive Sci & Design</span></div>
+      <div class="info-item"><span class="info-label">Employer</span><span class="info-val">Arcion Labs (Bay Area startup)</span></div>
+      <div class="info-item"><span class="info-label">Family</span><span class="info-val">Parents: first-gen Indian immigrants; San Jose</span></div>
+      <div class="info-item"><span class="info-label">Show Application</span><span class="info-val">March 2025 — genuine connection + family pressure</span></div>
+    </div>
+    <p style="margin-top:1rem;">Kavya's family background includes traditional marriage expectations from her first-generation immigrant parents. She applied to <em>Forever Match</em> with genuine intent — both to find a connection and to demonstrate to her family that she was actively engaging in the process. Colleagues on the show describe her as warm, self-aware, and initially enthusiastic about the EROS matching system.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span>⚡</span> Relationship to Victim & Documented Conflict</div>
+    <p>Kavya was assigned to Solomon Vance as his primary match under the EROS compatibility algorithm at a score of 94.7% — the highest of the season. Initially, she invested emotionally in the pairing.</p>
+    <p>On Day 12 of filming, during a filmed "compatibility challenge," Solomon publicly declared that the algorithm "made a mistake" and that he felt no romantic interest in Kavya. The declaration was made in front of other contestants and two active cameras. The clip was clipped and shared on social media before the episode formally aired, creating public exposure for Kavya's rejection on a national scale.</p>
+    <div class="quote-block">"I trusted the number. I trusted 94.7%. And he made that number a joke in front of everyone." — Kavya Nair, informal statement to production liaison, Day 13</div>
+    <div class="motive-box">
+      <span class="motive-label">🔍 Documented Motive (as known to investigators)</span>
+      <span class="motive-text">Public humiliation. Emotional betrayal. Kavya believed in the EROS algorithm's validity. Solomon's deliberate public rejection weaponized that belief. Investigators note that the emotional wound is compounded by the fact that the rejection became viral content — it did not stay within the confines of the show.</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span>🕐</span> Last Known Movements — July 18, 2025</div>
+    <div class="timeline-entry"><span class="t-time">6:00 PM</span><span class="t-text">Day 19 Compatibility Pool Party, Roof 15. All contestants present.</span></div>
+    <div class="timeline-entry"><span class="t-time">9:00 PM</span><span class="t-text">Present at poolside informal gathering. Solomon present; second public comment about the algorithm directed at Kavya documented.</span></div>
+    <div class="timeline-entry"><span class="t-time">10:35 PM</span><span class="t-text">Attending cast dinner, Las Brisas Restaurant (ground floor).</span></div>
+    <div class="timeline-entry"><span class="t-time">12:20 AM</span><span class="t-text">Left Las Brisas dinner early. Returned to contestant suite, Room 1108.</span></div>
+    <div class="timeline-entry"><span class="t-time">12:31 AM</span><span class="t-text">Phone records indicate outgoing call placed from Room 1108 to a family member in San Jose, CA. Duration: approximately 28 minutes.</span></div>
+    <div class="timeline-entry"><span class="t-time">1:30 AM</span><span class="t-text">FGE-QR investigators request all persons remain in rooms. Kavya was in Room 1108.</span></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span>🗣</span> Statement to Investigators (Initial)</div>
+    <div class="quote-block">"I was at dinner with everyone. I left early because I was tired and emotional — honestly, being around people who'd watched that clip of Solomon rejecting me was hard. I went to my room and called my sister. I didn't see Solomon after the pool event. I had nothing to do with what happened to him."</div>
+    <p>Kavya stated she last saw Solomon at approximately 9:15 PM during the poolside gathering. She said she did not attend the formal Roof 15 pool area after 9:30 PM. She declined to comment further without a legal advisor present. Investigators have noted that Kavya's initial statement is internally consistent.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title"><span>🔎</span> Investigator's Notes — Points to Examine</div>
+    <p>Investigators have flagged the following for further inquiry:</p>
+    <p>· Was Kavya aware of any of Solomon's other activities on the show beyond the rejection incident?</p>
+    <p>· Phone records confirm her stated call at 12:31 AM — but what is her verified location between 12:20 AM and 12:31 AM?</p>
+    <p>· Did Kavya have access to or knowledge of the resort's restricted equipment storage areas?</p>
+    <p>· Were there any communications between Kavya and Solomon (text, in-person) after Day 12?</p>
+  </div>
+
+  <div class="case-meta">
+    <div class="meta-item">Case: <span>FGE-QR-2025-07-0847</span></div>
+    <div class="meta-item">Document: <span>T1-07 · Suspect Profile — Kavya Nair</span></div>
+    <div class="meta-item">Prepared by: <span>Inv. Dra. Sofía Montoya-Reyes, FGE-QR</span></div>
+    <div class="meta-item">Date: <span>July 19, 2025</span></div>
+  </div>
+</div>
+</body>
+</html>

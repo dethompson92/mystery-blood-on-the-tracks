@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solution | Blood on the Tracks | MMC</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/mystery-2b.css">
+</head>
+
+<body class="mystery-2b">
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-container">
+            <a href="../index.html" class="nav-logo">MMC.</a>
+            <div class="nav-links">
+                <a href="investigation.html" class="nav-link">&larr; Hub</a>
+                <a href="../gm-portal.html" class="nav-link">GM Portal</a>
+            </div>
+            <button class="hamburger">☰</button>
+        </div>
+    </nav>
+
+    <header class="page-header"
+        style="padding: var(--spacing-lg) 0; text-align: center; border-bottom: 2px double var(--color-primary); margin-bottom: var(--spacing-sm);">
+        <div class="container">
+            <h1 style="color: var(--color-secondary);">Case Solution</h1>
+            <p class="mono" style="color: var(--color-secondary);">NOPD-57-1144 - GM ONLY</p>
+        </div>
+    </header>
+
+    <main class="section pt-0">
+        <div class="container" style="max-width: 800px;">
+
+            <div id="solution-lock"
+                style="padding: var(--spacing-md); background: rgba(192, 57, 43, 0.1); border: 2px dashed var(--color-secondary); text-align: center; margin-bottom: 4rem;">
+                <h3 style="color: var(--color-secondary); margin-bottom: 1rem;">Sealed FBI Archives</h3>
+                <p style="color: var(--color-tertiary);">Access requires the final truth decrypted from the timeline.
+                </p>
+                <form id="solution-auth-form" style="max-width: 300px; margin: 2rem auto 0;">
+                    <input type="text" id="solution-password" class="form-input mono mb-2"
+                        style="text-align: center; background: var(--color-tertiary); color: #000;"
+                        placeholder="XXXXXX-XXXX-XXXX" required>
+                    <p id="solution-error" class="mono"
+                        style="color: var(--color-secondary); font-size: 0.85rem; height: 1.2rem; margin-bottom: 0.5rem;">
+                    </p>
+                    <button type="submit" class="btn"
+                        style="width: 100%; background: var(--color-secondary); color: #fff;">Break Seal</button>
+                </form>
+            </div>
+
+            <div id="solution-content" style="display: none;">
+
+                <div
+                    style="background: rgba(192, 57, 43, 0.2); border: 1px solid var(--color-secondary); padding: 1.5rem; margin-bottom: 2rem;">
+                    <h2 style="color: var(--color-tertiary); margin-bottom: 0.5rem;">The Killer: Thomas Harrison</h2>
+                    <p style="font-size: 1.2rem; color: var(--color-tertiary);">Title: <strong>Pullman Porter</strong>
+                    </p>
+                </div>
+
+                <div class="mb-4">
+                    <h3 style="color: var(--color-tertiary);">The Motive</h3>
+                    <p style="color: var(--color-gray);">The 1957 investigation missed it entirely because of racial
+                        prejudice and class assumptions. Marchand was trafficking stolen artifacts recovered from WWII
+                        Europe. Thomas Harrison's family had been robbed of a priceless heirloom during the war. Thomas
+                        tracked the piece to Marchand, joined the rail staff specifically for this route, and intended
+                        to steal it back.</p>
+                </div>
+
+                <div class="mb-4">
+                    <h3 style="color: var(--color-tertiary);">How It Happened</h3>
+                    <p style="color: var(--color-gray);">When Thomas entered Cabin A to retrieve the heirloom using his
+                        master key, Marchand woke up. A struggle ensued, and Thomas struck him with a heavy brass lamp.
+                        The blood on Thomas's cuffs, which the 1957 police dismissed as coming from him "checking for a
+                        pulse," was proven by 2024 blood spatter re-analysis to be high-velocity impact spatter,
+                        definitively placing him holding the weapon when the blow was struck.</p>
+                </div>
+
+                <h4
+                    style="margin-top: 3rem; text-align: center; color: var(--color-primary); font-family: var(--font-heading);">
+                    CASE CLOSED</h4>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../assets/js/nav.js"></script>
+    <script src="../assets/js/gm-portal.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            GMPortal.checkSolutionAuth('2b', 'SPATTER-1957-TRUTH');
+
+            const form = document.getElementById('solution-auth-form');
+            if (form) {
+                form.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const pwd = document.getElementById('solution-password').value;
+                    const isValid = GMPortal.authSolution('2b', 'SPATTER-1957-TRUTH', pwd);
+
+                    if (!isValid) {
+                        const err = document.getElementById('solution-error');
+                        err.textContent = "Invalid code.";
+                        setTimeout(() => err.textContent = "", 2000);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

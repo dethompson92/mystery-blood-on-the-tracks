@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S2 | Case Solution Summary | Forever Match</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root { --pink:#FF4D6D; --cyan:#00D4FF; --gold:#FFD700; --dark:#0a0a0f; --panel:#12121a; --border:#2a2a3a; --text:#e0e0f0; --muted:#8888aa; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--dark); color:var(--text); font-family:'Inter',sans-serif; min-height:100vh; }
+  .gm-banner { background:#1a0020; border-bottom:2px solid #9B59B6; padding:12px 40px; text-align:center; font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:#9B59B6; letter-spacing:3px; }
+  .hero { background:radial-gradient(ellipse at center, #1a0030 0%, #05050f 100%); border-bottom:3px solid var(--pink); padding:50px 40px; text-align:center; }
+  .hero-label { font-family:'IBM Plex Mono',monospace; font-size:0.75rem; color:var(--muted); letter-spacing:4px; text-transform:uppercase; margin-bottom:14px; }
+  .hero h1 { font-family:'Playfair Display',serif; font-size:3.2rem; font-weight:900; color:white; line-height:1.1; }
+  .hero h1 span { color:var(--pink); }
+  .hero .subtitle { font-size:0.9rem; color:var(--muted); margin-top:12px; font-style:italic; }
+  .container { max-width:900px; margin:0 auto; padding:40px; }
+  .verdict-hero { background:linear-gradient(135deg,#1a0a0a,#0a0010); border:2px solid var(--pink); border-radius:12px; padding:36px; text-align:center; margin-bottom:40px; }
+  .verdict-hero .label { font-family:'IBM Plex Mono',monospace; font-size:0.7rem; color:var(--muted); letter-spacing:3px; margin-bottom:14px; }
+  .verdict-hero h2 { font-family:'Playfair Display',serif; font-size:2.2rem; color:var(--pink); margin-bottom:8px; }
+  .verdict-hero .real-name { font-family:'IBM Plex Mono',monospace; font-size:0.85rem; color:var(--muted); }
+  .verdict-hero .method { font-size:1rem; color:var(--text); margin-top:16px; line-height:1.7; }
+  .verdict-hero .method span { color:var(--gold); font-weight:600; }
+  .section { margin-bottom:36px; }
+  .section-title { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--gold); border-left:4px solid var(--gold); padding-left:14px; margin-bottom:16px; }
+  p { font-size:0.9rem; line-height:1.75; color:#c8c8e0; margin-bottom:12px; }
+  .evidence-cascade { counter-reset:evidence; }
+  .evidence-item { display:grid; grid-template-columns:50px 1fr; gap:16px; padding:16px 0; border-bottom:1px solid var(--border); align-items:flex-start; }
+  .evidence-item:last-child { border-bottom:none; }
+  .evidence-num { width:40px; height:40px; background:var(--pink); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'IBM Plex Mono',monospace; font-weight:700; font-size:0.9rem; flex-shrink:0; }
+  .evidence-content { }
+  .evidence-title { font-weight:600; font-size:0.9rem; color:var(--text); margin-bottom:4px; }
+  .evidence-source { font-family:'IBM Plex Mono',monospace; font-size:0.65rem; color:var(--muted); letter-spacing:2px; text-transform:uppercase; margin-bottom:6px; }
+  .evidence-desc { font-size:0.83rem; color:#c0c0d8; line-height:1.6; }
+  .motive-box { background:var(--panel); border:1px solid var(--border); border-radius:8px; padding:24px; margin:16px 0; }
+  .motive-title { font-family:'Playfair Display',serif; font-size:1.1rem; color:var(--cyan); margin-bottom:14px; }
+  .motive-item { padding:10px 14px; border-left:3px solid var(--pink); margin-bottom:10px; background:#0f0f1a; border-radius:0 4px 4px 0; }
+  .motive-item h4 { font-size:0.85rem; font-weight:600; color:var(--text); margin-bottom:4px; }
+  .motive-item p { font-size:0.8rem; color:var(--muted); margin:0; }
+  .timeline-grid { margin:16px 0; }
+  .tl-row { display:grid; grid-template-columns:140px 1fr; gap:16px; padding:10px 0; border-bottom:1px solid var(--border); font-size:0.82rem; align-items:center; }
+  .tl-time { font-family:'IBM Plex Mono',monospace; color:var(--gold); }
+  .tl-action { color:#c0c0d8; }
+  .tl-action.murder-moment { color:var(--pink); font-weight:600; }
+  .scoring-table { width:100%; border-collapse:collapse; margin:16px 0; font-size:0.83rem; }
+  .scoring-table th { background:#1a1a2e; color:var(--cyan); padding:10px 14px; text-align:left; font-size:0.68rem; letter-spacing:2px; text-transform:uppercase; border-bottom:1px solid var(--border); }
+  .scoring-table td { padding:10px 14px; border-bottom:1px solid var(--border); color:#c8c8e0; vertical-align:top; }
+  .pts { font-family:'IBM Plex Mono',monospace; font-weight:700; color:var(--gold); }
+  .footer { margin-top:60px; border-top:1px solid var(--border); padding-top:16px; font-size:0.7rem; color:var(--muted); display:flex; justify-content:space-between; font-family:'IBM Plex Mono',monospace; }
+</style>
+</head>
+<body>
+
+<div class="gm-banner">⚠ GM-ONLY DOCUMENT — SOLUTION PACKAGE — DO NOT DISTRIBUTE ⚠</div>
+
+<div class="hero">
+  <div class="hero-label">Case FGE-QR-2025-07-0847 · Complete Solution</div>
+  <h1>The Algorithm<br><span>Always Knew</span></h1>
+  <div class="subtitle">Full Case Solution Summary · Forever Match Murder Mystery</div>
+</div>
+
+<div class="container">
+
+  <div class="verdict-hero">
+    <div class="label">THE KILLER</div>
+    <h2>Victor Delgado</h2>
+    <div class="real-name">Real Name: Víctor Manuel Soto-Guerrero · DOB: August 3, 1982</div>
+    <div class="method">
+      Murdered Solomon Vance at <span>approximately 12:05–12:15 AM, July 19, 2025</span><br>
+      On the <span>rooftop infinity pool</span> of Gran Horizonte Resort & Spa<br>
+      Using a <span>Conair Pro Series 1875W hair dryer</span> + <span>extension cord</span><br>
+      Method: <span>Intentional electrocution</span> — dropped powered appliance into pool<br>
+      Classification: <span>First-Degree Homicide — Premeditated</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Victor's Triple Motive</div>
+    <div class="motive-box">
+      <div class="motive-title">Why Victor Killed Solomon</div>
+      <div class="motive-item">
+        <h4>Motive 1 — Identity Exposure</h4>
+        <p>Solomon had discovered Victor's real identity: Víctor Manuel Soto-Guerrero, convicted of wire fraud in 2011. Victor had built an entirely new life using a purchased false identity. Exposure meant prison, career destruction, and the collapse of everything he'd built.</p>
+      </div>
+      <div class="motive-item">
+        <h4>Motive 2 — Algorithm Exposure</h4>
+        <p>Solomon had reverse-engineered the EROS algorithm and confirmed it was completely fraudulent — a $14M+ deception affecting the network, advertisers, and Victor's $2.1M annual hosting contract. Victor had been actively promoting fraudulent AI science on air. Exposure meant civil and criminal liability.</p>
+      </div>
+      <div class="motive-item">
+        <h4>Motive 3 — Blackmail Stalemate</h4>
+        <p>Victor had been blackmailing Solomon for six weeks (SEC investigation, Cayman account, identity). When Solomon discovered Victor's own secrets, the blackmail became mutual. Victor recognized that with mutual leverage, the only remaining resolution was permanent silence. Solomon had become too dangerous to let live.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Complete Murder Timeline</div>
+    <div class="timeline-grid">
+      <div class="tl-row"><div class="tl-time">Jun 2 · 11:42 PM</div><div class="tl-action">Victor sends first blackmail message to Solomon ($5K/week demand)</div></div>
+      <div class="tl-row"><div class="tl-time">Jul 11 · 10:32 PM</div><div class="tl-action">Solomon reveals he knows Victor's real identity — blackmail stalemate begins</div></div>
+      <div class="tl-row"><div class="tl-time">Jul 11 · 10:58 PM</div><div class="tl-action">Victor escalates to $25K/week, references EROS algorithm knowledge, begins planning elimination</div></div>
+      <div class="tl-row"><div class="tl-time">Jul 18 · ~8:00 PM</div><div class="tl-action">Victor scouts rooftop, confirms camera blind spot plan, prepares execution route</div></div>
+      <div class="tl-row"><div class="tl-time">Jul 18 · 8:15 PM</div><div class="tl-action">Victor texts Solomon: "Come to rooftop pool. Midnight. Alone. No cameras tonight." Solomon agrees.</div></div>
+      <div class="tl-row"><div class="tl-time">Jul 18 · 10:02 PM</div><div class="tl-action">Victor accesses Camera Control Panel A; triggers 94-camera blackout including all rooftop coverage</div></div>
+      <div class="tl-row"><div class="tl-time">Jul 18 · 10:22 PM</div><div class="tl-action">Victor enters Equipment Room B1 (keycard log); retrieves Conair hair dryer and extension cord</div></div>
+      <div class="tl-row"><div class="tl-time">Jul 18 · 10:35 PM</div><div class="tl-action">Cast dinner begins; Victor present initially. He leaves during dinner without announcing departure.</div></div>
+      <div class="tl-row"><div class="tl-time">Jul 18 · 11:10 PM</div><div class="tl-action">Victor last seen on working hallway camera; begins unrecorded gap (absent until 12:47 AM)</div></div>
+      <div class="tl-row"><div class="tl-time">Jul 18 · 11:47 PM</div><div class="tl-action">Victor re-enters Equipment Room B1 (keycard log); retrieves equipment or confirms setup</div></div>
+      <div class="tl-row"><div class="tl-time">Jul 18 · 11:52 PM</div><div class="tl-action">Security guard Rodrigo sees Victor on rooftop carrying hair dryer + cord; heads toward pool</div></div>
+      <div class="tl-row"><div class="tl-time">Jul 18 · 11:55 PM</div><div class="tl-action">Solomon Vance arrives at rooftop pool via main stairwell — seen as silhouette by Rodrigo</div></div>
+      <div class="tl-row"><div class="tl-time">Jul 19 · 12:05 AM</div><div class="tl-action murder-moment">⚡ MURDER: Victor connects extension cord to rooftop socket, drops powered hair dryer into occupied pool. Solomon Vance dies from electrocution within seconds.</div></div>
+      <div class="tl-row"><div class="tl-time">Jul 19 · 12:15 AM</div><div class="tl-action">Victor abandons equipment at scene; returns to resort interior via service stairwell</div></div>
+      <div class="tl-row"><div class="tl-time">Jul 19 · 12:30 AM</div><div class="tl-action">Victor returns to Production Suite B; begins deleting SMS thread with Solomon from phone</div></div>
+      <div class="tl-row"><div class="tl-time">Jul 19 · 12:47 AM</div><div class="tl-action">Victor reappears on working hallway camera near Production Suite B — alibi re-established</div></div>
+      <div class="tl-row"><div class="tl-time">Jul 19 · 1:15 AM</div><div class="tl-action">Rodrigo Espinoza-Vargas discovers Solomon's body during patrol. FGE-QR notified.</div></div>
+      <div class="tl-row"><div class="tl-time">Jul 19 · 6:30 AM</div><div class="tl-action">Victor interviewed; presents false alibi ("Production Suite B, 10 PM–2 AM"). Phone seized.</div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Complete Evidence Inventory</div>
+    <div class="evidence-cascade">
+      <div class="evidence-item">
+        <div class="evidence-num">T1</div>
+        <div class="evidence-content">
+          <div class="evidence-title">Equipment Room B1 Keycard Log</div>
+          <div class="evidence-source">Tier 1 · T2-01 · Keycard Access Records</div>
+          <div class="evidence-desc">Victor's double entry (10:22 PM + 11:47 PM) — only person with unexplained access to the room containing the murder weapon. All other entries accounted for with legitimate maintenance purposes.</div>
+        </div>
+      </div>
+      <div class="evidence-item">
+        <div class="evidence-num">T1</div>
+        <div class="evidence-content">
+          <div class="evidence-title">Hallway Camera Gap — Victor's Alibi Void</div>
+          <div class="evidence-source">Tier 2 · T2-04 · Camera Malfunction Analysis</div>
+          <div class="evidence-desc">Victor absent from all working cameras 11:10 PM – 12:47 AM. His stated alibi of Production Suite B cannot be verified for a 97-minute window containing the murder.</div>
+        </div>
+      </div>
+      <div class="evidence-item">
+        <div class="evidence-num">T1</div>
+        <div class="evidence-content">
+          <div class="evidence-title">Camera Blackout — Premeditated Concealment</div>
+          <div class="evidence-source">Tier 2 · T2-04 · Camera Malfunction Analysis</div>
+          <div class="evidence-desc">94 cameras disabled from Camera Control Panel A at 10:02 PM. Panel A was accessible to Victor (production access). The blackout covered the rooftop pool and Equipment Room B1 — both murder-relevant locations.</div>
+        </div>
+      </div>
+      <div class="evidence-item">
+        <div class="evidence-num">T2</div>
+        <div class="evidence-content">
+          <div class="evidence-title">Victor's False Alibi Statement</div>
+          <div class="evidence-source">Tier 2 · T2-02 · Interview Transcripts Round 1</div>
+          <div class="evidence-desc">Victor claims uninterrupted presence in Production Suite B from 10 PM to 2 AM. Contradicted by hallway camera absence, keycard logs, and eyewitness testimony.</div>
+        </div>
+      </div>
+      <div class="evidence-item">
+        <div class="evidence-num">T3</div>
+        <div class="evidence-content">
+          <div class="evidence-title">Fingerprint — Left Thumb on Extension Cord</div>
+          <div class="evidence-source">Tier 3 · T3-01 · Fingerprint Analysis Report</div>
+          <div class="evidence-desc">14-point minutiae match to Victor's voluntary sample. Position (plug end, grip consistent with socket insertion) proves deliberate handling. No other suspect's prints on the cord.</div>
+        </div>
+      </div>
+      <div class="evidence-item">
+        <div class="evidence-num">T3</div>
+        <div class="evidence-content">
+          <div class="evidence-title">Deleted SMS Blackmail Chain</div>
+          <div class="evidence-source">Tier 3 · T3-02 · Recovered Deleted Text Messages</div>
+          <div class="evidence-desc">47 recovered messages spanning June 2 – July 18. Documents extortion scheme, escalating demands, mutual knowledge of each other's secrets, and the final luring message to the rooftop at midnight.</div>
+        </div>
+      </div>
+      <div class="evidence-item">
+        <div class="evidence-num">T3</div>
+        <div class="evidence-content">
+          <div class="evidence-title">EROS Algorithm Fraud Audit</div>
+          <div class="evidence-source">Tier 3 · T3-03 · EROS Algorithm Audit</div>
+          <div class="evidence-desc">Confirms EROS is a scripted sham. Establishes Victor's $2.1M financial motive for silencing Solomon. Corroborates the blackmail messages' references to algorithm exposure.</div>
+        </div>
+      </div>
+      <div class="evidence-item">
+        <div class="evidence-num">T3</div>
+        <div class="evidence-content">
+          <div class="evidence-title">Eyewitness — Victor on Rooftop with Murder Weapons</div>
+          <div class="evidence-source">Tier 3 · T3-04 · Overlooked Witness Statement</div>
+          <div class="evidence-desc">Rodrigo Espinoza-Vargas places Victor on the rooftop at 11:52 PM carrying items consistent with the hair dryer and extension cord — 13 minutes before estimated time of death. Directly contradicts false alibi.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">The Five Innocents — Complete Alibi Reference</div>
+    <p>Each innocent suspect had a genuine motive and concealed a real secret. Their alibis, however, are airtight. Use this as the GM's authoritative clearing reference during the reveal.</p>
+    <table class="scoring-table">
+      <thead>
+        <tr><th>Suspect</th><th>Hidden Secret</th><th>Motive</th><th>Ironclad Alibi</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>Kavya Nair</strong><br><span style="font-size:0.75rem;color:var(--muted)">29 · UX Designer</span></td><td>Knew Solomon's "side connections" — protected him publicly despite private frustration</td><td>Humiliation (viral clip); protecting secrets she feared would surface</td><td>Cast dinner 10:35 PM–12:20 AM (6 witnesses) + confirmed sister call 12:31 AM</td></tr>
+        <tr><td><strong>Dominic Wallace</strong><br><span style="font-size:0.75rem;color:var(--muted)">31 · Physical Trainer</span></td><td>Recording conversations to document show's scripted matches; had a producer admission</td><td>Romantic betrayal — Solomon cheating with Zara, Dominic's assigned match</td><td>Cast dinner 10:35 PM–12:40 AM; multiple witnesses + security footage. Physically impossible alibi.</td></tr>
+        <tr><td><strong>Vivian Fong</strong><br><span style="font-size:0.75rem;color:var(--muted)">27 · Associate Producer</span></td><td>Built and ran the fraudulent EROS algorithm; falsified all match scores; hid USB with original code</td><td>Career survival — Solomon threatened to expose the multi-million dollar algorithm fraud</td><td>Camera Control Room B 10:08 PM–2:33 AM; never left; confirmed by access logs and co-worker. Guilty of fraud, not murder.</td></tr>
+        <tr><td><strong>Rafael Rios</strong><br><span style="font-size:0.75rem;color:var(--muted)">35 · Architect</span></td><td>Closeted gay man; Solomon using his secret as low-level social coercion to keep him compliant</td><td>Fear of being outed — deeply personal threat to career and family</td><td>Cast dinner 10:35 PM–12:10 AM; then Suite 1104 12:14 AM–7:30 AM confirmed by keycard logs</td></tr>
+        <tr><td><strong>Zara Mirza</strong><br><span style="font-size:0.75rem;color:var(--muted)">30 · OB/GYN Resident</span></td><td>Secret 10-day intimacy with Solomon; he later spread a false STI rumor to defame her</td><td>Righteous fury over deliberate sexual defamation — most emotionally charged motive in the case</td><td>Cast dinner 10:35 PM–12:05 AM; Kavya's suite until ~1:00 AM. Cross-confirmed alibis between the two women.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Scoring Guide</div>
+    <table class="scoring-table">
+      <thead>
+        <tr><th>Achievement</th><th>Points</th><th>Notes</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Correctly named Victor Delgado as killer</td><td class="pts">50 pts</td><td>Core objective</td></tr>
+        <tr><td>Correctly identified hair dryer as murder weapon</td><td class="pts">25 pts</td><td>Tier 1 objective</td></tr>
+        <tr><td>Correctly identified electrocution as method</td><td class="pts">15 pts</td><td>Tier 1 objective</td></tr>
+        <tr><td>Identified Victor's false identity</td><td class="pts">20 pts</td><td>Tier 2/3 objective</td></tr>
+        <tr><td>Identified the EROS algorithm as fraudulent</td><td class="pts">15 pts</td><td>Tier 3 objective</td></tr>
+        <tr><td>Uncovered the SMS blackmail chain</td><td class="pts">20 pts</td><td>Tier 3 objective</td></tr>
+        <tr><td>Identified Victor's wire fraud conviction</td><td class="pts">10 pts</td><td>Bonus</td></tr>
+        <tr><td>Cleared all 5 innocent suspects with reasoning</td><td class="pts">25 pts</td><td>Bonus — thoroughness</td></tr>
+        <tr><td>Identified the eyewitness significance</td><td class="pts">10 pts</td><td>Bonus</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.8rem; color:var(--muted); margin-top:8px;">Maximum possible score: <strong style="color:var(--gold);">190 points</strong>. Recommended threshold for "Master Detective": 130+ pts.</p>
+  </div>
+
+  <div class="footer">
+    <div>S2 · CASE SOLUTION SUMMARY · GM ONLY</div>
+    <div>Victor Delgado · FGE-QR-2025-07-0847</div>
+    <div>Forever Match // Murder Mystery</div>
+  </div>
+</div>
+</body>
+</html>

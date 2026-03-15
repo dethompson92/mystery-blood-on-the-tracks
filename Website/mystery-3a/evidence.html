@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence Board | The Algorithm Knows | MMC</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/mystery-3a.css">
+    <style>
+        .evidence-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: var(--spacing-sm);
+        }
+    </style>
+</head>
+
+<body class="mystery-3a">
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-container">
+            <a href="../index.html" class="nav-logo">MMC.</a>
+            <div class="nav-links">
+                <a href="investigation.html" class="nav-link">&larr; Hub</a>
+                <a href="suspects.html" class="nav-link">Suspects</a>
+                <a href="evidence.html" class="nav-link active">Evidence Board</a>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+            </div>
+            <button class="hamburger">☰</button>
+        </div>
+    </nav>
+
+    <header class="page-header"
+        style="padding: var(--spacing-lg) 0; text-align: center; border-bottom: 1px solid var(--color-slate); margin-bottom: var(--spacing-sm);">
+        <div class="container">
+            <h1>Evidence Board</h1>
+            <p class="mono" style="color: var(--color-gray);">Case FGE-QR-2025-07-0847 Materials</p>
+        </div>
+    </header>
+
+    <main class="section pt-0">
+        <div class="container">
+
+            <div class="evidence-tabs">
+                <button class="tab-btn active" data-target="tab-tier-1">TIER 1 (Open)</button>
+                <button class="tab-btn" data-target="tab-tier-2">TIER 2 <span
+                        style="font-size: 0.8em">🔒</span></button>
+                <button class="tab-btn" data-target="tab-tier-3">TIER 3 <span
+                        style="font-size: 0.8em">🔒</span></button>
+            </div>
+
+            <!-- TIER 1 -->
+            <div id="tab-tier-1" class="tab-content active">
+                <p class="mb-4" style="color: var(--color-gray);">Initial scene reports, basic profiles, and
+                    foundational case documents. Available immediately.</p>
+                <div class="evidence-grid">
+                    <a href="documents/T1-01.html" class="evidence-card">
+                        <span class="doc-id">T1-01</span>
+                        <h4>Incident Report</h4>
+                    </a>
+                    <a href="documents/T1-02.html" class="evidence-card">
+                        <span class="doc-id">T1-02</span>
+                        <h4>Autopsy Summary</h4>
+                    </a>
+                    <a href="documents/T1-03.html" class="evidence-card">
+                        <span class="doc-id">T1-03</span>
+                        <h4>Crime Scene Floorplan</h4>
+                    </a>
+                    <a href="documents/T1-04.html" class="evidence-card">
+                        <span class="doc-id">T1-04</span>
+                        <h4>Guest Registry</h4>
+                    </a>
+                    <a href="documents/T1-05.html" class="evidence-card">
+                        <span class="doc-id">T1-05</span>
+                        <h4>Initial Interview: Kavya NR</h4>
+                    </a>
+                    <a href="documents/T1-06.html" class="evidence-card">
+                        <span class="doc-id">T1-06</span>
+                        <h4>Initial Interview: Dominic W</h4>
+                    </a>
+                    <a href="documents/T1-07.html" class="evidence-card">
+                        <span class="doc-id">T1-07</span>
+                        <h4>Initial Interview: Vivian F</h4>
+                    </a>
+                    <a href="documents/T1-08.html" class="evidence-card">
+                        <span class="doc-id">T1-08</span>
+                        <h4>Initial Interview: Rafael R</h4>
+                    </a>
+                    <a href="documents/T1-09.html" class="evidence-card">
+                        <span class="doc-id">T1-09</span>
+                        <h4>Initial Interview: Zara M</h4>
+                    </a>
+                    <a href="documents/T1-10.html" class="evidence-card">
+                        <span class="doc-id">T1-10</span>
+                        <h4>Initial Interview: Victor D</h4>
+                    </a>
+                    <a href="documents/T1-11.html" class="evidence-card">
+                        <span class="doc-id">T1-11</span>
+                        <h4>Production Schedule</h4>
+                    </a>
+                    <a href="documents/T1-12.html" class="evidence-card">
+                        <span class="doc-id">T1-12</span>
+                        <h4>Weather Report</h4>
+                    </a>
+                </div>
+            </div>
+
+            <!-- TIER 2 -->
+            <div id="tab-tier-2" class="tab-content">
+                <form class="tier-unlock-form tier-2-lock-form mb-4" data-tier="2"
+                    style="max-width: 400px; padding: var(--spacing-md); background: var(--color-charcoal); border: 1px solid var(--color-secondary); border-radius: 8px;">
+                    <h3 style="color: var(--color-secondary);">Unlock Tier 2</h3>
+                    <p style="font-size: 0.9rem; color: var(--color-gray);">Enter the production bypass code found in
+                        Tier 1 evidence.</p>
+                    <input type="text" class="form-input tier-code-input mb-2 mono" placeholder="XXXXXXX" required>
+                    <p class="error-message mono" style="color: #FF4D6D; font-size: 0.85rem; height: 1.2rem;"></p>
+                    <button type="submit" class="btn"
+                        style="width: 100%; background: var(--color-secondary); color: var(--color-black);">Decrypt
+                        Files</button>
+                    <p class="mono mt-2" style="font-size: 0.75rem; color: #8A8A9A;">HINT: Look for the 'Forever' WiFi
+                        master password.</p>
+                </form>
+
+                <div class="needs-tier-2 locked-section locked">
+                    <div class="lock-overlay tier-2-lock-form">
+                        <h3 style="color: var(--color-secondary); margin:0;">SEALED ARCHIVE</h3>
+                    </div>
+                    <p class="mb-4" style="color: var(--color-secondary);">Equipment logs, deeper interviews, and
+                        specialized forensics.</p>
+                    <div class="evidence-grid">
+                        <a href="documents/T2-01.html" class="evidence-card">
+                            <span class="doc-id">T2-01</span>
+                            <h4>Keycard Logs: Equip B1</h4>
+                        </a>
+                        <a href="documents/T2-02.html" class="evidence-card">
+                            <span class="doc-id">T2-02</span>
+                            <h4>SEMEFO Hardware Analysis</h4>
+                        </a>
+                        <a href="documents/T2-03.html" class="evidence-card">
+                            <span class="doc-id">T2-03</span>
+                            <h4>Camera Malfunction Report</h4>
+                        </a>
+                        <a href="documents/T2-04.html" class="evidence-card">
+                            <span class="doc-id">T2-04</span>
+                            <h4>Production Comms Tx</h4>
+                        </a>
+                        <a href="documents/T2-05.html" class="evidence-card">
+                            <span class="doc-id">T2-05</span>
+                            <h4>Follow-up: Dominic/Vivian</h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TIER 3 -->
+            <div id="tab-tier-3" class="tab-content">
+                <form class="tier-unlock-form tier-3-lock-form mb-4" data-tier="3"
+                    style="max-width: 400px; padding: var(--spacing-md); background: var(--color-charcoal); border: 1px solid var(--color-primary); border-radius: 8px;">
+                    <h3 style="color: var(--color-primary);">Unlock Tier 3</h3>
+                    <p style="font-size: 0.9rem; color: var(--color-gray);">Enter the system override phrase required to
+                        access private algorithm logs.</p>
+                    <input type="text" class="form-input tier-code-input mb-2 mono" placeholder="XXXX-XXXXX" required>
+                    <p class="error-message mono" style="color: #FF4D6D; font-size: 0.85rem; height: 1.2rem;"></p>
+                    <button type="submit" class="btn" style="width: 100%;">Decrypt Files</button>
+                </form>
+
+                <div class="needs-tier-3 locked-section locked">
+                    <div class="lock-overlay tier-3-lock-form">
+                        <h3 style="color: var(--color-primary); margin:0;">SEALED ARCHIVE</h3>
+                    </div>
+                    <p class="mb-4" style="color: var(--color-primary);">Partial fingerprints, deleted texts, EROS
+                        audit, and eyewitness statements.</p>
+                    <div class="evidence-grid">
+                        <a href="documents/T3-01.html" class="evidence-card">
+                            <span class="doc-id">T3-01</span>
+                            <h4>Fingerprint Match (Partial)</h4>
+                        </a>
+                        <a href="documents/T3-02.html" class="evidence-card">
+                            <span class="doc-id">T3-02</span>
+                            <h4>Recovered Texts (Victim)</h4>
+                        </a>
+                        <a href="documents/T3-03.html" class="evidence-card">
+                            <span class="doc-id">T3-03</span>
+                            <h4>EROS Audit Report</h4>
+                        </a>
+                        <a href="documents/T3-04.html" class="evidence-card">
+                            <span class="doc-id">T3-04</span>
+                            <h4>Rodrigo M Statement</h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="mt-4 mb-2" style="border-top: 1px solid var(--color-slate); padding-top: 2rem;">Forensic Imagery
+            </h3>
+            <p style="color: var(--color-gray);">Access high-resolution evidence scans in the main Gallery.</p>
+            <a href="gallery.html" class="btn btn-outline"
+                style="border-color: var(--color-gray); color: var(--color-text);">Open Visual Evidence Gallery</a>
+
+        </div>
+    </main>
+
+    <!-- Modal for Evidence Documents -->
+    <div id="evidence-modal" class="modal">
+        <div class="modal-header">
+            <button class="modal-close">&times;</button>
+        </div>
+        <iframe src="about:blank" title="Evidence Document"></iframe>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/nav.js"></script>
+    <script src="../assets/js/tier-reveal.js"></script>
+    <script src="../assets/js/evidence-board.js"></script>
+    <script>
+        // Initialize Tier System
+        document.addEventListener('DOMContentLoaded', () => {
+            TierReveal.init({
+                mystery: '3a',
+                tier2Code: 'FOREVER2025',
+                tier3Code: 'EROS-AUDIT'
+            });
+        });
+    </script>
+</body>
+
+</html>

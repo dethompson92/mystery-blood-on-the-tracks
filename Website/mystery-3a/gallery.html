@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evidence Gallery | The Algorithm Knows | MMC</title>
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="../assets/css/mystery-3a.css">
+    <style>
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: var(--spacing-sm);
+        }
+
+        .gallery-item {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            border-radius: 4px;
+            border: 1px solid var(--color-slate);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item::after {
+            /* Overlay */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 77, 109, 0.2);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .gallery-item:hover::after {
+            opacity: 1;
+        }
+
+        /* Lightbox specific styles */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 10, 15, 0.98);
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+            border: 1px solid var(--color-slate);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+        }
+
+        .lightbox-controls {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100vw;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 var(--spacing-md);
+            pointer-events: none;
+            /* Let clicks pass through */
+        }
+
+        .lightbox-controls button {
+            background: rgba(10, 10, 15, 0.8);
+            color: var(--color-text);
+            border: 1px solid var(--color-slate);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            pointer-events: auto;
+            transition: all 0.2s ease;
+        }
+
+        .lightbox-controls button:hover {
+            background: var(--color-primary);
+            color: var(--color-black);
+            border-color: var(--color-primary);
+        }
+
+        .lightbox-header {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: var(--spacing-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .lightbox-caption {
+            color: var(--color-gray);
+            font-family: var(--font-evidence);
+            font-size: 0.9rem;
+            max-width: 70%;
+        }
+
+        .lightbox-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .lightbox-close {
+            background: none;
+            border: none;
+            color: var(--color-primary);
+            font-size: 2.5rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+    </style>
+</head>
+
+<body class="mystery-3a">
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container nav-container">
+            <a href="../index.html" class="nav-logo">MMC.</a>
+            <div class="nav-links">
+                <a href="investigation.html" class="nav-link">&larr; Hub</a>
+                <a href="suspects.html" class="nav-link">Suspects</a>
+                <a href="evidence.html" class="nav-link">Evidence Board</a>
+                <a href="gallery.html" class="nav-link active">Gallery</a>
+            </div>
+            <button class="hamburger">☰</button>
+        </div>
+    </nav>
+
+    <header class="page-header"
+        style="padding: var(--spacing-lg) 0; text-align: center; border-bottom: 1px solid var(--color-slate); margin-bottom: var(--spacing-sm);">
+        <div class="container">
+            <h1>Evidence Gallery</h1>
+            <p class="mono" style="color: var(--color-gray);">High-Resolution Visual Assets | Scene & Forensics</p>
+        </div>
+    </header>
+
+    <main class="section pt-0">
+        <div class="container">
+
+            <p class="mb-4" style="color: var(--color-gray); max-width: 600px;">All recovered imagery, scene
+                reconstructions, and photographic evidence. Click any item to examine in detail.</p>
+
+            <div class="gallery-grid">
+                <!-- Using placeholder fallbacks for all image paths specified in prompt -->
+
+                <div class="gallery-item">
+                    <img src="images/00A-gran-horizonte-exterior-night.png"
+                        onerror="this.src='https://placehold.co/800x600/101015/FF4D6D?text=00A-Gran-Horizonte-Exterior-Night'"
+                        alt="00A - Resort Exterior, Night">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/00B-rooftop-infinity-pool-day.png"
+                        onerror="this.src='https://placehold.co/800x600/101015/FF4D6D?text=00B-Rooftop-Pool-Day'"
+                        alt="00B - Rooftop Infinity Pool, Day Preview">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/00C-rooftop-pool-crime-scene-night.png"
+                        onerror="this.src='https://placehold.co/800x600/101015/FF4D6D?text=00C-Crime-Scene'"
+                        alt="00C - The Crime Scene (Hero Image)">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/00D-equipment-room-B1.png"
+                        onerror="this.src='https://placehold.co/800x600/101015/FF4D6D?text=00D-Equipment-Room-B1'"
+                        alt="00D - Equipment Room B1 (Staging Area)">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/01A-forever-match-title-card.png"
+                        onerror="this.src='https://placehold.co/800x600/101015/FF4D6D?text=01A-Show-Title-Card'"
+                        alt="01A - Show Title Card">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/01B-forever-match-production-set.png"
+                        onerror="this.src='https://placehold.co/800x600/101015/FF4D6D?text=01B-Production-Set'"
+                        alt="01B - Main Production Set Layout">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/01C-eros-algorithm-interface.png"
+                        onerror="this.src='https://placehold.co/800x600/101015/FF4D6D?text=01C-EROS-Algorithm-Interface'"
+                        alt="01C - EROS Algorithm UI Preview">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/04A-murder-weapon-evidence.png"
+                        onerror="this.src='https://placehold.co/800x600/101015/FF4D6D?text=04A-Murder-Weapon'"
+                        alt="04A - Murder Weapon (Hair Dryer + Extension Cord)">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/04B-fingerprint-comparison.png"
+                        onerror="this.src='https://placehold.co/800x600/101015/FF4D6D?text=04B-Fingerprint-Comparison'"
+                        alt="04B - Partial Fingerprint Analysis">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/04C-deleted-sms-evidence.png"
+                        onerror="this.src='https://placehold.co/800x600/101015/FF4D6D?text=04C-Deleted-Texts'"
+                        alt="04C - Recovered Deleted SMS">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/04D-semefo-forensic-examination.png"
+                        onerror="this.src='https://placehold.co/800x600/101015/FF4D6D?text=04D-SEMEFO-Lab'"
+                        alt="04D - SEMEFO Forensic Examination Lab">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/04E-rodrigo-witness-reconstruction.png"
+                        onerror="this.src='https://placehold.co/800x600/101015/FF4D6D?text=04E-Witness-Reconstruction'"
+                        alt="04E - Rodrigo Witness Stairwell Reconstruction">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/05A-camera-malfunction-log.png"
+                        onerror="this.src='https://placehold.co/800x600/101015/FF4D6D?text=05A-Camera-Log'"
+                        alt="05A - Camera Malfunction Printout">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/05B-production-comms-evidence.png"
+                        onerror="this.src='https://placehold.co/800x600/101015/FF4D6D?text=05B-Production-Comms'"
+                        alt="05B - Recovered Production Communications">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/05C-eros-audit-report.png"
+                        onerror="this.src='https://placehold.co/800x600/101015/FF4D6D?text=05C-EROS-Audit'"
+                        alt="05C - EROS Code Audit Report">
+                </div>
+
+                <div class="gallery-item">
+                    <img src="images/06A-investigation-board.png"
+                        onerror="this.src='https://placehold.co/800x600/101015/FF4D6D?text=06A-Investigation-Board'"
+                        alt="06A - Police Detective String Board">
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Fullscreen Lightbox Overlay -->
+    <div id="gallery-lightbox" class="lightbox">
+
+        <div class="lightbox-header">
+            <div class="lightbox-caption mono">Image Caption Placeholder</div>
+            <div class="lightbox-actions">
+                <a href="#" download class="btn btn-outline lightbox-download"
+                    style="font-size: 0.8rem; padding: 0.5rem 1rem;">Download RAW</a>
+                <button class="lightbox-close">&times;</button>
+            </div>
+        </div>
+
+        <div class="lightbox-content">
+            <img class="lightbox-image" src="" alt="Zoomed Evidence">
+        </div>
+
+        <div class="lightbox-controls">
+            <button class="lightbox-prev">&larr;</button>
+            <button class="lightbox-next">&rarr;</button>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/js/nav.js"></script>
+    <script src="../assets/js/gallery.js"></script>
+</body>
+
+</html>
