@@ -196,6 +196,24 @@
     </footer>
 
     <script src="assets/js/nav.js"></script>
+
+    <!-- UNIVERSAL FLOATING NAV -->
+    <div id="universal-floating-nav" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; display: flex; gap: 10px; font-family: 'Inter', sans-serif;">
+        <button onclick="history.back()" style="background: rgba(10, 10, 15, 0.9); color: white; border: 1px solid #FF4D6D; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; box-shadow: 0 4px 12px rgba(0,0,0,0.5); transition: all 0.2s;" onmouseover="this.style.background='#FF4D6D'; this.style.color='black';" onmouseout="this.style.background='rgba(10, 10, 15, 0.9)'; this.style.color='white';">
+            &larr; Go Back
+        </button>
+        <a href="./index.html" style="text-decoration: none;">
+            <button style="background: rgba(10, 10, 15, 0.9); color: white; border: 1px solid #00D4FF; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; box-shadow: 0 4px 12px rgba(0,0,0,0.5); transition: all 0.2s;" onmouseover="this.style.background='#00D4FF'; this.style.color='black';" onmouseout="this.style.background='rgba(10, 10, 15, 0.9)'; this.style.color='white';">
+                &#8962; Home
+            </button>
+        </a>
+        <a href="./mysteries.html" style="text-decoration: none;">
+            <button style="background: rgba(10, 10, 15, 0.9); color: white; border: 1px solid #FFD700; padding: 10px 16px; border-radius: 6px; cursor: pointer; font-size: 14px; font-weight: 500; box-shadow: 0 4px 12px rgba(0,0,0,0.5); transition: all 0.2s;" onmouseover="this.style.background='#FFD700'; this.style.color='black';" onmouseout="this.style.background='rgba(10, 10, 15, 0.9)'; this.style.color='white';">
+                &#128269; Mysteries
+            </button>
+        </a>
+    </div>
+
 </body>
 
 </html>
